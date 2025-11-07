@@ -1,0 +1,39 @@
+/* UDP明朝／ゴシックフォント定義 */
+
+@font-face {
+  font-family: 'BIZ UDPMincho';
+  src:
+    url('../fonts/BIZUDPMincho-Regular.woff2') format('woff2'),
+    url('../fonts/BIZUDPMincho-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BIZ UDPMincho';
+  src:
+    url('../fonts/BIZUDPMincho-Bold.woff2') format('woff2'),
+    url('../fonts/BIZUDPMincho-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BIZ UDPGothic';
+  src:
+    url('../fonts/BIZUDPGothic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BIZ UDPGothic';
+  src:
+    url('../fonts/BIZUDPGothic-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
