@@ -4090,414 +4090,98 @@ font-family: var(--font-serif);
 --right-w: 320px;
 --content-max: 800px;
 }
-
-.toc-tabs {
-display: flex;
-border-bottom: 1px solid #dee2e6;
-background: #f8f9fa;
-padding: 0;
-margin-bottom: 12px;
-}
-.toc-tab-btn {
-flex: 1;
-padding: 8px 16px;
-border: none;
-background: transparent;
-font-size: var(--font-small);
-font-weight: 500;
-color: #6c757d;
-border-bottom: 2px solid transparent;
-cursor: pointer;
-text-align: center;
-transition: all 0.2s ease;
-}
-.toc-tab-btn:hover {
-color: #495057;
-background: rgba(0, 0, 0, 0.05);
-}
-.toc-tab-btn.active {
-color: #1a73e8;
-border-bottom-color: #1a73e8;
-background: white;
-}
-#TOC .toc-tabs .tab-button:hover {
-color: #495057;
-background: rgba(0, 0, 0, 0.05);
-}
-.toc-content {
-padding: 16px 0;
-}
-.toc-page-toc {
-display: none;
-}
-.toc-page-toc ul {
-list-style: none;
-padding: 0;
-margin: 0;
-}
-.toc-page-toc li {
-margin: 4px 0;
-padding-left: 8px;
-}
-.toc-page-toc a {
-color: #1a73e8;
-text-decoration: none;
-font-size: 14px;
-display: block;
-padding: 4px 8px;
-border-radius: 4px;
-transition: background-color 0.2s ease;
-}
-.toc-page-toc a:hover {
-background: #f8f9fa;
-}
-.toc-page-toc a.active {
-background: #e3f2fd;
-color: #1565c0;
-font-weight: 500;
-}
-#TOC .site-toc-content,
-#TOC .page-toc-content {
-padding: 16px 0;
-}
-#TOC .page-toc-content {
-display: none;
-}
-
-.marker-highlight {
-background: #fff59d;
-padding: 2px 4px;
-border-radius: 3px;
-transition: background-color 0.3s ease;
-}
-.marker-highlight:hover {
-background: #ffeb3b;
-}
 .marker-toolbar {
-position: fixed;
-top: 60px;
-right: 20px;
-background: white;
-border: 1px solid #dee2e6;
-border-radius: var(--radius);
-padding: 8px;
-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+position: absolute;
+background: var(--marker-toolbar-bg, #fff);
+border: 1px solid rgba(0, 0, 0, 0.12);
+border-radius: 8px;
+padding: 6px 8px;
+box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 z-index: 1000;
 display: none;
+font-size: 13px;
+min-width: 150px;
 }
+.marker-toolbar.show,
 .marker-toolbar.visible {
-display: block;
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+body[data-theme="dark"] .marker-toolbar {
+--marker-toolbar-bg: #1f1f1f;
+border-color: rgba(255, 255, 255, 0.18);
+box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+.marker-controls {
+display: flex;
+align-items: center;
+gap: 6px;
 }
 .marker-colors {
 display: flex;
 gap: 4px;
-margin-bottom: 8px;
 }
 .marker-color-btn {
-width: 24px;
+width: 26px;
 height: 24px;
-border: none;
-border-radius: 4px;
-cursor: pointer;
-border: 2px solid transparent;
-transition: all 0.2s ease;
-}
-.marker-color-btn:hover {
-border-color: #333;
-}
-.marker-color-btn.active {
-border-color: #333;
-box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
-}
-.marker-color-yellow {
-background: #fff59d;
-}
-.marker-color-green {
-background: #c8e6c9;
-}
-.marker-color-blue {
-background: #bbdefb;
-}
-.marker-color-pink {
-background: #f8bbd0;
-}
-.marker-color-clear {
-background: #f5f5f5;
-border: 1px solid #dee2e6;
-}
-.marker-controls {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-top: 8px;
-}
-.marker-clear-btn {
-padding: 4px 8px;
-border: 1px solid #dee2e6;
-background: white;
+border: 1px solid rgba(0, 0, 0, 0.15);
 border-radius: 6px;
 cursor: pointer;
-font-size: 12px;
-transition: all 0.2s ease;
+transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+background-clip: padding-box;
 }
-body[data-theme="dark"] .marker-clear-btn {
-background: #2a2a2a;
-border-color: #333;
-color: #ddd;
-}
-.marker-clear-btn:hover {
-background: #f3f4f6;
-}
-.marker-clear-btn:hover {
-background: #f8f9fa;
-}
-
-.text-marker {
-display: inline;
-line-height: inherit;
-border-radius: 4px;
-cursor: pointer;
-border: none;
-padding: 0;
-
-margin: 0;
-transition: background-color 0.2s ease, box-shadow 0.2s ease;
-box-shadow: inset 0 -0.15em 0 rgba(0, 0, 0, 0.08);
-
-}
-
-.marker-yellow {
-background: rgba(255, 235, 59, 0.6);
-box-shadow: 0 0 0 2px rgba(255, 235, 59, 0.25) inset;
-}
-.marker-green {
-background: rgba(129, 199, 132, 0.5);
-box-shadow: 0 0 0 2px rgba(129, 199, 132, 0.25) inset;
-}
-.marker-blue {
-background: rgba(100, 181, 246, 0.5);
-box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.25) inset;
-}
-.marker-pink {
-background: rgba(244, 143, 177, 0.5);
-box-shadow: 0 0 0 2px rgba(244, 143, 177, 0.25) inset;
-}
-.marker-orange {
-background: rgba(255, 152, 0, 0.45);
-box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.25) inset;
-}
-
-body[data-theme="dark"] .marker-yellow {
-background: rgba(255, 235, 59, 0.35);
-}
-body[data-theme="dark"] .marker-green {
-background: rgba(129, 199, 132, 0.3);
-}
-body[data-theme="dark"] .marker-blue {
-background: rgba(100, 181, 246, 0.3);
-}
-body[data-theme="dark"] .marker-pink {
-background: rgba(244, 143, 177, 0.3);
-}
-.text-marker:hover {
-opacity: 0.8;
-}
-.text-marker.selected {
-outline: 2px solid #fff;
-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-outline-offset: 1px;
-}
-.marker-toolbar {
-position: fixed;
-top: 56px;
-right: 16px;
-background: var(--marker-toolbar-bg, #fff);
-border: 1px solid #dee2e6;
-border-radius: 10px;
-padding: 10px;
-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-z-index: 1000;
-display: none;
-font-size: 14px;
-}
-body[data-theme="dark"] .marker-toolbar {
---marker-toolbar-bg: #1f1f1f;
-border-color: #333;
-}
-.marker-toolbar.show {
-display: flex;
-flex-direction: column;
-gap: 8px;
-}
-.marker-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding-bottom: 8px;
-border-bottom: 1px solid #e9ecef;
-margin-bottom: 8px;
-}
-.marker-title {
-font-weight: 600;
-color: #495057;
-margin: 0;
-}
-.marker-close {
-background: none;
-border: none;
-font-size: 18px;
-cursor: pointer;
-padding: 4px;
-color: #6c757d;
-border-radius: 4px;
-transition: background-color 0.2s ease;
-}
-.marker-close:hover {
-background: #f8f9fa;
-}
-.marker-colors {
-display: grid;
-grid-template-columns: repeat(4, 28px);
-gap: 8px;
-margin-bottom: 8px;
-}
-.marker-color-btn {
-width: 28px;
-height: 28px;
-border: 2px solid rgba(0, 0, 0, 0.1);
-border-radius: 50%;
-cursor: pointer;
-transition: transform 0.12s ease, box-shadow 0.12s ease;
+body[data-theme="dark"] .marker-color-btn {
+border-color: rgba(255, 255, 255, 0.2);
 }
 .marker-color-btn:hover {
 transform: translateY(-1px);
-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+border-color: rgba(0, 0, 0, 0.3);
+}
+body[data-theme="dark"] .marker-color-btn:hover {
+border-color: rgba(255, 255, 255, 0.35);
 }
 .marker-color-btn[data-color="yellow"] {
-background: #ffeb3b;
+background: #ffe066;
 }
 .marker-color-btn[data-color="green"] {
-background: #81c784;
+background: #8bd17c;
 }
 .marker-color-btn[data-color="blue"] {
-background: #64b5f6;
+background: #5ab0ff;
 }
 .marker-color-btn[data-color="pink"] {
-background: #f48fb1;
+background: #f7a0c2;
 }
-.marker-color-btn:hover {
-border-color: #333;
-}
+.marker-color-btn:focus-visible,
 .marker-color-btn.active {
-border-color: #333;
-box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
+outline: none;
+border-color: #1a73e8;
+box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.25);
 }
-.marker-btn-yellow {
-background: #fff59d;
-}
-.marker-btn-green {
-background: #c8e6c9;
-}
-.marker-btn-blue {
-background: #bbdefb;
-}
-.marker-btn-pink {
-background: #f8bbd0;
-}
-.marker-btn-clear {
-background: #f5f5f5;
-border: 1px solid #dee2e6;
-}
-.marker-actions {
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-.marker-apply {
-padding: 6px 12px;
-background: #007bff;
-color: white;
-border: none;
-border-radius: 4px;
+.marker-comment-btn {
+width: 28px;
+height: 24px;
+border: 1px solid rgba(0, 0, 0, 0.15);
+border-radius: 6px;
+background: #f5f7fb url(data:image/png;base64,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) center/16px 16px no-repeat;
 cursor: pointer;
-font-weight: 500;
-transition: background-color 0.2s ease;
+transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
 }
-.marker-apply:hover {
-background: #0056b3;
+.marker-comment-btn:hover {
+transform: translateY(-1px);
+box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+border-color: rgba(0, 0, 0, 0.3);
+background-color: #eef1f8;
 }
-.marker-cancel {
-padding: 6px 12px;
-background: #6c757d;
-color: white;
-border: none;
-border-radius: 4px;
-cursor: pointer;
-transition: background-color 0.2s ease;
+body[data-theme="dark"] .marker-comment-btn {
+background-color: #edf1ff;
+border-color: rgba(255, 255, 255, 0.2);
 }
-.marker-cancel:hover {
-background: #545b62;
-}
-.marker-delete-all {
-padding: 4px 8px;
-background: #dc3545;
-color: white;
-border: none;
-border-radius: 4px;
-cursor: pointer;
-font-size: 12px;
-transition: background-color 0.2s ease;
-}
-.marker-delete-all:hover {
-background: #c82333;
-}
-
-.text-highlight-overlay {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: rgba(0, 0, 0, 0.3);
-z-index: 999;
-display: none;
-}
-.text-highlight-overlay.show {
-display: block;
-}
-.text-highlight-container {
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background: white;
-border: 2px solid #dee2e6;
-border-radius: 8px;
-padding: 20px;
-max-width: 80%;
-max-height: 60vh;
-overflow-y: auto;
-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-z-index: 1000;
-display: none;
-}
-.text-highlight-container.show {
-display: block;
-}
-.highlight-context {
-font-size: 14px;
-color: #495057;
-line-height: 1.5;
-margin: 10px 0;
-padding: 12px;
-background: #f8f9fa;
-border-radius: 4px;
-border: 1px solid #e9ecef;
-}
-.highlight-controls {
-display: flex;
-gap: 8px;
-margin-top: 10px;
+body[data-theme="dark"] .marker-comment-btn:hover {
+background-color: #dce4ff;
+border-color: rgba(255, 255, 255, 0.32);
 }
 
 #quarto-content,
@@ -6264,52 +5948,110 @@ overflow-y: auto;
 #quarto-sidebar .toc-panel.hidden {
 display: none;
 }
-#quarto-sidebar .toc-page-content nav#TOC {
+#quarto-sidebar .toc-page-content {
+padding-bottom: 8px;
+}
+#quarto-sidebar .toc-page-content .toc-empty {
+margin: 0;
+padding: 8px;
+color: #868e96;
+font-size: 0.85rem;
+font-style: italic;
+}
+#quarto-sidebar .toc-page-content .page-toc-list {
+list-style: none;
+padding: 0;
+margin: 0;
+display: flex;
+flex-direction: column;
+gap: 4px;
+}
+#quarto-sidebar .toc-page-content .page-toc-item {
 margin: 0;
 }
-#quarto-sidebar .toc-page-content nav#TOC>h2 {
-font-size: 0.95rem;
-margin-bottom: 8px;
-color: #495057;
-}
-#quarto-sidebar .toc-page-content nav#TOC ul {
-padding-left: 0;
-list-style: none;
-}
-#quarto-sidebar .toc-page-content nav#TOC li {
-margin: 4px 0;
-}
-#quarto-sidebar .toc-page-content nav#TOC a {
+#quarto-sidebar .toc-page-content .page-toc-link {
 display: block;
-padding: 6px 8px;
-border-radius: 4px;
+padding: 6px 10px;
+border-radius: 6px;
 color: #1a73e8;
 text-decoration: none;
 font-size: 0.9rem;
-transition: background 0.2s ease;
+transition: background 0.2s ease, color 0.2s ease;
 }
-#quarto-sidebar .toc-page-content nav#TOC a:hover,
-#quarto-sidebar .toc-page-content nav#TOC a.active {
+#quarto-sidebar .toc-page-content .page-toc-link:hover,
+#quarto-sidebar .toc-page-content .page-toc-link.active {
 background: #e8f2ff;
 color: #0c5bc0;
 }
-
-#quarto-sidebar .toc-page-content nav#TOC li.has-children>.li-row {
+#quarto-sidebar .toc-page-content .page-toc-level-2 {
+padding-left: 14px;
+}
+#quarto-sidebar .toc-page-content .page-toc-level-3 {
+padding-left: 24px;
+}
+#quarto-sidebar .toc-page-content .page-toc-level-4,
+#quarto-sidebar .toc-page-content .page-toc-level-5,
+#quarto-sidebar .toc-page-content .page-toc-level-6 {
+padding-left: 32px;
+font-size: 0.85rem;
+}
+#quarto-sidebar .toc-all-content {
+padding-bottom: 8px;
+}
+#quarto-sidebar .toc-all-content .all-toc-list {
+list-style: none;
+padding: 0;
+margin: 0;
 display: flex;
-align-items: center;
-gap: 6px;
+flex-direction: column;
+gap: 2px;
 }
-#quarto-sidebar .toc-page-content nav#TOC .toc-toggle {
-cursor: pointer;
-color: #6c757d;
+#quarto-sidebar .toc-all-content .all-toc-item {
+margin: 0;
+line-height: 1.05;
+}
+#quarto-sidebar .toc-all-content .all-toc-item.active > .all-toc-link {
+font-weight: 600;
+color: #1a73e8;
+}
+#quarto-sidebar .toc-all-content .all-toc-link {
+display: block;
+padding: 4px 10px;
+border-radius: 6px;
+color: #202124;
+text-decoration: none;
 font-size: 0.9rem;
-user-select: none;
-width: 1em;
-display: inline-block;
-text-align: center;
+transition: background 0.2s ease, color 0.2s ease;
 }
-#quarto-sidebar .toc-page-content nav#TOC li.collapsed>ul {
-display: none;
+#quarto-sidebar .toc-all-content .all-toc-link:hover {
+background: #f1f3f4;
+}
+#quarto-sidebar .toc-all-content .all-toc-sublist {
+list-style: none;
+padding-left: 14px;
+margin: 2px 0 6px;
+display: flex;
+flex-direction: column;
+gap: 2px;
+}
+#quarto-sidebar .toc-all-content .all-toc-sublink {
+font-size: 0.8rem;
+color: #5f6368;
+text-decoration: none;
+padding: 3px 8px;
+border-radius: 4px;
+transition: background 0.2s ease, color 0.2s ease;
+}
+#quarto-sidebar .toc-all-content .all-toc-sublink:hover {
+background: #f3f4f6;
+color: #3c4043;
+}
+#quarto-sidebar .toc-all-content .all-toc-item--chapter {
+margin-top: 0.6em;
+line-height: 1.15;
+}
+#quarto-sidebar .toc-all-content .all-toc-item--chapter:first-child {
+margin-top: 0;
 }
 #quarto-sidebar .toc-empty {
 margin: 0;
@@ -7408,9 +7150,14 @@ background: transparent;
       if (!href || !href.startsWith('#')) return;
       const id = href.slice(1);
       const top = ref.getBoundingClientRect().top + window.scrollY;
+      const label = (() => {
+        const sup = ref.querySelector('sup');
+        const raw = (sup ? sup.textContent : ref.textContent) || '';
+        return raw.replace(/\s+/g, ' ').trim();
+      })();
       const existing = refMap.get(id);
       if (!existing || top < existing.pos) {
-        refMap.set(id, { id, ref, pos: top });
+        refMap.set(id, { id, ref, pos: top, number: label });
       }
     });
     const items = [];
@@ -7429,7 +7176,8 @@ background: transparent;
         const parentSection = li.closest('section.chapter-page');
         if (parentSection && parentSection !== active) return;
       }
-      items.push({ id: entry.id, li, ref: entry.ref, pos: entry.pos });
+      const fallbackLabel = entry.number || entry.id.replace(/[^0-9]+/g, '').trim();
+      items.push({ id: entry.id, li, ref: entry.ref, pos: entry.pos, number: fallbackLabel });
     });
     return items;
   }
@@ -7458,10 +7206,11 @@ background: transparent;
       console.error('UI init failed:', e);
     }
   }
+  const queueInit = () => window.setTimeout(initUI, 0);
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initUI);
+    document.addEventListener('DOMContentLoaded', queueInit, { once: true });
   } else {
-    initUI();
+    queueInit();
   }
 
   function setupHeaderControls() {
@@ -7746,9 +7495,6 @@ background: transparent;
     if (!sidebar) return;
     const menuContainer = sidebar.querySelector('.sidebar-menu-container');
     if (!menuContainer) return;
-    const marginSidebar = document.getElementById('quarto-margin-sidebar');
-    const pageToc = marginSidebar ? marginSidebar.querySelector('#TOC') : null;
-
     const tabWrapper = document.createElement('div');
     tabWrapper.className = 'toc-switcher';
     tabWrapper.innerHTML = `
@@ -7771,14 +7517,6 @@ background: transparent;
     try { setSidebarDepth(menuContainer, 2); } catch (e) { console.warn('setSidebarDepth failed for site', e); }
 
     const pagePanel = tabWrapper.querySelector('.toc-page-content');
-    // 章内タブ: 独自TOCシステムで生成
-    try { 
-      if (pageToc) {
-        pagePanel.appendChild(pageToc);
-        pagePanel.classList.add('page-toc');
-      }
-      // 親要素を確保して後で初期化（onload時にも実行される）
-    } catch (e) { console.warn('TOC setup failed', e); }
 
     const allPanel = tabWrapper.querySelector('.toc-all-content');
     if (menuCloneForAll) {
@@ -8080,21 +7818,42 @@ background: transparent;
 
     const items = footnotes.slice();
     const mode = sort.value;
-    if (mode === 'pos') items.sort((a,b)=>a.pos-b.pos);
-    else items.sort((a,b)=> (a.id||'').localeCompare(b.id||''));
+    const getSortableNumber = (item) => {
+      const primary = Number(item.number);
+      if (!Number.isNaN(primary)) return primary;
+      const fallbackFromId = Number(String(item.id || '').replace(/[^0-9]+/g, ''));
+      if (!Number.isNaN(fallbackFromId)) return fallbackFromId;
+      return Number.POSITIVE_INFINITY;
+    };
+    if (mode === 'pos') {
+      items.sort((a,b)=>a.pos-b.pos);
+    } else {
+      items.sort((a,b)=> {
+        const numA = getSortableNumber(a);
+        const numB = getSortableNumber(b);
+        if (numA !== numB) return numA - numB;
+        const labelA = (a.number || '').toString();
+        const labelB = (b.number || '').toString();
+        const cmpLabel = labelA.localeCompare(labelB, undefined, { numeric: true, sensitivity: 'base' });
+        if (cmpLabel !== 0) return cmpLabel;
+        return (a.id || '').localeCompare(b.id || '');
+      });
+    }
 
     const wrapper = document.createElement('div');
     wrapper.className = 'margin-footnotes';
     const ol = document.createElement('ol');
     items.forEach((it, idx) => {
       const clone = it.li.cloneNode(true);
+      const displayLabel = (it.number && String(it.number).trim().length) ? String(it.number).trim() : String(idx + 1);
       if (!clone.querySelector('.footnote-num')) {
         const num = document.createElement('span');
         num.className = 'footnote-num';
-        num.textContent = (idx + 1) + '. ';
+        num.textContent = displayLabel + '. ';
         clone.insertBefore(num, clone.firstChild);
       }
-      it.displayIndex = idx + 1;
+      it.number = displayLabel;
+      it.displayIndex = displayLabel;
       it.clone = clone;
       ol.appendChild(clone);
     });
@@ -8118,7 +7877,8 @@ background: transparent;
       type: 'foot',
       top: f.pos,
       id: f.id,
-      displayIndex: f.displayIndex || 0,
+      displayIndex: f.displayIndex,
+      number: f.number,
       clone: f.li.cloneNode(true)
     }));
     const merged = commItems.concat(footMixed).sort((a, b) => a.top - b.top);
@@ -8170,8 +7930,12 @@ background: transparent;
         if (!clone.querySelector('.footnote-num')) {
           const num = document.createElement('span');
           num.className = 'footnote-num';
-          const displayNum = item.displayIndex || (footMixed.indexOf(item) + 1);
-          num.textContent = displayNum + '. ';
+          const label = (item.displayIndex && String(item.displayIndex).trim().length)
+            ? String(item.displayIndex).trim()
+            : (item.number && String(item.number).trim().length)
+              ? String(item.number).trim()
+              : String(footMixed.indexOf(item) + 1);
+          num.textContent = label + '. ';
           clone.insertBefore(num, clone.firstChild);
         }
         wrapper.appendChild(clone);
@@ -8484,12 +8248,21 @@ background: transparent;
     document.addEventListener('mouseup', (e) => {
       if (closestInteractive(e.target)) return;
       const sel = window.getSelection();
-      if (!sel || sel.rangeCount === 0) { hideMarkerToolbar(); pendingSerializedRange = null; return; }
+      if (!sel || sel.rangeCount === 0) {
+        hideMarkerToolbar();
+        pendingSerializedRange = null;
+        return;
+      }
       const text = sel.toString().trim();
       if (text) {
-        // 選択状態を保持（ボタン操作で選択が消えても適用できるように）
-        try { pendingSerializedRange = serializeRange(sel.getRangeAt(0)); } catch { pendingSerializedRange = null; }
-        showMarkerToolbar();
+        const rect = getSelectionRect(sel);
+        const fallbackPoint = { x: e.clientX, y: e.clientY };
+        try {
+          pendingSerializedRange = serializeRange(sel.getRangeAt(0));
+        } catch {
+          pendingSerializedRange = null;
+        }
+        showMarkerToolbar(rect, fallbackPoint);
       } else {
         hideMarkerToolbar();
         pendingSerializedRange = null;
@@ -8500,27 +8273,102 @@ background: transparent;
       return el.closest('.marker-toolbar, .js-header, .global-search-dialog, #quarto-sidebar');
     }
 
-    function showMarkerToolbar() {
+    function getSelectionRect(selection) {
+      if (!selection || selection.rangeCount === 0) return null;
+      try {
+        const range = selection.getRangeAt(0).cloneRange();
+        const rect = range.getBoundingClientRect();
+        if (rect && (rect.width || rect.height)) return rect;
+        const rects = range.getClientRects();
+        for (const r of rects) {
+          if (r.width || r.height) return r;
+        }
+      } catch (err) {
+        console.warn('getSelectionRect failed', err);
+      }
+      const focusContainer = selection.focusNode instanceof Element ? selection.focusNode : selection.focusNode?.parentElement;
+      return focusContainer ? focusContainer.getBoundingClientRect() : null;
+    }
+
+    function showMarkerToolbar(rect, fallbackPoint) {
       let toolbar = document.querySelector('.marker-toolbar');
       if (!toolbar) {
         toolbar = createMarkerToolbar();
         document.body.appendChild(toolbar);
       }
       toolbar.classList.add('show');
+      toolbar.style.display = 'flex';
+      toolbar.style.flexDirection = 'column';
+      toolbar.style.gap = '6px';
+      toolbar.style.position = 'absolute';
+      toolbar.style.removeProperty('right');
+      toolbar.style.removeProperty('bottom');
+      positionMarkerToolbar(toolbar, rect, fallbackPoint);
+    }
+
+    function positionMarkerToolbar(toolbar, rect, fallbackPoint) {
+      requestAnimationFrame(() => {
+        if (!toolbar.classList.contains('show')) return;
+        let targetRect = rect;
+        if (!targetRect || (!(targetRect.width || targetRect.height))) {
+          if (fallbackPoint && typeof fallbackPoint.x === 'number' && typeof fallbackPoint.y === 'number') {
+            targetRect = {
+              top: fallbackPoint.y,
+              bottom: fallbackPoint.y,
+              left: fallbackPoint.x,
+              right: fallbackPoint.x,
+              width: 0,
+              height: 0
+            };
+          } else {
+            const vw = window.innerWidth || document.documentElement.clientWidth || 0;
+            const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+            targetRect = {
+              top: vh / 2,
+              bottom: vh / 2,
+              left: vw / 2,
+              right: vw / 2,
+              width: 0,
+              height: 0
+            };
+          }
+        }
+        const scrollX = window.scrollX ?? window.pageXOffset ?? document.documentElement.scrollLeft ?? 0;
+        const scrollY = window.scrollY ?? window.pageYOffset ?? document.documentElement.scrollTop ?? 0;
+        const toolbarWidth = toolbar.offsetWidth;
+        const toolbarHeight = toolbar.offsetHeight;
+        const margin = 12;
+        const viewportWidth = document.documentElement.clientWidth || window.innerWidth || toolbarWidth;
+        const rectWidth = targetRect.width ?? (targetRect.right - targetRect.left) ?? 0;
+        const rectCenterX = targetRect.left + rectWidth / 2;
+        let left = scrollX + rectCenterX - toolbarWidth / 2;
+        left = Math.max(scrollX + 8, Math.min(left, scrollX + viewportWidth - toolbarWidth - 8));
+        const rectBottom = targetRect.bottom ?? (targetRect.top + targetRect.height) ?? targetRect.top;
+        let top = scrollY + targetRect.top - toolbarHeight - margin;
+        if (top < scrollY + 8) {
+          top = scrollY + rectBottom + margin;
+        }
+        const viewportHeight = document.documentElement.clientHeight || window.innerHeight || toolbarHeight;
+        const maxTop = scrollY + viewportHeight - toolbarHeight - 8;
+        top = Math.min(top, maxTop);
+        toolbar.style.left = `${Math.round(left)}px`;
+        toolbar.style.top = `${Math.round(top)}px`;
+      });
     }
 
     function createMarkerToolbar() {
       const toolbar = document.createElement('div');
       toolbar.className = 'marker-toolbar';
       toolbar.innerHTML = `
-        <div class="marker-colors" role="toolbar" aria-label="ハイライト色選択">
-          <button class="marker-color-btn" data-color="yellow" title="黄"></button>
-          <button class="marker-color-btn" data-color="green" title="緑"></button>
-          <button class="marker-color-btn" data-color="blue" title="青"></button>
-          <button class="marker-color-btn" data-color="pink" title="ピンク"></button>
-          <button class="marker-comment-btn" title="選択範囲にコメント">💬</button>
+        <div class="marker-controls" role="toolbar" aria-label="ハイライト色選択">
+          <div class="marker-colors">
+            <button type="button" class="marker-color-btn" data-color="yellow" title="黄"></button>
+            <button type="button" class="marker-color-btn" data-color="green" title="緑"></button>
+            <button type="button" class="marker-color-btn" data-color="blue" title="青"></button>
+            <button type="button" class="marker-color-btn" data-color="pink" title="ピンク"></button>
+          </div>
+          <button type="button" class="marker-comment-btn" title="選択範囲にコメント" aria-label="選択範囲にコメント"></button>
         </div>
-        <button class="marker-clear-btn" title="このページのマーカーを全消去">全消去</button>
       `;
       toolbar.querySelectorAll('.marker-color-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -8534,11 +8382,6 @@ background: transparent;
           openCommentDialog();
         });
       }
-      toolbar.querySelector('.marker-clear-btn').addEventListener('click', () => {
-        clearAllMarkers();
-        hideMarkerToolbar();
-        window.getSelection().removeAllRanges();
-      });
       return toolbar;
     }
 
@@ -8690,7 +8533,10 @@ background: transparent;
 
     function hideMarkerToolbar() {
       const toolbar = document.querySelector('.marker-toolbar');
-      if (toolbar) toolbar.classList.remove('show');
+      if (toolbar) {
+        toolbar.classList.remove('show');
+        toolbar.style.display = 'none';
+      }
     }
 
     function removeMarkerGroup(markerId) {
@@ -10098,59 +9944,44 @@ background: transparent;
         return '<p class="toc-empty">このページには見出しがありません。</p>';
       }
       
-      // 見出しレベルの階層構造を構築
-      const tocStructure = [];
-      let currentLevel = 1;
-      let currentParents = [tocStructure];
-      
+      const items = [];
       headings.forEach((heading, id) => {
-        const headingLevel = heading.level;
-        const item = {
-          id: id,
-          text: heading.text,
-          level: headingLevel,
-          children: []
-        };
-        
-        // レベルに合わせて親を調整
-        while (currentParents.length > headingLevel) {
-          currentParents.pop();
-        }
-        while (currentParents.length <= headingLevel) {
-          if (currentParents[currentParents.length - 1] && currentParents[currentParents.length - 1].children) {
-            const parent = currentParents[currentParents.length - 1].children;
-            parent.push({ level: headingLevel, children: [] });
-            currentParents.push(parent[parent.length - 1].children);
-          } else {
-            currentParents.push([]);
-          }
-        }
-        
-        if (currentParents.length > 0) {
-          currentParents[currentParents.length - 1].push(item);
-        }
+        const level = Math.min(Math.max(heading.level, 1), 6);
+        if (level > maxDepth) return;
+        const levelClass = `page-toc-level-${level}`;
+        const liClasses = ['page-toc-item', levelClass].join(' ');
+        items.push(`<li class="${liClasses}"><a class="page-toc-link" href="#${id}">${heading.text}</a></li>`);
       });
-      
-      return this.renderTOCStructure(tocStructure, maxDepth);
+
+      if (!items.length) {
+        return '<p class="toc-empty">このページには見出しがありません。</p>';
+      }
+
+      return `<ul class="page-toc-list">${items.join('')}</ul>`;
     },
     
     // 全体TOCを生成（全体タブ用）
     generateAllPagesTOC: function() {
       const pages = this.getAllPagesTOC();
+      const currentPath = (window.location.pathname || '').split('/').pop() || 'index.html';
       
-      let html = '<ul class="custom-toc-list">';
+      let html = '<ul class="all-toc-list">';
       
       pages.forEach(page => {
-        const activeClass = page.url.includes(window.location.pathname.replace(/\/[^\/]+\..+$/, '').split('/').pop()) ? 'active' : '';
+        const normalizedPage = (page.url || '').replace(/^\.\//, '').split('/').pop() || '';
+        const isActive = normalizedPage === currentPath;
+        const itemClasses = ['all-toc-item', `all-toc-item--${page.type || 'other'}`];
+        if (isActive) itemClasses.push('active');
         
-        html += `<li class="custom-toc-item ${activeClass}" data-type="${page.type}">`;
-        html += `<a href="${page.url}" class="custom-toc-link ${activeClass}">${page.title}</a>`;
+        html += `<li class="${itemClasses.join(' ')}">`;
+        html += `<a href="${page.url}" class="all-toc-link">${page.title}</a>`;
         
-        if (page.sections && page.sections.length > 0) {
-          html += '<ul class="custom-toc-child-list">';
+        if (Array.isArray(page.sections) && page.sections.length) {
+          html += '<ul class="all-toc-sublist">';
           page.sections.forEach(sectionName => {
             const sectionId = this.generateIdFromText(sectionName);
-            html += `<li class="custom-toc-child-item"><a href="${page.url}#${sectionId}" class="custom-toc-child-link">${sectionName}</a></li>`;
+            const link = `${page.url}#${sectionId}`;
+            html += `<li class="all-toc-subitem"><a href="${link}" class="all-toc-sublink">${sectionName}</a></li>`;
           });
           html += '</ul>';
         }
@@ -10163,47 +9994,56 @@ background: transparent;
     },
     
     // TOC構造をHTMLに変換
-    renderTOCStructure: function(structure, maxDepth = Infinity) {
-      let html = '<ul class="custom-toc-list">';
-      
-      function renderItems(items, currentDepth = 1) {
+    renderTOCStructure: function(structure, maxDepth = Infinity, options = {}) {
+      const {
+        listClass = 'custom-toc-list',
+        childListClass = 'custom-toc-child-list',
+        itemClass = (item, active) => `custom-toc-item level-${item.level} ${active}`,
+        linkClass = (item, active) => `custom-toc-link ${active}`
+      } = options;
+
+      const normalizeClass = (value) => (value || '').trim().replace(/\s+/g, ' ');
+
+      const renderItems = (items, currentDepth = 1) => {
         let resultHtml = '';
-        
+
         items.forEach(item => {
           if (Array.isArray(item)) {
-            // レベルが配列の場合の子要素
             if (currentDepth <= maxDepth) {
-              resultHtml += '<ul class="custom-toc-child-list">';
+              resultHtml += `<ul class="${normalizeClass(childListClass)}">`;
               item.forEach(childItem => {
                 resultHtml += renderItems([childItem], currentDepth + 1);
               });
               resultHtml += '</ul>';
             }
           } else if (item && item.id) {
-            // 見出しアイテム
-            const activeClass = document.getElementById(item.id)?.classList.contains('active') ? 'active' : '';
-            resultHtml += `<li class="custom-toc-item level-${item.level} ${activeClass}">`;
-            resultHtml += `<a href="#${item.id}" class="custom-toc-link ${activeClass}">${item.text}</a>`;
-            
+            const isActive = document.getElementById(item.id)?.classList.contains('active');
+            const activeClass = isActive ? 'active' : '';
+            const liClass = typeof itemClass === 'function' ? itemClass(item, activeClass) : itemClass;
+            const linkClassName = typeof linkClass === 'function' ? linkClass(item, activeClass) : linkClass;
+
+            resultHtml += `<li class="${normalizeClass(liClass)}">`;
+            resultHtml += `<a href="#${item.id}" class="${normalizeClass(linkClassName)}">${item.text}</a>`;
+
             if (item.children && item.children.length > 0 && currentDepth < maxDepth) {
-              resultHtml += '<ul class="custom-toc-child-list">';
+              resultHtml += `<ul class="${normalizeClass(childListClass)}">`;
               item.children.forEach(child => {
                 resultHtml += renderItems([child], currentDepth + 1);
               });
               resultHtml += '</ul>';
             }
-            
+
             resultHtml += '</li>';
           }
         });
-        
+
         return resultHtml;
-      }
-      
+      };
+
+      let html = `<ul class="${normalizeClass(listClass)}">`;
       structure.forEach(item => {
         html += renderItems([item], 1);
       });
-      
       html += '</ul>';
       return html;
     },

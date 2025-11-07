@@ -938,9 +938,14 @@ ul.task-list li input[type="checkbox"] {
       if (!href || !href.startsWith('#')) return;
       const id = href.slice(1);
       const top = ref.getBoundingClientRect().top + window.scrollY;
+      const label = (() => {
+        const sup = ref.querySelector('sup');
+        const raw = (sup ? sup.textContent : ref.textContent) || '';
+        return raw.replace(/\s+/g, ' ').trim();
+      })();
       const existing = refMap.get(id);
       if (!existing || top < existing.pos) {
-        refMap.set(id, { id, ref, pos: top });
+        refMap.set(id, { id, ref, pos: top, number: label });
       }
     });
     const items = [];
@@ -959,7 +964,8 @@ ul.task-list li input[type="checkbox"] {
         const parentSection = li.closest('section.chapter-page');
         if (parentSection && parentSection !== active) return;
       }
-      items.push({ id: entry.id, li, ref: entry.ref, pos: entry.pos });
+      const fallbackLabel = entry.number || entry.id.replace(/[^0-9]+/g, '').trim();
+      items.push({ id: entry.id, li, ref: entry.ref, pos: entry.pos, number: fallbackLabel });
     });
     return items;
   }
@@ -988,10 +994,11 @@ ul.task-list li input[type="checkbox"] {
       console.error('UI init failed:', e);
     }
   }
+  const queueInit = () => window.setTimeout(initUI, 0);
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initUI);
+    document.addEventListener('DOMContentLoaded', queueInit, { once: true });
   } else {
-    initUI();
+    queueInit();
   }
 
   function setupHeaderControls() {
@@ -1276,9 +1283,6 @@ ul.task-list li input[type="checkbox"] {
     if (!sidebar) return;
     const menuContainer = sidebar.querySelector('.sidebar-menu-container');
     if (!menuContainer) return;
-    const marginSidebar = document.getElementById('quarto-margin-sidebar');
-    const pageToc = marginSidebar ? marginSidebar.querySelector('#TOC') : null;
-
     const tabWrapper = document.createElement('div');
     tabWrapper.className = 'toc-switcher';
     tabWrapper.innerHTML = `
@@ -1301,14 +1305,6 @@ ul.task-list li input[type="checkbox"] {
     try { setSidebarDepth(menuContainer, 2); } catch (e) { console.warn('setSidebarDepth failed for site', e); }
 
     const pagePanel = tabWrapper.querySelector('.toc-page-content');
-    // 章内タブ: 独自TOCシステムで生成
-    try { 
-      if (pageToc) {
-        pagePanel.appendChild(pageToc);
-        pagePanel.classList.add('page-toc');
-      }
-      // 親要素を確保して後で初期化（onload時にも実行される）
-    } catch (e) { console.warn('TOC setup failed', e); }
 
     const allPanel = tabWrapper.querySelector('.toc-all-content');
     if (menuCloneForAll) {
@@ -1610,21 +1606,42 @@ ul.task-list li input[type="checkbox"] {
 
     const items = footnotes.slice();
     const mode = sort.value;
-    if (mode === 'pos') items.sort((a,b)=>a.pos-b.pos);
-    else items.sort((a,b)=> (a.id||'').localeCompare(b.id||''));
+    const getSortableNumber = (item) => {
+      const primary = Number(item.number);
+      if (!Number.isNaN(primary)) return primary;
+      const fallbackFromId = Number(String(item.id || '').replace(/[^0-9]+/g, ''));
+      if (!Number.isNaN(fallbackFromId)) return fallbackFromId;
+      return Number.POSITIVE_INFINITY;
+    };
+    if (mode === 'pos') {
+      items.sort((a,b)=>a.pos-b.pos);
+    } else {
+      items.sort((a,b)=> {
+        const numA = getSortableNumber(a);
+        const numB = getSortableNumber(b);
+        if (numA !== numB) return numA - numB;
+        const labelA = (a.number || '').toString();
+        const labelB = (b.number || '').toString();
+        const cmpLabel = labelA.localeCompare(labelB, undefined, { numeric: true, sensitivity: 'base' });
+        if (cmpLabel !== 0) return cmpLabel;
+        return (a.id || '').localeCompare(b.id || '');
+      });
+    }
 
     const wrapper = document.createElement('div');
     wrapper.className = 'margin-footnotes';
     const ol = document.createElement('ol');
     items.forEach((it, idx) => {
       const clone = it.li.cloneNode(true);
+      const displayLabel = (it.number && String(it.number).trim().length) ? String(it.number).trim() : String(idx + 1);
       if (!clone.querySelector('.footnote-num')) {
         const num = document.createElement('span');
         num.className = 'footnote-num';
-        num.textContent = (idx + 1) + '. ';
+        num.textContent = displayLabel + '. ';
         clone.insertBefore(num, clone.firstChild);
       }
-      it.displayIndex = idx + 1;
+      it.number = displayLabel;
+      it.displayIndex = displayLabel;
       it.clone = clone;
       ol.appendChild(clone);
     });
@@ -1648,7 +1665,8 @@ ul.task-list li input[type="checkbox"] {
       type: 'foot',
       top: f.pos,
       id: f.id,
-      displayIndex: f.displayIndex || 0,
+      displayIndex: f.displayIndex,
+      number: f.number,
       clone: f.li.cloneNode(true)
     }));
     const merged = commItems.concat(footMixed).sort((a, b) => a.top - b.top);
@@ -1700,8 +1718,12 @@ ul.task-list li input[type="checkbox"] {
         if (!clone.querySelector('.footnote-num')) {
           const num = document.createElement('span');
           num.className = 'footnote-num';
-          const displayNum = item.displayIndex || (footMixed.indexOf(item) + 1);
-          num.textContent = displayNum + '. ';
+          const label = (item.displayIndex && String(item.displayIndex).trim().length)
+            ? String(item.displayIndex).trim()
+            : (item.number && String(item.number).trim().length)
+              ? String(item.number).trim()
+              : String(footMixed.indexOf(item) + 1);
+          num.textContent = label + '. ';
           clone.insertBefore(num, clone.firstChild);
         }
         wrapper.appendChild(clone);
@@ -2014,12 +2036,21 @@ ul.task-list li input[type="checkbox"] {
     document.addEventListener('mouseup', (e) => {
       if (closestInteractive(e.target)) return;
       const sel = window.getSelection();
-      if (!sel || sel.rangeCount === 0) { hideMarkerToolbar(); pendingSerializedRange = null; return; }
+      if (!sel || sel.rangeCount === 0) {
+        hideMarkerToolbar();
+        pendingSerializedRange = null;
+        return;
+      }
       const text = sel.toString().trim();
       if (text) {
-        // 選択状態を保持（ボタン操作で選択が消えても適用できるように）
-        try { pendingSerializedRange = serializeRange(sel.getRangeAt(0)); } catch { pendingSerializedRange = null; }
-        showMarkerToolbar();
+        const rect = getSelectionRect(sel);
+        const fallbackPoint = { x: e.clientX, y: e.clientY };
+        try {
+          pendingSerializedRange = serializeRange(sel.getRangeAt(0));
+        } catch {
+          pendingSerializedRange = null;
+        }
+        showMarkerToolbar(rect, fallbackPoint);
       } else {
         hideMarkerToolbar();
         pendingSerializedRange = null;
@@ -2030,27 +2061,102 @@ ul.task-list li input[type="checkbox"] {
       return el.closest('.marker-toolbar, .js-header, .global-search-dialog, #quarto-sidebar');
     }
 
-    function showMarkerToolbar() {
+    function getSelectionRect(selection) {
+      if (!selection || selection.rangeCount === 0) return null;
+      try {
+        const range = selection.getRangeAt(0).cloneRange();
+        const rect = range.getBoundingClientRect();
+        if (rect && (rect.width || rect.height)) return rect;
+        const rects = range.getClientRects();
+        for (const r of rects) {
+          if (r.width || r.height) return r;
+        }
+      } catch (err) {
+        console.warn('getSelectionRect failed', err);
+      }
+      const focusContainer = selection.focusNode instanceof Element ? selection.focusNode : selection.focusNode?.parentElement;
+      return focusContainer ? focusContainer.getBoundingClientRect() : null;
+    }
+
+    function showMarkerToolbar(rect, fallbackPoint) {
       let toolbar = document.querySelector('.marker-toolbar');
       if (!toolbar) {
         toolbar = createMarkerToolbar();
         document.body.appendChild(toolbar);
       }
       toolbar.classList.add('show');
+      toolbar.style.display = 'flex';
+      toolbar.style.flexDirection = 'column';
+      toolbar.style.gap = '6px';
+      toolbar.style.position = 'absolute';
+      toolbar.style.removeProperty('right');
+      toolbar.style.removeProperty('bottom');
+      positionMarkerToolbar(toolbar, rect, fallbackPoint);
+    }
+
+    function positionMarkerToolbar(toolbar, rect, fallbackPoint) {
+      requestAnimationFrame(() => {
+        if (!toolbar.classList.contains('show')) return;
+        let targetRect = rect;
+        if (!targetRect || (!(targetRect.width || targetRect.height))) {
+          if (fallbackPoint && typeof fallbackPoint.x === 'number' && typeof fallbackPoint.y === 'number') {
+            targetRect = {
+              top: fallbackPoint.y,
+              bottom: fallbackPoint.y,
+              left: fallbackPoint.x,
+              right: fallbackPoint.x,
+              width: 0,
+              height: 0
+            };
+          } else {
+            const vw = window.innerWidth || document.documentElement.clientWidth || 0;
+            const vh = window.innerHeight || document.documentElement.clientHeight || 0;
+            targetRect = {
+              top: vh / 2,
+              bottom: vh / 2,
+              left: vw / 2,
+              right: vw / 2,
+              width: 0,
+              height: 0
+            };
+          }
+        }
+        const scrollX = window.scrollX ?? window.pageXOffset ?? document.documentElement.scrollLeft ?? 0;
+        const scrollY = window.scrollY ?? window.pageYOffset ?? document.documentElement.scrollTop ?? 0;
+        const toolbarWidth = toolbar.offsetWidth;
+        const toolbarHeight = toolbar.offsetHeight;
+        const margin = 12;
+        const viewportWidth = document.documentElement.clientWidth || window.innerWidth || toolbarWidth;
+        const rectWidth = targetRect.width ?? (targetRect.right - targetRect.left) ?? 0;
+        const rectCenterX = targetRect.left + rectWidth / 2;
+        let left = scrollX + rectCenterX - toolbarWidth / 2;
+        left = Math.max(scrollX + 8, Math.min(left, scrollX + viewportWidth - toolbarWidth - 8));
+        const rectBottom = targetRect.bottom ?? (targetRect.top + targetRect.height) ?? targetRect.top;
+        let top = scrollY + targetRect.top - toolbarHeight - margin;
+        if (top < scrollY + 8) {
+          top = scrollY + rectBottom + margin;
+        }
+        const viewportHeight = document.documentElement.clientHeight || window.innerHeight || toolbarHeight;
+        const maxTop = scrollY + viewportHeight - toolbarHeight - 8;
+        top = Math.min(top, maxTop);
+        toolbar.style.left = `${Math.round(left)}px`;
+        toolbar.style.top = `${Math.round(top)}px`;
+      });
     }
 
     function createMarkerToolbar() {
       const toolbar = document.createElement('div');
       toolbar.className = 'marker-toolbar';
       toolbar.innerHTML = `
-        <div class="marker-colors" role="toolbar" aria-label="ハイライト色選択">
-          <button class="marker-color-btn" data-color="yellow" title="黄"></button>
-          <button class="marker-color-btn" data-color="green" title="緑"></button>
-          <button class="marker-color-btn" data-color="blue" title="青"></button>
-          <button class="marker-color-btn" data-color="pink" title="ピンク"></button>
-          <button class="marker-comment-btn" title="選択範囲にコメント">💬</button>
+        <div class="marker-controls" role="toolbar" aria-label="ハイライト色選択">
+          <div class="marker-colors">
+            <button type="button" class="marker-color-btn" data-color="yellow" title="黄"></button>
+            <button type="button" class="marker-color-btn" data-color="green" title="緑"></button>
+            <button type="button" class="marker-color-btn" data-color="blue" title="青"></button>
+            <button type="button" class="marker-color-btn" data-color="pink" title="ピンク"></button>
+          </div>
+          <button type="button" class="marker-comment-btn" title="選択範囲にコメント" aria-label="選択範囲にコメント"></button>
         </div>
-        <button class="marker-clear-btn" title="このページのマーカーを全消去">全消去</button>
       `;
       toolbar.querySelectorAll('.marker-color-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -2064,11 +2170,6 @@ ul.task-list li input[type="checkbox"] {
           openCommentDialog();
         });
       }
-      toolbar.querySelector('.marker-clear-btn').addEventListener('click', () => {
-        clearAllMarkers();
-        hideMarkerToolbar();
-        window.getSelection().removeAllRanges();
-      });
       return toolbar;
     }
 
@@ -2220,7 +2321,10 @@ ul.task-list li input[type="checkbox"] {
 
     function hideMarkerToolbar() {
       const toolbar = document.querySelector('.marker-toolbar');
-      if (toolbar) toolbar.classList.remove('show');
+      if (toolbar) {
+        toolbar.classList.remove('show');
+        toolbar.style.display = 'none';
+      }
     }
 
     function removeMarkerGroup(markerId) {
@@ -3628,59 +3732,44 @@ ul.task-list li input[type="checkbox"] {
         return '<p class="toc-empty">このページには見出しがありません。</p>';
       }
       
-      // 見出しレベルの階層構造を構築
-      const tocStructure = [];
-      let currentLevel = 1;
-      let currentParents = [tocStructure];
-      
+      const items = [];
       headings.forEach((heading, id) => {
-        const headingLevel = heading.level;
-        const item = {
-          id: id,
-          text: heading.text,
-          level: headingLevel,
-          children: []
-        };
-        
-        // レベルに合わせて親を調整
-        while (currentParents.length > headingLevel) {
-          currentParents.pop();
-        }
-        while (currentParents.length <= headingLevel) {
-          if (currentParents[currentParents.length - 1] && currentParents[currentParents.length - 1].children) {
-            const parent = currentParents[currentParents.length - 1].children;
-            parent.push({ level: headingLevel, children: [] });
-            currentParents.push(parent[parent.length - 1].children);
-          } else {
-            currentParents.push([]);
-          }
-        }
-        
-        if (currentParents.length > 0) {
-          currentParents[currentParents.length - 1].push(item);
-        }
+        const level = Math.min(Math.max(heading.level, 1), 6);
+        if (level > maxDepth) return;
+        const levelClass = `page-toc-level-${level}`;
+        const liClasses = ['page-toc-item', levelClass].join(' ');
+        items.push(`<li class="${liClasses}"><a class="page-toc-link" href="#${id}">${heading.text}</a></li>`);
       });
-      
-      return this.renderTOCStructure(tocStructure, maxDepth);
+
+      if (!items.length) {
+        return '<p class="toc-empty">このページには見出しがありません。</p>';
+      }
+
+      return `<ul class="page-toc-list">${items.join('')}</ul>`;
     },
     
     // 全体TOCを生成（全体タブ用）
     generateAllPagesTOC: function() {
       const pages = this.getAllPagesTOC();
+      const currentPath = (window.location.pathname || '').split('/').pop() || 'index.html';
       
-      let html = '<ul class="custom-toc-list">';
+      let html = '<ul class="all-toc-list">';
       
       pages.forEach(page => {
-        const activeClass = page.url.includes(window.location.pathname.replace(/\/[^\/]+\..+$/, '').split('/').pop()) ? 'active' : '';
+        const normalizedPage = (page.url || '').replace(/^\.\//, '').split('/').pop() || '';
+        const isActive = normalizedPage === currentPath;
+        const itemClasses = ['all-toc-item', `all-toc-item--${page.type || 'other'}`];
+        if (isActive) itemClasses.push('active');
         
-        html += `<li class="custom-toc-item ${activeClass}" data-type="${page.type}">`;
-        html += `<a href="${page.url}" class="custom-toc-link ${activeClass}">${page.title}</a>`;
+        html += `<li class="${itemClasses.join(' ')}">`;
+        html += `<a href="${page.url}" class="all-toc-link">${page.title}</a>`;
         
-        if (page.sections && page.sections.length > 0) {
-          html += '<ul class="custom-toc-child-list">';
+        if (Array.isArray(page.sections) && page.sections.length) {
+          html += '<ul class="all-toc-sublist">';
           page.sections.forEach(sectionName => {
             const sectionId = this.generateIdFromText(sectionName);
-            html += `<li class="custom-toc-child-item"><a href="${page.url}#${sectionId}" class="custom-toc-child-link">${sectionName}</a></li>`;
+            const link = `${page.url}#${sectionId}`;
+            html += `<li class="all-toc-subitem"><a href="${link}" class="all-toc-sublink">${sectionName}</a></li>`;
           });
           html += '</ul>';
         }
@@ -3693,47 +3782,56 @@ ul.task-list li input[type="checkbox"] {
     },
     
     // TOC構造をHTMLに変換
-    renderTOCStructure: function(structure, maxDepth = Infinity) {
-      let html = '<ul class="custom-toc-list">';
-      
-      function renderItems(items, currentDepth = 1) {
+    renderTOCStructure: function(structure, maxDepth = Infinity, options = {}) {
+      const {
+        listClass = 'custom-toc-list',
+        childListClass = 'custom-toc-child-list',
+        itemClass = (item, active) => `custom-toc-item level-${item.level} ${active}`,
+        linkClass = (item, active) => `custom-toc-link ${active}`
+      } = options;
+
+      const normalizeClass = (value) => (value || '').trim().replace(/\s+/g, ' ');
+
+      const renderItems = (items, currentDepth = 1) => {
         let resultHtml = '';
-        
+
         items.forEach(item => {
           if (Array.isArray(item)) {
-            // レベルが配列の場合の子要素
             if (currentDepth <= maxDepth) {
-              resultHtml += '<ul class="custom-toc-child-list">';
+              resultHtml += `<ul class="${normalizeClass(childListClass)}">`;
               item.forEach(childItem => {
                 resultHtml += renderItems([childItem], currentDepth + 1);
               });
               resultHtml += '</ul>';
             }
           } else if (item && item.id) {
-            // 見出しアイテム
-            const activeClass = document.getElementById(item.id)?.classList.contains('active') ? 'active' : '';
-            resultHtml += `<li class="custom-toc-item level-${item.level} ${activeClass}">`;
-            resultHtml += `<a href="#${item.id}" class="custom-toc-link ${activeClass}">${item.text}</a>`;
-            
+            const isActive = document.getElementById(item.id)?.classList.contains('active');
+            const activeClass = isActive ? 'active' : '';
+            const liClass = typeof itemClass === 'function' ? itemClass(item, activeClass) : itemClass;
+            const linkClassName = typeof linkClass === 'function' ? linkClass(item, activeClass) : linkClass;
+
+            resultHtml += `<li class="${normalizeClass(liClass)}">`;
+            resultHtml += `<a href="#${item.id}" class="${normalizeClass(linkClassName)}">${item.text}</a>`;
+
             if (item.children && item.children.length > 0 && currentDepth < maxDepth) {
-              resultHtml += '<ul class="custom-toc-child-list">';
+              resultHtml += `<ul class="${normalizeClass(childListClass)}">`;
               item.children.forEach(child => {
                 resultHtml += renderItems([child], currentDepth + 1);
               });
               resultHtml += '</ul>';
             }
-            
+
             resultHtml += '</li>';
           }
         });
-        
+
         return resultHtml;
-      }
-      
+      };
+
+      let html = `<ul class="${normalizeClass(listClass)}">`;
       structure.forEach(item => {
         html += renderItems([item], 1);
       });
-      
       html += '</ul>';
       return html;
     },

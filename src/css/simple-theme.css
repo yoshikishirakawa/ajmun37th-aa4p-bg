@@ -18,492 +18,115 @@
   --content-max: 800px;
 }
 
-/* タブ機能（本番環境用） */
-.toc-tabs {
-  display: flex;
-  border-bottom: 1px solid #dee2e6;
-  background: #f8f9fa;
-  padding: 0;
-  margin-bottom: 12px;
-}
-
-.toc-tab-btn {
-  flex: 1;
-  padding: 8px 16px;
-  border: none;
-  background: transparent;
-  font-size: var(--font-small);
-  font-weight: 500;
-  color: #6c757d;
-  border-bottom: 2px solid transparent;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-
-.toc-tab-btn:hover {
-  color: #495057;
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.toc-tab-btn.active {
-  color: #1a73e8;
-  border-bottom-color: #1a73e8;
-  background: white;
-}
-
-#TOC .toc-tabs .tab-button:hover {
-  color: #495057;
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.toc-content {
-  padding: 16px 0;
-}
-
-.toc-page-toc {
-  display: none;
-}
-
-.toc-page-toc ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.toc-page-toc li {
-  margin: 4px 0;
-  padding-left: 8px;
-}
-
-.toc-page-toc a {
-  color: #1a73e8;
-  text-decoration: none;
-  font-size: 14px;
-  display: block;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-.toc-page-toc a:hover {
-  background: #f8f9fa;
-}
-
-.toc-page-toc a.active {
-  background: #e3f2fd;
-  color: #1565c0;
-  font-weight: 500;
-}
-
-#TOC .site-toc-content,
-#TOC .page-toc-content {
-  padding: 16px 0;
-}
-
-#TOC .page-toc-content {
-  display: none;
-}
-
-/* マーカー機能用スタイル */
-.marker-highlight {
-  background: #fff59d;
-  padding: 2px 4px;
-  border-radius: 3px;
-  transition: background-color 0.3s ease;
-}
-
-.marker-highlight:hover {
-  background: #ffeb3b;
-}
-
 .marker-toolbar {
-  position: fixed;
-  top: 60px;
-  right: 20px;
-  background: white;
-  border: 1px solid #dee2e6;
-  border-radius: var(--radius);
-  padding: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  background: var(--marker-toolbar-bg, #fff);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  padding: 6px 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   display: none;
+  font-size: 13px;
+  min-width: 150px;
 }
 
+.marker-toolbar.show,
 .marker-toolbar.visible {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+body[data-theme="dark"] .marker-toolbar {
+  --marker-toolbar-bg: #1f1f1f;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.marker-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .marker-colors {
   display: flex;
   gap: 4px;
-  margin-bottom: 8px;
 }
 
 .marker-color-btn {
-  width: 24px;
+  width: 26px;
   height: 24px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.marker-color-btn:hover {
-  border-color: #333;
-}
-
-.marker-color-btn.active {
-  border-color: #333;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
-}
-
-.marker-color-yellow {
-  background: #fff59d;
-}
-
-.marker-color-green {
-  background: #c8e6c9;
-}
-
-.marker-color-blue {
-  background: #bbdefb;
-}
-
-.marker-color-pink {
-  background: #f8bbd0;
-}
-
-.marker-color-clear {
-  background: #f5f5f5;
-  border: 1px solid #dee2e6;
-}
-
-.marker-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 8px;
-}
-
-.marker-clear-btn {
-  padding: 4px 8px;
-  border: 1px solid #dee2e6;
-  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 6px;
   cursor: pointer;
-  font-size: 12px;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  background-clip: padding-box;
 }
 
-body[data-theme="dark"] .marker-clear-btn {
-  background: #2a2a2a;
-  border-color: #333;
-  color: #ddd;
-}
-
-.marker-clear-btn:hover {
-  background: #f3f4f6;
-}
-
-.marker-clear-btn:hover {
-  background: #f8f9fa;
-}
-
-/* マーカー機能（本番環境用） */
-.text-marker {
-  display: inline;
-  line-height: inherit;
-  border-radius: 4px;
-  cursor: pointer;
-  border: none;
-  padding: 0;
-  /* 横に拡大しない */
-  margin: 0;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: inset 0 -0.15em 0 rgba(0, 0, 0, 0.08);
-  /* レイアウト不変 */
-}
-
-/* カラー別（スタイリッシュな半透明＋グロー） */
-.marker-yellow {
-  background: rgba(255, 235, 59, 0.6);
-  box-shadow: 0 0 0 2px rgba(255, 235, 59, 0.25) inset;
-}
-
-.marker-green {
-  background: rgba(129, 199, 132, 0.5);
-  box-shadow: 0 0 0 2px rgba(129, 199, 132, 0.25) inset;
-}
-
-.marker-blue {
-  background: rgba(100, 181, 246, 0.5);
-  box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.25) inset;
-}
-
-.marker-pink {
-  background: rgba(244, 143, 177, 0.5);
-  box-shadow: 0 0 0 2px rgba(244, 143, 177, 0.25) inset;
-}
-
-.marker-orange {
-  background: rgba(255, 152, 0, 0.45);
-  box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.25) inset;
-}
-
-/* ダークテーマ最適化 */
-body[data-theme="dark"] .marker-yellow {
-  background: rgba(255, 235, 59, 0.35);
-}
-
-body[data-theme="dark"] .marker-green {
-  background: rgba(129, 199, 132, 0.3);
-}
-
-body[data-theme="dark"] .marker-blue {
-  background: rgba(100, 181, 246, 0.3);
-}
-
-body[data-theme="dark"] .marker-pink {
-  background: rgba(244, 143, 177, 0.3);
-}
-
-.text-marker:hover {
-  opacity: 0.8;
-}
-
-.text-marker.selected {
-  outline: 2px solid #fff;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
-  outline-offset: 1px;
-}
-
-.marker-toolbar {
-  position: fixed;
-  top: 56px;
-  right: 16px;
-  background: var(--marker-toolbar-bg, #fff);
-  border: 1px solid #dee2e6;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
-  z-index: 1000;
-  display: none;
-  font-size: 14px;
-}
-
-body[data-theme="dark"] .marker-toolbar {
-  --marker-toolbar-bg: #1f1f1f;
-  border-color: #333;
-}
-
-.marker-toolbar.show {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.marker-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e9ecef;
-  margin-bottom: 8px;
-}
-
-.marker-title {
-  font-weight: 600;
-  color: #495057;
-  margin: 0;
-}
-
-.marker-close {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  padding: 4px;
-  color: #6c757d;
-  border-radius: 4px;
-  transition: background-color 0.2s ease;
-}
-
-.marker-close:hover {
-  background: #f8f9fa;
-}
-
-.marker-colors {
-  display: grid;
-  grid-template-columns: repeat(4, 28px);
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
-.marker-color-btn {
-  width: 28px;
-  height: 28px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+body[data-theme="dark"] .marker-color-btn {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .marker-color-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .marker-color-btn:hover {
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .marker-color-btn[data-color="yellow"] {
-  background: #ffeb3b;
+  background: #ffe066;
 }
 
 .marker-color-btn[data-color="green"] {
-  background: #81c784;
+  background: #8bd17c;
 }
 
 .marker-color-btn[data-color="blue"] {
-  background: #64b5f6;
+  background: #5ab0ff;
 }
 
 .marker-color-btn[data-color="pink"] {
-  background: #f48fb1;
+  background: #f7a0c2;
 }
 
-.marker-color-btn:hover {
-  border-color: #333;
-}
-
+.marker-color-btn:focus-visible,
 .marker-color-btn.active {
-  border-color: #333;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3);
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.25);
 }
 
-.marker-btn-yellow {
-  background: #fff59d;
-}
-
-.marker-btn-green {
-  background: #c8e6c9;
-}
-
-.marker-btn-blue {
-  background: #bbdefb;
-}
-
-.marker-btn-pink {
-  background: #f8bbd0;
-}
-
-.marker-btn-clear {
-  background: #f5f5f5;
-  border: 1px solid #dee2e6;
-}
-
-.marker-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.marker-apply {
-  padding: 6px 12px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
+.marker-comment-btn {
+  width: 28px;
+  height: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  background: #f5f7fb url("../../assets/comment.png") center/16px 16px no-repeat;
   cursor: pointer;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
 }
 
-.marker-apply:hover {
-  background: #0056b3;
+.marker-comment-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  border-color: rgba(0, 0, 0, 0.3);
+  background-color: #eef1f8;
 }
 
-.marker-cancel {
-  padding: 6px 12px;
-  background: #6c757d;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+body[data-theme="dark"] .marker-comment-btn {
+  background-color: #edf1ff;
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.marker-cancel:hover {
-  background: #545b62;
-}
-
-.marker-delete-all {
-  padding: 4px 8px;
-  background: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  transition: background-color 0.2s ease;
-}
-
-.marker-delete-all:hover {
-  background: #c82333;
-}
-
-/* マーカーオーバーレイ */
-
-.text-highlight-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 999;
-  display: none;
-}
-
-.text-highlight-overlay.show {
-  display: block;
-}
-
-.text-highlight-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  border: 2px solid #dee2e6;
-  border-radius: 8px;
-  padding: 20px;
-  max-width: 80%;
-  max-height: 60vh;
-  overflow-y: auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  z-index: 1000;
-  display: none;
-}
-
-.text-highlight-container.show {
-  display: block;
-}
-
-.highlight-context {
-  font-size: 14px;
-  color: #495057;
-  line-height: 1.5;
-  margin: 10px 0;
-  padding: 12px;
-  background: #f8f9fa;
-  border-radius: 4px;
-  border: 1px solid #e9ecef;
-}
-
-.highlight-controls {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
+body[data-theme="dark"] .marker-comment-btn:hover {
+  background-color: #dce4ff;
+  border-color: rgba(255, 255, 255, 0.32);
 }
 
 /* 横余白を半減（メインコンテンツと全体コンテナ） */

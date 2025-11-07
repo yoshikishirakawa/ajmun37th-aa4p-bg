@@ -54,60 +54,129 @@
   display: none;
 }
 
-#quarto-sidebar .toc-page-content nav#TOC {
+#quarto-sidebar .toc-page-content {
+  padding-bottom: 8px;
+}
+
+#quarto-sidebar .toc-page-content .toc-empty {
+  margin: 0;
+  padding: 8px;
+  color: #868e96;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+#quarto-sidebar .toc-page-content .page-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#quarto-sidebar .toc-page-content .page-toc-item {
   margin: 0;
 }
 
-#quarto-sidebar .toc-page-content nav#TOC>h2 {
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-  color: #495057;
-}
-
-#quarto-sidebar .toc-page-content nav#TOC ul {
-  padding-left: 0;
-  list-style: none;
-}
-
-#quarto-sidebar .toc-page-content nav#TOC li {
-  margin: 4px 0;
-}
-
-#quarto-sidebar .toc-page-content nav#TOC a {
+#quarto-sidebar .toc-page-content .page-toc-link {
   display: block;
-  padding: 6px 8px;
-  border-radius: 4px;
+  padding: 6px 10px;
+  border-radius: 6px;
   color: #1a73e8;
   text-decoration: none;
   font-size: 0.9rem;
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-#quarto-sidebar .toc-page-content nav#TOC a:hover,
-#quarto-sidebar .toc-page-content nav#TOC a.active {
+#quarto-sidebar .toc-page-content .page-toc-link:hover,
+#quarto-sidebar .toc-page-content .page-toc-link.active {
   background: #e8f2ff;
   color: #0c5bc0;
 }
 
-/* 章内（ページ内目次）の展開/格納トグル */
-#quarto-sidebar .toc-page-content nav#TOC li.has-children>.li-row {
+#quarto-sidebar .toc-page-content .page-toc-level-2 {
+  padding-left: 14px;
+}
+
+#quarto-sidebar .toc-page-content .page-toc-level-3 {
+  padding-left: 24px;
+}
+
+#quarto-sidebar .toc-page-content .page-toc-level-4,
+#quarto-sidebar .toc-page-content .page-toc-level-5,
+#quarto-sidebar .toc-page-content .page-toc-level-6 {
+  padding-left: 32px;
+  font-size: 0.85rem;
+}
+
+#quarto-sidebar .toc-all-content {
+  padding-bottom: 8px;
+}
+
+#quarto-sidebar .toc-all-content .all-toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
-  align-items: center;
-  gap: 6px;
+  flex-direction: column;
+  gap: 2px;
 }
 
-#quarto-sidebar .toc-page-content nav#TOC .toc-toggle {
-  cursor: pointer;
-  color: #6c757d;
+#quarto-sidebar .toc-all-content .all-toc-item {
+  margin: 0;
+  line-height: 1.05;
+}
+
+#quarto-sidebar .toc-all-content .all-toc-item.active > .all-toc-link {
+  font-weight: 600;
+  color: #1a73e8;
+}
+
+#quarto-sidebar .toc-all-content .all-toc-link {
+  display: block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #202124;
+  text-decoration: none;
   font-size: 0.9rem;
-  user-select: none;
-  width: 1em;
-  display: inline-block;
-  text-align: center;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-#quarto-sidebar .toc-page-content nav#TOC li.collapsed>ul {
-  display: none;
+#quarto-sidebar .toc-all-content .all-toc-link:hover {
+  background: #f1f3f4;
+}
+
+#quarto-sidebar .toc-all-content .all-toc-sublist {
+  list-style: none;
+  padding-left: 14px;
+  margin: 2px 0 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#quarto-sidebar .toc-all-content .all-toc-sublink {
+  font-size: 0.8rem;
+  color: #5f6368;
+  text-decoration: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+#quarto-sidebar .toc-all-content .all-toc-sublink:hover {
+  background: #f3f4f6;
+  color: #3c4043;
+}
+
+#quarto-sidebar .toc-all-content .all-toc-item--chapter {
+  margin-top: 0.6em;
+  line-height: 1.15;
+}
+
+#quarto-sidebar .toc-all-content .all-toc-item--chapter:first-child {
+  margin-top: 0;
 }
 
 #quarto-sidebar .toc-empty {
