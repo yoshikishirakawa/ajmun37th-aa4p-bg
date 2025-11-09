@@ -1,0 +1,161 @@
+{
+  "generated_at": "2025-11-09T10:18:43.008546+00:00",
+  "categories": [
+    {
+      "name": "テスト",
+      "terms": [
+        {
+          "term": "うんち",
+          "reading": "うんち",
+          "locations": [
+            {
+              "label": "6章1節",
+              "href": "06_ch06.html#idx-content-06-ch06-md-005-01",
+              "order": [
+                6,
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "テスト2",
+      "terms": [
+        {
+          "term": "うんち",
+          "reading": "うんち",
+          "locations": [
+            {
+              "label": "6章1節",
+              "href": "06_ch06.html#idx-content-06-ch06-md-005-02",
+              "order": [
+                6,
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "国連憲章各条",
+      "terms": [
+        {
+          "term": "第1条",
+          "reading": "だい1じょう",
+          "locations": [
+            {
+              "label": "6章1節1項",
+              "href": "06_ch06.html#idx-content-06-ch06-md-009-01",
+              "order": [
+                6,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "term": "第2条",
+          "reading": "だい2じょう",
+          "locations": [
+            {
+              "label": "6章1節1項",
+              "href": "06_ch06.html#idx-content-06-ch06-md-014-01",
+              "order": [
+                6,
+                1,
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "kana": [
+    {
+      "name": "ア段",
+      "terms": [
+        {
+          "term": "うんち3",
+          "reading": "うんち3",
+          "locations": [
+            {
+              "label": "6章1節",
+              "href": "06_ch06.html#idx-content-06-ch06-md-005-03",
+              "order": [
+                6,
+                1
+              ]
+            },
+            {
+              "label": "6章1節2項",
+              "href": "06_ch06.html#idx-content-06-ch06-md-036-01",
+              "order": [
+                6,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "6章1節2項",
+              "href": "06_ch06.html#idx-content-06-ch06-md-054-01",
+              "order": [
+                6,
+                1,
+                2
+              ]
+            },
+            {
+              "label": "6章3節2項",
+              "href": "06_ch06.html#idx-content-06-ch06-md-225-01",
+              "order": [
+                6,
+                3,
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "term": "うんち4",
+          "reading": "うんち4",
+          "locations": [
+            {
+              "label": "6章3節3項",
+              "href": "06_ch06.html#idx-content-06-ch06-md-314-01",
+              "order": [
+                6,
+                3,
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "カ段",
+      "terms": [
+        {
+          "term": "国連総会",
+          "reading": "こくれんそうかい",
+          "locations": [
+            {
+              "label": "6章1節1項",
+              "href": "06_ch06.html#idx-content-06-ch06-md-026-01",
+              "order": [
+                6,
+                1,
+                1
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -96,17 +96,17 @@
 }
 
 #quarto-sidebar .toc-page-content .page-toc-level-2 {
-  padding-left: 14px;
+  padding-left: var(--toc-indent-step, 1.2em);
 }
 
 #quarto-sidebar .toc-page-content .page-toc-level-3 {
-  padding-left: 24px;
+  padding-left: calc(var(--toc-indent-step, 1.2em) * 2);
 }
 
 #quarto-sidebar .toc-page-content .page-toc-level-4,
 #quarto-sidebar .toc-page-content .page-toc-level-5,
 #quarto-sidebar .toc-page-content .page-toc-level-6 {
-  padding-left: 32px;
+  padding-left: calc(var(--toc-indent-step, 1.2em) * 3);
   font-size: 0.85rem;
 }
 
@@ -149,7 +149,7 @@
 
 #quarto-sidebar .toc-all-content .all-toc-sublist {
   list-style: none;
-  padding-left: 14px;
+  padding-left: var(--toc-indent-step, 1.2em);
   margin: 2px 0 6px;
   display: flex;
   flex-direction: column;

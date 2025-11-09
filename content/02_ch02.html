@@ -249,29 +249,11 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 <div class="header-ui">
-  <!-- ハンバーガーメニューボタン（左上常設） -->
-  <button class="hamburger-menu-btn" id="hamburger-menu-btn" aria-label="メニューを開く" aria-expanded="false" aria-controls="hamburger-menu-panel">
-    <span class="hamburger-menu-icon">
-      <span></span>
-      <span></span>
-      <span></span>
-    </span>
-  </button>
-
-  <!-- ハンバーガーメニュー（展開パネル） -->
-  <div id="hamburger-menu-panel" class="hamburger-menu-panel" role="menu">
-    <div class="hamburger-menu-content">
-      <!-- メニュー項目はJavaScriptで生成 -->
-    </div>
-    <div class="hamburger-menu-notch"></div>
-  </div>
-  <div class="hamburger-menu-overlay" id="hamburger-menu-overlay"></div>
-
   <div id="js-header" class="js-header">
     <div class="js-header__inner">
       <div class="js-header__left">
         <div class="js-header__logo">
-          <span class="js-header__title">平和への課題：補遺</span>
+          <span class="js-header__title"><span class="title-main">平和への課題：補遺</span><span class="title-sub">Background Guide</span></span>
         </div>
       </div>
       <div class="js-header__right">
@@ -280,7 +262,9 @@ ul.task-list li input[type="checkbox"] {
           <button class="js-toc-mobile-btn" id="toc-mobile-btn" aria-label="目次">☰</button>
           
           <!-- 設定メニューボタン -->
-          <button class="js-settings-toggle-btn" id="settings-toggle-btn" aria-label="設定メニューを開く">⚙️</button>
+          <button class="js-settings-toggle-btn" id="settings-toggle-btn" aria-label="設定メニューを開く">
+            <img src="" data-asset="assets/setting.png" alt="" aria-hidden="true" class="settings-toggle-icon">
+          </button>
         </div>
       </div>
     </div>
@@ -298,6 +282,8 @@ ul.task-list li input[type="checkbox"] {
         <div class="settings-item">
           <label for="font-size-select">文字サイズ：</label>
           <select class="js-font-size-select" id="font-size-select" aria-label="文字サイズ">
+            <option value="3XS">3XS</option>
+            <option value="2XS">2XS</option>
             <option value="XS">XS</option>
             <option value="S">S</option>
             <option value="M" selected="">M</option>
@@ -839,28 +825,367 @@ ul.task-list li input[type="checkbox"] {
     rightTab: 'quarto-right-tab'
   };
 
+  const NAV_DATA_STATE = {
+    promise: null,
+    data: null,
+    rootPrefix: null
+  };
+
+  function getRootPrefix() {
+    if (NAV_DATA_STATE.rootPrefix != null) return NAV_DATA_STATE.rootPrefix;
+    const meta = document.querySelector('meta[name="quarto:offset"]');
+    let prefix = meta ? (meta.getAttribute('content') || '') : '';
+    if (prefix && !prefix.endsWith('/')) prefix += '/';
+    NAV_DATA_STATE.rootPrefix = prefix;
+    return prefix;
+  }
+
+  function normalizePath(path) {
+    const cleaned = (path || '').replace(/\\/g, '/');
+    const decoded = decodeURIComponent(cleaned);
+    return decoded.replace(/^\/+/, '');
+  }
+
+  function computeCurrentOutputPath() {
+    const currentUrl = new URL(window.location.href);
+    let rel = decodeURIComponent(currentUrl.pathname);
+    try {
+      const rootUrl = new URL(getRootPrefix() || './', window.location.href);
+      if (rel.startsWith(rootUrl.pathname)) {
+        rel = rel.slice(rootUrl.pathname.length);
+      }
+    } catch (e) {
+      console.warn('computeCurrentOutputPath root resolution failed:', e);
+    }
+    const outIdx = rel.indexOf('/out/');
+    if (outIdx >= 0) rel = rel.slice(outIdx + 5);
+    rel = rel.replace(/^\//, '');
+    if (!rel) rel = 'index.html';
+    if (rel.endsWith('/')) rel += 'index.html';
+    return rel;
+  }
+
+  function isSamePage(pathA, pathB) {
+    return normalizePath(pathA) === normalizePath(pathB);
+  }
+
+  function buildHref(pagePath, anchor) {
+    const current = computeCurrentOutputPath();
+    if (isSamePage(pagePath, current)) {
+      return anchor ? `#${anchor}` : '#';
+    }
+    const prefix = getRootPrefix();
+    const base = `${prefix || ''}${pagePath}`;
+    return anchor ? `${base}#${anchor}` : base;
+  }
+
+  function cloneTreeWithDepth(nodes, maxLevel) {
+    if (!Array.isArray(nodes) || !nodes.length) return [];
+    const walk = (list) => {
+      const acc = [];
+      list.forEach(node => {
+        if (!node || typeof node !== 'object') return;
+        if (typeof node.level !== 'number' || node.level > maxLevel) return;
+        const copy = {
+          title: node.title,
+          level: node.level,
+          anchor: node.anchor,
+          children: []
+        };
+        if (Array.isArray(node.children) && node.children.length) {
+          copy.children = walk(node.children);
+        }
+        acc.push(copy);
+      });
+      return acc;
+    };
+    return walk(nodes);
+  }
+
+  function resolveNavData(data) {
+    if (data && typeof data === 'object' && Array.isArray(data.pages)) {
+      NAV_DATA_STATE.data = data;
+      return data;
+    }
+    throw new Error('Invalid navigation data payload');
+  }
+
+  function loadNavDataViaScript(prefix) {
+    if (typeof document === 'undefined') {
+      return Promise.reject(new Error('DOM unavailable for script loading'));
+    }
+    return new Promise((resolve, reject) => {
+      const existing = document.querySelector('script[data-nav-data="true"]');
+      if (existing && typeof window.__NAV_DATA__ === 'object' && window.__NAV_DATA__) {
+        try {
+          resolve(resolveNavData(window.__NAV_DATA__));
+        } catch (err) {
+          reject(err);
+        }
+        return;
+      }
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.dataset.navData = 'true';
+      script.src = `${prefix}assets/nav-data.js`;
+      script.onload = () => {
+        try {
+          resolve(resolveNavData(window.__NAV_DATA__));
+        } catch (err) {
+          reject(err);
+        }
+      };
+      script.onerror = () => reject(new Error('Failed to load nav-data.js'));
+      document.head.appendChild(script);
+    });
+  }
+
+  function loadNavData() {
+    if (NAV_DATA_STATE.data) return Promise.resolve(NAV_DATA_STATE.data);
+    if (typeof window.__NAV_DATA__ === 'object' && window.__NAV_DATA__) {
+      try {
+        return Promise.resolve(resolveNavData(window.__NAV_DATA__));
+      } catch (err) {
+        return Promise.reject(err);
+      }
+    }
+    if (NAV_DATA_STATE.promise) return NAV_DATA_STATE.promise;
+    const prefix = getRootPrefix() || '';
+    if (location.protocol === 'file:') {
+      NAV_DATA_STATE.promise = loadNavDataViaScript(prefix)
+        .catch(err => {
+          console.warn('Failed to load nav data via script:', err);
+          NAV_DATA_STATE.data = null;
+          return null;
+        });
+      return NAV_DATA_STATE.promise;
+    }
+
+    const url = new URL(`${prefix}assets/nav-data.json`, window.location.href);
+    NAV_DATA_STATE.promise = fetch(url.href)
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then(json => resolveNavData(json))
+      .catch(err => {
+        console.warn('Failed to fetch nav data, retrying with script fallback:', err);
+        return loadNavDataViaScript(prefix)
+          .catch(scriptErr => {
+            console.warn('Script fallback failed for nav data:', scriptErr);
+            NAV_DATA_STATE.data = null;
+            return null;
+          });
+      });
+    return NAV_DATA_STATE.promise;
+  }
+
   // コメントDB（ページパス毎に配列）
   let COMMENTS_DB = {};
   try { COMMENTS_DB = JSON.parse(localStorage.getItem(STORAGE_KEYS.comments) || '{}') || {}; } catch { COMMENTS_DB = {}; }
   function saveComments() { try { localStorage.setItem(STORAGE_KEYS.comments, JSON.stringify(COMMENTS_DB)); } catch (e) { console.warn('Save comments failed', e); } }
   function pageKey() { return window.location.pathname; }
 
-  function readRightTabState() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEYS.rightTab) || '{}') || {}; }
-    catch (e) { console.warn('Failed to read right tab state', e); return {}; }
+  function resolveAssetPath(relPath) {
+    try {
+      const themeLink = document.querySelector('link[rel="stylesheet"][href*="src/css/simple-theme.css"]');
+      if (themeLink) {
+        const href = themeLink.getAttribute('href') || '';
+        const parts = href.split('/');
+        const srcIndex = parts.indexOf('src');
+        if (srcIndex >= 0) {
+          const prefix = parts.slice(0, srcIndex).join('/');
+          const base = prefix ? prefix.replace(/\/*$/, '/') : '';
+          return base + relPath;
+        }
+      }
+      const path = window.location.pathname || '';
+      const depth = (path.split('/').length - 1) - (path.endsWith('/') ? 1 : 0);
+      if (depth > 0) {
+        const up = new Array(depth).fill('..').join('/');
+        return (up ? up + '/' : '') + relPath;
+      }
+    } catch (e) {
+      console.warn('resolveAssetPath failed', e);
+    }
+    return relPath;
   }
+
+  let readingMeterState = null;
+
+  function formatReadingNumber(value) {
+    if (!Number.isFinite(value)) return '0';
+    try {
+      return value.toLocaleString('ja-JP');
+    } catch (error) {
+      console.warn('Failed to format number:', error);
+      return String(Math.trunc(value));
+    }
+  }
+
+  function extractReadableText(root) {
+    if (!root) return '';
+    const clone = root.cloneNode(true);
+    const selectorsToRemove = [
+      '.header-ui',
+      '.settings-menu',
+      '.settings-menu-overlay',
+      '.scroll-settings-header',
+      '#scroll-settings-header',
+      '.toc-overlay',
+      '.global-search-overlay',
+      '.marker-toolbar'
+    ];
+    selectorsToRemove.forEach((selector) => {
+      clone.querySelectorAll(selector).forEach((node) => node.remove());
+    });
+    return (clone.textContent || '').replace(/\s+/g, '');
+  }
+
+  function initializeReadingMeter(displayEl) {
+    if (!displayEl) return;
+
+    const readingRoot = document.querySelector('#quarto-document-content');
+    if (!readingRoot) {
+      displayEl.textContent = '[0/0]';
+      displayEl.setAttribute('aria-label', '読書メーター: 0 / 0');
+      return;
+    }
+
+    const totalText = extractReadableText(readingRoot);
+    const totalChars = totalText.length;
+    const formattedTotal = formatReadingNumber(totalChars);
+
+    displayEl.textContent = `[0/${formattedTotal}]`;
+    displayEl.setAttribute('data-total-chars', `${totalChars}`);
+    displayEl.setAttribute('data-current-chars', '0');
+    displayEl.setAttribute('aria-live', 'polite');
+    displayEl.setAttribute('aria-label', `読書メーター: 0 / ${formattedTotal}`);
+
+    const state = {
+      displayEl,
+      readingRoot,
+      measureElement: readingRoot,
+      totalChars,
+      formattedTotal,
+      lastCurrent: -1,
+      lastOutput: '',
+      updateScheduled: false,
+      cleanup: null
+    };
+
+    const computeRatio = () => {
+      if (!state.measureElement) return 0;
+      const rect = state.measureElement.getBoundingClientRect();
+      const contentTop = window.scrollY + rect.top;
+      const contentBottom = contentTop + rect.height;
+      if (!Number.isFinite(contentTop) || !Number.isFinite(contentBottom) || contentBottom <= contentTop) {
+        return 0;
+      }
+
+      const scrollTop = window.scrollY;
+      const scrollBottom = scrollTop + window.innerHeight;
+      const scrollRange = contentBottom - contentTop - window.innerHeight;
+      let ratio;
+
+      if (scrollRange <= 0) {
+        if (scrollBottom >= contentBottom) {
+          ratio = 1;
+        } else if (scrollTop <= contentTop) {
+          ratio = 0;
+        } else {
+          ratio = (scrollTop - contentTop) / Math.max(1, contentBottom - contentTop);
+        }
+      } else {
+        ratio = (scrollTop - contentTop) / scrollRange;
+      }
+
+      if (!Number.isFinite(ratio)) {
+        return 0;
+      }
+      return Math.min(1, Math.max(0, ratio));
+    };
+
+    const applyUpdate = () => {
+      state.updateScheduled = false;
+      if (state.totalChars <= 0) {
+        const output = '[0/0]';
+        if (output !== state.lastOutput) {
+          state.lastOutput = output;
+          state.displayEl.textContent = output;
+          state.displayEl.setAttribute('data-current-chars', '0');
+          state.displayEl.setAttribute('aria-label', '読書メーター: 0 / 0');
+        }
+        return;
+      }
+
+      const ratio = computeRatio();
+      const currentChars = Math.max(0, Math.min(state.totalChars, Math.round(state.totalChars * ratio)));
+      if (currentChars === state.lastCurrent && state.lastOutput) {
+        return;
+      }
+
+      state.lastCurrent = currentChars;
+      const formattedCurrent = formatReadingNumber(currentChars);
+      const output = `[${formattedCurrent}/${state.formattedTotal}]`;
+      if (output !== state.lastOutput) {
+        state.lastOutput = output;
+        state.displayEl.textContent = output;
+        state.displayEl.setAttribute('data-current-chars', `${currentChars}`);
+        state.displayEl.setAttribute('aria-label', `読書メーター: ${formattedCurrent} / ${state.formattedTotal}`);
+      }
+    };
+
+    const scheduleUpdate = () => {
+      if (state.updateScheduled) return;
+      state.updateScheduled = true;
+      requestAnimationFrame(applyUpdate);
+    };
+
+    const onScroll = () => scheduleUpdate();
+    const onResize = () => scheduleUpdate();
+
+    if (readingMeterState && typeof readingMeterState.cleanup === 'function') {
+      readingMeterState.cleanup();
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+
+    state.cleanup = () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+    };
+
+    readingMeterState = state;
+    scheduleUpdate();
+  }
+
   function getSavedRightTab() {
-    const map = readRightTabState();
-    return map[pageKey()] || 'footnotes';
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.rightTab);
+      if (saved && ['footnotes', 'comments', 'both'].includes(saved)) {
+        return saved;
+      }
+    } catch (e) {
+      console.warn('Failed to read right tab state', e);
+    }
+    return 'both';
   }
   function saveRightTab(tab) {
-    try {
-      const map = readRightTabState();
-      map[pageKey()] = tab;
-      localStorage.setItem(STORAGE_KEYS.rightTab, JSON.stringify(map));
-    } catch (e) {
-      console.warn('Failed to save right tab state', e);
-    }
+    if (!['footnotes', 'comments', 'both'].includes(tab)) return;
+    try { localStorage.setItem(STORAGE_KEYS.rightTab, tab); }
+    catch (e) { console.warn('Failed to save right tab state', e); }
+  }
+
+  function setupTopChapterNavigation() {
+    if (document.querySelector('nav.page-navigation-top')) return;
+    const header = document.querySelector('header.quarto-title-block');
+    const bottomNav = document.querySelector('nav.page-navigation');
+    if (!header || !bottomNav) return;
+    const topNav = bottomNav.cloneNode(true);
+    topNav.classList.add('page-navigation-top');
+    header.parentNode.insertBefore(topNav, header);
   }
 
   function getActiveChapterSection() {
@@ -982,11 +1307,18 @@ ul.task-list li input[type="checkbox"] {
     return items;
   }
 
-  function initUI() {
+  async function initUI() {
+    let navData = null;
+    try {
+      navData = await loadNavData();
+    } catch (e) {
+      console.warn('Nav data load failed:', e);
+    }
     try {
       setupHeaderControls();
-      setupLeftPanelTabs();
+      await setupLeftPanelTabs(navData);
       setupRightSidebar();
+      setupTopChapterNavigation();
       setupMarkerFunctionality();
       setupMobileFootnoteToggle();
       disableDefaultQuartoSearch();
@@ -997,7 +1329,7 @@ ul.task-list li input[type="checkbox"] {
       
       // 独自TOCシステムを初期化（DOM構築後）
       setTimeout(() => {
-        CustomTOC.initializeCustomTOC();
+        CustomTOC.initializeCustomTOC(navData);
       }, 100);
       
       console.log('UI initialized');
@@ -1026,191 +1358,19 @@ ul.task-list li input[type="checkbox"] {
     const commentsImport = document.getElementById('comments-import');
     const commentsImportButton = document.getElementById('comments-import-button');
 
-    // ハンバーガーメニュー機能
-    const hamburgerBtn = document.getElementById('hamburger-menu-btn');
-    const hamburgerPanel = document.getElementById('hamburger-menu-panel');
-    const hamburgerOverlay = document.getElementById('hamburger-menu-overlay');
-    const hamburgerContent = hamburgerPanel.querySelector('.hamburger-menu-content');
-    
-    if (hamburgerBtn && hamburgerPanel && hamburgerOverlay) {
-      const menuItems = [
-        {
-          label: "目次を表示",
-          action: "show-toc",
-          icon: "📋"
-        },
-        {
-          label: "文字サイズ",
-          action: "font-size",
-          icon: "🔤"
-        },
-        {
-          label: "テーマ切り替え",
-          action: "theme",
-          icon: "🎨"
-        },
-        {
-          label: "コメント出力(このページ)",
-          action: "export-comments-page",
-          icon: "📄"
-        },
-        {
-          label: "全コメント出力",
-          action: "export-comments-all", 
-          icon: "📚"
-        },
-        {
-          label: "コメント読込",
-          action: "import-comments",
-          icon: "📥"
-        },
-        {
-          label: "PDFダウンロード",
-          action: "download-pdf",
-          icon: "📑"
+    // ハンバーガーメニューは廃止
+
+    // 設定メニュー開閉機能
+    if (settingsToggleBtn) {
+      const iconImg = settingsToggleBtn.querySelector('.settings-toggle-icon[data-asset]');
+      if (iconImg) {
+        const assetPath = iconImg.getAttribute('data-asset');
+        if (assetPath) {
+          iconImg.src = resolveAssetPath(assetPath);
         }
-      ];
-
-      // メニュー項目を生成
-      const menuList = document.createElement('ul');
-      menuList.className = 'hamburger-menu-list';
-      
-      menuItems.forEach(item => {
-        const menuItem = document.createElement('li');
-        menuItem.className = 'hamburger-menu-item';
-        const menuLink = document.createElement('a');
-        menuLink.className = 'hamburger-menu-link';
-        menuLink.href = '#';
-        menuLink.innerHTML = `${item.icon} ${item.label}`;
-        menuLink.setAttribute('role', 'menuitem');
-        menuLink.setAttribute('aria-label', item.label);
-        
-        menuLink.addEventListener('click', (e) => {
-          e.preventDefault();
-          handleHamburgerMenuAction(item.action);
-          closeHamburgerMenu();
-        });
-        
-        menuItem.appendChild(menuLink);
-        menuList.appendChild(menuItem);
-      });
-      
-      hamburgerContent.innerHTML = '';
-      hamburgerContent.appendChild(menuList);
-
-      // メニュー開閉機能
-      const openHamburgerMenu = () => {
-        hamburgerBtn.setAttribute('aria-expanded', 'true');
-        hamburgerBtn.setAttribute('aria-label', 'メニューを閉じる');
-        hamburgerPanel.classList.add('open');
-        hamburgerOverlay.classList.add('open');
-        
-        // 最初の項目にフォーカス
-        const firstLink = hamburgerPanel.querySelector('.hamburger-menu-link');
-        if (firstLink) {
-          firstLink.focus();
-        }
-      };
-
-      const closeHamburgerMenu = () => {
-        hamburgerBtn.setAttribute('aria-expanded', 'false');
-        hamburgerBtn.setAttribute('aria-label', 'メニューを開く');
-        hamburgerPanel.classList.remove('open');
-        hamburgerOverlay.classList.remove('open');
-        hamburgerBtn.focus();
-      };
-
-      hamburgerBtn.addEventListener('click', openHamburgerMenu);
-      hamburgerOverlay.addEventListener('click', closeHamburgerMenu);
-      
-      // ESCキーで閉じる
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && hamburgerPanel.classList.contains('open')) {
-          closeHamburgerMenu();
-        }
-      });
-
-      // アクセシビリティのため、キーボードナビゲーションをサポート
-      hamburgerBtn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openHamburgerMenu();
-        }
-      });
-
-      // アクティベーションツキップでキーボードナビゲーションを有効化
-      let currentFocusIndex = -1;
-      const focusableElements = () => hamburgerPanel.querySelectorAll('.hamburger-menu-link');
-
-      hamburgerPanel.addEventListener('keydown', (e) => {
-        if (!hamburgerPanel.classList.contains('open')) return;
-        
-        const elements = focusableElements();
-        if (elements.length === 0) return;
-
-        switch (e.key) {
-          case 'ArrowDown':
-            e.preventDefault();
-            currentFocusIndex = (currentFocusIndex + 1) % elements.length;
-            elements[currentFocusIndex].focus();
-            break;
-          case 'ArrowUp':
-            e.preventDefault();
-            currentFocusIndex = currentFocusIndex <= 0 ? elements.length - 1 : currentFocusIndex - 1;
-            elements[currentFocusIndex].focus();
-            break;
-          case 'Home':
-            e.preventDefault();
-            currentFocusIndex = 0;
-            elements[currentFocusIndex].focus();
-            break;
-          case 'End':
-            e.preventDefault();
-            currentFocusIndex = elements.length - 1;
-            elements[currentFocusIndex].focus();
-            break;
-        }
-      });
-    }
-
-    // ハンバーガーメニューのアクション処理
-    function handleHamburgerMenuAction(action) {
-      switch (action) {
-        case 'show-toc':
-          // 目次を表示
-          const tocMobileBtn = document.getElementById('toc-mobile-btn');
-          if (tocMobileBtn) tocMobileBtn.click();
-          break;
-        case 'font-size':
-          // 文字サイズメニューを開く
-          if (settingsMenu) {
-            settingsMenu.classList.add('open');
-            settingsMenuOverlay.classList.add('open');
-          }
-          break;
-        case 'theme':
-          // テーマメニューを開く
-          if (settingsMenu) {
-            settingsMenu.classList.add('open');
-            settingsMenuOverlay.classList.add('open');
-          }
-          break;
-        case 'export-comments-page':
-          exportComments(true);
-          break;
-        case 'export-comments-all':
-          exportComments(false);
-          break;
-        case 'import-comments':
-          if (commentsImport) commentsImport.click();
-          break;
-        case 'download-pdf':
-          window.print();
-          break;
       }
     }
 
-    // 設定メニュー開閉機能
     if (settingsToggleBtn && settingsMenu && settingsMenuOverlay) {
       const openSettingsMenu = () => {
         settingsMenu.classList.add('open');
@@ -1290,15 +1450,16 @@ ul.task-list li input[type="checkbox"] {
     }
   }
 
-  function setupLeftPanelTabs() {
+  function setupLeftPanelTabs(navData) {
     const sidebar = document.getElementById('quarto-sidebar');
     if (!sidebar) return;
     const menuContainer = sidebar.querySelector('.sidebar-menu-container');
     if (!menuContainer) return;
+
     const tabWrapper = document.createElement('div');
     tabWrapper.className = 'toc-switcher';
     tabWrapper.innerHTML = `
-<div class="toc-tabs">
+      <div class="toc-tabs">
         <button type="button" class="toc-tab active" data-tab="site">各章</button>
         <button type="button" class="toc-tab" data-tab="page">章内</button>
         <button type="button" class="toc-tab" data-tab="all">全体</button>
@@ -1308,23 +1469,32 @@ ul.task-list li input[type="checkbox"] {
       <div class="toc-panel toc-all-content hidden"></div>
     `;
 
-    const menuCloneForAll = menuContainer.cloneNode(true);
     const parent = menuContainer.parentNode;
     parent.replaceChild(tabWrapper, menuContainer);
+
     const sitePanel = tabWrapper.querySelector('.toc-site-content');
-    sitePanel.appendChild(menuContainer);
-    // デフォルト: 各章タブは第2階層まで展開
-    try { setSidebarDepth(menuContainer, 2); } catch (e) { console.warn('setSidebarDepth failed for site', e); }
-
     const pagePanel = tabWrapper.querySelector('.toc-page-content');
-
     const allPanel = tabWrapper.querySelector('.toc-all-content');
-    if (menuCloneForAll) {
-      // 各章タブ: 第2階層まで展開（従来のナビゲーション）
-      setSidebarDepth(menuCloneForAll, 2);
-      allPanel.appendChild(menuCloneForAll);
+
+    sitePanel.innerHTML = '';
+    pagePanel.innerHTML = '';
+    allPanel.innerHTML = '';
+
+    menuContainer.innerHTML = '';
+    sitePanel.appendChild(menuContainer);
+
+    const allContainer = document.createElement('div');
+    allContainer.className = 'toc-all-container';
+    allPanel.appendChild(allContainer);
+
+    if (!navData || !Array.isArray(navData.pages) || !navData.pages.length) {
+      menuContainer.innerHTML = '<p class="toc-empty">目次データを読み込めませんでした。</p>';
+      allContainer.innerHTML = '<p class="toc-empty">目次データを読み込めませんでした。</p>';
+      pagePanel.innerHTML = '<p class="toc-empty">目次データを読み込めませんでした。</p>';
     } else {
-      allPanel.innerHTML = '<p class="toc-empty">メニューを読み込めませんでした。</p>';
+      CustomTOC.renderChapterTab(menuContainer, navData);
+      CustomTOC.renderAllTab(allContainer, navData);
+      CustomTOC.renderPageTab(pagePanel, navData, 4);
     }
 
     const tabButtons = tabWrapper.querySelectorAll('.toc-tab');
@@ -1335,7 +1505,12 @@ ul.task-list li input[type="checkbox"] {
         tabButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
         Object.values(panels).forEach(p => p.classList.add('hidden'));
-        if (panels[target]) panels[target].classList.remove('hidden');
+        if (panels[target]) {
+          panels[target].classList.remove('hidden');
+          if (target === 'page' && navData) {
+            CustomTOC.renderPageTab(pagePanel, navData, 4);
+          }
+        }
       });
     });
   }
@@ -1372,7 +1547,7 @@ ul.task-list li input[type="checkbox"] {
       wrapper.innerHTML = `
         <div class="toc-tabs">
           <button type="button" class="toc-tab" data-tab="footnotes">脚注</button>
-          <button type="button" class="toc-tab" data-tab="comments">コメント</button>
+          <button type="button" class="toc-tab" data-tab="comments">ｺﾒﾝﾄ</button>
           <button type="button" class="toc-tab" data-tab="both">両方</button>
         </div>
         <div class="sidenotes-toolbar">
@@ -1420,7 +1595,7 @@ ul.task-list li input[type="checkbox"] {
     const wrapper = marginSidebar.querySelector('.right-switcher');
     if (!wrapper) return;
     const tabs = Array.from(wrapper.querySelectorAll('.toc-tab'));
-    const normalized = ['footnotes', 'comments', 'both'].includes(tab) ? tab : 'footnotes';
+    const normalized = ['footnotes', 'comments', 'both'].includes(tab) ? tab : 'both';
     tabs.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === normalized));
     const footPanel = wrapper.querySelector('.right-footnotes');
     const commPanel = wrapper.querySelector('.right-comments');
@@ -1590,10 +1765,35 @@ ul.task-list li input[type="checkbox"] {
 
   function renderSidebarFootnotes() {
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
-    const marginSidebar = document.getElementById('quarto-margin-sidebar');
+    let marginSidebar = document.getElementById('quarto-margin-sidebar');
     if (!marginSidebar) return;
-    const footHost = marginSidebar.querySelector('.right-footnotes') || marginSidebar;
-    const bothHost = marginSidebar.querySelector('.right-both');
+
+    if (marginSidebar.style.display === 'none') {
+      const prev = marginSidebar.dataset.prevDisplay || '';
+      marginSidebar.style.display = prev;
+      delete marginSidebar.dataset.prevDisplay;
+    }
+
+    if (!marginSidebar.querySelector('.right-switcher')) {
+      ensureRightTabs();
+      marginSidebar = document.getElementById('quarto-margin-sidebar');
+    }
+
+    let footHost = marginSidebar.querySelector('.right-footnotes');
+    if (!footHost) {
+      footHost = document.createElement('div');
+      footHost.className = 'toc-panel right-footnotes';
+      marginSidebar.appendChild(footHost);
+    }
+
+    let bothHost = marginSidebar.querySelector('.right-both');
+    if (!bothHost) {
+      bothHost = document.createElement('div');
+      bothHost.className = 'toc-panel right-both';
+      bothHost.style.display = 'none';
+      marginSidebar.appendChild(bothHost);
+    }
+
     footHost.innerHTML = '';
     if (bothHost) bothHost.innerHTML = '';
 
@@ -1989,7 +2189,10 @@ ul.task-list li input[type="checkbox"] {
 
   function renderInlineFootnotes() {
     const marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (marginSidebar) marginSidebar.innerHTML = '';
+    if (marginSidebar && marginSidebar.style.display !== 'none') {
+      marginSidebar.dataset.prevDisplay = marginSidebar.style.display || '';
+      marginSidebar.style.display = 'none';
+    }
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
     const active = getActiveChapterSection();
     const scope = active || document;
@@ -2502,86 +2705,60 @@ ul.task-list li input[type="checkbox"] {
     if (!sidebarSearch) return;
 
     sidebarSearch.innerHTML = '';
+    sidebarSearch.style.display = '';
 
-    const form = document.createElement('form');
-    form.className = 'sidebar-search-form';
-    form.setAttribute('role', 'search');
-    form.setAttribute('aria-label', 'サイト内検索フォーム');
+    const utilityBar = document.createElement('div');
+    utilityBar.className = 'sidebar-search-utility';
 
-    const input = document.createElement('input');
-    input.type = 'search';
-    input.id = 'sidebar-search-input';
-    input.placeholder = 'キーワードを検索...';
-    input.setAttribute('aria-label', 'キーワードを検索');
-    input.autocomplete = 'off';
+    const searchButton = document.createElement('button');
+    searchButton.type = 'button';
+    searchButton.className = 'sidebar-search-button';
+    searchButton.setAttribute('aria-label', '検索を開く (Cmd+K)');
+    searchButton.title = '検索 (Cmd+K)';
 
-    form.appendChild(input);
-    sidebarSearch.appendChild(form);
+    const searchIcon = document.createElement('img');
+    searchIcon.className = 'sidebar-search-button-icon';
+    searchIcon.alt = '';
+    searchIcon.decoding = 'async';
+    searchIcon.loading = 'lazy';
+    searchIcon.setAttribute('aria-hidden', 'true');
+    searchIcon.src = resolveAssetPath('assets/search.png');
 
-    const resultsWrapper = document.createElement('div');
-    resultsWrapper.className = 'sidebar-search-results hidden';
-    resultsWrapper.innerHTML = `
-      <div class="sidebar-search-header">
-        <span class="sidebar-search-query"></span>
-        <button type="button" class="sidebar-search-clear" aria-label="検索結果を閉じる">×</button>
-      </div>
-      <div class="sidebar-search-summary"></div>
-      <div class="sidebar-search-items"></div>
-      <div class="sidebar-search-empty">検索結果はここに表示されます。</div>
-    `;
-    sidebarSearch.appendChild(resultsWrapper);
-
-    SEARCH_RESULTS_VIEW.sidebarContainer = resultsWrapper;
-    SEARCH_RESULTS_VIEW.sidebarSummary = resultsWrapper.querySelector('.sidebar-search-summary');
-    SEARCH_RESULTS_VIEW.sidebarList = resultsWrapper.querySelector('.sidebar-search-items');
-    SEARCH_RESULTS_VIEW.sidebarQuery = resultsWrapper.querySelector('.sidebar-search-query');
-    SEARCH_RESULTS_VIEW.sidebarClearBtn = resultsWrapper.querySelector('.sidebar-search-clear');
-
-    if (SEARCH_RESULTS_VIEW.sidebarClearBtn) {
-      SEARCH_RESULTS_VIEW.sidebarClearBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-        clearSidebarSearchResults();
-      });
-    }
-
-    const openOverlayWithQuery = (raw) => {
-      const query = (typeof raw === 'string' ? raw : '').trim();
-      const handle = openSearchOverlay(query);
+    searchButton.appendChild(searchIcon);
+    searchButton.addEventListener('click', () => {
+      const handle = openSearchOverlay('');
       if (handle && handle.input) {
-        const end = handle.input.value.length;
-        handle.input.focus();
-        handle.input.setSelectionRange(end, end);
-      }
-    };
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      openOverlayWithQuery(input.value);
-    });
-
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        openOverlayWithQuery(input.value);
+        const inputEl = handle.input;
+        const end = inputEl.value.length;
+        inputEl.focus();
+        inputEl.setSelectionRange(end, end);
       }
     });
 
-    input.addEventListener('input', (event) => {
-      const value = event.target.value;
-      const overlay = document.querySelector('.global-search-overlay');
-      if (!overlay) {
-        if (value.trim().length >= 1) {
-          openOverlayWithQuery(value);
-        }
-        return;
-      }
-      const overlayInput = overlay.querySelector('#global-search-input');
-      if (overlayInput && overlayInput.value !== value) {
-        overlayInput.value = value;
-        overlayInput.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-    });
+    utilityBar.appendChild(searchButton);
 
+    const meterWrapper = document.createElement('div');
+    meterWrapper.className = 'sidebar-reading-meter';
+    meterWrapper.setAttribute('role', 'status');
+    meterWrapper.setAttribute('aria-label', '読書メーター');
+    meterWrapper.title = '読書メーター';
+
+    const meterValue = document.createElement('span');
+    meterValue.className = 'sidebar-reading-meter-value';
+    meterValue.textContent = '[0/0]';
+
+    meterWrapper.appendChild(meterValue);
+    utilityBar.appendChild(meterWrapper);
+
+    sidebarSearch.appendChild(utilityBar);
+
+    SEARCH_RESULTS_VIEW.sidebarContainer = null;
+    SEARCH_RESULTS_VIEW.sidebarSummary = null;
+    SEARCH_RESULTS_VIEW.sidebarList = null;
+    SEARCH_RESULTS_VIEW.sidebarQuery = null;
+    SEARCH_RESULTS_VIEW.sidebarClearBtn = null;
+
+    initializeReadingMeter(meterValue);
     restoreSearchSession();
   }
 
@@ -3100,11 +3277,7 @@ ul.task-list li input[type="checkbox"] {
 
     const input = overlay.querySelector('#global-search-input');
     const btn = overlay.querySelector('#global-search-btn');
-    const syncSidebarInput = (value) => {
-      const sidebarInput = document.getElementById('sidebar-search-input');
-      if (!sidebarInput || sidebarInput === document.activeElement) return;
-      if (sidebarInput.value !== value) sidebarInput.value = value;
-    };
+    const syncSidebarInput = () => {};
     input.value = startQuery;
     input.focus();
 
@@ -3910,6 +4083,269 @@ ul.task-list li input[type="checkbox"] {
         }
       });
     }
+  };
+
+  CustomTOC.getNavData = function(navData) {
+    return navData || NAV_DATA_STATE.data;
+  };
+
+  CustomTOC.normalizeText = function(text) {
+    return (text || '').replace(/\s+/g, ' ').trim();
+  };
+
+  CustomTOC.getCurrentPage = function(navData) {
+    const data = this.getNavData(navData);
+    if (!data || !Array.isArray(data.pages)) return null;
+    const current = computeCurrentOutputPath();
+    return data.pages.find(page => isSamePage(page.output, current)) || null;
+  };
+
+  CustomTOC.createTree = function(nodes, pageOutput, options = {}) {
+    const { variant } = options;
+    const ul = document.createElement('ul');
+    ul.className = 'toc-tree';
+    if (variant) ul.classList.add(variant);
+
+    nodes.forEach((node, index) => {
+      if (!node) return;
+      const depth = Math.min(node.level || 1, 6);
+      const li = document.createElement('li');
+      li.className = `toc-item toc-level-${depth}`;
+      if (index === nodes.length - 1) li.classList.add('is-last');
+
+      const row = document.createElement('div');
+      row.className = 'toc-row';
+
+      const link = document.createElement('a');
+      link.className = `toc-link toc-level-${depth}`;
+      link.href = buildHref(pageOutput, node.anchor || null);
+      link.textContent = node.title || '';
+      row.appendChild(link);
+      li.appendChild(row);
+
+      const hasChildren = Array.isArray(node.children) && node.children.length > 0;
+      if (hasChildren) {
+        const childList = this.createTree(node.children, pageOutput, options);
+        li.appendChild(childList);
+        li.classList.add('has-children');
+      }
+
+      ul.appendChild(li);
+    });
+
+    return ul;
+  };
+
+  CustomTOC.cloneNodeWithLevelOffset = function(node, offset) {
+    if (!node) return null;
+    const level = Math.max(1, (node.level || 1) + offset);
+    const clone = {
+      title: node.title,
+      level,
+      anchor: node.anchor,
+      children: []
+    };
+    if (Array.isArray(node.children) && node.children.length) {
+      clone.children = node.children
+        .map(child => this.cloneNodeWithLevelOffset(child, offset))
+        .filter(Boolean);
+    }
+    return clone;
+  };
+
+  CustomTOC.rebasePageHeadings = function(nodes) {
+    if (!Array.isArray(nodes) || !nodes.length) return [];
+
+    const rebased = [];
+    let consumedLevel1 = false;
+
+    nodes.forEach(node => {
+      if (!node) return;
+      const level = node.level || 1;
+      if (level <= 1) {
+        consumedLevel1 = true;
+        if (Array.isArray(node.children) && node.children.length) {
+          node.children.forEach(child => {
+            const adjusted = this.cloneNodeWithLevelOffset(child, -1);
+            if (adjusted) rebased.push(adjusted);
+          });
+        }
+      } else {
+        const adjusted = this.cloneNodeWithLevelOffset(node, -1);
+        if (adjusted) rebased.push(adjusted);
+      }
+    });
+
+    if (!rebased.length && !consumedLevel1) {
+      return nodes
+        .map(node => this.cloneNodeWithLevelOffset(node, -1))
+        .filter(Boolean);
+    }
+
+    return rebased;
+  };
+
+  CustomTOC.renderChapterTab = function(container, navData) {
+    if (!container) return;
+    const data = this.getNavData(navData);
+    container.innerHTML = '';
+
+    if (!data || !Array.isArray(data.pages) || !data.pages.length) {
+      container.innerHTML = '<p class="toc-empty">目次データを読み込めませんでした。</p>';
+      return;
+    }
+
+    const list = document.createElement('ul');
+    list.className = 'toc-chapter-list toc-tree';
+    const current = computeCurrentOutputPath();
+
+    data.pages.forEach(page => {
+      if (!page) return;
+      const li = document.createElement('li');
+      li.className = 'toc-chapter-item';
+      if (isSamePage(page.output, current)) li.classList.add('active');
+
+      const headingTree = cloneTreeWithDepth(page.headings || [], 1);
+      const nodes = headingTree.length ? headingTree : [{
+        title: page.title,
+        level: 1,
+        anchor: page.headings && page.headings.length ? page.headings[0].anchor : null,
+        children: []
+      }];
+
+      const primary = nodes[0];
+      const link = document.createElement('a');
+      link.className = 'toc-link toc-chapter-link';
+      link.href = buildHref(page.output, primary.anchor || null);
+      link.textContent = primary.title || page.title;
+      li.appendChild(link);
+
+      if (nodes.length > 1) {
+        const childList = document.createElement('ul');
+        childList.className = 'toc-tree toc-chapter-sublist';
+        nodes.slice(1).forEach(node => {
+          const subLi = document.createElement('li');
+          subLi.className = 'toc-item toc-level-1';
+          const subLink = document.createElement('a');
+          subLink.className = 'toc-link';
+          subLink.href = buildHref(page.output, node.anchor || null);
+          subLink.textContent = node.title || '';
+          subLi.appendChild(subLink);
+          childList.appendChild(subLi);
+        });
+        li.appendChild(childList);
+      }
+
+      list.appendChild(li);
+    });
+
+    container.appendChild(list);
+  };
+
+  CustomTOC.renderAllTab = function(container, navData) {
+    if (!container) return;
+    const data = this.getNavData(navData);
+    container.innerHTML = '';
+    container.classList.add('toc-all-container-ready');
+
+    if (!data || !Array.isArray(data.pages) || !data.pages.length) {
+      container.innerHTML = '<p class="toc-empty">目次データを読み込めませんでした。</p>';
+      return;
+    }
+
+    const list = document.createElement('ul');
+    list.className = 'toc-all-list toc-tree toc-tree-root toc-tree-all-root';
+    const current = computeCurrentOutputPath();
+
+    data.pages.forEach(page => {
+      if (!page) return;
+      const li = document.createElement('li');
+      li.className = 'toc-all-item';
+      if (isSamePage(page.output, current)) li.classList.add('active');
+
+      const headingTree = cloneTreeWithDepth(page.headings || [], 3);
+      let sectionNodes = headingTree;
+      let chapterAnchor = page.headings && page.headings.length ? page.headings[0].anchor : null;
+      if (
+        headingTree.length === 1 &&
+        this.normalizeText(headingTree[0].title) === this.normalizeText(page.title)
+      ) {
+        chapterAnchor = headingTree[0].anchor || chapterAnchor;
+        sectionNodes = headingTree[0].children || [];
+      }
+
+      const link = document.createElement('a');
+      link.className = 'toc-link toc-all-link';
+      link.href = buildHref(page.output, chapterAnchor || null);
+      link.textContent = page.title;
+      li.appendChild(link);
+
+      if (sectionNodes.length) {
+        const childTree = this.createTree(sectionNodes, page.output, { variant: 'toc-tree-all' });
+        li.appendChild(childTree);
+      }
+
+      list.appendChild(li);
+    });
+
+    container.appendChild(list);
+  };
+
+  CustomTOC.renderPageTab = function(container, navData, maxDepth = 4) {
+    if (!container) return;
+    const page = this.getCurrentPage(navData);
+    container.innerHTML = '';
+    container.classList.add('toc-page-container');
+
+    if (!page) {
+      container.innerHTML = '<p class="toc-empty">このページには見出しがありません。</p>';
+      return;
+    }
+
+    const headingTree = cloneTreeWithDepth(page.headings || [], maxDepth);
+    const rebasedTree = this.rebasePageHeadings(headingTree)
+      .filter(node => (node.level || 1) >= 1);
+
+    if (!rebasedTree.length) {
+      container.innerHTML = '<p class="toc-empty">このページには見出しがありません。</p>';
+      return;
+    }
+
+    const tree = this.createTree(rebasedTree, page.output, { variant: 'toc-tree-page' });
+    tree.classList.add('toc-tree-root', 'toc-tree-page-root');
+    container.appendChild(tree);
+  };
+
+  CustomTOC.initializeCustomTOC = function(navData) {
+    const data = this.getNavData(navData);
+    if (!data) return;
+
+    const pagePanel = document.querySelector('.toc-page-content');
+    if (pagePanel) {
+      this.renderPageTab(pagePanel, data, 4);
+    }
+
+    const allPanel = document.querySelector('.toc-all-content .toc-all-container') || document.querySelector('.toc-all-content');
+    if (allPanel) {
+      this.renderAllTab(allPanel, data);
+    }
+
+    const sitePanel = document.querySelector('.toc-site-content .sidebar-menu-container');
+    if (sitePanel) {
+      this.renderChapterTab(sitePanel, data);
+    }
+  };
+
+  CustomTOC.generatePageTOC = function(maxDepth = 4) {
+    const temp = document.createElement('div');
+    this.renderPageTab(temp, this.getNavData(), maxDepth);
+    return temp.innerHTML || '<p class="toc-empty">このページには見出しがありません。</p>';
+  };
+
+  CustomTOC.generateAllPagesTOC = function() {
+    const temp = document.createElement('div');
+    this.renderAllTab(temp, this.getNavData());
+    return temp.innerHTML || '<p class="toc-empty">目次データを読み込めませんでした。</p>';
   };
 
   // コメントエクスポート/インポート

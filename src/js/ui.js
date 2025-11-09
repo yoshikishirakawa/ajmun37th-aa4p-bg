@@ -841,6 +841,12 @@
     const sizeMap = { S: 15, M: 17, L: 19, XL: 21 };
     const fontSize = sizeMap[size] || 17;
     document.documentElement.style.setProperty('--font-base', `${fontSize}px`);
+    // 文字サイズ変更時にページ内目次を再生成
+    const pageTocContainer = document.querySelector('.page-toc-content');
+    if (pageTocContainer && pageTocContainer.children.length > 0) {
+      pageTocContainer.innerHTML = '';
+      generatePageTocList(pageTocContainer);
+    }
   }
 
   // テーマ設定
@@ -974,8 +980,11 @@
         heading.id = id;
       }
 
+      const fontSizeValue = window.getComputedStyle(document.body).fontSize;
+      const fontSize = parseFloat(fontSizeValue);
+      const indentStep = fontSize * 1.0;
       const listItem = document.createElement('li');
-      listItem.style.cssText = `margin: 4px 0; padding-left: ${(level - 1) * 16}px;`;
+      listItem.style.cssText = `margin: 4px 0; padding-left: ${(level - 1) * indentStep}px;`;
 
       const link = document.createElement('a');
       link.href = `#${id}`;

@@ -1,30 +1,9 @@
 <div class="header-ui">
-  <!-- ハンバーガーメニューボタン（左上常設） -->
-  <button class="hamburger-menu-btn" id="hamburger-menu-btn" 
-          aria-label="メニューを開く" 
-          aria-expanded="false" 
-          aria-controls="hamburger-menu-panel">
-    <span class="hamburger-menu-icon">
-      <span></span>
-      <span></span>
-      <span></span>
-    </span>
-  </button>
-
-  <!-- ハンバーガーメニュー（展開パネル） -->
-  <div id="hamburger-menu-panel" class="hamburger-menu-panel" role="menu">
-    <div class="hamburger-menu-content">
-      <!-- メニュー項目はJavaScriptで生成 -->
-    </div>
-    <div class="hamburger-menu-notch"></div>
-  </div>
-  <div class="hamburger-menu-overlay" id="hamburger-menu-overlay"></div>
-
   <div id="js-header" class="js-header">
     <div class="js-header__inner">
       <div class="js-header__left">
         <div class="js-header__logo">
-          <span class="js-header__title">平和への課題：補遺</span>
+          <span class="js-header__title"><span class="title-main">平和への課題：補遺</span><span class="title-sub">Background Guide</span></span>
         </div>
       </div>
       <div class="js-header__right">
@@ -33,7 +12,9 @@
           <button class="js-toc-mobile-btn" id="toc-mobile-btn" aria-label="目次">☰</button>
           
           <!-- 設定メニューボタン -->
-          <button class="js-settings-toggle-btn" id="settings-toggle-btn" aria-label="設定メニューを開く">⚙️</button>
+          <button class="js-settings-toggle-btn" id="settings-toggle-btn" aria-label="設定メニューを開く">
+            <img src="" data-asset="assets/setting.png" alt="" aria-hidden="true" class="settings-toggle-icon">
+          </button>
         </div>
       </div>
     </div>
@@ -51,6 +32,8 @@
         <div class="settings-item">
           <label for="font-size-select">文字サイズ：</label>
           <select class="js-font-size-select" id="font-size-select" aria-label="文字サイズ">
+            <option value="3XS">3XS</option>
+            <option value="2XS">2XS</option>
             <option value="XS">XS</option>
             <option value="S">S</option>
             <option value="M" selected>M</option>

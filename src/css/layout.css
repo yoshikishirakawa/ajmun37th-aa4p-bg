@@ -296,12 +296,12 @@
 }
 
 .toc-item.level-2 {
-  padding-left: 16px;
+  padding-left: var(--toc-indent-step, 1.2em);
   font-size: 0.95em;
 }
 
 .toc-item.level-3 {
-  padding-left: 32px;
+  padding-left: calc(var(--toc-indent-step, 1.2em) * 2);
   font-size: 0.9em;
 }
 
