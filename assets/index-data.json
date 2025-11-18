@@ -1,135 +1,72 @@
 {
-  "generated_at": "2025-11-12T16:34:54.722487+00:00",
+  "generated_at": "2025-11-18T23:27:36.339760+00:00",
   "categories": [
     {
-      "name": "テスト",
+      "name": "イラク情勢",
       "terms": [
         {
-          "term": "うんち",
-          "reading": "うんち",
+          "term": "S/RES/661",
+          "reading": "",
           "locations": [
             {
-              "label": "6章1節",
-              "href": "06_ch06.html#idx-content-06-ch06-md-005-01",
+              "label": "5章4節3項",
+              "href": "content/05_ch05.html#idx-05-ch05-348-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-348-01",
+              "href_local": "05_ch05.html#idx-05-ch05-348-01",
               "order": [
-                6,
-                1
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "テスト2",
-      "terms": [
-        {
-          "term": "うんち",
-          "reading": "うんち",
-          "locations": [
-            {
-              "label": "6章1節",
-              "href": "06_ch06.html#idx-content-06-ch06-md-005-02",
-              "order": [
-                6,
-                1
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "国連憲章各条",
-      "terms": [
-        {
-          "term": "第1条",
-          "reading": "だい1じょう",
-          "locations": [
-            {
-              "label": "6章1節1項",
-              "href": "06_ch06.html#idx-content-06-ch06-md-009-01",
-              "order": [
-                6,
-                1,
-                1
+                5,
+                4,
+                3
               ]
             }
           ]
         },
         {
-          "term": "第2条",
-          "reading": "だい2じょう",
+          "term": "S/RES/666",
+          "reading": "",
           "locations": [
             {
-              "label": "6章1節1項",
-              "href": "06_ch06.html#idx-content-06-ch06-md-014-01",
+              "label": "5章4節3項",
+              "href": "content/05_ch05.html#idx-05-ch05-353-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-353-01",
+              "href_local": "05_ch05.html#idx-05-ch05-353-01",
               "order": [
-                6,
-                1,
-                1
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "kana": [
-    {
-      "name": "ア段",
-      "terms": [
-        {
-          "term": "うんち3",
-          "reading": "うんち3",
-          "locations": [
-            {
-              "label": "6章1節",
-              "href": "06_ch06.html#idx-content-06-ch06-md-005-03",
-              "order": [
-                6,
-                1
-              ]
-            },
-            {
-              "label": "6章1節2項",
-              "href": "06_ch06.html#idx-content-06-ch06-md-036-01",
-              "order": [
-                6,
-                1,
-                2
-              ]
-            },
-            {
-              "label": "6章1節2項",
-              "href": "06_ch06.html#idx-content-06-ch06-md-054-01",
-              "order": [
-                6,
-                1,
-                2
-              ]
-            },
-            {
-              "label": "6章3節2項",
-              "href": "06_ch06.html#idx-content-06-ch06-md-225-01",
-              "order": [
-                6,
-                3,
-                2
+                5,
+                4,
+                3
               ]
             }
           ]
         },
         {
-          "term": "うんち4",
-          "reading": "うんち4",
+          "term": "S/RES/678",
+          "reading": "",
           "locations": [
             {
-              "label": "6章3節3項",
-              "href": "06_ch06.html#idx-content-06-ch06-md-314-01",
+              "label": "5章4節3項",
+              "href": "content/05_ch05.html#idx-05-ch05-354-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-354-01",
+              "href_local": "05_ch05.html#idx-05-ch05-354-01",
               "order": [
-                6,
-                3,
+                5,
+                4,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "term": "S/RES/687",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章4節3項",
+              "href": "content/05_ch05.html#idx-05-ch05-362-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-362-01",
+              "href_local": "05_ch05.html#idx-05-ch05-362-01",
+              "order": [
+                5,
+                4,
                 3
               ]
             }
@@ -138,19 +75,336 @@
       ]
     },
     {
-      "name": "カ段",
+      "name": "主要な安保理決議",
       "terms": [
         {
-          "term": "国連総会",
-          "reading": "こくれんそうかい",
+          "term": "S/RES/661",
+          "reading": "",
           "locations": [
             {
-              "label": "6章1節1項",
-              "href": "06_ch06.html#idx-content-06-ch06-md-026-01",
+              "label": "5章4節3項",
+              "href": "content/05_ch05.html#idx-05-ch05-348-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-348-01",
+              "href_local": "05_ch05.html#idx-05-ch05-348-01",
               "order": [
-                6,
+                5,
+                4,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "term": "S/RES/666",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章4節3項",
+              "href": "content/05_ch05.html#idx-05-ch05-353-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-353-01",
+              "href_local": "05_ch05.html#idx-05-ch05-353-01",
+              "order": [
+                5,
+                4,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "term": "S/RES/678",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章4節3項",
+              "href": "content/05_ch05.html#idx-05-ch05-354-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-354-01",
+              "href_local": "05_ch05.html#idx-05-ch05-354-01",
+              "order": [
+                5,
+                4,
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "term": "S/RES/687",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章4節3項",
+              "href": "content/05_ch05.html#idx-05-ch05-362-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-362-01",
+              "href_local": "05_ch05.html#idx-05-ch05-362-01",
+              "order": [
+                5,
+                4,
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "国連憲章",
+      "terms": [
+        {
+          "term": "103条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節4項",
+              "href": "content/05_ch05.html#idx-05-ch05-102-03",
+              "href_root": "content/05_ch05.html#idx-05-ch05-102-03",
+              "href_local": "05_ch05.html#idx-05-ch05-102-03",
+              "order": [
+                5,
+                1,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "term": "1条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節1項",
+              "href": "content/05_ch05.html#idx-05-ch05-004-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-004-01",
+              "href_local": "05_ch05.html#idx-05-ch05-004-01",
+              "order": [
+                5,
                 1,
                 1
+              ]
+            }
+          ]
+        },
+        {
+          "term": "24条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節2項",
+              "href": "content/05_ch05.html#idx-05-ch05-062-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-062-01",
+              "href_local": "05_ch05.html#idx-05-ch05-062-01",
+              "order": [
+                5,
+                1,
+                2
+              ]
+            }
+          ]
+        },
+        {
+          "term": "25条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節4項",
+              "href": "content/05_ch05.html#idx-05-ch05-102-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-102-01",
+              "href_local": "05_ch05.html#idx-05-ch05-102-01",
+              "order": [
+                5,
+                1,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "term": "2条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節1項",
+              "href": "content/05_ch05.html#idx-05-ch05-004-02",
+              "href_root": "content/05_ch05.html#idx-05-ch05-004-02",
+              "href_local": "05_ch05.html#idx-05-ch05-004-02",
+              "order": [
+                5,
+                1,
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "term": "39条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節3項7",
+              "href": "content/05_ch05.html#idx-05-ch05-092-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-092-01",
+              "href_local": "05_ch05.html#idx-05-ch05-092-01",
+              "order": [
+                5,
+                1,
+                3,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "term": "40条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節3項7",
+              "href": "content/05_ch05.html#idx-05-ch05-092-02",
+              "href_root": "content/05_ch05.html#idx-05-ch05-092-02",
+              "href_local": "05_ch05.html#idx-05-ch05-092-02",
+              "order": [
+                5,
+                1,
+                3,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "term": "41条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節3項7",
+              "href": "content/05_ch05.html#idx-05-ch05-092-03",
+              "href_root": "content/05_ch05.html#idx-05-ch05-092-03",
+              "href_local": "05_ch05.html#idx-05-ch05-092-03",
+              "order": [
+                5,
+                1,
+                3,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "term": "42条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節3項7",
+              "href": "content/05_ch05.html#idx-05-ch05-092-04",
+              "href_root": "content/05_ch05.html#idx-05-ch05-092-04",
+              "href_local": "05_ch05.html#idx-05-ch05-092-04",
+              "order": [
+                5,
+                1,
+                3,
+                7
+              ]
+            }
+          ]
+        },
+        {
+          "term": "48条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章1節4項",
+              "href": "content/05_ch05.html#idx-05-ch05-102-02",
+              "href_root": "content/05_ch05.html#idx-05-ch05-102-02",
+              "href_local": "05_ch05.html#idx-05-ch05-102-02",
+              "order": [
+                5,
+                1,
+                4
+              ]
+            }
+          ]
+        },
+        {
+          "term": "49条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章4節1項41",
+              "href": "content/05_ch05.html#idx-05-ch05-281-01",
+              "href_root": "content/05_ch05.html#idx-05-ch05-281-01",
+              "href_local": "05_ch05.html#idx-05-ch05-281-01",
+              "order": [
+                5,
+                4,
+                1,
+                41
+              ]
+            }
+          ]
+        },
+        {
+          "term": "50条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "5章4節1項41",
+              "href": "content/05_ch05.html#idx-05-ch05-281-02",
+              "href_root": "content/05_ch05.html#idx-05-ch05-281-02",
+              "href_local": "05_ch05.html#idx-05-ch05-281-02",
+              "order": [
+                5,
+                4,
+                1,
+                41
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "国連憲��",
+      "terms": [
+        {
+          "term": "1条",
+          "reading": "",
+          "locations": [
+            {
+              "label": "本文",
+              "href": "-.html#idx-doc-001-01",
+              "href_root": "-.html#idx-doc-001-01",
+              "href_local": "../-.html#idx-doc-001-01",
+              "order": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "kana": [
+    {
+      "name": "タ段",
+      "terms": [
+        {
+          "term": "対抗措置",
+          "reading": "たいこうそち",
+          "locations": [
+            {
+              "label": "2節",
+              "href": "content/06_ch06.html#idx-06-ch06-032-01",
+              "href_root": "content/06_ch06.html#idx-06-ch06-032-01",
+              "href_local": "06_ch06.html#idx-06-ch06-032-01",
+              "order": [
+                2
+              ]
+            },
+            {
+              "label": "2節",
+              "href": "content/06_ch06.html#idx-06-ch06-034-01",
+              "href_root": "content/06_ch06.html#idx-06-ch06-034-01",
+              "href_local": "06_ch06.html#idx-06-ch06-034-01",
+              "order": [
+                2
               ]
             }
           ]

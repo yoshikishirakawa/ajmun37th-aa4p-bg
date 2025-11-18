@@ -1,0 +1,25 @@
+format: 
+  html:
+    embed-resources: false
+    css:
+      - ../src/css/font-udpmincho.css
+      - ../src/css/base.css
+      - ../src/css/simple-theme.css
+      - ../src/css/right-panel.css
+    include-before-body:
+      - file: ../templates/header-ui.html
+    include-after-body:
+      - file: ../templates/ui-clean-script.html
+    include-in-header:
+      - text: |
+          <style>
+            :root {
+              --sidebar-width: 280px;
+              --margin-width: 150px;
+              --gutter-width: 12px;
+            }
+          </style>
+          <link rel="preload" href="../fonts/BIZUDPMincho-Regular.woff2" as="font" type="font/woff2" crossorigin>
+          <link rel="preload" href="../fonts/BIZUDPMincho-Bold.woff2" as="font" type="font/woff2" crossorigin>
+          <link rel="preload" href="../fonts/BIZUDPGothic-Regular.woff2" as="font" type="font/woff2" crossorigin>
+          <link rel="preload" href="../fonts/BIZUDPGothic-Bold.woff2" as="font" type="font/woff2" crossorigin>

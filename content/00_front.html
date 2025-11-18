@@ -149,47 +149,27 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/02_ch02.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第2章　集団安全保障体制の系譜　　　　　　　　　　　　　　　　　　　　　〜「平和への課題：補遺」に至るまで〜</span></a>
+  <a href="../content/02_ch02.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第2章　集団安全保障体制の系譜</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/03_ch03.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第3章 実装方針</span></a>
+  <a href="../content/03_ch03.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第3章　争点・論点解説</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/20_col01.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">コラム1：Webフォントの歴史</span></a>
+  <a href="../content/04_ch04.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第4章 国連による紛争処理</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/21_col02.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">コラム2：アクセシビリティの重要性</span></a>
+  <a href="../content/05_ch05.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第5章　国連の制度</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/04_ch04.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第4章 UI/UX設計</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/05_ch05.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第5章 パフォーマンス最適化</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/06_ch06.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第6章　国連の制度</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/07_ch07.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第7章 まとめと展望</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/22_col03.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">コラム3：今後の技術動向</span></a>
+  <a href="../content/06_ch06.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">第1節　国際法法原論</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -247,9 +227,6 @@ ul.task-list li input[type="checkbox"] {
       </div>
       <div class="js-header__right">
         <div class="js-header__controls">
-          <!-- モバイル用目次ボタン -->
-          <button class="js-toc-mobile-btn" id="toc-mobile-btn" aria-label="目次">☰</button>
-          
           <!-- 設定メニューボタン -->
           <button class="js-settings-toggle-btn" id="settings-toggle-btn" aria-label="設定メニューを開く">
             <img src="" data-asset="assets/setting.png" alt="" aria-hidden="true" class="settings-toggle-icon">
@@ -305,6 +282,23 @@ ul.task-list li input[type="checkbox"] {
           <input type="file" id="comments-import" class="js-comments-import" accept="application/json" style="display:none;">
           <button class="js-comments-import-button" id="comments-import-button">ファイル選択</button>
         </div>
+        
+        <!-- プレビューのトースト表示数 -->
+        <div class="settings-item">
+          <label for="gdoc-toast-max">プレビューのトースト数：</label>
+          <input type="range" id="gdoc-toast-max" min="0" max="9" value="3" aria-label="プレビューのトースト数">
+          <span id="gdoc-toast-max-value">3</span>
+        </div>
+
+        <!-- 各種設定リセット -->
+        <div class="settings-divider"></div>
+        <div class="settings-section-title">リセット</div>
+        <div class="settings-item settings-item--reset-buttons">
+          <button type="button" id="reset-ui-settings">UI系をリセット</button>
+          <button type="button" id="reset-memo-settings">メモ系をリセット</button>
+          <button type="button" id="reset-preview-settings">プレビューをリセット</button>
+          <button type="button" id="reset-all-settings">すべてをリセット</button>
+        </div>
       </div>
     </div>
   </div>
@@ -315,11 +309,11 @@ ul.task-list li input[type="checkbox"] {
   <div class="toc-overlay__backdrop"></div>
   <div class="toc-sheet">
     <div class="toc-sheet__header">
-      <h3 class="anchored">目次</h3>
+      <h3 class="anchored">ナビゲーション</h3>
       <button class="toc-sheet__close">×</button>
     </div>
     <div class="toc-sheet__content">
-      <!-- 目次はJavaScriptで生成 -->
+      <!-- 左パネル相当の内容はJavaScriptで生成 -->
     </div>
   </div>
 </div>
@@ -343,6 +337,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="q-image-block pos-center q-image-gradient" style="--img-width: 100%; --img-gradient-edge: 2.5%;">
+<img src="" class="img-fluid" data-asset="assets/front_cover.png" alt="表紙">
+</div>
 <p>読者の皆様へ</p>
 <p>この度、本書をお手に取っていただき、誠にありがとうございます。</p>
 <hr>
@@ -363,6 +360,9 @@ ul.task-list li input[type="checkbox"] {
 <p>デジタル時代において、学術的な長文ドキュメントの適切な配信形式は依然として課題です。PDFは印刷適性が高い一方で、画面での読書性には限界があります。HTMLは柔軟性が高い一方で、一貫した組版の維持が困難です。</p>
 <p>本書では、これらの課題に対する現代的な解決策を提案します。</p>
 <hr>
+<div class="q-image-block pos-center q-image-gradient" style="--img-width: 100%; --img-gradient-edge: 2.5%;">
+<img src="" class="img-fluid" data-asset="assets/back_cover.png" alt="裏表紙">
+</div>
 </section>
 <section id="読者対象" class="level2">
 <h2 class="anchored" data-anchor-id="読者対象">読者対象</h2>
@@ -809,15 +809,16 @@ ul.task-list li input[type="checkbox"] {
 (function() {
   'use strict';
 
-  const STORAGE_KEYS = {
-    tocLocation: 'quarto-toc-location',
-    theme: 'quarto-theme',
-    fontSize: 'quarto-font-size',
-    markers: 'quarto-markers',
-    comments: 'quarto-comments',
-    scrollPosition: 'quarto-scroll-position',
-    rightTab: 'quarto-right-tab'
-  };
+const STORAGE_KEYS = {
+  tocLocation: 'quarto-toc-location',
+  theme: 'quarto-theme',
+  fontSize: 'quarto-font-size',
+  markers: 'quarto-markers',
+  comments: 'quarto-comments',
+  scrollPosition: 'quarto-scroll-position',
+  rightTab: 'quarto-right-tab',
+  readingState: 'quarto-reading-state'
+};
 
   const NAV_DATA_STATE = {
     promise: null,
@@ -838,6 +839,64 @@ ul.task-list li input[type="checkbox"] {
     const cleaned = (path || '').replace(/\\/g, '/');
     const decoded = decodeURIComponent(cleaned);
     return decoded.replace(/^\/+/, '');
+  }
+
+  // =============================
+  // 設定リセット系ユーティリティ
+  // =============================
+  function resetUiSettings() {
+    try {
+      // 現行UIの表示系
+      localStorage.removeItem(STORAGE_KEYS.theme);
+      localStorage.removeItem(STORAGE_KEYS.fontSize);
+      localStorage.removeItem(STORAGE_KEYS.rightTab);
+      localStorage.removeItem('footnotes-sort');
+      localStorage.removeItem('comments-sort');
+
+      // 旧UI由来（残っている可能性があるもの）
+      localStorage.removeItem('txtSize');
+      localStorage.removeItem('theme');
+      localStorage.removeItem('tocLocation');
+      localStorage.removeItem('scrollPos');
+    } catch (e) {
+      console.warn('resetUiSettings failed', e);
+    }
+  }
+
+  function resetMemoSettings() {
+    try {
+      // マーカー／コメント関連
+      localStorage.removeItem(STORAGE_KEYS.markers);
+      localStorage.removeItem(STORAGE_KEYS.comments);
+    } catch (e) {
+      console.warn('resetMemoSettings failed', e);
+    }
+  }
+
+  function resetPreviewSettings() {
+    try {
+      // Docs/BG プレビュー関連
+      localStorage.removeItem('gdocPreviewMaxToasts');
+      localStorage.removeItem('gdocPreviewState_v2');
+    } catch (e) {
+      console.warn('resetPreviewSettings failed', e);
+    }
+  }
+
+  function resetAllSettingsHard() {
+    try {
+      // localStorage 全消去（他サイトのデータは同一オリジン内なので注意が必要だが、
+      // このBGビューア専用オリジン前提で、完全リセットとして実装）
+      localStorage.clear();
+    } catch (e) {
+      console.warn('resetAllSettingsHard failed', e);
+    }
+    try {
+      // 読書状態・スクロール状態など sessionStorage 由来のものもクリア
+      sessionStorage.clear();
+    } catch (e) {
+      console.warn('sessionStorage clear failed', e);
+    }
   }
 
   function computeCurrentOutputPath() {
@@ -872,6 +931,185 @@ ul.task-list li input[type="checkbox"] {
     const base = `${prefix || ''}${pagePath}`;
     return anchor ? `${base}#${anchor}` : base;
   }
+
+  function updateIndexLinksForContext() {
+    const currentPath = computeCurrentOutputPath();
+    const inContentDir = typeof currentPath === 'string' && currentPath.startsWith('content/');
+    const links = document.querySelectorAll('a[data-aj-index-root-href]');
+    if (!links.length) return;
+    links.forEach(link => {
+      const rootHref = link.getAttribute('data-aj-index-root-href');
+      const localHref = link.getAttribute('data-aj-index-local-href');
+      const target = inContentDir && localHref ? localHref : rootHref;
+      if (target) {
+        link.setAttribute('href', target);
+      }
+    });
+  }
+
+  function reinforceAnchors(scope) {
+    if (!scope || typeof scope.querySelectorAll !== 'function') return;
+    const anchors = scope.querySelectorAll('a[href]');
+    anchors.forEach(anchor => {
+      if (anchor.dataset.ajLinkReinforced === 'true') return;
+      anchor.dataset.ajLinkReinforced = 'true';
+      const href = anchor.getAttribute('href') || '';
+      if (/^https?:\/\//i.test(href)) {
+        if (!anchor.getAttribute('target')) {
+          anchor.setAttribute('target', '_blank');
+        }
+        const rel = anchor.getAttribute('rel') || '';
+        if (!/noopener/i.test(rel)) {
+          anchor.setAttribute('rel', (rel + ' noopener noreferrer').trim());
+        }
+      }
+    });
+  }
+
+  function setInlineFootnoteMode(active) {
+    const next = !!active;
+    if (INLINE_FOOTNOTE_MODE === next) return;
+    INLINE_FOOTNOTE_MODE = next;
+    if (!INLINE_FOOTNOTE_MODE) {
+      hideCommentPopover();
+    }
+  }
+
+  function ensureCommentMarkerInteractions() {
+    const markers = document.querySelectorAll('.text-marker[data-comment-id]');
+    markers.forEach(marker => {
+      if (marker.dataset.commentMarkerBound === 'true') return;
+      marker.dataset.commentMarkerBound = 'true';
+      marker.addEventListener('click', handleCommentMarkerClick);
+      marker.addEventListener('pointerenter', handleCommentMarkerPointerEnter);
+      marker.addEventListener('pointerleave', handleCommentMarkerPointerLeave);
+    });
+  }
+
+  function handleCommentMarkerClick(event) {
+    if (!INLINE_FOOTNOTE_MODE) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const marker = event.currentTarget;
+    if (commentPopoverEl && commentPopoverMarker === marker && commentPopoverPersistent) {
+      hideCommentPopover();
+    } else {
+      showCommentPopover(marker, { persistent: true });
+    }
+  }
+
+  function handleCommentMarkerPointerEnter(event) {
+    if (!INLINE_FOOTNOTE_MODE) return;
+    if (event.pointerType && event.pointerType !== 'mouse') return;
+    const marker = event.currentTarget;
+    showCommentPopover(marker, { persistent: false });
+    clearCommentPopoverHideTimer();
+  }
+
+  function handleCommentMarkerPointerLeave() {
+    if (!INLINE_FOOTNOTE_MODE) return;
+    scheduleCommentPopoverHide(200);
+  }
+
+  function showCommentPopover(marker, opts) {
+    if (!marker) return;
+    const rec = getCommentRecordById(marker.getAttribute('data-comment-id'));
+    if (!rec) return;
+    const persistent = !!(opts && opts.persistent);
+    clearCommentPopoverHideTimer();
+    commentPopoverPersistent = persistent;
+    commentPopoverMarker = marker;
+    if (commentPopoverEl) {
+      commentPopoverEl.remove();
+      commentPopoverEl = null;
+    }
+    commentPopoverEl = document.createElement('div');
+    commentPopoverEl.className = 'comment-inline-popover';
+    const snippetRaw = (rec.text || '').trim();
+    const snippetHtml = snippetRaw ? `対象: ${escapeHtml(snippetRaw.slice(0, 160))}` : '';
+    const bodyHtml = escapeHtml(rec.body || '').replace(/\n/g, '<br>');
+    commentPopoverEl.innerHTML = `
+      ${snippetHtml ? `<div class="comment-inline-popover__snippet">${snippetHtml}</div>` : ''}
+      <div class="comment-inline-popover__body">${bodyHtml || '<em>コメント内容がありません。</em>'}</div>
+    `;
+    commentPopoverEl.addEventListener('pointerenter', clearCommentPopoverHideTimer);
+    commentPopoverEl.addEventListener('pointerleave', () => scheduleCommentPopoverHide(200));
+    document.body.appendChild(commentPopoverEl);
+    positionCommentPopover(marker);
+  }
+
+  function hideCommentPopover() {
+    clearCommentPopoverHideTimer();
+    if (commentPopoverEl) {
+      commentPopoverEl.remove();
+      commentPopoverEl = null;
+    }
+    commentPopoverMarker = null;
+    commentPopoverPersistent = false;
+  }
+
+  function scheduleCommentPopoverHide(delay) {
+    if (commentPopoverPersistent || !commentPopoverEl) return;
+    clearCommentPopoverHideTimer();
+    commentPopoverHideTimer = window.setTimeout(() => {
+      hideCommentPopover();
+    }, delay || 0);
+  }
+
+  function clearCommentPopoverHideTimer() {
+    if (commentPopoverHideTimer) {
+      clearTimeout(commentPopoverHideTimer);
+      commentPopoverHideTimer = null;
+    }
+  }
+
+  function positionCommentPopover(marker) {
+    if (!commentPopoverEl || !marker) return;
+    const rect = marker.getBoundingClientRect();
+    const popRect = commentPopoverEl.getBoundingClientRect();
+    const scrollX = window.scrollX || document.documentElement.scrollLeft || 0;
+    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    const viewportWidth = document.documentElement.clientWidth || window.innerWidth || popRect.width;
+    const viewportHeight = document.documentElement.clientHeight || window.innerHeight || popRect.height;
+    let top = scrollY + rect.bottom + 10;
+    let left = scrollX + rect.left + (rect.width / 2) - (popRect.width / 2);
+    const minLeft = scrollX + 8;
+    const maxLeft = scrollX + viewportWidth - popRect.width - 8;
+    if (left < minLeft) left = minLeft;
+    if (left > maxLeft) left = maxLeft;
+    const maxTop = scrollY + viewportHeight - popRect.height - 8;
+    if (top > maxTop) {
+      top = scrollY + rect.top - popRect.height - 10;
+    }
+    if (top < scrollY + 8) {
+      top = scrollY + 8;
+    }
+    commentPopoverEl.style.top = `${top}px`;
+    commentPopoverEl.style.left = `${left}px`;
+  }
+
+  function updateCommentPopoverPosition() {
+    if (!INLINE_FOOTNOTE_MODE || !commentPopoverEl || !commentPopoverMarker) return;
+    positionCommentPopover(commentPopoverMarker);
+  }
+
+  function getCommentRecordById(id) {
+    if (!id) return null;
+    const list = COMMENTS_DB[pageKey()] || [];
+    return list.find(rec => rec && rec.id === id) || null;
+  }
+
+  document.addEventListener('click', (event) => {
+    if (!INLINE_FOOTNOTE_MODE) return;
+    const marker = event.target.closest && event.target.closest('.text-marker[data-comment-id]');
+    if (marker) return;
+    if (commentPopoverEl && !event.target.closest('.comment-inline-popover')) {
+      hideCommentPopover();
+    }
+  });
+
+  window.addEventListener('scroll', () => updateCommentPopoverPosition(), { passive: true });
+  window.addEventListener('resize', () => updateCommentPopoverPosition());
 
   function cloneTreeWithDepth(nodes, maxLevel) {
     if (!Array.isArray(nodes) || !nodes.length) return [];
@@ -974,14 +1212,83 @@ ul.task-list li input[type="checkbox"] {
     return NAV_DATA_STATE.promise;
   }
 
-  // コメントDB（ページパス毎に配列）
+  function canonicalPageKey(pathname) {
+    try {
+      let path = (pathname || '').split(/[?#]/)[0];
+      path = path.replace(/\\/g, '/').replace(/\/+/g, '/');
+      const segments = path.split('/').filter(Boolean);
+      if (!segments.length) return 'index.html';
+      const last = segments[segments.length - 1];
+      if (!last || last.toLowerCase() === 'index.html') {
+        const prev = segments.length > 1 ? segments[segments.length - 2] : '';
+        return prev ? `${prev}/index.html` : 'index.html';
+      }
+      return last;
+    } catch {
+      return pathname || 'index.html';
+    }
+  }
+
+  function pageKey() {
+    return canonicalPageKey(window.location.pathname || '');
+  }
+
+  function canonicalizeCommentsDB(db) {
+    const merged = {};
+    const seenMap = {};
+    if (!db || typeof db !== 'object') {
+      return {};
+    }
+    Object.keys(db).forEach(oldKey => {
+      const canonical = canonicalPageKey(oldKey);
+      if (!merged[canonical]) {
+        merged[canonical] = [];
+        seenMap[canonical] = new Set();
+      }
+      const list = db[oldKey] || [];
+      list.forEach(rec => {
+        if (!rec || !rec.id || seenMap[canonical].has(rec.id)) return;
+        merged[canonical].push(rec);
+        seenMap[canonical].add(rec.id);
+      });
+    });
+    return merged;
+  }
+
+  // コメントDB（ページキー毎に配列）
   let COMMENTS_DB = {};
-  try { COMMENTS_DB = JSON.parse(localStorage.getItem(STORAGE_KEYS.comments) || '{}') || {}; } catch { COMMENTS_DB = {}; }
-  function saveComments() { try { localStorage.setItem(STORAGE_KEYS.comments, JSON.stringify(COMMENTS_DB)); } catch (e) { console.warn('Save comments failed', e); } }
-  function pageKey() { return window.location.pathname; }
+  try {
+    COMMENTS_DB = JSON.parse(localStorage.getItem(STORAGE_KEYS.comments) || '{}') || {};
+  } catch {
+    COMMENTS_DB = {};
+  }
+  COMMENTS_DB = canonicalizeCommentsDB(COMMENTS_DB);
+  try { localStorage.setItem(STORAGE_KEYS.comments, JSON.stringify(COMMENTS_DB)); } catch {}
+  function saveComments() {
+    try { localStorage.setItem(STORAGE_KEYS.comments, JSON.stringify(COMMENTS_DB)); }
+    catch (e) { console.warn('Save comments failed', e); }
+  }
+
+let INLINE_FOOTNOTE_MODE = false;
+let commentPopoverEl = null;
+let commentPopoverMarker = null;
+let commentPopoverPersistent = false;
+let commentPopoverHideTimer = null;
+let cleanupCommentMarkersDom = () => {};
+let refreshCommentMarkersFromDB = () => {};
+let readingStateSaveTimer = null;
 
   function resolveAssetPath(relPath) {
     try {
+      // Prefer Quarto's offset meta when available so paths work on index.html and content pages
+      const offsetMeta = document.querySelector('meta[name="quarto:offset"]');
+      if (offsetMeta) {
+        let offset = offsetMeta.getAttribute('content') || '';
+        if (offset && !offset.endsWith('/')) offset += '/';
+        return offset + relPath;
+      }
+
+      // Fallback: derive base from simple-theme.css location if present
       const themeLink = document.querySelector('link[rel="stylesheet"][href*="src/css/simple-theme.css"]');
       if (themeLink) {
         const href = themeLink.getAttribute('href') || '';
@@ -992,12 +1299,6 @@ ul.task-list li input[type="checkbox"] {
           const base = prefix ? prefix.replace(/\/*$/, '/') : '';
           return base + relPath;
         }
-      }
-      const path = window.location.pathname || '';
-      const depth = (path.split('/').length - 1) - (path.endsWith('/') ? 1 : 0);
-      if (depth > 0) {
-        const up = new Array(depth).fill('..').join('/');
-        return (up ? up + '/' : '') + relPath;
       }
     } catch (e) {
       console.warn('resolveAssetPath failed', e);
@@ -1225,28 +1526,8 @@ ul.task-list li input[type="checkbox"] {
 
   function getActiveComments() {
     const list = (COMMENTS_DB[pageKey()] || []);
-    const slug = getCurrentChapterSlug();
-    if (!slug) return list.slice();
-    const activeSection = getActiveChapterSection();
-    const result = [];
-    let mutated = false;
-    list.forEach(rec => {
-      if (!rec) return;
-      if (!rec.slug) {
-        const detected = detectCommentSlug(rec);
-        if (detected) {
-          rec.slug = detected;
-          mutated = true;
-        }
-      }
-      if (rec.slug) {
-        if (rec.slug === slug) result.push(rec);
-      } else if (isCommentInSection(rec, activeSection)) {
-        result.push(rec);
-      }
-    });
-    if (mutated) saveComments();
-    return result;
+    // 章タブやセクションに関わらず、このページ上のコメントをすべて返す
+    return list.filter(rec => !!rec);
   }
 
   function gatherActiveCommentsWithElements() {
@@ -1308,29 +1589,47 @@ ul.task-list li input[type="checkbox"] {
     } catch (e) {
       console.warn('Nav data load failed:', e);
     }
-    try {
-      setupHeaderControls();
-      await setupLeftPanelTabs(navData);
-      setupRightSidebar();
-      setupTopChapterNavigation();
-      setupMarkerFunctionality();
-      setupMobileFootnoteToggle();
-      disableDefaultQuartoSearch();
-      setupSidebarSearch();
-      setupGlobalSearch();
-      setupKeyboardShortcuts();
-      setupScrollPosition();
-      
-      // 独自TOCシステムを初期化（DOM構築後）
-      setTimeout(() => {
-        CustomTOC.initializeCustomTOC(navData);
-      }, 100);
-      
-      console.log('UI initialized');
-      setTimeout(refreshRightPanels, 80);
-    } catch (e) {
-      console.error('UI init failed:', e);
+
+    const safeInvoke = async (label, action) => {
+      try {
+        const result = action();
+        if (result && typeof result.then === 'function') {
+          await result;
+        }
+      } catch (err) {
+        console.error(`UI init step failed (${label}):`, err);
+      }
+    };
+
+    const steps = [
+      ['header-controls', () => setupHeaderControls()],
+      ['left-sidebar-tabs', () => setupLeftPanelTabs(navData)],
+      ['site-title-enhancements', () => applySiteTitleEnhancements(navData)],
+      ['mobile-nav-drawer', () => setupMobileNavDrawer(navData)],
+      ['left-sidebar-stability', () => setupLeftSidebarStability()],
+      ['right-sidebar', () => setupRightSidebar()],
+      ['top-nav', () => setupTopChapterNavigation()],
+      ['markers', () => setupMarkerFunctionality()],
+      ['mobile-footnotes', () => setupMobileFootnoteToggle()],
+      ['disable-default-search', () => disableDefaultQuartoSearch()],
+      ['sidebar-search', () => setupSidebarSearch()],
+      ['global-search', () => setupGlobalSearch()],
+      ['shortcuts', () => setupKeyboardShortcuts()],
+      ['scroll-position', () => setupScrollPosition()],
+      ['body-links', () => reinforceAnchors(document.getElementById('quarto-document-content'))],
+      ['index-links', () => updateIndexLinksForContext()],
+      ['custom-toc', () => setTimeout(() => CustomTOC.initializeCustomTOC(navData), 100)],
+    ];
+
+    for (const [label, action] of steps) {
+      await safeInvoke(label, action);
     }
+
+    console.log('UI initialized');
+    setTimeout(() => {
+      refreshRightPanels();
+      restoreReadingState();
+    }, 120);
   }
   const queueInit = () => window.setTimeout(initUI, 0);
   if (document.readyState === 'loading') {
@@ -1340,7 +1639,6 @@ ul.task-list li input[type="checkbox"] {
   }
 
   function setupHeaderControls() {
-    const tocMobileBtn = document.getElementById('toc-mobile-btn');
     const settingsToggleBtn = document.getElementById('settings-toggle-btn');
     const settingsMenu = document.getElementById('settings-menu');
     const settingsMenuClose = document.getElementById('settings-menu-close');
@@ -1351,6 +1649,12 @@ ul.task-list li input[type="checkbox"] {
     const commentsExportAll = document.getElementById('comments-export-all');
     const commentsImport = document.getElementById('comments-import');
     const commentsImportButton = document.getElementById('comments-import-button');
+    const toastMaxRange = document.getElementById('gdoc-toast-max');
+    const toastMaxValue = document.getElementById('gdoc-toast-max-value');
+    const resetUiBtn = document.getElementById('reset-ui-settings');
+    const resetMemoBtn = document.getElementById('reset-memo-settings');
+    const resetPreviewBtn = document.getElementById('reset-preview-settings');
+    const resetAllBtn = document.getElementById('reset-all-settings');
 
     // ハンバーガーメニューは廃止
 
@@ -1363,6 +1667,21 @@ ul.task-list li input[type="checkbox"] {
           iconImg.src = resolveAssetPath(assetPath);
         }
       }
+    }
+
+    // 一般の画像についても data-asset 属性があれば resolveAssetPath で解決する
+    try {
+      const assetImgs = document.querySelectorAll('img[data-asset]');
+      assetImgs.forEach(img => {
+        const rel = img.getAttribute('data-asset');
+        if (!rel) return;
+        const resolved = resolveAssetPath(rel);
+        if (resolved && img.src !== resolved) {
+          img.src = resolved;
+        }
+      });
+    } catch (e) {
+      console.warn('resolveAssetPath for img[data-asset] failed', e);
     }
 
     if (settingsToggleBtn && settingsMenu && settingsMenuOverlay) {
@@ -1421,14 +1740,6 @@ ul.task-list li input[type="checkbox"] {
       });
     }
 
-    // モバイル用目次ボタン
-    if (tocMobileBtn) {
-      tocMobileBtn.addEventListener('click', () => {
-        const tocPanel = document.getElementById('quarto-sidebar');
-        if (tocPanel) tocPanel.classList.toggle('mobile-open');
-      });
-    }
-
     // コメント出力機能
     if (commentsExportPage) {
       commentsExportPage.addEventListener('click', () => exportComments(true));
@@ -1442,6 +1753,211 @@ ul.task-list li input[type="checkbox"] {
       commentsImport.addEventListener('change', (e) => importCommentsFromFile(e.target.files[0]));
       commentsImportButton.addEventListener('click', () => commentsImport.click());
     }
+
+    // リセットボタン群
+    if (resetUiBtn) {
+      resetUiBtn.addEventListener('click', () => {
+        const ok = window.confirm('UI系の設定（テーマ・文字サイズ・右パネルタブ・ソート設定など）をリセットしますか？');
+        if (!ok) return;
+        resetUiSettings();
+        // 即時反映のため、ページを再読み込み
+        window.location.reload();
+      });
+    }
+
+    if (resetMemoBtn) {
+      resetMemoBtn.addEventListener('click', () => {
+        const ok = window.confirm('メモ系（マーカー・コメント）の保存データをすべてリセットしますか？\\n※元に戻すことはできません。');
+        if (!ok) return;
+        resetMemoSettings();
+        window.location.reload();
+      });
+    }
+
+    if (resetPreviewBtn) {
+      resetPreviewBtn.addEventListener('click', () => {
+        const ok = window.confirm('プレビュー関連の設定（Docs/BGプレビューの状態・トースト表示数）をリセットしますか？');
+        if (!ok) return;
+        resetPreviewSettings();
+        window.location.reload();
+      });
+    }
+
+    if (resetAllBtn) {
+      resetAllBtn.addEventListener('click', () => {
+        const ok = window.confirm('すべての設定と保存データを完全にリセットします。\\nlocalStorage / sessionStorage を初期化しますが、本当に実行しますか？');
+        if (!ok) return;
+        resetAllSettingsHard();
+        window.location.reload();
+      });
+    }
+
+    // プレビューのトースト表示数スライダー
+    if (toastMaxRange && toastMaxValue) {
+      let stored = 3;
+      try {
+        const raw = localStorage.getItem('gdocPreviewMaxToasts');
+        if (raw != null) {
+          const n = parseInt(raw, 10);
+          if (!isNaN(n)) stored = Math.min(9, Math.max(0, n));
+        }
+      } catch (e) {
+        // ignore
+      }
+      toastMaxRange.value = String(stored);
+      toastMaxValue.textContent = String(stored);
+
+      toastMaxRange.addEventListener('input', () => {
+        toastMaxValue.textContent = String(toastMaxRange.value);
+      });
+      toastMaxRange.addEventListener('change', () => {
+        const n = parseInt(toastMaxRange.value, 10) || 0;
+        try {
+          localStorage.setItem('gdocPreviewMaxToasts', String(Math.min(9, Math.max(0, n))));
+        } catch (e) {}
+        if (window.__gdocPreviewAPI__ && typeof window.__gdocPreviewAPI__.refreshToasts === 'function') {
+          window.__gdocPreviewAPI__.refreshToasts();
+        }
+      });
+    }
+
+    ensureHeaderListButtons();
+    document.addEventListener('quarto-hrChanged', ensureHeaderListButtons);
+    window.addEventListener('resize', ensureHeaderListButtons);
+  }
+
+  function ensureHeaderListButtons() {
+    try {
+      const searchButtons = document.querySelectorAll('.quarto-search-button');
+      if (!searchButtons.length) return;
+      searchButtons.forEach(searchButton => {
+        const parent = searchButton.parentElement;
+        if (!parent) return;
+        if (parent.querySelector('.quarto-list-button')) return;
+        const listBtn = document.createElement('button');
+        listBtn.type = 'button';
+        listBtn.className = 'btn quarto-list-button';
+        listBtn.setAttribute('aria-label', 'プレビュー・コメント・マーカー一覧を開く');
+        const icon = document.createElement('img');
+        icon.alt = '';
+        icon.decoding = 'async';
+        icon.loading = 'lazy';
+        icon.setAttribute('aria-hidden', 'true');
+        icon.src = resolveAssetPath('assets/list.png');
+        listBtn.appendChild(icon);
+        listBtn.addEventListener('click', (event) => {
+          event.preventDefault();
+          openGlobalListOverlay();
+        });
+        parent.insertBefore(listBtn, searchButton);
+      });
+    } catch (e) {
+      console.warn('inject list button failed', e);
+    }
+  }
+
+  function renderNavDrawerContent(container, navData) {
+    if (!container) return;
+    container.innerHTML = '';
+    const switcher = document.createElement('div');
+    switcher.className = 'toc-switcher nav-drawer-switcher';
+    switcher.innerHTML = `
+      <div class="toc-tabs">
+        <button type="button" class="toc-tab active" data-tab="site">各章</button>
+        <button type="button" class="toc-tab" data-tab="page">章内</button>
+        <button type="button" class="toc-tab" data-tab="all">全体</button>
+      </div>
+      <div class="toc-panel toc-site-content"></div>
+      <div class="toc-panel toc-page-content hidden"></div>
+      <div class="toc-panel toc-all-content hidden"></div>
+    `;
+    container.appendChild(switcher);
+    const sitePanel = switcher.querySelector('.toc-site-content');
+    const pagePanel = switcher.querySelector('.toc-page-content');
+    const allPanel = switcher.querySelector('.toc-all-content');
+    if (sitePanel) CustomTOC.renderChapterTab(sitePanel, navData);
+    if (pagePanel) CustomTOC.renderPageTab(pagePanel, navData, 4);
+    if (allPanel) CustomTOC.renderAllTab(allPanel, navData);
+    const tabButtons = switcher.querySelectorAll('.toc-tab');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tab;
+        tabButtons.forEach(other => other.classList.remove('active'));
+        btn.classList.add('active');
+        switcher.querySelectorAll('.toc-panel').forEach(panel => {
+          panel.classList.add('hidden');
+        });
+        const panel = switcher.querySelector(`.toc-${target}-content`);
+        if (panel) panel.classList.remove('hidden');
+      });
+    });
+  }
+
+  function setupMobileNavDrawer(navData) {
+    const overlay = document.querySelector('.toc-overlay');
+    if (!overlay) return;
+    const closeBtn = overlay.querySelector('.toc-sheet__close');
+    const backdrop = overlay.querySelector('.toc-overlay__backdrop');
+    const content = overlay.querySelector('.toc-sheet__content');
+    const toggleButtons = document.querySelectorAll('.quarto-btn-toggle, [data-bs-target=".quarto-sidebar-collapse-item"]');
+    const buttons = Array.from(new Set(Array.from(toggleButtons)));
+    if (!buttons.length) return;
+
+    const closeDrawer = () => {
+      document.body.classList.remove('toc-open');
+    };
+
+    const openDrawer = () => {
+      renderNavDrawerContent(content, navData);
+      document.body.classList.add('toc-open');
+    };
+
+    const toggleDrawer = () => {
+      if (document.body.classList.contains('toc-open')) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    };
+
+    const interceptToggle = (event) => {
+      if (window.innerWidth > 1024) {
+        closeDrawer();
+        return;
+      }
+      event.preventDefault();
+      event.stopPropagation();
+      if (typeof event.stopImmediatePropagation === 'function') {
+        event.stopImmediatePropagation();
+      }
+      toggleDrawer();
+    };
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', interceptToggle, true);
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    if (backdrop) backdrop.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', (event) => {
+      if (event.target.classList.contains('toc-overlay')) {
+        closeDrawer();
+      }
+    });
+    if (content) {
+      content.addEventListener('click', (event) => {
+        const anchor = event.target.closest('a');
+        if (anchor) closeDrawer();
+      });
+    }
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && document.body.classList.contains('toc-open')) {
+        closeDrawer();
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024) closeDrawer();
+    });
   }
 
   function setupLeftPanelTabs(navData) {
@@ -1509,6 +2025,139 @@ ul.task-list li input[type="checkbox"] {
     });
   }
 
+  function setupLeftSidebarStability() {
+    const sidebar = document.getElementById('quarto-sidebar');
+    const toggles = document.querySelectorAll('[data-bs-target=".quarto-sidebar-collapse-item"]');
+    if (!sidebar || !toggles.length) return;
+    let pendingState = null;
+    let pendingExpiry = 0;
+    let restoreHandle = null;
+
+    const applyPendingState = () => {
+      if (!pendingState) return;
+      scrollToReadingState(pendingState);
+      if (Date.now() > pendingExpiry) {
+        pendingState = null;
+      }
+    };
+
+    const scheduleRestore = () => {
+      if (!pendingState) return;
+      if (restoreHandle) {
+        cancelAnimationFrame(restoreHandle);
+        restoreHandle = null;
+      }
+      restoreHandle = requestAnimationFrame(() => {
+        restoreHandle = requestAnimationFrame(() => {
+          applyPendingState();
+        });
+      });
+    };
+
+    const captureStateBeforeToggle = () => {
+      const snapshot = captureReadingState({ captureNodeRef: true });
+      if (!snapshot) return;
+      pendingState = snapshot;
+      pendingExpiry = Date.now() + 1200;
+      scheduleRestore();
+    };
+
+    toggles.forEach(btn => {
+      btn.addEventListener('click', captureStateBeforeToggle, true);
+      btn.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          captureStateBeforeToggle();
+        }
+      }, true);
+    });
+
+    sidebar.addEventListener('transitionstart', () => {
+      if (!pendingState) {
+        captureStateBeforeToggle();
+      }
+    });
+
+    sidebar.addEventListener('animationstart', () => {
+      if (!pendingState) {
+        captureStateBeforeToggle();
+      }
+    });
+
+    sidebar.addEventListener('transitionend', (event) => {
+      if (!pendingState) return;
+      if (event && event.propertyName && !/width|flex|margin|padding/i.test(event.propertyName)) return;
+      scheduleRestore();
+    });
+
+    const sidebarMutationObserver = new MutationObserver(() => {
+      if (pendingState) scheduleRestore();
+    });
+    sidebarMutationObserver.observe(sidebar, { attributes: true, attributeFilter: ['class', 'style'] });
+
+    window.addEventListener('resize', () => {
+      if (pendingState) {
+        scheduleRestore();
+      }
+    });
+  }
+
+  function applySiteTitleEnhancements(navData) {
+    enhanceSidebarSiteTitle();
+    updateMainHeaderTitle(navData);
+  }
+
+  function enhanceSidebarSiteTitle() {
+    try {
+      const link = document.querySelector('#quarto-sidebar .sidebar-title a');
+      if (!link || link.dataset.siteTitleEnhanced === 'true') return;
+      const mainText = (link.textContent || '').trim() || '平和への課題：補遺';
+      const safeMain = escapeHtml(mainText);
+      const subtitle = 'Background Guide';
+      link.innerHTML = `<span class="site-title-main">${safeMain}</span><span class="site-title-sub">${subtitle}</span>`;
+      link.dataset.siteTitleEnhanced = 'true';
+    } catch (e) {
+      console.warn('enhanceSidebarSiteTitle failed', e);
+    }
+  }
+
+  function updateMainHeaderTitle(navData) {
+    const header = document.querySelector('header.quarto-title-block');
+    if (!header) return;
+    const titleEl = header.querySelector('.quarto-title .title');
+    if (!titleEl) return;
+    const existingSpan = titleEl.querySelector('.chapter-title') || titleEl.firstElementChild;
+    const current = computeCurrentOutputPath();
+    let pageTitle = '';
+    try {
+      if (navData && Array.isArray(navData.pages)) {
+        const entry = navData.pages.find(page => {
+          if (!page) return false;
+          const paths = [page.output, page.url, page.source];
+          return paths.some(p => isSamePage(p, current));
+        });
+        if (entry && entry.title) {
+          pageTitle = entry.title;
+        }
+      }
+    } catch (e) {
+      console.warn('updateMainHeaderTitle nav data lookup failed', e);
+    }
+    if (!pageTitle && existingSpan) {
+      pageTitle = (existingSpan.textContent || '').trim();
+    }
+    if (!pageTitle) {
+      const contentHeading = document.querySelector('main h1, main h2');
+      if (contentHeading) {
+        pageTitle = (contentHeading.textContent || '').trim();
+      }
+    }
+    if (!pageTitle) {
+      header.style.display = 'none';
+      return;
+    }
+    header.style.display = 'none';
+  }
+
   function setupRightSidebar() {
     ensureRightTabs();
     refreshRightPanels();
@@ -1526,9 +2175,9 @@ ul.task-list li input[type="checkbox"] {
     renderCommentsPanel();
     if (SIDENOTES_ON) {
       renderSidenotes(currentRightTab());
-    } else {
-      activateRightTab(currentRightTab(), { skipSave: true });
     }
+    enumerateReadingNodes();
+    scheduleReadingStateSave();
   }
 
   function ensureRightTabs() {
@@ -1544,9 +2193,6 @@ ul.task-list li input[type="checkbox"] {
           <button type="button" class="toc-tab" data-tab="comments">ｺﾒﾝﾄ</button>
           <button type="button" class="toc-tab" data-tab="both">両方</button>
         </div>
-        <div class="sidenotes-toolbar">
-          <label class="sidenotes-toggle"><input type="checkbox" id="sidenotes-toggle"> 傍注表示</label>
-        </div>
         <div class="toc-panel right-footnotes"></div>
         <div class="toc-panel right-comments" style="display:none"></div>
         <div class="toc-panel right-both" style="display:none"></div>
@@ -1560,23 +2206,14 @@ ul.task-list li input[type="checkbox"] {
           activateRightTab(btn.dataset.tab || 'footnotes');
         });
       });
-
-      const sidenotesToggle = wrapper.querySelector('#sidenotes-toggle');
-      if (sidenotesToggle) {
-        sidenotesToggle.addEventListener('change', (e) => setSidenotesMode(e.target.checked));
-      }
       const savedTab = getSavedRightTab();
       activateRightTab(savedTab, { skipSave: true });
-      if (sidenotesToggle) {
-        sidenotesToggle.checked = true;
-        setSidenotesMode(true);
-      } else {
-        setSidenotesMode(false);
-      }
+      // 傍注表示は常に ON とする
+      setSidenotesMode(true);
     } else {
-      const toggle = wrapper.querySelector('#sidenotes-toggle');
-      if (toggle) toggle.checked = SIDENOTES_ON;
       activateRightTab(getSavedRightTab(), { skipSave: true });
+      // 既存 DOM 再利用時も傍注モードを維持
+      if (!SIDENOTES_ON) setSidenotesMode(true);
     }
   }
 
@@ -1666,7 +2303,7 @@ ul.task-list li input[type="checkbox"] {
     if (mode !== 'comments') {
       footnotes.forEach(fn => {
         if (!fn.ref) return;
-        entries.push({ kind: 'foot', el: fn.ref, def: fn.li });
+        entries.push({ kind: 'foot', el: fn.ref, def: fn.li, label: fn.number });
       });
     }
     if (mode !== 'footnotes') {
@@ -1691,10 +2328,27 @@ ul.task-list li input[type="checkbox"] {
         note.querySelector('.menu')?.addEventListener('click', (e)=>{ e.stopPropagation(); openCommentMenu(note, rec, { x: e.clientX, y: e.clientY }); });
         return { kind: 'comment', el: entry.el, node: note };
       } else {
-        const txt = entry.def ? entry.def.innerText || entry.def.textContent || '' : '';
+        // 脚注の傍注では、元の脚注HTMLを元にクローンを作り、
+        // 先頭に [番号] スパンを 1 個だけ挿入して同一行に表示する
+        let bodyHtml = '';
+        if (entry.def) {
+          const clone = entry.def.cloneNode(true);
+          clone.querySelectorAll('.footnote-back, .footnote-backref, [role="doc-backlink"]').forEach(a => a.remove());
+          const hasNum = clone.querySelector('.footnote-num');
+          if (!hasNum) {
+            const numSpan = document.createElement('span');
+            numSpan.className = 'footnote-num';
+            const labelText = (entry.label && String(entry.label).trim().length)
+              ? String(entry.label).trim()
+              : '';
+            numSpan.textContent = labelText ? (labelText + '. ') : '';
+            clone.insertBefore(numSpan, clone.firstChild);
+          }
+          bodyHtml = clone.innerHTML;
+        }
         const note = makeNote({
           kind: 'foot',
-          bodyHtml: escapeHtml(txt),
+          bodyHtml: bodyHtml,
           moveHtml: '',
           showMenu: false
         });
@@ -1704,6 +2358,7 @@ ul.task-list li input[type="checkbox"] {
     });
 
     updateSidenotesPositions();
+    reinforceAnchors(ms);
   }
 
   function rightSidebarBaseOffset() {
@@ -1717,34 +2372,49 @@ ul.task-list li input[type="checkbox"] {
     if (!SIDENOTES_ON) return;
     const ms = document.getElementById('quarto-margin-sidebar');
     if (!ms) return;
-    const msTop = ms.getBoundingClientRect().top;
-    const viewH = window.innerHeight || document.documentElement.clientHeight;
+    const msRect = ms.getBoundingClientRect();
+    const viewH = window.innerHeight || document.documentElement.clientHeight || 0;
+    const msHeight = ms.clientHeight || (viewH || 0);
+    if (!msHeight) return;
+    const buffer = viewH || msHeight; // 1画面分のバッファ
     const baseOffset = rightSidebarBaseOffset();
 
-    SIDENOTES_ITEMS.forEach(item => { if (item.node) item.node.style.display = 'none'; });
-
-    const desired = SIDENOTES_ITEMS
+    // アンカー位置に応じて傍注の理想位置を決める
+    const entries = SIDENOTES_ITEMS
       .filter(item => item.el && item.node && item.el.getClientRects().length)
       .map(item => {
         const rect = item.el.getBoundingClientRect();
-        return { item, rect, desiredTop: rect.top - msTop };
+        const node = item.node;
+        const nodeHeight = node.offsetHeight || 0;
+        // アンカーの上端を右パネル座標系に合わせる
+        const anchorTopInSidebar = rect.top - msRect.top;
+        // 傍注はタブ行の直下から並ぶので baseOffset を足す
+        const desiredTop = anchorTopInSidebar + baseOffset;
+        return { item, desiredTop, nodeHeight };
       })
-      .sort((a,b)=>a.desiredTop-b.desiredTop);
+      .sort((a, b) => a.desiredTop - b.desiredTop);
 
-    const gap = 8;
-    let cursor = baseOffset;
-    desired.forEach(({item, rect, desiredTop}) => {
+    // ノート同士が重ならないように、手前のノートの下に最小限だけずらして配置する。
+    // アンカーが画面外に出ていっても entries からは除外しないことで、
+    // 上のノートが非表示になった瞬間に下のノートが大きくジャンプすることを防ぐ。
+    const gap = 4;
+    let cursor = -Infinity;
+    entries.forEach(({ item, desiredTop, nodeHeight }) => {
       const node = item.node;
       if (!node) return;
-      const visible = !(rect.bottom < 0 || rect.top > viewH);
+      const height = nodeHeight || node.offsetHeight || 0;
+      // 直前のノートの直下までは押し下げるが、それ以上はアンカーに追随
+      const top = Math.max(desiredTop, cursor);
+      const bottom = top + height;
+      // 1画面分のバッファを考慮し、完全に表示範囲から外れたときだけ非表示にする
+      const visible = bottom > (baseOffset - buffer) && top < (msHeight + buffer);
       if (!visible) {
         node.style.display = 'none';
         return;
       }
-      const targetTop = Math.max(cursor, desiredTop + baseOffset);
       node.style.display = 'block';
-      node.style.top = targetTop + 'px';
-      cursor = targetTop + node.offsetHeight + gap;
+      node.style.top = top + 'px';
+      cursor = top + height + gap;
     });
   }
 
@@ -1758,6 +2428,7 @@ ul.task-list li input[type="checkbox"] {
   }
 
   function renderSidebarFootnotes() {
+    setInlineFootnoteMode(false);
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
     let marginSidebar = document.getElementById('quarto-margin-sidebar');
     if (!marginSidebar) return;
@@ -1853,11 +2524,16 @@ ul.task-list li input[type="checkbox"] {
     });
     wrapper.appendChild(ol);
     footHost.appendChild(wrapper);
+    reinforceAnchors(footHost);
 
     // 両方タブ: コメントと脚注を本文位置で混在
-    if (bothHost) renderBothPanel(bothHost, items);
+    if (bothHost) {
+      renderBothPanel(bothHost, items);
+      reinforceAnchors(bothHost);
+    }
 
     setupScrollSyncForFootnotes(footHost, items);
+    refreshCommentMarkersFromDB({ preserveExisting: true });
   }
 
   function renderBothPanel(host, footItems) {
@@ -1937,50 +2613,69 @@ ul.task-list li input[type="checkbox"] {
       }
     });
     host.appendChild(list);
+    reinforceAnchors(list);
     setupScrollSyncForBoth(host, merged);
+  }
+
+  // 本文側のスクロール位置と右パネル内部スクロールの同期ユーティリティ
+  function computeScrollRatioFromPositions(positions) {
+    if (!Array.isArray(positions) || !positions.length) return null;
+    let minPos = Infinity;
+    let maxPos = -Infinity;
+    positions.forEach(p => {
+      if (typeof p !== 'number' || !isFinite(p)) return;
+      if (p < minPos) minPos = p;
+      if (p > maxPos) maxPos = p;
+    });
+    if (!isFinite(minPos) || !isFinite(maxPos)) return null;
+
+    const scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    const viewH = window.innerHeight || document.documentElement.clientHeight || 0;
+    const center = scrollY + viewH / 2;
+
+    if (maxPos === minPos) {
+      return center <= minPos ? 0 : 1;
+    }
+    let ratio = (center - minPos) / (maxPos - minPos);
+    if (ratio < 0) ratio = 0;
+    else if (ratio > 1) ratio = 1;
+    return ratio;
+  }
+
+  function scrollRightSidebarToRatio(ratio, host) {
+    if (ratio == null) return;
+    const container = document.getElementById('quarto-margin-sidebar') || host;
+    if (!container) return;
+    const maxScroll = container.scrollHeight - container.clientHeight;
+    if (!(maxScroll > 0)) return;
+    const clamped = Math.max(0, Math.min(1, ratio));
+    container.scrollTop = maxScroll * clamped;
   }
 
   function setupScrollSyncForFootnotes(host, items) {
     const mode = localStorage.getItem('footnotes-sort') || 'pos';
     if (mode !== 'pos') return;
+    if (!Array.isArray(items) || !items.length) return;
+    const positions = items
+      .map(it => (typeof it.pos === 'number' ? it.pos : null))
+      .filter(p => typeof p === 'number' && isFinite(p));
+    if (!positions.length) return;
+
     const onScroll = () => {
-      const center = window.scrollY + window.innerHeight/2;
-      let best = null, bestD = Infinity;
-      items.forEach(it => {
-        const d = Math.abs((it.pos ?? Infinity) - center);
-        if (d < bestD) { best = it; bestD = d; }
-      });
-      if (best) {
-        const nodes = host.querySelectorAll('ol > li');
-        const idx = items.indexOf(best);
-        const li = nodes[idx];
-        const container = document.getElementById('quarto-margin-sidebar') || host;
-        if (li && container) {
-          const targetTop = li.offsetTop - (container.clientHeight/2 - li.clientHeight/2);
-          container.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
-        }
-      }
+      const ratio = computeScrollRatioFromPositions(positions);
+      scrollRightSidebarToRatio(ratio, host);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
   function setupScrollSyncForBoth(host, items) {
     const onScroll = () => {
-      const center = window.scrollY + window.innerHeight/2;
-      let bestIndex = -1, bestD = Infinity;
-      items.forEach((it, i) => {
-        const d = Math.abs((it.top ?? Infinity) - center);
-        if (d < bestD) { bestD = d; bestIndex = i; }
-      });
-      if (bestIndex >= 0) {
-        const list = host.lastElementChild; // list container
-        const card = list && list.children[bestIndex];
-        const container = document.getElementById('quarto-margin-sidebar') || host;
-        if (card && container) {
-          const targetTop = card.offsetTop - (container.clientHeight/2 - card.clientHeight/2);
-          container.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
-        }
-      }
+      if (!Array.isArray(items) || !items.length) return;
+      const positions = items
+        .map(it => (typeof it.top === 'number' ? it.top : null))
+        .filter(p => typeof p === 'number' && isFinite(p));
+      const ratio = computeScrollRatioFromPositions(positions);
+      scrollRightSidebarToRatio(ratio, host);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
   }
@@ -2057,9 +2752,10 @@ ul.task-list li input[type="checkbox"] {
     });
 
     commHost.appendChild(ul);
-
     setupScrollSyncForComments(commHost, arr);
   }
+
+  let commentMenuCleanup = null;
 
   function openCommentMenu(li, rec, pt) {
     closeAnyInlineMenu();
@@ -2072,8 +2768,17 @@ ul.task-list li input[type="checkbox"] {
     const y = pt?.y || (li.getBoundingClientRect().top + 20);
     menu.style.left = x + 'px';
     menu.style.top = y + 'px';
-    const onDoc = (e)=>{ if (!menu.contains(e.target)) { closeAnyInlineMenu(); document.removeEventListener('mousedown', onDoc, true);} };
+    const onDoc = (e)=>{ if (!menu.contains(e.target)) { closeAnyInlineMenu(); } };
+    const onViewportChange = () => closeAnyInlineMenu();
     document.addEventListener('mousedown', onDoc, true);
+    window.addEventListener('scroll', onViewportChange, true);
+    window.addEventListener('resize', onViewportChange);
+    commentMenuCleanup = () => {
+      document.removeEventListener('mousedown', onDoc, true);
+      window.removeEventListener('scroll', onViewportChange, true);
+      window.removeEventListener('resize', onViewportChange);
+      commentMenuCleanup = null;
+    };
     menu.addEventListener('click', (e) => {
       const act = e.target?.getAttribute('data-act');
       if (act === 'edit') editComment(rec);
@@ -2082,7 +2787,12 @@ ul.task-list li input[type="checkbox"] {
     });
   }
 
-  function closeAnyInlineMenu(){ document.querySelectorAll('.comment-menu-popup').forEach(n=>n.remove()); }
+  function closeAnyInlineMenu(){
+    document.querySelectorAll('.comment-menu-popup').forEach(n=>n.remove());
+    if (typeof commentMenuCleanup === 'function') {
+      commentMenuCleanup();
+    }
+  }
 
   function editComment(rec) {
     const overlay = document.createElement('div');
@@ -2103,27 +2813,64 @@ ul.task-list li input[type="checkbox"] {
     `;
     overlay.appendChild(dialog);
     document.body.appendChild(overlay);
-    const close = ()=>overlay.remove();
+    const close = ()=>{
+      overlay.remove();
+      document.removeEventListener('keydown', onKey);
+    };
+    const onKey = (evt) => {
+      if (evt.key === 'Escape') {
+        evt.preventDefault();
+        close();
+      }
+    };
     dialog.querySelector('[aria-label="閉じる"]').addEventListener('click', close);
     dialog.querySelector('#comment-edit-cancel').addEventListener('click', close);
-    dialog.querySelector('#comment-edit-save').addEventListener('click', () => {
-      const v = (dialog.querySelector('#comment-edit-area').value||'').trim();
-      if (!v) return;
-      const key = pageKey();
-      const arr = COMMENTS_DB[key]||[];
-      const idx = arr.findIndex(x=>x.id===rec.id);
-      if (idx>=0) {
-        arr[idx].body = v;
-        arr[idx].t = Date.now();
-        COMMENTS_DB[key]=arr;
-        saveComments();
-        refreshRightPanels();
+    overlay.addEventListener('click', (evt) => {
+      if (evt.target === overlay) {
+        close();
       }
-      close();
+    });
+    document.addEventListener('keydown', onKey);
+    const editTextarea = dialog.querySelector('#comment-edit-area');
+    const editSaveBtn = dialog.querySelector('#comment-edit-save');
+    editSaveBtn.addEventListener('click', () => {
+      if (editSaveBtn.disabled) return;
+      const v = (editTextarea.value||'').trim();
+      if (!v) { editTextarea.focus(); return; }
+      editSaveBtn.disabled = true;
+      const originalLabel = editSaveBtn.textContent;
+      editSaveBtn.textContent = '保存中…';
+      let success = false;
+      try {
+        const key = pageKey();
+        const arr = COMMENTS_DB[key]||[];
+        const idx = arr.findIndex(x=>x.id===rec.id);
+        if (idx>=0) {
+          arr[idx].body = v;
+          arr[idx].t = Date.now();
+          COMMENTS_DB[key]=arr;
+          saveComments();
+          refreshRightPanels();
+          refreshCommentMarkersFromDB();
+        }
+        success = true;
+      } catch (error) {
+        console.warn('Failed to update comment', error);
+      }
+      if (success) {
+        Promise.resolve().then(() => {
+          closeAnyInlineMenu();
+          close();
+        });
+      } else {
+        editSaveBtn.disabled = false;
+        editSaveBtn.textContent = originalLabel;
+      }
     });
   }
 
   function deleteComment(rec) {
+    closeAnyInlineMenu();
     if (!confirm('このコメントを削除しますか？')) return;
     const key = pageKey();
     const arr = COMMENTS_DB[key]||[];
@@ -2133,29 +2880,27 @@ ul.task-list li input[type="checkbox"] {
     document.querySelectorAll(`.text-marker[data-comment-id="${rec.id}"]`).forEach(el => {
       const p = el.parentNode; while (el.firstChild) p.insertBefore(el.firstChild, el); p.removeChild(el);
     });
+    refreshCommentMarkersFromDB();
     refreshRightPanels();
   }
 
   function setupScrollSyncForComments(host, items) {
     const mode = localStorage.getItem('comments-sort') || 'new';
     if (mode !== 'pos') return;
-    const onScroll = () => {
-      const center = window.scrollY + window.innerHeight/2;
-      let best = null, bestD = Infinity;
-      items.forEach(rec => {
+    if (!Array.isArray(items) || !items.length) return;
+    const positions = items
+      .map(rec => {
         const el = findCommentAnchorElement(rec);
-        const top = el ? (el.getBoundingClientRect().top + window.scrollY) : Infinity;
-        const d = Math.abs(top - center);
-        if (d < bestD) { best = rec; bestD = d; }
-      });
-      if (best) {
-        const li = host.querySelector(`li[data-id="${best.id}"]`);
-        const container = document.getElementById('quarto-margin-sidebar') || host;
-        if (li && container) {
-          const targetTop = li.offsetTop - (container.clientHeight/2 - li.clientHeight/2);
-          container.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
-        }
-      }
+        if (!el) return null;
+        const rect = el.getBoundingClientRect();
+        return rect ? (rect.top + window.scrollY) : null;
+      })
+      .filter(p => typeof p === 'number' && isFinite(p));
+    if (!positions.length) return;
+
+    const onScroll = () => {
+      const ratio = computeScrollRatioFromPositions(positions);
+      scrollRightSidebarToRatio(ratio, host);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
   }
@@ -2182,6 +2927,7 @@ ul.task-list li input[type="checkbox"] {
   }
 
   function renderInlineFootnotes() {
+    setInlineFootnoteMode(true);
     const marginSidebar = document.getElementById('quarto-margin-sidebar');
     if (marginSidebar && marginSidebar.style.display !== 'none') {
       marginSidebar.dataset.prevDisplay = marginSidebar.style.display || '';
@@ -2193,6 +2939,7 @@ ul.task-list li input[type="checkbox"] {
     const refSelector = 'a[role="doc-noteref"], a.footnote-ref';
     const refs = Array.from(scope.querySelectorAll(refSelector)).filter(ref => !active || active.contains(ref));
     if (!refs.length) return;
+    const hostTailMap = new Map();
     refs.forEach(ref => {
       const href = ref.getAttribute('href') || ref.getAttribute('data-footnote-href');
       if (!href || !href.startsWith('#')) return;
@@ -2215,8 +2962,16 @@ ul.task-list li input[type="checkbox"] {
       numSpan.textContent = (numberText ? numberText : '') + '. ';
       container.appendChild(numSpan);
       while (clone.firstChild) container.appendChild(clone.firstChild);
-      host.insertAdjacentElement('afterend', container);
+      const tail = hostTailMap.get(host);
+      if (tail && tail.parentNode) {
+        tail.insertAdjacentElement('afterend', container);
+      } else {
+        host.insertAdjacentElement('afterend', container);
+      }
+      hostTailMap.set(host, container);
+      reinforceAnchors(container);
     });
+    ensureCommentMarkerInteractions();
   }
 
   function findHostParagraph(el) {
@@ -2233,23 +2988,209 @@ ul.task-list li input[type="checkbox"] {
     return (...args) => { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), ms); };
   }
 
-  function setupMarkerFunctionality() {
+function setupMarkerFunctionality() {
     let markersDB = JSON.parse(localStorage.getItem(STORAGE_KEYS.markers) || '{}');
     let pendingSerializedRange = null;
 
-    // 既存マーカーを復元
-    restoreMarkers();
-    restoreCommentMarkers();
-
-    // テキスト選択でツールバーを表示（UI要素上は無効）
-    document.addEventListener('mouseup', (e) => {
+    const handleSelectionEvent = (e) => {
       if (closestInteractive(e.target)) return;
       const sel = window.getSelection();
       if (!sel || sel.rangeCount === 0) {
         hideMarkerToolbar();
         pendingSerializedRange = null;
         return;
+}
+
+  function getHeadingElements() {
+    const scope = document.getElementById('quarto-document-content');
+    if (!scope) return [];
+    return scope.querySelectorAll('h1, h2, h3, h4, h5, h6');
+  }
+
+  function enumerateReadingNodes() {}
+
+  function findReadableElement(node) {
+    const scope = document.getElementById('quarto-document-content');
+    if (!scope) return null;
+    let current = node;
+    while (current && current !== document.body) {
+      if (current.tagName) {
+        const tag = current.tagName.toLowerCase();
+        if (['p','li','blockquote','pre','table','figure','dd','dt'].includes(tag)) {
+          return current;
+        }
       }
+      current = current.parentElement;
+    }
+    return null;
+  }
+
+  function captureReadingState(options) {
+    const opts = options || {};
+    const headings = getHeadingElements();
+    const docEl = document.documentElement;
+    const body = document.body;
+    const scrollTop = (docEl && docEl.scrollTop) || (body && body.scrollTop) || 0;
+    const viewportHeight = window.innerHeight || docEl.clientHeight || 0;
+    const viewportWidth = window.innerWidth || docEl.clientWidth || body.clientWidth || 0;
+    const focusLine = scrollTop + viewportHeight * 0.35;
+    let current = null;
+    for (let i = 0; i < headings.length; i += 1) {
+      const el = headings[i];
+      const top = el.offsetTop;
+      if (top <= focusLine) {
+        current = el;
+      } else {
+        break;
+      }
+    }
+    if (!current && headings.length) {
+      current = headings[0];
+    }
+    const pageHeight = Math.max(1, (docEl && docEl.scrollHeight) || (body && body.scrollHeight) || 1) - viewportHeight;
+    const pageRatio = pageHeight > 0 ? scrollTop / pageHeight : 0;
+    const state = { pageRatio };
+    const centerX = viewportWidth / 2;
+    let focusNode = null;
+    try {
+      focusNode = document.elementFromPoint(centerX, viewportHeight * 0.4);
+    } catch (e) {
+      focusNode = null;
+    }
+    if (current) {
+      const currentId = current.getAttribute('id') || current.getAttribute('data-anchor-id') || '';
+      const next = current.nextElementSibling ? current.nextElementSibling.closest('h1, h2, h3, h4, h5, h6') : null;
+      let nextTop = null;
+      if (next) {
+        nextTop = next.offsetTop;
+      } else {
+        nextTop = (docEl && docEl.scrollHeight) || (body && body.scrollHeight) || (current.offsetTop + viewportHeight);
+      }
+      const currentTop = current.offsetTop;
+      const sectionHeight = Math.max(1, nextTop - currentTop);
+      const rel = (focusLine - currentTop) / sectionHeight;
+      if (currentId) {
+        state.sectionId = currentId;
+        state.sectionOffset = Math.min(0.995, Math.max(0, rel));
+      }
+    }
+    const focusElement = findReadableElement(focusNode);
+    if (focusElement) {
+      const rect = focusElement.getBoundingClientRect();
+      const elementHeight = Math.max(1, rect.height || focusElement.offsetHeight || 1);
+      const elementTop = focusElement.offsetTop;
+      const relInElement = Math.min(0.995, Math.max(0, (focusLine - elementTop) / elementHeight));
+      state.focusElementOffset = relInElement;
+      const id = focusElement.getAttribute('id') || focusElement.getAttribute('data-anchor-id') || '';
+      if (id) state.focusElementId = id;
+      if (opts.captureNodeRef) {
+        state.__focusNode = focusElement;
+      }
+    }
+    return state;
+  }
+
+  function scrollToReadingState(state) {
+    if (!state) return false;
+    const docEl = document.documentElement;
+    const body = document.body;
+    const viewportHeight = window.innerHeight || docEl.clientHeight || 0;
+    const focusRatio = typeof state.focusElementOffset === 'number' ? state.focusElementOffset : null;
+    const resolveFocusTarget = () => {
+      if (state.__focusNode && state.__focusNode instanceof HTMLElement && document.body.contains(state.__focusNode)) {
+        return state.__focusNode;
+      }
+      if (state.focusElementId) {
+        return document.getElementById(state.focusElementId) || document.querySelector(`[data-anchor-id="${state.focusElementId}"]`);
+      }
+      return null;
+    };
+    const focusTarget = resolveFocusTarget();
+    if (focusTarget) {
+      const ratio = focusRatio != null ? focusRatio : 0.35;
+      const targetTop = focusTarget.offsetTop + ratio * Math.max(1, focusTarget.offsetHeight || 1);
+      const desired = targetTop - viewportHeight * 0.35;
+      window.scrollTo({ top: Math.max(0, desired), behavior: 'auto' });
+      return true;
+    }
+    if (state.sectionId) {
+      const selector = `#${escapeCssId(state.sectionId)}`;
+      let target = document.querySelector(selector);
+      if (!target) {
+        target = document.querySelector(`[data-anchor-id="${state.sectionId}"]`);
+      }
+      if (target) {
+        const headings = Array.from(getHeadingElements());
+        const idx = headings.indexOf(target);
+        let nextTop = null;
+        if (idx >= 0 && idx + 1 < headings.length) {
+          nextTop = headings[idx + 1].offsetTop;
+        } else {
+          nextTop = (docEl && docEl.scrollHeight) || (body && body.scrollHeight) || (target.offsetTop + viewportHeight);
+        }
+        const currentTop = target.offsetTop;
+        const sectionHeight = Math.max(1, nextTop - currentTop);
+        const rel = typeof state.sectionOffset === 'number' ? state.sectionOffset : 0;
+        const dest = currentTop + rel * sectionHeight;
+        window.scrollTo({ top: Math.max(0, dest), behavior: 'auto' });
+        return true;
+      }
+    }
+    if (typeof state.pageRatio === 'number') {
+      const docHeight = Math.max(1, ((docEl && docEl.scrollHeight) || (body && body.scrollHeight) || 1) - viewportHeight);
+      const targetY = state.pageRatio * docHeight;
+      window.scrollTo({ top: Math.max(0, targetY), behavior: 'auto' });
+      return true;
+    }
+    return false;
+  }
+
+  function escapeCssId(id) {
+    if (window.CSS && typeof window.CSS.escape === 'function') {
+      return window.CSS.escape(id);
+    }
+    return id.replace(/[^a-zA-Z0-9_\-]/g, '\\$&');
+  }
+
+  function restoreReadingState() {
+    let raw = null;
+    try {
+      raw = sessionStorage.getItem(STORAGE_KEYS.readingState);
+    } catch (e) {
+      raw = null;
+    }
+    if (!raw) return;
+    let state = null;
+    try {
+      state = JSON.parse(raw);
+    } catch (e) {
+      state = null;
+    }
+    scrollToReadingState(state);
+  }
+
+  function persistReadingState() {
+    let state = null;
+    try {
+      state = captureReadingState();
+    } catch (e) {
+      state = null;
+    }
+    if (!state) return;
+    try {
+      sessionStorage.setItem(STORAGE_KEYS.readingState, JSON.stringify(state));
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  function scheduleReadingStateSave() {
+    if (readingStateSaveTimer) return;
+    readingStateSaveTimer = window.setTimeout(() => {
+      readingStateSaveTimer = null;
+      persistReadingState();
+    }, 500);
+  }
       const text = sel.toString().trim();
       if (text) {
         const rect = getSelectionRect(sel);
@@ -2264,7 +3205,11 @@ ul.task-list li input[type="checkbox"] {
         hideMarkerToolbar();
         pendingSerializedRange = null;
       }
-    });
+    };
+
+    // テキスト選択でツールバーを表示（UI要素上は無効）
+    document.addEventListener('mouseup', handleSelectionEvent);
+    document.addEventListener('touchend', handleSelectionEvent);
 
     function closestInteractive(el){
       return el.closest('.marker-toolbar, .js-header, .global-search-dialog, #quarto-sidebar');
@@ -2419,26 +3364,51 @@ ul.task-list li input[type="checkbox"] {
       const snippet = baseRange.cloneContents().textContent || window.getSelection().toString();
       dialog.querySelector('#comment-snippet').textContent = `対象: ${snippet?.slice(0,140) || ''}`;
 
-      dialog.querySelector('#comment-save').addEventListener('click', () => {
-        const body = (dialog.querySelector('#comment-textarea').value || '').trim();
-        if (!body) { dialog.querySelector('#comment-textarea').focus(); return; }
+      const saveBtn = dialog.querySelector('#comment-save');
+      const commentTextarea = dialog.querySelector('#comment-textarea');
+      const originalLabel = saveBtn.textContent;
+      saveBtn.addEventListener('click', () => {
+        if (saveBtn.disabled) return;
+        const body = (commentTextarea.value || '').trim();
+        if (!body) { commentTextarea.focus(); return; }
         const segs = getTextSegments(baseRange);
         if (!segs.length) { close(); return; }
-        const serializedRanges = segs.map(seg => ({ s: getPath(seg.node), so: seg.start, e: getPath(seg.node), eo: seg.end }));
-        const rec = { id: `comment-${Date.now()}-${Math.floor(Math.random()*1000)}`, ranges: serializedRanges, text: snippet, body, t: Date.now(), slug: getCurrentChapterSlug() || null };
-        const key = pageKey();
-        if (!COMMENTS_DB[key]) COMMENTS_DB[key] = [];
-        COMMENTS_DB[key].push(rec);
-        saveComments();
-        // 橙色マーカー適用
-        segs.forEach(seg => {
-          const span = document.createElement('span');
-          span.className = 'text-marker marker-orange';
-          span.setAttribute('data-comment-id', rec.id);
-          applyColorStyles(span, 'orange');
-          wrapBySplitText(seg.node, seg.start, seg.end, span);
-        });
-        refreshRightPanels();
+        saveBtn.disabled = true;
+        saveBtn.textContent = '保存中…';
+        let saved = false;
+        try {
+          const serializedRanges = segs.map(seg => ({ s: getPath(seg.node), so: seg.start, e: getPath(seg.node), eo: seg.end }));
+          const rec = { id: `comment-${Date.now()}-${Math.floor(Math.random()*1000)}`, ranges: serializedRanges, text: snippet, body, t: Date.now(), slug: getCurrentChapterSlug() || null };
+          const key = pageKey();
+          if (!COMMENTS_DB[key]) COMMENTS_DB[key] = [];
+          COMMENTS_DB[key].push(rec);
+          saveComments();
+          saved = true;
+          segs.forEach(seg => {
+            const span = document.createElement('span');
+            span.className = 'text-marker marker-orange';
+            span.setAttribute('data-comment-id', rec.id);
+            applyColorStyles(span, 'orange');
+            wrapBySplitText(seg.node, seg.start, seg.end, span);
+          });
+          ensureCommentMarkerInteractions();
+          try {
+            refreshRightPanels();
+          } catch (panelError) {
+            console.warn('Refresh right panels failed after comment', panelError);
+          }
+          hideMarkerToolbar();
+          const selection = window.getSelection();
+          if (selection && typeof selection.removeAllRanges === 'function') {
+            selection.removeAllRanges();
+          }
+          pendingSerializedRange = null;
+        } catch (error) {
+          console.warn('Failed to save comment', error);
+          saveBtn.disabled = false;
+          saveBtn.textContent = originalLabel;
+          return;
+        }
         close();
       });
     }
@@ -2615,6 +3585,31 @@ ul.task-list li input[type="checkbox"] {
       }
     }
 
+    cleanupCommentMarkersDom = function() {
+      document.querySelectorAll('.text-marker[data-comment-id]').forEach(span => {
+        const parent = span.parentNode;
+        if (!parent) return;
+        while (span.firstChild) parent.insertBefore(span.firstChild, span);
+        parent.removeChild(span);
+      });
+    };
+
+    refreshCommentMarkersFromDB = function(options) {
+      const preserveExisting = !!(options && options.preserveExisting);
+      const existingCount = document.querySelectorAll('.text-marker[data-comment-id]').length;
+      if (preserveExisting && existingCount > 0) {
+        ensureCommentMarkerInteractions();
+        return;
+      }
+      cleanupCommentMarkersDom();
+      restoreCommentMarkers();
+      ensureCommentMarkerInteractions();
+    };
+
+    // 既存マーカー / コメントマーカー再描画
+    restoreMarkers();
+    refreshCommentMarkersFromDB();
+
     // 範囲のシリアライズ/デシリアライズ
     function serializeRange(range) {
       return {
@@ -2730,6 +3725,29 @@ ul.task-list li input[type="checkbox"] {
     });
 
     utilityBar.appendChild(searchButton);
+
+    // プレビュー・コメント・マーカー一覧を開くボタン（検索アイコンのすぐ右）
+    const listButton = document.createElement('button');
+    listButton.type = 'button';
+    listButton.className = 'sidebar-search-button sidebar-list-button';
+    listButton.setAttribute('aria-label', 'プレビュー・コメント一覧を開く');
+    listButton.title = 'プレビュー・コメント・マーカー一覧';
+    listButton.style.marginLeft = '6px';
+
+    const listIcon = document.createElement('img');
+    listIcon.className = 'sidebar-search-button-icon';
+    listIcon.alt = '';
+    listIcon.decoding = 'async';
+    listIcon.loading = 'lazy';
+    listIcon.setAttribute('aria-hidden', 'true');
+    listIcon.src = resolveAssetPath('assets/list.png');
+    listButton.appendChild(listIcon);
+
+    listButton.addEventListener('click', () => {
+      openGlobalListOverlay();
+    });
+
+    utilityBar.appendChild(listButton);
 
     const meterWrapper = document.createElement('div');
     meterWrapper.className = 'sidebar-reading-meter';
@@ -3408,6 +4426,537 @@ ul.task-list li input[type="checkbox"] {
     return `${pad(d.getMonth()+1)}/${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
 
+  // --- グローバル一覧モーダル（プレビュー / コメント / マーカー） ---
+  function openGlobalListOverlay() {
+    try {
+      const existing = document.querySelector('.global-list-overlay');
+      if (existing) existing.remove();
+
+      const overlay = document.createElement('div');
+      overlay.className = 'global-list-overlay';
+      overlay.style.position = 'fixed';
+      overlay.style.inset = '0';
+      overlay.style.background = 'rgba(0,0,0,0.45)';
+      overlay.style.zIndex = '1700';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+
+      const dialog = document.createElement('div');
+      dialog.className = 'global-list-dialog';
+      dialog.style.background = '#fff';
+      dialog.style.borderRadius = '10px';
+      dialog.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+      dialog.style.maxWidth = '720px';
+      dialog.style.width = '96vw';
+      dialog.style.maxHeight = '80vh';
+      dialog.style.display = 'flex';
+      dialog.style.flexDirection = 'column';
+      dialog.style.overflow = 'hidden';
+
+      const header = document.createElement('div');
+      header.style.display = 'flex';
+      header.style.alignItems = 'center';
+      header.style.justifyContent = 'space-between';
+      header.style.padding = '10px 14px';
+      header.style.borderBottom = '1px solid #e1e5e9';
+      const title = document.createElement('h3');
+      title.textContent = 'プレビュー / コメント / マーカー一覧';
+      title.style.margin = '0';
+      title.style.fontSize = '15px';
+      title.style.fontWeight = '600';
+      const closeBtn = document.createElement('button');
+      closeBtn.type = 'button';
+      closeBtn.textContent = '×';
+      closeBtn.setAttribute('aria-label', '閉じる');
+      closeBtn.style.border = 'none';
+      closeBtn.style.background = 'none';
+      closeBtn.style.cursor = 'pointer';
+      closeBtn.style.fontSize = '18px';
+      closeBtn.style.lineHeight = '1';
+      closeBtn.style.marginLeft = '12px';
+      header.appendChild(title);
+      header.appendChild(closeBtn);
+
+      const tabs = document.createElement('div');
+      tabs.style.display = 'flex';
+      tabs.style.borderBottom = '1px solid #e1e5e9';
+
+      const tabNames = [
+        { id: 'previews-docs', label: 'Docsプレビュー' },
+        { id: 'previews-bg', label: 'BGプレビュー' },
+        { id: 'comments', label: 'コメント' },
+        { id: 'markers', label: 'マーカー' }
+      ];
+      const panels = {};
+
+      tabNames.forEach((t, idx) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = t.label;
+        btn.dataset.tab = t.id;
+        btn.style.flex = '1';
+        btn.style.padding = '8px 10px';
+        btn.style.border = 'none';
+        btn.style.borderBottom = idx === 0 ? '2px solid #1a73e8' : '2px solid transparent';
+        btn.style.background = idx === 0 ? '#ffffff' : '#f8f9fa';
+        btn.style.cursor = 'pointer';
+        btn.style.fontSize = '13px';
+        btn.style.fontWeight = idx === 0 ? '600' : '500';
+        btn.addEventListener('click', () => {
+          const current = dialog.querySelectorAll('.global-list-tab');
+          for (let i = 0; i < current.length; i++) {
+            const b = current[i];
+            const active = b === btn;
+            b.style.borderBottom = active ? '2px solid #1a73e8' : '2px solid transparent';
+            b.style.background = active ? '#ffffff' : '#f8f9fa';
+            b.style.fontWeight = active ? '600' : '500';
+          }
+          Object.keys(panels).forEach(id => {
+            panels[id].style.display = id === t.id ? 'block' : 'none';
+          });
+          if (t.id === 'previews-docs') renderGlobalPreviewList(panels['previews-docs'], 'gdoc');
+          if (t.id === 'previews-bg') renderGlobalPreviewList(panels['previews-bg'], 'bg');
+          if (t.id === 'comments') renderGlobalCommentList(panels.comments);
+          if (t.id === 'markers') renderGlobalMarkerList(panels.markers);
+        });
+        btn.className = 'global-list-tab';
+        tabs.appendChild(btn);
+      });
+
+      const body = document.createElement('div');
+      body.style.flex = '1';
+      body.style.overflowY = 'auto';
+      body.style.padding = '10px 14px 12px';
+      body.style.fontSize = '13px';
+
+      tabNames.forEach((t, idx) => {
+        const panel = document.createElement('div');
+        panel.className = 'global-list-panel global-list-' + t.id;
+        panel.style.display = idx === 0 ? 'block' : 'none';
+        body.appendChild(panel);
+        panels[t.id] = panel;
+      });
+
+      dialog.appendChild(header);
+      dialog.appendChild(tabs);
+      dialog.appendChild(body);
+      overlay.appendChild(dialog);
+      document.body.appendChild(overlay);
+
+      const close = () => {
+        if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+      };
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) close();
+      });
+
+      // 初期タブ: Docsプレビュー
+      renderGlobalPreviewList(panels['previews-docs'], 'gdoc');
+    } catch (e) {
+      console.warn('openGlobalListOverlay failed', e);
+    }
+  }
+
+  function loadPreviewItemsForGlobalList() {
+    var items = [];
+    try {
+      if (window.__gdocPreviewAPI__ && typeof window.__gdocPreviewAPI__.getItems === 'function') {
+        items = window.__gdocPreviewAPI__.getItems() || [];
+      } else {
+        var raw = window.localStorage.getItem('gdocPreviewState_v2');
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (parsed && Array.isArray(parsed.items)) items = parsed.items;
+        }
+      }
+    } catch (e) {
+      console.warn('loadPreviewItemsForGlobalList failed', e);
+      items = [];
+    }
+    return items;
+  }
+
+  function renderGlobalPreviewList(panel, kind) {
+    if (!panel) return;
+    panel.innerHTML = '';
+    var allItems = loadPreviewItemsForGlobalList();
+    var items = kind ? allItems.filter(function (item) {
+      return item.kind === kind;
+    }) : allItems;
+    
+    if (!items || !items.length) {
+      var empty = document.createElement('p');
+      var msg = kind === 'gdoc' ? '現在Docsプレビュー中の文書はありません。' :
+                kind === 'bg' ? '現在BGプレビュー中の文書はありません。' :
+                '現在プレビュー中の文書はありません。';
+      empty.textContent = msg;
+      empty.style.cssText = 'margin:4px 0;color:#6c757d;';
+      panel.appendChild(empty);
+      return;
+    }
+
+    var list = document.createElement('ul');
+    list.style.listStyle = 'none';
+    list.style.padding = '0';
+    list.style.margin = '0';
+
+    items.forEach(function (item) {
+      var li = document.createElement('li');
+      li.style.cssText = 'margin:6px 0;padding:6px 8px;border-radius:6px;border:1px solid #e1e5e9;display:flex;flex-direction:column;gap:4px;';
+
+      var titleRow = document.createElement('div');
+      titleRow.style.cssText = 'display:flex;align-items:center;gap:8px;';
+      var titleSpan = document.createElement('span');
+      titleSpan.style.flex = '1';
+      titleSpan.style.fontWeight = '500';
+      titleSpan.textContent = item.title || item.href || item.id || '(無題)';
+      var stateSpan = document.createElement('span');
+      stateSpan.style.fontSize = '11px';
+      stateSpan.style.color = '#6c757d';
+      stateSpan.textContent = item.state === 'active' ? '表示中' : '格納中';
+      titleRow.appendChild(titleSpan);
+      titleRow.appendChild(stateSpan);
+
+      var actions = document.createElement('div');
+      actions.style.cssText = 'display:flex;gap:4px;flex-wrap:wrap;';
+
+      // 「表示」ボタン（目アイコン）
+      var btnShow = document.createElement('button');
+      btnShow.type = 'button';
+      btnShow.className = 'gdoc-toast-btn';
+      btnShow.setAttribute('aria-label', 'プレビュー表示');
+      btnShow.title = 'プレビュー表示';
+      btnShow.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C7 5 3.1 8 1.5 12 3.1 16 7 19 12 19s8.9-3 10.5-7C20.9 8 17 5 12 5zm0 10a3 3 0 110-6 3 3 0 010 6z"></path></svg>';
+      btnShow.addEventListener('click', function () {
+        if (window.__gdocPreviewAPI__ && typeof window.__gdocPreviewAPI__.activate === 'function') {
+          window.__gdocPreviewAPI__.activate(item.key);
+        }
+      });
+
+      // 「本文へ」ボタン（ジャンプアイコン）
+      var btnJump = document.createElement('button');
+      btnJump.type = 'button';
+      btnJump.className = 'gdoc-toast-btn';
+      btnJump.setAttribute('aria-label', '本文へ移動');
+      btnJump.title = '本文へ移動';
+      btnJump.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-.55 0-1 .45-1 1v12.59l-4.3-4.3a1 1 0 10-1.4 1.42l6 6a1 1 0 001.4 0l6-6a1 1 0 10-1.4-1.42L13 15.59V3c0-.55-.45-1-1-1z"></path></svg>';
+      btnJump.addEventListener('click', function () {
+        if (window.__gdocPreviewAPI__ && typeof window.__gdocPreviewAPI__.jumpToSource === 'function') {
+          window.__gdocPreviewAPI__.jumpToSource(item.key);
+        }
+      });
+
+      // 「他タブで開く」ボタン（外部リンクアイコン）
+      var btnTab = document.createElement('button');
+      btnTab.type = 'button';
+      btnTab.className = 'gdoc-toast-btn';
+      btnTab.setAttribute('aria-label', '別タブで開く');
+      btnTab.title = '別タブで開く';
+      btnTab.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"></path><path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z"></path></svg>';
+      btnTab.addEventListener('click', function () {
+        var url = item.href || item.previewUrl;
+        if (url) window.open(url, '_blank', 'noopener');
+      });
+
+      // 「閉じる」ボタン（×アイコン）
+      var btnClose = document.createElement('button');
+      btnClose.type = 'button';
+      btnClose.className = 'gdoc-toast-btn';
+      btnClose.setAttribute('aria-label', '閉じる');
+      btnClose.title = '閉じる';
+      btnClose.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.293 6.707l5.293 5.293-5.293 5.293c-.39.39-.39 1.024 0 1.414s1.024.39 1.414 0l5.293-5.293 5.293 5.293c.39.39 1.024.39 1.414 0s.39-1.024 0-1.414L13.414 12l5.293-5.293c.39-.39.39-1.024 0-1.414s-1.024-.39-1.414 0L12 10.586 6.707 5.293c-.39-.39-1.024-.39-1.414 0s-.39 1.024 0 1.414z"></path></svg>';
+      btnClose.addEventListener('click', function () {
+        if (window.__gdocPreviewAPI__ && typeof window.__gdocPreviewAPI__.close === 'function') {
+          window.__gdocPreviewAPI__.close(item.key);
+          renderGlobalPreviewList(panel);
+        }
+      });
+
+      actions.appendChild(btnShow);
+      actions.appendChild(btnJump);
+      actions.appendChild(btnTab);
+      actions.appendChild(btnClose);
+
+      li.appendChild(titleRow);
+      li.appendChild(actions);
+      list.appendChild(li);
+    });
+
+    panel.appendChild(list);
+  }
+
+  var GLOBAL_LIST_SCOPE = {
+    comments: 'page',
+    markers: 'page'
+  };
+
+  function renderGlobalCommentList(panel) {
+    if (!panel) return;
+    panel.innerHTML = '';
+    var scope = GLOBAL_LIST_SCOPE.comments || 'page';
+
+    // スコープ切り替えトグル（このページ / 全ページ）
+    var ctrl = document.createElement('div');
+    ctrl.style.cssText = 'display:flex;align-items:center;justify-content:flex-end;margin-bottom:6px;gap:6px;font-size:11px;color:#6c757d;';
+    var label = document.createElement('label');
+    label.style.display = 'inline-flex';
+    label.style.alignItems = 'center';
+    label.style.gap = '4px';
+    var checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = scope === 'all';
+    checkbox.addEventListener('change', function () {
+      GLOBAL_LIST_SCOPE.comments = checkbox.checked ? 'all' : 'page';
+      renderGlobalCommentList(panel);
+    });
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode('全ページ'));
+    ctrl.appendChild(label);
+    panel.appendChild(ctrl);
+
+    var key = typeof pageKey === 'function' ? pageKey() : window.location.pathname;
+    var list = [];
+    if (scope === 'page') {
+      // コメントパネルと同じロジックで、このページ上のコメントを取得
+      if (typeof getActiveComments === 'function') {
+        list = getActiveComments().slice();
+      } else if (typeof COMMENTS_DB === 'object' && COMMENTS_DB && COMMENTS_DB[key]) {
+        list = COMMENTS_DB[key].slice();
+      } else {
+        list = [];
+      }
+    } else {
+      if (typeof COMMENTS_DB === 'object' && COMMENTS_DB) {
+        Object.keys(COMMENTS_DB).forEach(function (k) {
+          (COMMENTS_DB[k] || []).forEach(function (rec) {
+            list.push({ __pageKey: k, rec: rec });
+          });
+        });
+      }
+    }
+    if (!list.length) {
+      var empty = document.createElement('p');
+      empty.textContent = scope === 'page' ? 'このページにはコメントがありません。' : '全ページにコメントがありません。';
+      empty.style.cssText = 'margin:4px 0;color:#6c757d;';
+      panel.appendChild(empty);
+      return;
+    }
+
+    // 並び替え（新しい順）
+    list.sort(function (a, b) {
+      var ra = scope === 'page' ? a : a.rec;
+      var rb = scope === 'page' ? b : b.rec;
+      return (rb.t || 0) - (ra.t || 0);
+    });
+
+    var ul = document.createElement('ul');
+    ul.style.listStyle = 'none';
+    ul.style.padding = '0';
+    ul.style.margin = '0';
+
+    list.forEach(function (entry) {
+      var rec = scope === 'page' ? entry : entry.rec;
+      var pageKeyForRec = scope === 'page' ? key : entry.__pageKey;
+
+      var li = document.createElement('li');
+      li.style.cssText = 'margin:6px 0;padding:6px 8px;border-radius:6px;border:1px solid #e1e5e9;';
+
+      var meta = document.createElement('div');
+      meta.style.cssText = 'font-size:11px;color:#6c757d;display:flex;gap:8px;align-items:center;margin-bottom:4px;';
+      var time = document.createElement('span');
+      time.textContent = fmtMMDDHHmm(rec.t || Date.now());
+      meta.appendChild(time);
+      if (scope === 'all' && pageKeyForRec !== key) {
+        var pageLabel = document.createElement('span');
+        pageLabel.textContent = pageKeyForRec;
+        pageLabel.style.maxWidth = '220px';
+        pageLabel.style.overflow = 'hidden';
+        pageLabel.style.textOverflow = 'ellipsis';
+        meta.appendChild(pageLabel);
+      }
+      var move = document.createElement('button');
+      move.type = 'button';
+      move.textContent = '移動';
+      move.style.cssText = 'padding:2px 6px;font-size:11px;border-radius:4px;border:1px solid #6c757d;background:#fff;cursor:pointer;';
+      move.addEventListener('click', function () {
+        if (scope === 'page' || pageKeyForRec === key) {
+          scrollToComment(rec);
+        } else {
+          // 別ページのコメントの場合はそのページを開く
+          try {
+            window.location.href = pageKeyForRec;
+          } catch (e) {
+            window.location.assign(pageKeyForRec);
+          }
+        }
+      });
+      meta.appendChild(move);
+
+      var target = document.createElement('div');
+      target.style.cssText = 'font-size:13px;color:#495057;background:#f8f9fa;padding:4px 6px;border-radius:4px;margin-bottom:4px;';
+      target.textContent = rec.text || '';
+      var body = document.createElement('div');
+      body.style.cssText = 'white-space:pre-wrap;line-height:1.5;';
+      body.textContent = rec.body || '';
+
+      li.appendChild(meta);
+      li.appendChild(target);
+      li.appendChild(body);
+      ul.appendChild(li);
+    });
+
+    panel.appendChild(ul);
+  }
+
+  function renderGlobalMarkerList(panel) {
+    if (!panel) return;
+    panel.innerHTML = '';
+    var scope = GLOBAL_LIST_SCOPE.markers || 'page';
+
+    var ctrl = document.createElement('div');
+    ctrl.style.cssText = 'display:flex;align-items:center;justify-content:flex-end;margin-bottom:6px;gap:6px;font-size:11px;color:#6c757d;';
+    var label = document.createElement('label');
+    label.style.display = 'inline-flex';
+    label.style.alignItems = 'center';
+    label.style.gap = '4px';
+    var checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = scope === 'all';
+    checkbox.addEventListener('change', function () {
+      GLOBAL_LIST_SCOPE.markers = checkbox.checked ? 'all' : 'page';
+      renderGlobalMarkerList(panel);
+    });
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode('全ページ'));
+    ctrl.appendChild(label);
+    panel.appendChild(ctrl);
+
+    var markersDB;
+    try {
+      markersDB = JSON.parse(window.localStorage.getItem(STORAGE_KEYS.markers) || '{}') || {};
+    } catch (e) {
+      markersDB = {};
+    }
+    var page = window.location.pathname;
+    var list = [];
+    if (scope === 'page') {
+      list = markersDB[page] || [];
+    } else {
+      Object.keys(markersDB).forEach(function (k) {
+        (markersDB[k] || []).forEach(function (m) {
+          list.push({ __pageKey: k, marker: m });
+        });
+      });
+    }
+    if (!list.length) {
+      var empty = document.createElement('p');
+      empty.textContent = scope === 'page' ? 'このページにはマーカーがありません。' : '全ページにマーカーがありません。';
+      empty.style.cssText = 'margin:4px 0;color:#6c757d;';
+      panel.appendChild(empty);
+      return;
+    }
+
+    var ul = document.createElement('ul');
+    ul.style.listStyle = 'none';
+    ul.style.padding = '0';
+    ul.style.margin = '0';
+
+    list.forEach(function (entry) {
+      var m = scope === 'page' ? entry : entry.marker;
+      var pageKeyForMarker = scope === 'page' ? page : entry.__pageKey;
+
+      var li = document.createElement('li');
+      li.style.cssText = 'margin:6px 0;padding:6px 8px;border-radius:6px;border:1px solid #e1e5e9;display:flex;flex-direction:column;gap:4px;';
+
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;gap:8px;';
+      var label = document.createElement('span');
+      label.style.flex = '1';
+      label.textContent = (function () {
+        var span = document.querySelector('.text-marker[data-marker-id="' + m.id + '"]');
+        if (span && span.textContent) return span.textContent.slice(0, 80);
+        return '(マーカー)';
+      })();
+      if (scope === 'all' && pageKeyForMarker !== page) {
+        label.textContent = '[' + pageKeyForMarker + '] ' + label.textContent;
+      }
+      var colorSwatch = document.createElement('span');
+      colorSwatch.style.display = 'inline-block';
+      colorSwatch.style.width = '10px';
+      colorSwatch.style.height = '10px';
+      colorSwatch.style.borderRadius = '2px';
+      var colorMap = { yellow:'#fff59d', green:'#c8e6c9', blue:'#bbdefb', pink:'#f8bbd0', orange:'#ffcc80' };
+      colorSwatch.style.backgroundColor = colorMap[m.color] || '#fff59d';
+      row.appendChild(label);
+      row.appendChild(colorSwatch);
+
+      var actions = document.createElement('div');
+      actions.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap;';
+      var btnMove = document.createElement('button');
+      btnMove.type = 'button';
+      btnMove.textContent = '移動';
+      btnMove.style.cssText = 'padding:3px 8px;font-size:11px;border-radius:4px;border:1px solid #6c757d;background:#fff;cursor:pointer;';
+      btnMove.addEventListener('click', function () {
+        try {
+          if (scope === 'page' || pageKeyForMarker === page) {
+            var span = document.querySelector('.text-marker[data-marker-id="' + m.id + '"]');
+            if (span && typeof span.scrollIntoView === 'function') {
+              var el = span;
+              while (el && el !== document.body && !(el instanceof HTMLElement)) {
+                el = el.parentElement;
+              }
+              if (!el) el = span;
+              el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              try {
+                var prevBox = el.style.boxShadow;
+                el.style.transition = 'box-shadow 0.3s ease';
+                el.style.boxShadow = '0 0 0 3px rgba(26,115,232,0.5)';
+                setTimeout(function () {
+                  el.style.boxShadow = prevBox || '';
+                }, 1600);
+              } catch (e2) {}
+            }
+          } else {
+            window.location.href = pageKeyForMarker;
+          }
+        } catch (e) {}
+      });
+      var btnDelete = document.createElement('button');
+      btnDelete.type = 'button';
+      btnDelete.textContent = '削除';
+      btnDelete.style.cssText = 'padding:3px 8px;font-size:11px;border-radius:4px;border:1px solid #dc3545;background:#fff;color:#dc3545;cursor:pointer;';
+      btnDelete.addEventListener('click', function () {
+        try {
+          // remove spans
+          document.querySelectorAll('.text-marker[data-marker-id="' + m.id + '"]').forEach(function (el) {
+            var parent = el.parentNode;
+            while (el.firstChild) parent.insertBefore(el.firstChild, el);
+            parent.removeChild(el);
+          });
+          // update storage
+          var db = markersDB[page] || [];
+          markersDB[page] = db.filter(function (x) { return x.id !== m.id; });
+          if (!markersDB[page].length) delete markersDB[page];
+          window.localStorage.setItem(STORAGE_KEYS.markers, JSON.stringify(markersDB));
+          renderGlobalMarkerList(panel);
+        } catch (e) {
+          console.warn('failed to delete marker group', e);
+        }
+      });
+
+      actions.appendChild(btnMove);
+      actions.appendChild(btnDelete);
+
+      li.appendChild(row);
+      li.appendChild(actions);
+      ul.appendChild(li);
+    });
+
+    panel.appendChild(ul);
+  }
+
   function renderResults(container, results, query) {
     if (!container) return;
 
@@ -3568,9 +5117,17 @@ ul.task-list li input[type="checkbox"] {
   function setupScrollPosition() {
     const scrollY = sessionStorage.getItem(STORAGE_KEYS.scrollPosition);
     if (scrollY) window.scrollTo(0, parseInt(scrollY));
-    window.addEventListener('beforeunload', () => {
-      sessionStorage.setItem(STORAGE_KEYS.scrollPosition, window.scrollY);
+  window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem(STORAGE_KEYS.scrollPosition, window.scrollY);
+    persistReadingState();
+  });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        persistReadingState();
+      }
     });
+    window.addEventListener('scroll', scheduleReadingStateSave, { passive: true });
+    window.addEventListener('resize', scheduleReadingStateSave);
   }
 
   function expandAllInMenu(root) {
@@ -4381,6 +5938,2807 @@ ul.task-list li input[type="checkbox"] {
 
 })();
 </script>
+<style>
+  .gdoc-popover {
+    position: absolute;
+    z-index: 1100;
+    max-width: 320px;
+    background: var(--gdoc-popover-bg, #fff);
+    color: inherit;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    border: 1px solid rgba(0,0,0,0.07);
+    font-size: 14px;
+  }
+  .gdoc-popover[hidden] {
+    display: none !important;
+  }
+  .gdoc-popover-inner {
+    padding: 8px 10px;
+  }
+  .gdoc-popover-header {
+    margin-bottom: 6px;
+    font-weight: 600;
+    line-height: 1.3;
+    max-height: 3.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .gdoc-popover-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .gdoc-popover-actions {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+  .gdoc-popover-actions .gdoc-btn {
+    border: none;
+    background: transparent;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: inherit;
+  }
+  .gdoc-popover-actions .gdoc-btn:hover {
+    background: rgba(0,0,0,0.06);
+  }
+  .gdoc-popover-actions .gdoc-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+.gdoc-modal {
+    position: static;
+    z-index: auto;
+  }
+  .gdoc-modal[hidden] {
+    display: none !important;
+  }
+  .gdoc-modal-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(900px, 90vw);
+    height: min(600px, 80vh);
+    min-width: 320px;
+    min-height: 220px;
+    max-width: 95vw;
+    max-height: 95vh;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    z-index: 1500;
+  }
+  .gdoc-modal-header {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    background: #f5f5f5;
+    cursor: move;
+    user-select: none;
+  }
+  .gdoc-modal-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 8px;
+    max-width: 60vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .gdoc-modal-header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .gdoc-modal-header-actions .gdoc-modal-btn {
+    border: none;
+    background: transparent;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: inherit;
+  }
+  .gdoc-modal-header-actions .gdoc-modal-btn:hover {
+    background: rgba(0,0,0,0.06);
+  }
+  .gdoc-modal-header-actions .gdoc-modal-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+  .gdoc-modal-body {
+    flex: 1 1 auto;
+    position: relative;
+    overflow: auto;
+  }
+  .gdoc-modal-iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+    transform-origin: 0 0;
+  }
+  .bg-preview-body {
+    display: none;
+    padding: 20px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: inherit; /* 設定された文字サイズを継承 */
+    line-height: 1.8;
+    overflow-y: auto;
+    height: 100%;
+  }
+  
+  /* 文字サイズクラスに対応 */
+  .font-size-small .bg-preview-body { font-size: 14px; }
+  .font-size-medium .bg-preview-body { font-size: 16px; }
+  .font-size-large .bg-preview-body { font-size: 18px; }
+  .font-size-xlarge .bg-preview-body { font-size: 20px; }
+  .bg-preview-body.active {
+    display: block;
+  }
+  .bg-preview-body .inline-footnote {
+    color: #1a73e8;
+    font-size: 0.9em;
+    margin-left: 2px;
+  }
+  .bg-preview-body .text-marker {
+    background: rgba(255, 235, 59, 0.3);
+    padding: 0 2px;
+  }
+  
+  /* プレビュー内のポップオーバーを最前面に */
+  .bg-preview-body .gdoc-popover,
+  .bg-preview-body #bg-preview-popover {
+    z-index: 10001 !important;
+  }
+  .bg-preview-body h1,
+  .bg-preview-body h2,
+  .bg-preview-body h3,
+  .bg-preview-body h4 {
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+  }
+  .bg-preview-body p {
+    margin-bottom: 1em;
+  }
+  .bg-preview-body a {
+    color: #1a73e8;
+    text-decoration: none;
+  }
+  .bg-preview-body a:hover {
+    text-decoration: underline;
+  }
+  /* モバイルモードでは画面全体を覆うモーダルとして動作 */
+  .gdoc-modal.gdoc-modal-mobile {
+    position: fixed;
+    inset: 0;
+    z-index: 1500;
+    background: rgba(0,0,0,0.35);
+  }
+  .gdoc-modal.gdoc-modal-mobile .gdoc-modal-dialog {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 96vw;
+    height: 90vh;
+    min-width: 0;
+    min-height: 0;
+    max-width: none;
+    max-height: none;
+    border-radius: 8px;
+  }
+  
+  /* モバイル版でのウィンドウサイズ変更対応 */
+  @media (max-width: 768px) {
+    .gdoc-modal-dialog {
+      position: fixed !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      width: 95vw !important;
+      height: 95vh !important;
+    }
+  }
+  .gdoc-resize-handle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    z-index: 1600;
+    background: transparent;
+    /* 視認性が必要なら、以下のコメントアウトを外す
+    background: rgba(0,0,0,0.15);
+    border-radius: 50%;
+    */
+  }
+  .gdoc-resize-handle-nw {
+    top: -4px;
+    left: -4px;
+    cursor: nwse-resize;
+  }
+  .gdoc-resize-handle-ne {
+    top: -4px;
+    right: -4px;
+    cursor: nesw-resize;
+  }
+  .gdoc-resize-handle-sw {
+    bottom: -4px;
+    left: -4px;
+    cursor: nesw-resize;
+  }
+  .gdoc-resize-handle-se {
+    bottom: -4px;
+    right: -4px;
+    cursor: nwse-resize;
+  }
+
+  /* 右下に積まれる格納トースト */
+  .gdoc-toast-container {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1400;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 480px;
+    pointer-events: none;
+  }
+  .gdoc-toast-container-inner {
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+.gdoc-toast {
+    width: 480px;
+    max-width: 100vw;
+    background: #f5f5f5;
+    color: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    box-sizing: border-box;
+  }
+  .gdoc-toast-main {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+  .gdoc-toast-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .gdoc-toast-actions {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .gdoc-toast-btn {
+    border: none;
+    background: transparent;
+    padding: 2px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+  }
+  .gdoc-toast-btn:hover {
+    background: rgba(255,255,255,0.12);
+  }
+  .gdoc-toast-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* トーストのダークテーマ */
+  body[data-theme="dark"] .gdoc-toast {
+    background: #303134;
+    color: #e0e0e0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+  }
+
+  body[data-theme="dark"] .gdoc-toast-btn:hover {
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* 他文書一覧モーダル */
+  .gdoc-list-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1550;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.4);
+  }
+  .gdoc-list-modal[hidden] {
+    display: none !important;
+  }
+  .gdoc-list-modal-dialog {
+    width: min(640px, 96vw);
+    max-height: 80vh;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .gdoc-list-modal-header {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .gdoc-list-modal-title {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .gdoc-list-modal-close {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .gdoc-list-modal-body {
+    padding: 8px 12px;
+    overflow: auto;
+  }
+  .gdoc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .gdoc-list-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
+  .gdoc-list-item:hover {
+    background: rgba(0,0,0,0.03);
+  }
+  .gdoc-list-item-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .gdoc-list-item-actions {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .gdoc-list-item-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  .gdoc-list-item-btn:hover {
+    background: rgba(0,0,0,0.06);
+  }
+</style>
+
+<div id="gdoc-preview-popover" class="gdoc-popover" hidden="">
+  <div class="gdoc-popover-inner">
+    <div class="gdoc-popover-header">
+      <span class="gdoc-popover-title"></span>
+    </div>
+    <div class="gdoc-popover-actions" role="group" aria-label="Googleドキュメント操作">
+      <button type="button" class="gdoc-btn gdoc-btn-preview" data-action="preview" title="プレビュー表示" aria-label="プレビュー表示">
+        <!-- 目アイコン -->
+        <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12 5C7 5 3.1 8 1.5 12 3.1 16 7 19 12 19s8.9-3 10.5-7C20.9 8 17 5 12 5zm0 10a3 3 0 110-6 3 3 0 010 6z"></path></svg>
+      </button>
+      <button type="button" class="gdoc-btn gdoc-btn-open" data-action="open" title="別タブで開く" aria-label="別タブで開く">
+        <!-- 外部リンクアイコン -->
+        <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"></path><path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z"></path></svg>
+      </button>
+      <button type="button" class="gdoc-btn gdoc-btn-copy" data-action="copy" title="リンクをコピー" aria-label="リンクをコピー">
+        <!-- コピーアイコン -->
+        <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="bg-preview-popover" class="gdoc-popover" hidden="">
+  <div class="gdoc-popover-inner">
+    <div class="gdoc-popover-header">
+      <span class="gdoc-popover-title"></span>
+    </div>
+    <div class="gdoc-popover-actions" role="group" aria-label="ドキュメント内遷移操作">
+      <button type="button" class="gdoc-btn gdoc-btn-preview" data-action="preview" title="プレビュー表示" aria-label="プレビュー表示">
+        <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12 5C7 5 3.1 8 1.5 12 3.1 16 7 19 12 19s8.9-3 10.5-7C20.9 8 17 5 12 5zm0 10a3 3 0 110-6 3 3 0 010 6z"></path></svg>
+      </button>
+      <button type="button" class="gdoc-btn gdoc-btn-go" data-action="go" title="リンク先に遷移" aria-label="リンク先に遷移">
+        <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"></path></svg>
+      </button>
+      <button type="button" class="gdoc-btn gdoc-btn-toast" data-action="toast" title="トーストへ格納" aria-label="トーストへ格納">
+        <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"></path></svg>
+      </button>
+      <button type="button" class="gdoc-btn gdoc-btn-close" data-action="close" title="閉じる" aria-label="閉じる">
+        <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="gdoc-preview-modal" class="gdoc-modal" hidden="">
+  <div class="gdoc-modal-dialog" role="dialog" aria-label="Googleドキュメント プレビュー">
+    <div class="gdoc-resize-handle gdoc-resize-handle-nw" data-resize-dir="nw"></div>
+    <div class="gdoc-resize-handle gdoc-resize-handle-ne" data-resize-dir="ne"></div>
+    <div class="gdoc-resize-handle gdoc-resize-handle-sw" data-resize-dir="sw"></div>
+    <div class="gdoc-resize-handle gdoc-resize-handle-se" data-resize-dir="se"></div>
+    <div class="gdoc-modal-header">
+      <div class="gdoc-modal-title"></div>
+      <div class="gdoc-modal-header-actions">
+        <button type="button" class="gdoc-modal-btn gdoc-modal-btn-reload" title="再読み込み" aria-label="再読み込み">
+          <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path></svg>
+        </button>
+        <button type="button" class="gdoc-modal-btn gdoc-modal-btn-copy" title="リンクをコピー" aria-label="リンクをコピー">
+          <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path></svg>
+        </button>
+        <button type="button" class="gdoc-modal-btn gdoc-modal-btn-open" title="別タブで開く" aria-label="別タブで開く">
+          <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"></path><path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z"></path></svg>
+        </button>
+        <button type="button" class="gdoc-modal-btn gdoc-modal-btn-jump" title="本文へ移動" aria-label="本文へ移動">
+          <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12 2c-.55 0-1 .45-1 1v12.59l-4.3-4.3a1 1 0 10-1.4 1.42l6 6a1 1 0 001.4 0l6-6a1 1 0 10-1.4-1.42L13 15.59V3c0-.55-.45-1-1-1z"></path></svg>
+        </button>
+        <button type="button" class="gdoc-modal-btn gdoc-modal-btn-close" title="閉じる" aria-label="ポップアップを閉じる">
+          <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M5.293 6.707l5.293 5.293-5.293 5.293c-.39.39-.39 1.024 0 1.414s1.024.39 1.414 0l5.293-5.293 5.293 5.293c.39.39 1.024.39 1.414 0s.39-1.024 0-1.414L13.414 12l5.293-5.293c.39-.39.39-1.024 0-1.414s-1.024-.39-1.414 0L12 10.586 6.707 5.293c-.39-.39-1.024-.39-1.414 0s-.39 1.024 0 1.414z"></path></svg>
+        </button>
+      </div>
+    </div>
+    <div class="gdoc-modal-body">
+      <iframe class="gdoc-modal-iframe" src="about:blank" loading="lazy"></iframe>
+      <div class="bg-preview-body"></div>
+    </div>
+</div>
+</div>
+
+<div id="gdoc-preview-toast-container" class="gdoc-toast-container" aria-live="polite" aria-atomic="false">
+  <div class="gdoc-toast-container-inner"></div>
+</div>
+
+<div id="gdoc-preview-list-modal" class="gdoc-list-modal" hidden="">
+  <div class="gdoc-list-modal-dialog" role="dialog" aria-modal="true" aria-label="他のプレビュー文書一覧">
+    <div class="gdoc-list-modal-header">
+      <div class="gdoc-list-modal-title">プレビュー中の文書</div>
+      <button type="button" class="gdoc-list-modal-close" aria-label="閉じる">×</button>
+    </div>
+    <div class="gdoc-list-modal-body">
+      <ul class="gdoc-list"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var MOBILE_MAX_WIDTH = 768; // ビューポート幅による PC/モバイル判定
+  var STORAGE_KEY = 'gdocPreviewState_v2';
+  var ZOOM_MIN = 0.5;
+  var ZOOM_MAX = 2.0;
+  var ZOOM_STEP = 0.05;
+
+  // ブラウザの自動スクロール復元を無効化（自前で制御する）
+  if (history && typeof history.scrollRestoration === 'string') {
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
+  }
+
+  var popover = document.getElementById('gdoc-preview-popover');
+  var titleEl = popover ? popover.querySelector('.gdoc-popover-title') : null;
+  var previewBtn = popover ? popover.querySelector('.gdoc-btn-preview') : null;
+  var openBtn = popover ? popover.querySelector('.gdoc-btn-open') : null;
+  var copyBtn = popover ? popover.querySelector('.gdoc-btn-copy') : null;
+
+  var bgPopover = document.getElementById('bg-preview-popover');
+  var bgTitleEl = bgPopover ? bgPopover.querySelector('.gdoc-popover-title') : null;
+  var bgPreviewBtn = bgPopover ? bgPopover.querySelector('.gdoc-btn-preview') : null;
+  var bgGoBtn = bgPopover ? bgPopover.querySelector('.gdoc-btn-go') : null;
+  var bgToastBtn = bgPopover ? bgPopover.querySelector('.gdoc-btn-toast') : null;
+  var bgCloseBtn = bgPopover ? bgPopover.querySelector('.gdoc-btn-close') : null;
+
+  var modal = document.getElementById('gdoc-preview-modal');
+  var modalDialog = modal ? modal.querySelector('.gdoc-modal-dialog') : null;
+  var modalHeader = modal ? modal.querySelector('.gdoc-modal-header') : null;
+  var modalTitle = modal ? modal.querySelector('.gdoc-modal-title') : null;
+  var modalIframe = modal ? modal.querySelector('.gdoc-modal-iframe') : null;
+  var bgPreviewBody = modal ? modal.querySelector('.bg-preview-body') : null;
+  var modalBtnClose = modal ? modal.querySelector('.gdoc-modal-btn-close') : null;
+  var modalBtnOpen = modal ? modal.querySelector('.gdoc-modal-btn-open') : null;
+  var modalBtnReload = modal ? modal.querySelector('.gdoc-modal-btn-reload') : null;
+  var modalBtnCopy = modal ? modal.querySelector('.gdoc-modal-btn-copy') : null;
+  var modalBtnJump = modal ? modal.querySelector('.gdoc-modal-btn-jump') : null;
+  var resizeHandles = modalDialog ? modalDialog.querySelectorAll('.gdoc-resize-handle') : [];
+
+  var toastContainer = document.getElementById('gdoc-preview-toast-container');
+  var toastInner = toastContainer ? toastContainer.querySelector('.gdoc-toast-container-inner') : null;
+
+  var listModal = document.getElementById('gdoc-preview-list-modal');
+  var listModalDialog = listModal ? listModal.querySelector('.gdoc-list-modal-dialog') : null;
+  var listModalClose = listModal ? listModal.querySelector('.gdoc-list-modal-close') : null;
+  var listEl = listModal ? listModal.querySelector('.gdoc-list') : null;
+
+  if (!popover || !titleEl || !previewBtn || !openBtn || !copyBtn || !bgPopover || !bgTitleEl || !bgPreviewBtn || !bgGoBtn || !bgToastBtn || !bgCloseBtn || !modal || !modalDialog || !modalHeader || !modalTitle || !modalIframe || !bgPreviewBody || !modalBtnClose || !modalBtnOpen || !modalBtnReload || !modalBtnCopy || !modalBtnJump || !toastContainer || !toastInner || !listModal || !listModalDialog || !listModalClose || !listEl) {
+    return;
+  }
+
+  var currentLink = null; // ポップオーバー対象リンク（Docs用）
+  var currentBgLink = null; // ポップオーバー対象リンク（BG用）
+  var hideTimer = null;
+  var bgHideTimer = null;
+  var showTimer = null; // Docs用ポップオーバー表示遅延タイマー
+  var bgShowTimer = null; // BG用ポップオーバー表示遅延タイマー
+  var POPOVER_SHOW_DELAY = 400; // ポップオーバー表示までの遅延（ms）
+  var isDragging = false;
+  var dragStartX = 0;
+  var dragStartY = 0;
+  var dialogStartLeft = 0;
+  var dialogStartTop = 0;
+
+  var isResizing = false;
+  var resizeDir = '';
+  var resizeStartX = 0;
+  var resizeStartY = 0;
+  var startWidth = 0;
+  var startHeight = 0;
+  var startLeft = 0;
+  var startTop = 0;
+
+  var isMouseDownOnHeader = false;
+  var headerMouseDownX = 0;
+  var headerMouseDownY = 0;
+
+  var isMobile = false;
+  var state = loadState();
+  var currentKey = getActiveKeyFromState(state) || null;
+  var currentZoom = 1.0;
+
+  // ---- state persistence ----
+  function loadState() {
+    try {
+      var raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return { items: [], lastGeometry: null };
+      var parsed = JSON.parse(raw);
+      if (!parsed || !Array.isArray(parsed.items)) {
+        return { items: [], lastGeometry: null };
+      }
+      // 既存アイテムにkindがない場合はgdocとして扱う
+      for (var i = 0; i < parsed.items.length; i++) {
+        if (!parsed.items[i].kind) {
+          parsed.items[i].kind = 'gdoc';
+        }
+      }
+      return parsed;
+    } catch (e) {
+      return { items: [], lastGeometry: null };
+    }
+  }
+
+  function saveState() {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  function getActiveKeyFromState(s) {
+    if (!s || !Array.isArray(s.items)) return null;
+    for (var i = 0; i < s.items.length; i++) {
+      if (s.items[i].state === 'active') return s.items[i].key;
+    }
+    return null;
+  }
+
+  function getPreviewKeyFromLink(link) {
+    if (!link) return null;
+    // プレビューURLがあればそれをキーにする（同じドキュメント内の別タブも区別）
+    var previewUrl = link.dataset.gdocPreviewUrl;
+    if (previewUrl) return 'preview:' + previewUrl;
+    var id = link.dataset.gdocId;
+    if (id) return 'id:' + id;
+    return 'href:' + link.href;
+  }
+
+  // 各リンク要素にプレビューキーを紐付けておく（本文ジャンプ用）
+  function initializeLinkKeys() {
+    try {
+      var links = document.querySelectorAll('a.gdoc-link[data-gdoc-title]');
+      for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        var key = getPreviewKeyFromLink(link);
+        if (key) {
+          link.setAttribute('data-gdoc-key', key);
+        }
+      }
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  // 初期化直後にキーを付与
+  initializeLinkKeys();
+
+  function ensureItemForLink(link, previewUrl) {
+    var key = getPreviewKeyFromLink(link);
+    if (!key) return null;
+    var title = link.dataset.gdocTitle || link.textContent || link.href || '';
+    var href = link.href;
+    var items = state.items;
+    var item = null;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].key === key) {
+        item = items[i];
+        break;
+      }
+    }
+    if (!item) {
+      var sourceElement = link.closest('[id]') || link;
+      item = {
+        key: key,
+        kind: 'gdoc',
+        id: link.dataset.gdocId || null,
+        href: href,
+        previewUrl: previewUrl,
+        title: title,
+        state: 'active',
+        position: null,
+        size: null,
+        zoom: 1.0,
+        lastUpdated: Date.now(),
+        sourceId: sourceElement && sourceElement.id ? sourceElement.id : null,
+        sourceUrl: window.location.href.split('#')[0]
+      };
+      if (state.lastGeometry) {
+        item.position = {
+          left: state.lastGeometry.left,
+          top: state.lastGeometry.top
+        };
+        item.size = {
+          width: state.lastGeometry.width,
+          height: state.lastGeometry.height
+        };
+        item.zoom = state.lastGeometry.zoom || 1.0;
+      }
+      state.items.push(item);
+    } else {
+      item.href = href;
+      item.previewUrl = previewUrl;
+      item.title = title;
+      item.lastUpdated = Date.now();
+      if (!item.sourceUrl) {
+        var srcEl = link.closest('[id]') || link;
+        item.sourceId = srcEl && srcEl.id ? srcEl.id : (item.sourceId || null);
+        item.sourceUrl = window.location.href.split('#')[0];
+      }
+    }
+    return item;
+  }
+
+  function getBgPreviewKeyFromLink(link) {
+    if (!link) return null;
+    var href = link.href || link.getAttribute('href');
+    if (!href) return null;
+    return 'bg:' + href;
+  }
+
+  function ensureBgItemForLink(link) {
+    var key = getBgPreviewKeyFromLink(link);
+    if (!key) return null;
+    var href = link.href || link.getAttribute('href');
+    var title = link.textContent || link.getAttribute('title') || href || '';
+    var items = state.items;
+    var item = null;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].key === key) {
+        item = items[i];
+        break;
+      }
+    }
+    if (!item) {
+      var hrefWithoutHash = href.split('#')[0];
+      var anchorId = href.indexOf('#') !== -1 ? href.split('#')[1] : null;
+      var sourceElement = link.closest('[id]') || link;
+      item = {
+        key: key,
+        kind: 'bg',
+        href: href,
+        pageUrl: hrefWithoutHash,
+        anchorId: anchorId,
+        title: title,
+        state: 'active',
+        position: null,
+        size: null,
+        zoom: 1.0,
+        lastUpdated: Date.now(),
+        snippetHtml: null,
+        sourceId: sourceElement && sourceElement.id ? sourceElement.id : null,
+        sourceUrl: window.location.href.split('#')[0]
+      };
+      if (state.lastGeometry) {
+        item.position = {
+          left: state.lastGeometry.left,
+          top: state.lastGeometry.top
+        };
+        item.size = {
+          width: state.lastGeometry.width,
+          height: state.lastGeometry.height
+        };
+        item.zoom = state.lastGeometry.zoom || 1.0;
+      }
+      state.items.push(item);
+    } else {
+      // 既存のアイテムが見つかった場合
+      item.title = title;
+      item.lastUpdated = Date.now();
+      if (!item.sourceUrl) {
+        var srcEl = link.closest('[id]') || link;
+        item.sourceId = srcEl && srcEl.id ? srcEl.id : (item.sourceId || null);
+        item.sourceUrl = window.location.href.split('#')[0];
+      }
+      // minimized状態の場合は何もしない（activatePreviewItemで処理される）
+    }
+    return item;
+  }
+
+  function findItemByKey(key) {
+    if (!key) return null;
+    var items = state.items;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].key === key) return items[i];
+    }
+    return null;
+  }
+
+  function setActiveItem(item) {
+    if (!item) return;
+    var items = state.items;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].key === item.key) {
+        items[i].state = 'active';
+      } else if (items[i].state === 'active') {
+        items[i].state = 'minimized';
+      }
+    }
+    item.state = 'active';
+    currentKey = item.key;
+    item.lastUpdated = Date.now();
+    saveState();
+  }
+
+  function closeItemByKey(key) {
+    if (!key) return;
+    var items = state.items;
+    var newItems = [];
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].key !== key) newItems.push(items[i]);
+    }
+    state.items = newItems;
+    if (currentKey === key) {
+      currentKey = null;
+    }
+    saveState();
+    if (!isMobile) {
+      rebuildToasts();
+    }
+  }
+
+  function getActiveItem() {
+    if (currentKey) {
+      var byKey = findItemByKey(currentKey);
+      if (byKey && byKey.state === 'active') return byKey;
+    }
+    if (!state || !Array.isArray(state.items)) return null;
+    for (var i = 0; i < state.items.length; i++) {
+      if (state.items[i].state === 'active') {
+        currentKey = state.items[i].key;
+        return state.items[i];
+      }
+    }
+    return null;
+  }
+
+  function updateLastGeometryFromActive() {
+    var item = getActiveItem();
+    if (!item) return;
+    if (!item.position || !item.size) return;
+    state.lastGeometry = {
+      left: item.position.left,
+      top: item.position.top,
+      width: item.size.width,
+      height: item.size.height,
+      zoom: item.zoom || 1.0
+    };
+    saveState();
+  }
+
+  // ---- layout mode ----
+  function updateMode() {
+    isMobile = window.innerWidth <= MOBILE_MAX_WIDTH;
+    if (isMobile) {
+      modal.classList.add('gdoc-modal-mobile');
+      if (toastContainer) {
+        toastContainer.style.display = 'none';
+      }
+      if (!listModal.hidden) {
+        listModal.hidden = true;
+      }
+    } else {
+      modal.classList.remove('gdoc-modal-mobile');
+      if (toastContainer) {
+        toastContainer.style.display = '';
+      }
+      rebuildToasts();
+      var activeItem = getActiveItem();
+      if (activeItem) {
+        applyGeometry(activeItem);
+        applyZoom(activeItem.zoom || 1.0);
+      }
+    }
+  }
+
+  window.addEventListener('resize', function () {
+    updateMode();
+  });
+
+  // ---- popover (リンク横UI) ----
+  function showPopoverForLink(link) {
+    if (!link || !link.dataset || !link.dataset.gdocTitle) return;
+    currentLink = link;
+
+    var rect = link.getBoundingClientRect();
+    titleEl.textContent = link.dataset.gdocTitle || link.textContent || '';
+
+    var top = rect.bottom + window.scrollY + 8;
+    var left = rect.left + window.scrollX;
+
+    popover.style.top = top + 'px';
+    popover.style.left = left + 'px';
+    popover.hidden = false;
+  }
+
+  function scheduleHidePopover() {
+    hideTimer = window.setTimeout(function () {
+      popover.hidden = true;
+      currentLink = null;
+    }, 180);
+  }
+
+  function cancelHidePopover() {
+    if (hideTimer) {
+      window.clearTimeout(hideTimer);
+      hideTimer = null;
+    }
+  }
+
+  function cancelShowPopover() {
+    if (showTimer) {
+      window.clearTimeout(showTimer);
+      showTimer = null;
+    }
+  }
+
+  document.addEventListener('mouseover', function (e) {
+    var link = e.target.closest && e.target.closest('a.gdoc-link[data-gdoc-title]');
+    if (!link) return;
+    cancelHidePopover();
+    cancelShowPopover();
+    showTimer = window.setTimeout(function () {
+      showPopoverForLink(link);
+    }, POPOVER_SHOW_DELAY);
+  });
+
+  document.addEventListener('focusin', function (e) {
+    var link = e.target.closest && e.target.closest('a.gdoc-link[data-gdoc-title]');
+    if (!link) return;
+    cancelHidePopover();
+    showPopoverForLink(link);
+  });
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('a.gdoc-link[data-gdoc-title]');
+    if (!link) return;
+    e.preventDefault();
+    cancelHidePopover();
+    showPopoverForLink(link);
+  });
+
+  document.addEventListener('mouseout', function (e) {
+    var fromLink = e.target.closest && e.target.closest('a.gdoc-link[data-gdoc-title]');
+    if (!fromLink) return;
+    var to = e.relatedTarget;
+    if (to && (to.closest && (to.closest('a.gdoc-link[data-gdoc-title]') || to.closest('#gdoc-preview-popover')))) {
+      return;
+    }
+    cancelShowPopover();
+    scheduleHidePopover();
+  });
+
+  popover.addEventListener('mouseenter', cancelHidePopover);
+  popover.addEventListener('mouseleave', scheduleHidePopover);
+
+  function openLinkInNewTabFromLink(link) {
+    if (!link) return;
+    window.open(link.href, '_blank', 'noopener');
+  }
+
+  function copyLinkFromLink(link) {
+    if (!link) return;
+    var url = link.href;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).catch(function () {});
+      return;
+    }
+    var tmp = document.createElement('textarea');
+    tmp.style.position = 'fixed';
+    tmp.style.opacity = '0';
+    tmp.value = url;
+    document.body.appendChild(tmp);
+    tmp.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(tmp);
+  }
+
+  // ポップオーバーのボタン
+  previewBtn.addEventListener('click', function () {
+    if (!currentLink) return;
+    openPreviewFromLink(currentLink);
+  });
+
+  openBtn.addEventListener('click', function () {
+    if (!currentLink) return;
+    openLinkInNewTabFromLink(currentLink);
+  });
+
+  copyBtn.addEventListener('click', function () {
+    if (!currentLink) return;
+    copyLinkFromLink(currentLink);
+  });
+
+  // BGプレビュー用ポップオーバーのボタン
+  bgPreviewBtn.addEventListener('click', function () {
+    if (!currentBgLink) return;
+    openBgPreviewFromLink(currentBgLink);
+    bgPopover.hidden = true;
+  });
+
+  bgGoBtn.addEventListener('click', function () {
+    if (!currentBgLink) return;
+    window.location.href = currentBgLink.href;
+  });
+
+  bgToastBtn.addEventListener('click', function () {
+    if (!currentBgLink) return;
+    var item = ensureBgItemForLink(currentBgLink);
+    if (item) {
+      item.state = 'minimized';
+      saveState();
+      rebuildToasts();
+    }
+    bgPopover.hidden = true;
+  });
+
+  bgCloseBtn.addEventListener('click', function () {
+    bgPopover.hidden = true;
+    currentBgLink = null;
+  });
+
+  function openBgPreviewFromLink(link) {
+    var item = ensureBgItemForLink(link);
+    if (!item) return;
+    activatePreviewItem(item, true);
+  }
+
+  function showBgPopoverForLink(link) {
+    if (!link) return;
+    currentBgLink = link;
+
+    var rect = link.getBoundingClientRect();
+    bgTitleEl.textContent = link.textContent || link.getAttribute('title') || 'プレビュー';
+
+    var top = rect.bottom + window.scrollY + 8;
+    var left = rect.left + window.scrollX;
+
+    bgPopover.style.top = top + 'px';
+    bgPopover.style.left = left + 'px';
+    bgPopover.hidden = false;
+  }
+
+  function scheduleHideBgPopover() {
+    bgHideTimer = window.setTimeout(function () {
+      bgPopover.hidden = true;
+      currentBgLink = null;
+    }, 180);
+  }
+
+  function cancelHideBgPopover() {
+    if (bgHideTimer) {
+      window.clearTimeout(bgHideTimer);
+      bgHideTimer = null;
+    }
+  }
+
+  function cancelShowBgPopover() {
+    if (bgShowTimer) {
+      window.clearTimeout(bgShowTimer);
+      bgShowTimer = null;
+    }
+  }
+
+  bgPopover.addEventListener('mouseenter', cancelHideBgPopover);
+  bgPopover.addEventListener('mouseleave', scheduleHideBgPopover);
+
+  // ---- ポップアップ（プレビューウィンドウ） ----
+  function computePreviewUrlFromLink(link) {
+    if (!link) return null;
+    var previewUrl = link.dataset.gdocPreviewUrl;
+    if (previewUrl) return previewUrl;
+    var baseUrl = link.dataset.gdocBaseUrl;
+    if (!baseUrl) {
+      return link.href;
+    }
+    return baseUrl.replace(/\/$/, '') + '/preview';
+  }
+
+  function applyGeometry(item) {
+    if (!item || !item.position || !item.size) {
+      // デフォルト: 中央
+      modalDialog.style.top = '50%';
+      modalDialog.style.left = '50%';
+      modalDialog.style.transform = 'translate(-50%, -50%)';
+      modalDialog.style.width = '';
+      modalDialog.style.height = '';
+      return;
+    }
+    var left = item.position.left;
+    var top = item.position.top;
+    var width = item.size.width;
+    var height = item.size.height;
+
+    var minWidth = 320;
+    var minHeight = 220;
+    var maxWidth = Math.min(window.innerWidth - 40, 1400);
+    var maxHeight = window.innerHeight - 40;
+
+    if (width < minWidth) width = minWidth;
+    if (height < minHeight) height = minHeight;
+    if (width > maxWidth) width = maxWidth;
+    if (height > maxHeight) height = maxHeight;
+
+    if (left + width > window.innerWidth - 10) {
+      left = window.innerWidth - 10 - width;
+    }
+    if (top + height > window.innerHeight - 10) {
+      top = window.innerHeight - 10 - height;
+    }
+    if (left < 0) left = 0;
+    if (top < 0) top = 0;
+
+    modalDialog.style.transform = 'none';
+    modalDialog.style.left = left + 'px';
+    modalDialog.style.top = top + 'px';
+    modalDialog.style.width = width + 'px';
+    modalDialog.style.height = height + 'px';
+  }
+
+  function applyZoom(z) {
+    // ズーム機能を廃止し、常に等倍表示に固定する
+    currentZoom = 1.0;
+    modalIframe.style.transform = 'scale(1)';
+  }
+
+  function openPreviewFromLink(link) {
+    var previewUrl = computePreviewUrlFromLink(link);
+    if (!previewUrl) return;
+
+    var item = ensureItemForLink(link, previewUrl);
+    if (!item) return;
+    activatePreviewItem(item, true);
+  }
+
+  function loadBgSnippetForItem(item, callback) {
+    if (!item || item.kind !== 'bg') {
+      if (callback) callback(null);
+      return;
+    }
+
+    if (item.snippetHtml) {
+      if (callback) callback(item.snippetHtml);
+      return;
+    }
+
+    // 単一HTMLファイル（index_single.html）を検出
+    var isSinglePage = window.location.pathname.indexOf('index_single.html') !== -1 || 
+                       document.querySelector('section.chapter-page') !== null;
+    
+    console.log('loadBgSnippetForItem:', {
+      pageUrl: item.pageUrl,
+      anchorId: item.anchorId,
+      isSinglePage: isSinglePage,
+      pathname: window.location.pathname
+    });
+    
+    // 単一HTMLファイルの場合は常にページセクションから抽出
+    if (isSinglePage) {
+      console.log('Single-page mode: extracting from page section');
+      var snippet = extractSnippetFromSinglePage(item.pageUrl, item.anchorId);
+      if (snippet) {
+        item.snippetHtml = snippet;
+        saveState();
+        if (callback) callback(snippet);
+        return;
+      } else {
+        console.warn('Failed to extract from single page, trying current page');
+        // フォールバック: 現在のページから抽出
+        snippet = extractSnippetFromCurrentPage(item.anchorId);
+        item.snippetHtml = snippet;
+        saveState();
+        if (callback) callback(snippet);
+        return;
+      }
+    }
+    
+    // 個別HTMLファイルの場合
+    var currentPageUrl = window.location.href.split('#')[0];
+    var isSamePage = !item.pageUrl || item.pageUrl === '' || item.pageUrl === currentPageUrl;
+
+    if (isSamePage) {
+      var snippet = extractSnippetFromCurrentPage(item.anchorId);
+      item.snippetHtml = snippet;
+      saveState();
+      if (callback) callback(snippet);
+    } else {
+      // 相対パスを絶対URLに変換
+      var absoluteUrl = item.pageUrl;
+      try {
+        absoluteUrl = new URL(item.pageUrl, window.location.href).href;
+      } catch (e) {
+        console.warn('Failed to resolve URL', item.pageUrl, e);
+      }
+      
+      console.log('Loading BG preview from:', absoluteUrl);
+      
+      // file:// プロトコルの場合はXHRを使用（fetchはCORS制限がある）
+      var isFileProtocol = window.location.protocol === 'file:' || absoluteUrl.indexOf('file:') === 0;
+      
+      if (isFileProtocol) {
+        // XMLHttpRequestを使用（同期的に読み込む）
+        try {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', absoluteUrl, true);
+          xhr.onload = function () {
+            if (xhr.status === 200 || xhr.status === 0) {
+              var html = xhr.responseText;
+              var snippet = extractSnippetFromHtml(html, item.anchorId, item.pageUrl);
+              item.snippetHtml = snippet;
+              saveState();
+              if (callback) callback(snippet);
+            } else {
+              console.warn('XHR failed with status:', xhr.status);
+              if (callback) callback('<p>プレビューの読み込みに失敗しました。<br>Status: ' + xhr.status + '</p>');
+            }
+          };
+          xhr.onerror = function () {
+            console.warn('XHR error loading:', absoluteUrl);
+            var errorMsg = '<p>プレビューの読み込みに失敗しました。</p>';
+            errorMsg += '<p style="font-size:0.9em;color:#666;">file://プロトコルではブラウザのセキュリティ制限により、別ページの読み込みができません。</p>';
+            errorMsg += '<p style="font-size:0.9em;color:#666;">以下のいずれかの方法をお試しください：</p>';
+            errorMsg += '<ol style="font-size:0.9em;color:#666;margin-left:20px;">';
+            errorMsg += '<li>HTTPサーバーを起動：<pre style="background:#f5f5f5;padding:10px;border-radius:4px;font-size:0.85em;margin:5px 0;">cd out<br>python3 -m http.server 8000<br>open http://localhost:8000/content/' + window.location.pathname.split('/').pop() + '</pre></li>';
+            errorMsg += '<li>単一HTMLファイルを使用：<pre style="background:#f5f5f5;padding:10px;border-radius:4px;font-size:0.85em;margin:5px 0;">open out/index_single.html</pre></li>';
+            errorMsg += '</ol>';
+            if (callback) callback(errorMsg);
+          };
+          xhr.send();
+        } catch (e) {
+          console.warn('XHR exception:', e);
+          if (callback) callback('<p>プレビューの読み込みに失敗しました。<br>Error: ' + e.message + '</p>');
+        }
+      } else {
+        // HTTPプロトコルの場合はfetchを使用
+        fetch(absoluteUrl)
+          .then(function (response) {
+            if (!response.ok) {
+              throw new Error('HTTP ' + response.status + ': ' + response.statusText);
+            }
+            return response.text();
+          })
+          .then(function (html) {
+            var snippet = extractSnippetFromHtml(html, item.anchorId, item.pageUrl);
+            item.snippetHtml = snippet;
+            saveState();
+            if (callback) callback(snippet);
+          })
+          .catch(function (err) {
+            console.warn('Failed to load BG preview content', err, 'URL:', absoluteUrl);
+            if (callback) callback('<p>プレビューの読み込みに失敗しました。<br>URL: ' + item.pageUrl + '</p>');
+          });
+      }
+    }
+  }
+
+  function extractSnippetFromSinglePage(pageUrl, anchorId) {
+    // 単一HTMLファイルから該当ページのセクションを抽出
+    console.log('extractSnippetFromSinglePage:', { pageUrl: pageUrl, anchorId: anchorId });
+    
+    // pageUrlが空の場合は現在のページから抽出
+    if (!pageUrl || pageUrl === '') {
+      console.log('No pageUrl, using current page');
+      return extractSnippetFromCurrentPage(anchorId);
+    }
+    
+    // pageUrl: "05_ch05.html" -> "05_ch05"
+    var pageName = pageUrl.replace(/\.html.*$/, '').replace(/^.*\//, '');
+    var pageId = 'page-' + pageName;
+    
+    console.log('Searching for single-page section:', pageId, 'pageName:', pageName);
+    
+    // ページセクションを探す
+    var pageSection = document.getElementById(pageId);
+    if (!pageSection) {
+      // 別の形式も試す
+      console.log('Trying alternative selectors...');
+      var alternatives = [
+        'section[id="' + pageId + '"]',
+        'section[id*="' + pageName + '"]',
+        'section.chapter-page[id*="' + pageName + '"]'
+      ];
+      
+      for (var i = 0; i < alternatives.length; i++) {
+        try {
+          pageSection = document.querySelector(alternatives[i]);
+          if (pageSection) {
+            console.log('Found by alternative selector:', alternatives[i]);
+            break;
+          }
+        } catch (e) {
+          // 無効なセレクタの場合
+        }
+      }
+    }
+    
+    if (!pageSection) {
+      console.warn('Page section not found:', pageId);
+      // 利用可能なページセクションを表示
+      var sections = document.querySelectorAll('section.chapter-page');
+      var sectionIds = [];
+      for (var j = 0; j < Math.min(10, sections.length); j++) {
+        sectionIds.push(sections[j].id);
+      }
+      console.log('Available page sections:', sectionIds);
+      
+      // フォールバック: 現在のページから抽出
+      return extractSnippetFromCurrentPage(anchorId);
+    }
+    
+    console.log('Found page section:', pageSection.id);
+    
+    // セクション全体を取得
+    var clone = pageSection.cloneNode(true);
+    removeUiElements(clone);
+    
+    // 脚注参照の数を確認
+    var refsInClone = clone.querySelectorAll('a[role="doc-noteref"], a.footnote-ref');
+    console.log('extractSnippetFromSinglePage: Found', refsInClone.length, 'footnote refs in clone');
+    
+    inlineFootnotes(clone, document);
+    simplifyComments(clone);
+    fixRelativeLinks(clone, '');
+    
+    return clone.innerHTML || '';
+  }
+
+  function extractSnippetFromCurrentPage(anchorId) {
+    var target = anchorId ? document.getElementById(anchorId) : null;
+    
+    // セクション全体を取得（章レベル）
+    var section = target ? target.closest('section') : document.getElementById('quarto-document-content');
+    if (!section) section = document.getElementById('quarto-document-content');
+    if (!section) return '<p>コンテンツが見つかりません。</p>';
+
+    console.log('extractSnippetFromCurrentPage: Cloning section', section.id || section.className);
+    
+    var clone = section.cloneNode(true);
+    removeUiElements(clone);
+    
+    // 脚注参照の数を確認
+    var refsInClone = clone.querySelectorAll('a[role="doc-noteref"], a.footnote-ref');
+    console.log('extractSnippetFromCurrentPage: Found', refsInClone.length, 'footnote refs in clone');
+    
+    inlineFootnotes(clone, document);
+    simplifyComments(clone);
+    fixRelativeLinks(clone, '');
+    return clone.innerHTML || '';
+  }
+
+  function fixRelativeLinks(container, baseUrl) {
+    // プレビュー内のリンクを絶対パスに変換
+    var links = container.querySelectorAll('a[href]');
+    for (var i = 0; i < links.length; i++) {
+      var link = links[i];
+      var href = link.getAttribute('href');
+      if (href && !href.match(/^https?:/) && !href.match(/^#/)) {
+        try {
+          var absolute = new URL(href, window.location.href).href;
+          link.setAttribute('href', absolute);
+        } catch (e) {
+          // ignore
+        }
+      }
+    }
+  }
+
+  function extractSnippetFromHtml(html, anchorId, pageUrl) {
+    try {
+      var parser = new DOMParser();
+      var doc = parser.parseFromString(html, 'text/html');
+      var target = anchorId ? doc.getElementById(anchorId) : null;
+      
+      // セクション全体を取得（章レベル）
+      var section = target ? target.closest('section') : doc.getElementById('quarto-document-content');
+      if (!section) section = doc.getElementById('quarto-document-content');
+      if (!section) return '<p>コンテンツが見つかりません。</p>';
+
+      var clone = section.cloneNode(true);
+      removeUiElements(clone);
+      inlineFootnotes(clone, doc);
+      simplifyComments(clone);
+      fixRelativeLinks(clone, pageUrl);
+      
+      return clone.innerHTML || '';
+    } catch (e) {
+      console.warn('Failed to parse HTML', e);
+      return '<p>コンテンツの解析に失敗しました。</p>';
+    }
+  }
+
+  function removeUiElements(container) {
+    var selectors = [
+      'header', '.header-ui', '#quarto-sidebar', '#quarto-margin-sidebar',
+      '.right-comments', '.left-panel', '.right-panel', 'nav', '.navbar'
+    ];
+    selectors.forEach(function (sel) {
+      var elements = container.querySelectorAll(sel);
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].parentNode.removeChild(elements[i]);
+      }
+    });
+  }
+
+  function inlineFootnotes(container, sourceDoc) {
+    var refSelector = 'a[role="doc-noteref"], a.footnote-ref';
+    var refs = container.querySelectorAll(refSelector);
+    
+    console.log('inlineFootnotes: Found', refs.length, 'footnote references');
+    
+    // 既に処理済みかチェック（インラインマーカーが存在する場合）
+    var existingMarkers = container.querySelectorAll('.inline-footnote');
+    if (existingMarkers.length > 0 && refs.length === 0) {
+      console.log('inlineFootnotes: Already processed (found', existingMarkers.length, 'markers)');
+      return;
+    }
+    
+    if (!refs.length) {
+      console.log('inlineFootnotes: No footnote references found');
+      return;
+    }
+
+    var doc = sourceDoc || document;
+    
+    // 脚注参照を配列に変換して、段落ごとにグループ化
+    var refsByHost = new Map();
+    
+    for (var i = 0; i < refs.length; i++) {
+      var ref = refs[i];
+      var href = ref.getAttribute('href') || ref.getAttribute('data-footnote-href');
+      if (!href || !href.startsWith('#')) continue;
+      
+      var host = findHostParagraph(ref);
+      if (!host) continue;
+      
+      if (!refsByHost.has(host)) {
+        refsByHost.set(host, []);
+      }
+      refsByHost.get(host).push(ref);
+    }
+    
+    console.log('Found', refsByHost.size, 'host paragraphs with footnotes');
+    
+    // 各段落の脚注を処理
+    refsByHost.forEach(function (hostRefs, host) {
+      console.log('Processing', hostRefs.length, 'footnotes for paragraph:', host.textContent.substring(0, 50));
+      
+      // 脚注コンテナを作成
+      var footnotesWrapper = document.createElement('div');
+      footnotesWrapper.className = 'footnotes-wrapper';
+      footnotesWrapper.style.cssText = 'margin: 0.5em 0;';
+      
+      // 各脚注を処理
+      for (var j = 0; j < hostRefs.length; j++) {
+        var ref = hostRefs[j];
+        var href = ref.getAttribute('href') || ref.getAttribute('data-footnote-href');
+        if (!href || !href.startsWith('#')) continue;
+        
+        var id = href.slice(1);
+        // まずcontainer内を探し、なければsourceDocから探す
+        var target = container.querySelector('#' + id);
+        if (!target && doc) {
+          target = doc.getElementById ? doc.getElementById(id) : doc.querySelector('#' + id);
+        }
+        if (!target) {
+          console.warn('Footnote target not found:', id);
+          continue;
+        }
+        
+        var numberText = (ref.textContent || '').replace(/[^0-9]/g, '') || '';
+        
+        var clone = target.cloneNode(true);
+        var backlinks = clone.querySelectorAll('.footnote-back, .footnote-backref, [role="doc-backlink"]');
+        for (var k = 0; k < backlinks.length; k++) {
+          backlinks[k].parentNode.removeChild(backlinks[k]);
+        }
+        
+        var fnContainer = document.createElement('div');
+        fnContainer.className = 'footnote-inline';
+        fnContainer.style.cssText = 'margin: 0.3em 0; padding: 0.5em 1em; background: #f8f9fa; border-left: 3px solid #1a73e8; font-size: 0.9em;';
+        
+        var numSpan = document.createElement('span');
+        numSpan.className = 'footnote-num';
+        numSpan.style.fontWeight = 'bold';
+        numSpan.textContent = (numberText ? numberText : '') + '. ';
+        fnContainer.appendChild(numSpan);
+        
+        while (clone.firstChild) {
+          fnContainer.appendChild(clone.firstChild);
+        }
+        
+        footnotesWrapper.appendChild(fnContainer);
+        
+        // 元の脚注参照をインラインマーカーに置き換え
+        if (ref.parentNode) {
+          var marker = document.createElement('span');
+          marker.className = 'inline-footnote';
+          marker.style.cssText = 'color: #1a73e8; font-size: 0.9em; margin-left: 2px; font-weight: 600;';
+          marker.textContent = '[' + numberText + ']';
+          ref.parentNode.replaceChild(marker, ref);
+        }
+      }
+      
+      // 段落の直後に脚注ラッパーを挿入
+      if (host.nextSibling) {
+        host.parentNode.insertBefore(footnotesWrapper, host.nextSibling);
+      } else {
+        host.parentNode.appendChild(footnotesWrapper);
+      }
+      
+      console.log('Inserted footnotes wrapper after paragraph');
+    });
+    
+    console.log('Finished processing footnotes');
+  }
+
+  function findHostParagraph(el) {
+    var p = el;
+    while (p && p !== document.body) {
+      if (p.tagName === 'P' || p.tagName === 'LI') {
+        return p;
+      }
+      p = p.parentElement;
+    }
+    return null;
+  }
+
+  function getElementKey(el) {
+    if (!el) return '';
+    if (el.id) return 'id:' + el.id;
+    var parent = el.parentNode;
+    if (!parent) return '';
+    var siblings = parent.children;
+    for (var i = 0; i < siblings.length; i++) {
+      if (siblings[i] === el) {
+        return 'idx:' + i;
+      }
+    }
+    return '';
+  }
+
+  function scrollToAnchorInPreview(container, anchorId) {
+    if (!container || !anchorId) {
+      console.warn('scrollToAnchorInPreview: missing container or anchorId');
+      return false;
+    }
+    
+    console.log('Searching for anchor:', anchorId, 'in container');
+    
+    // 単一HTMLファイルの場合、プレフィックス付きIDも試す
+    var isSinglePage = window.location.pathname.indexOf('index_single.html') !== -1 || 
+                       document.querySelector('section.chapter-page') !== null;
+    var anchorVariants = [anchorId];
+    
+    if (isSinglePage) {
+      // ページ名のプレフィックスを試す（例: 05_ch05--toc-5-4-1）
+      var pageNames = ['05_ch05', '04_ch04', '03_ch03', '02_ch02', '01_ch01', '06_ch06'];
+      for (var p = 0; p < pageNames.length; p++) {
+        anchorVariants.push(pageNames[p] + '--' + anchorId);
+      }
+    }
+    
+    // アンカー要素を探す（複数の方法を試す）
+    var target = null;
+    
+    // 全てのバリアントを試す
+    for (var v = 0; v < anchorVariants.length && !target; v++) {
+      var currentAnchorId = anchorVariants[v];
+      
+      // 方法1: 直接ID検索（特殊文字をエスケープせずに試す）
+      try {
+        var selector = '#' + currentAnchorId.replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, '\\$&');
+        target = container.querySelector(selector);
+        if (target) {
+          console.log('Found by escaped selector (variant ' + v + '):', currentAnchorId);
+          anchorId = currentAnchorId; // 見つかったIDを使用
+          break;
+        }
+      } catch (e) {
+        // 次の方法を試す
+      }
+    }
+    
+    if (!target) {
+      console.log('Method 1 failed for all variants');
+    }
+    
+    // 方法2: CSS.escapeを使用（全バリアント）
+    if (!target) {
+      for (var v2 = 0; v2 < anchorVariants.length && !target; v2++) {
+        try {
+          if (typeof CSS !== 'undefined' && CSS.escape) {
+            target = container.querySelector('#' + CSS.escape(anchorVariants[v2]));
+            if (target) {
+              console.log('Found by CSS.escape (variant ' + v2 + '):', anchorVariants[v2]);
+              anchorId = anchorVariants[v2];
+              break;
+            }
+          }
+        } catch (e) {
+          // 次を試す
+        }
+      }
+    }
+    
+    // 方法3: data-anchor-id属性で検索（全バリアント）
+    if (!target) {
+      for (var v3 = 0; v3 < anchorVariants.length && !target; v3++) {
+        try {
+          target = container.querySelector('[data-anchor-id="' + anchorVariants[v3] + '"]');
+          if (target) {
+            console.log('Found by data-anchor-id (variant ' + v3 + '):', anchorVariants[v3]);
+            anchorId = anchorVariants[v3];
+            break;
+          }
+        } catch (e) {
+          // 次を試す
+        }
+      }
+    }
+    
+    // 方法4: id属性を直接検索（全要素をスキャン、全バリアント）
+    if (!target) {
+      var allElements = container.querySelectorAll('[id]');
+      console.log('Scanning', allElements.length, 'elements with id');
+      for (var i = 0; i < allElements.length; i++) {
+        for (var v4 = 0; v4 < anchorVariants.length; v4++) {
+          if (allElements[i].id === anchorVariants[v4]) {
+            target = allElements[i];
+            console.log('Found by direct scan at index', i, 'variant:', anchorVariants[v4]);
+            anchorId = anchorVariants[v4];
+            break;
+          }
+        }
+        if (target) break;
+      }
+    }
+    
+    // 方法5: spanタグの中を探す（idx-アンカーの場合、全バリアント）
+    if (!target) {
+      var spans = container.querySelectorAll('span[id]');
+      for (var j = 0; j < spans.length; j++) {
+        for (var v5 = 0; v5 < anchorVariants.length; v5++) {
+          if (anchorVariants[v5].indexOf('idx-') !== -1 && spans[j].id === anchorVariants[v5]) {
+            target = spans[j];
+            console.log('Found idx anchor in span, variant:', anchorVariants[v5]);
+            anchorId = anchorVariants[v5];
+            break;
+          }
+        }
+        if (target) break;
+      }
+    }
+    
+    // 方法6: toc-X-Y-Z形式の場合、セクション番号から推測
+    if (!target && anchorId.match(/^toc-\d+-\d+(-\d+)?$/)) {
+      console.log('Trying to find section by number pattern:', anchorId);
+      // toc-5-4-1 -> 第5章第4節第1項 のようなパターンを探す
+      var parts = anchorId.replace('toc-', '').split('-');
+      var sectionNum = parts[1]; // 4
+      var itemNum = parts[2]; // 1
+      
+      // 第X節を探す
+      var sectionPattern = '第' + sectionNum + '節';
+      var sections = container.querySelectorAll('section[id*="' + sectionPattern + '"], h2[id*="' + sectionPattern + '"], h2[data-anchor-id*="' + sectionPattern + '"]');
+      console.log('Found sections matching', sectionPattern, ':', sections.length);
+      
+      if (sections.length > 0) {
+        // 第X節が見つかった場合、その中の第Y項を探す
+        if (itemNum) {
+          var itemPattern = '第' + itemNum + '項';
+          var parentSection = sections[0].closest('section') || sections[0].parentElement;
+          if (parentSection) {
+            var items = parentSection.querySelectorAll('section[id*="' + itemPattern + '"], h3[id*="' + itemPattern + '"], h3[data-anchor-id*="' + itemPattern + '"]');
+            console.log('Found items matching', itemPattern, ':', items.length);
+            if (items.length > 0) {
+              target = items[0];
+              console.log('Found by section/item pattern');
+            }
+          }
+        }
+        
+        // 項が見つからない場合は節を使用
+        if (!target) {
+          target = sections[0];
+          console.log('Using section as fallback');
+        }
+      }
+    }
+    
+    if (!target) {
+      console.warn('Anchor not found in preview after all attempts:', anchorId);
+      // デバッグ: 最初の20個のIDを表示
+      var ids = [];
+      var els = container.querySelectorAll('[id]');
+      for (var k = 0; k < Math.min(20, els.length); k++) {
+        ids.push(els[k].id);
+      }
+      console.log('Available IDs (first 20):', ids);
+      return false;
+    }
+    
+    console.log('Found anchor:', anchorId, 'Element:', target.tagName, 'ID:', target.id, 'Class:', target.className);
+    
+    // 索引アンカー（idx-）の場合は、その段落を探す
+    if (anchorId.indexOf('idx-') === 0) {
+      var paragraph = findHostParagraph(target);
+      if (paragraph) {
+        console.log('Using host paragraph for idx anchor:', paragraph.tagName);
+        target = paragraph;
+      }
+    }
+    
+    // 目次アンカー（toc-）の場合は、対応する見出しを探す
+    if (anchorId.indexOf('toc-') === 0) {
+      // 見出し要素を探す
+      if (target.tagName && target.tagName.match(/^H[1-6]$/)) {
+        console.log('Target is already a heading');
+      } else {
+        var heading = target.closest('h1, h2, h3, h4, h5, h6');
+        if (heading) {
+          console.log('Using heading for toc anchor:', heading.tagName);
+          target = heading;
+        } else {
+          // data-anchor-idを持つ見出しを探す
+          var h = container.querySelector('h1[data-anchor-id="' + anchorId + '"], h2[data-anchor-id="' + anchorId + '"], h3[data-anchor-id="' + anchorId + '"], h4[data-anchor-id="' + anchorId + '"]');
+          if (h) {
+            console.log('Found heading by data-anchor-id:', h.tagName);
+            target = h;
+          }
+        }
+      }
+    }
+    
+    // 要素の位置を計算してスクロール
+    var targetTop = 0;
+    var el = target;
+    var iterations = 0;
+    while (el && el !== container && iterations < 50) {
+      targetTop += el.offsetTop || 0;
+      el = el.offsetParent;
+      iterations++;
+    }
+    
+    console.log('Scrolling to position:', targetTop, 'Container scrollHeight:', container.scrollHeight);
+    
+    // スクロール実行
+    if (container.scrollTo) {
+      container.scrollTo({
+        top: targetTop,
+        behavior: 'smooth'
+      });
+    } else {
+      container.scrollTop = targetTop;
+    }
+    
+    // ハイライト効果を追加
+    try {
+      var originalBg = target.style.backgroundColor;
+      var originalTransition = target.style.transition;
+      target.style.transition = 'background-color 0.3s ease';
+      target.style.backgroundColor = 'rgba(26, 115, 232, 0.15)';
+      
+      setTimeout(function () {
+        target.style.backgroundColor = originalBg;
+        setTimeout(function () {
+          target.style.transition = originalTransition;
+        }, 300);
+      }, 1500);
+    } catch (e) {
+      console.warn('Failed to apply highlight:', e);
+    }
+    
+    return true;
+  }
+
+  function simplifyComments(container) {
+    var markers = container.querySelectorAll('.text-marker[data-comment-id]');
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].removeAttribute('data-comment-id');
+    }
+  }
+
+  function activatePreviewItem(item, fromUser) {
+    if (!item) return;
+
+    setActiveItem(item);
+
+    modalTitle.textContent = item.title || '';
+
+    if (item.kind === 'bg') {
+      modalIframe.style.display = 'none';
+      bgPreviewBody.classList.add('active');
+      bgPreviewBody.innerHTML = '<p>読み込み中...</p>';
+      
+      loadBgSnippetForItem(item, function (html) {
+        if (!html) html = '<p>コンテンツが見つかりません。</p>';
+        bgPreviewBody.innerHTML = html;
+        
+        console.log('BG preview loaded, anchorId:', item.anchorId);
+        
+        // DOMが完全に描画されるまで待つ（複数回試行）
+        var scrollAttempts = 0;
+        var maxAttempts = 5;
+        
+        function tryScroll() {
+          scrollAttempts++;
+          
+          if (item.anchorId) {
+            var success = scrollToAnchorInPreview(bgPreviewBody, item.anchorId);
+            if (!success && scrollAttempts < maxAttempts) {
+              // スクロールに失敗した場合は再試行
+              setTimeout(tryScroll, 100);
+            }
+          } else {
+            // アンカーがない場合は先頭にスクロール
+            bgPreviewBody.scrollTop = 0;
+          }
+        }
+        
+        // 初回は少し待ってから実行
+        setTimeout(tryScroll, 100);
+      });
+    } else {
+      bgPreviewBody.classList.remove('active');
+      bgPreviewBody.innerHTML = '';
+      modalIframe.style.display = '';
+      modalIframe.src = item.previewUrl || item.href;
+    }
+
+    if (isMobile) {
+      modalDialog.style.transform = 'translate(-50%, -50%)';
+      modalDialog.style.top = '50%';
+      modalDialog.style.left = '50%';
+      modalDialog.style.width = '96vw';
+      modalDialog.style.height = '90vh';
+      applyZoom(1.0);
+    } else {
+      if (!item.position || !item.size) {
+        // 初回: デフォルト位置・サイズ
+        modalDialog.style.top = '50%';
+        modalDialog.style.left = '50%';
+        modalDialog.style.transform = 'translate(-50%, -50%)';
+        modalDialog.style.width = '';
+        modalDialog.style.height = '';
+      } else {
+        applyGeometry(item);
+      }
+      applyZoom(item.zoom || 1.0);
+      rebuildToasts();
+    }
+
+    modal.hidden = false;
+    saveState();
+    
+    // トーストを再構築（minimizedから復帰した場合に必要）
+    if (!isMobile) {
+      rebuildToasts();
+    }
+  }
+
+  function closeCurrentPreview() {
+    var active = getActiveItem();
+    if (!active) {
+      modal.hidden = true;
+      modalIframe.src = 'about:blank';
+      return;
+    }
+    var key = active.key;
+    modal.hidden = true;
+    modalIframe.src = 'about:blank';
+    closeItemByKey(key);
+  }
+
+  // モーダルのヘッダーボタン
+  modalBtnClose.addEventListener('click', function () {
+    closeCurrentPreview();
+  });
+
+  modalBtnOpen.addEventListener('click', function () {
+    var active = getActiveItem();
+    if (!active) return;
+    window.open(active.href, '_blank', 'noopener');
+  });
+
+  modalBtnReload.addEventListener('click', function () {
+    var active = getActiveItem();
+    if (!active) return;
+    reloadPreviewItem(active);
+  });
+
+  modalBtnCopy.addEventListener('click', function () {
+    var active = getActiveItem();
+    if (!active) return;
+    var url = active.href;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).catch(function () {});
+      return;
+    }
+    var tmp = document.createElement('textarea');
+    tmp.style.position = 'fixed';
+    tmp.style.opacity = '0';
+    tmp.value = url;
+    document.body.appendChild(tmp);
+    tmp.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(tmp);
+  });
+
+  function reloadPreviewItem(item) {
+    if (!item) return;
+    
+    console.log('Reloading preview item:', item.key);
+    
+    // キャッシュをクリア
+    if (item.kind === 'bg') {
+      item.snippetHtml = null;
+    }
+    
+    // 現在のスクロール位置を保存
+    var currentScrollTop = 0;
+    if (item.kind === 'bg' && bgPreviewBody) {
+      currentScrollTop = bgPreviewBody.scrollTop;
+    }
+    
+    // 再読み込み
+    if (item.kind === 'bg') {
+      bgPreviewBody.innerHTML = '<p>読み込み中...</p>';
+      loadBgSnippetForItem(item, function (html) {
+        if (!html) html = '<p>コンテンツが見つかりません。</p>';
+        bgPreviewBody.innerHTML = html;
+        
+        // 元のアンカー位置にスクロール（優先）
+        if (item.anchorId) {
+          setTimeout(function () {
+            scrollToAnchorInPreview(bgPreviewBody, item.anchorId);
+          }, 100);
+        } else {
+          // アンカーがない場合は元のスクロール位置に戻す
+          setTimeout(function () {
+            bgPreviewBody.scrollTop = currentScrollTop;
+          }, 100);
+        }
+      });
+    } else if (item.kind === 'gdoc') {
+      // Google Docsプレビューの場合はiframeを再読み込み
+      if (modalIframe) {
+        var currentSrc = modalIframe.src;
+        modalIframe.src = 'about:blank';
+        setTimeout(function () {
+          modalIframe.src = currentSrc;
+        }, 100);
+      }
+    }
+    
+    // 状態を保存
+    saveState();
+  }
+
+  function getScrollElement() {
+    return document.scrollingElement || document.documentElement || document.body;
+  }
+
+  function applyJumpHighlight(target) {
+    if (!target) return;
+    var el = target;
+    if (!(el instanceof HTMLElement)) {
+      el = target.parentElement || null;
+    }
+    while (el && el !== document.body && !(el instanceof HTMLElement)) {
+      el = el.parentElement;
+    }
+    if (!el) return;
+    try {
+      el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      var prevBox = el.style.boxShadow;
+      el.style.transition = 'box-shadow 0.3s ease';
+      el.style.boxShadow = '0 0 0 3px rgba(26,115,232,0.5)';
+      setTimeout(function () {
+        el.style.boxShadow = prevBox || '';
+      }, 1600);
+    } catch (e) {
+      try {
+        target.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      } catch (e2) {}
+    }
+  }
+
+  function findSourceElementForItem(item) {
+    if (!item) return null;
+
+    // まず data-gdoc-key で厳密に一致するリンクを探す（タブ/重複対応）
+    if (item.key) {
+      try {
+        var keySelector = 'a.gdoc-link[data-gdoc-key="' + String(item.key).replace(/"/g, '\"') + '"]';
+        var byKey = document.querySelector(keySelector);
+        if (byKey) return byKey;
+      } catch (e) {
+        // fall through to id/href
+      }
+    }
+
+    var selector = '';
+    if (item.id) {
+      // Google Docs ID は英数字等なので単純なエスケープで十分
+      selector = 'a.gdoc-link[data-gdoc-id="' + String(item.id).replace(/"/g, '\"') + '"]';
+    } else if (item.href) {
+      selector = 'a.gdoc-link[href="' + String(item.href).replace(/"/g, '\"') + '"]';
+    }
+    if (!selector) return null;
+    try {
+      var candidates = document.querySelectorAll(selector);
+      if (!candidates || !candidates.length) return null;
+      return candidates[0];
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function jumpToSourceForItem(item) {
+    if (!item) return;
+
+    var currentBase = window.location.href.split('#')[0];
+    var sourceUrl = item.sourceUrl || null;
+    var sourceId = item.sourceId || null;
+
+    // 別ページに元リンクがある場合は、そのページへ遷移
+    if (sourceUrl && sourceUrl !== currentBase) {
+      var targetUrl = sourceUrl;
+      if (sourceId) {
+        // 既にハッシュが含まれていない前提
+        targetUrl = sourceUrl + '#' + encodeURIComponent(sourceId);
+      }
+      try {
+        window.location.href = targetUrl;
+      } catch (e) {
+        window.location.assign(targetUrl);
+      }
+      return;
+    }
+
+    // 同一ページ内: ソースID優先でスクロール
+    var target = null;
+    if (sourceId) {
+      target = document.getElementById(sourceId) || null;
+    }
+    if (!target) {
+      var linkEl = findSourceElementForItem(item);
+      if (!linkEl) return;
+      target = linkEl.closest('[id]') || linkEl;
+    }
+
+    var scrollEl = getScrollElement();
+    var currentY = scrollEl.scrollTop;
+    try {
+      history.pushState({ __gdocScrollRestore: currentY }, '', window.location.href);
+    } catch (e2) {}
+    applyJumpHighlight(target);
+  }
+
+  modalBtnJump.addEventListener('click', function () {
+    var active = getActiveItem();
+    if (!active) return;
+    jumpToSourceForItem(active);
+  });
+
+  // ヘッダー: ドラッグ & クリックで格納
+  modalHeader.addEventListener('mousedown', function (e) {
+    if (e.button !== 0) return;
+    if (isMobile) return; // モバイルではドラッグ/格納なし
+
+    isMouseDownOnHeader = true;
+    headerMouseDownX = e.clientX;
+    headerMouseDownY = e.clientY;
+
+    isDragging = true;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    var rect = modalDialog.getBoundingClientRect();
+    dialogStartLeft = rect.left;
+    dialogStartTop = rect.top;
+    modalDialog.style.transform = 'none';
+    document.addEventListener('mousemove', onDragMove);
+    document.addEventListener('mouseup', onHeaderMouseUp);
+  });
+
+  function onDragMove(e) {
+    if (!isDragging || isMobile) return;
+    var dx = e.clientX - dragStartX;
+    var dy = e.clientY - dragStartY;
+    var newLeft = dialogStartLeft + dx;
+    var newTop = dialogStartTop + dy;
+
+    var maxLeft = window.innerWidth - 100;
+    var maxTop = window.innerHeight - 60;
+    if (newLeft < 0) newLeft = 0;
+    if (newTop < 0) newTop = 0;
+    if (newLeft > maxLeft) newLeft = maxLeft;
+    if (newTop > maxTop) newTop = maxTop;
+
+    modalDialog.style.left = newLeft + 'px';
+    modalDialog.style.top = newTop + 'px';
+  }
+
+  function onHeaderMouseUp(e) {
+    document.removeEventListener('mousemove', onDragMove);
+    document.removeEventListener('mouseup', onHeaderMouseUp);
+
+    if (!isDragging) {
+      isMouseDownOnHeader = false;
+      return;
+    }
+
+    isDragging = false;
+
+    var active = getActiveItem();
+    if (active && !isMobile) {
+      var rect = modalDialog.getBoundingClientRect();
+      active.position = { left: rect.left, top: rect.top };
+      if (active.size) {
+        active.size.width = rect.width;
+        active.size.height = rect.height;
+      }
+      saveState();
+      updateLastGeometryFromActive();
+    }
+
+    // クリック判定（ドラッグ距離が小さい場合）
+    if (isMouseDownOnHeader) {
+      var dx = Math.abs(e.clientX - headerMouseDownX);
+      var dy = Math.abs(e.clientY - headerMouseDownY);
+      if (dx < 3 && dy < 3) {
+        // ヘッダーの「ボタンやリサイズハンドル以外」をクリックした場合に格納
+        var target = e.target;
+        if (!target.closest('.gdoc-modal-btn') && !target.closest('.gdoc-resize-handle')) {
+          minimizeActiveToToast();
+        }
+      }
+    }
+    isMouseDownOnHeader = false;
+  }
+
+  function minimizeActiveToToast() {
+    if (isMobile) return;
+    var active = getActiveItem();
+    if (!active) return;
+    active.state = 'minimized';
+    active.lastUpdated = Date.now();
+    currentKey = null;
+    saveState();
+    modal.hidden = true;
+    modalIframe.src = 'about:blank';
+    rebuildToasts();
+  }
+
+  // 4隅のリサイズ
+  if (resizeHandles && resizeHandles.length) {
+    resizeHandles.forEach(function (handle) {
+      handle.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return;
+        if (isMobile) return;
+        e.preventDefault();
+        isResizing = true;
+        resizeDir = handle.getAttribute('data-resize-dir') || '';
+        var rect = modalDialog.getBoundingClientRect();
+        resizeStartX = e.clientX;
+        resizeStartY = e.clientY;
+        startWidth = rect.width;
+        startHeight = rect.height;
+        startLeft = rect.left;
+        startTop = rect.top;
+        modalDialog.style.transform = 'none';
+        document.addEventListener('mousemove', onResizeMove);
+        document.addEventListener('mouseup', onResizeEnd);
+      });
+    });
+  }
+
+  function onResizeMove(e) {
+    if (!isResizing || isMobile) return;
+
+    var dx = e.clientX - resizeStartX;
+    var dy = e.clientY - resizeStartY;
+
+    var newWidth = startWidth;
+    var newHeight = startHeight;
+    var newLeft = startLeft;
+    var newTop = startTop;
+
+    if (resizeDir.indexOf('e') !== -1) {
+      newWidth = startWidth + dx;
+    }
+    if (resizeDir.indexOf('s') !== -1) {
+      newHeight = startHeight + dy;
+    }
+    if (resizeDir.indexOf('w') !== -1) {
+      newWidth = startWidth - dx;
+      newLeft = startLeft + dx;
+    }
+    if (resizeDir.indexOf('n') !== -1) {
+      newHeight = startHeight - dy;
+      newTop = startTop + dy;
+    }
+
+    var minWidth = 320;
+    var minHeight = 220;
+    var maxWidth = Math.min(window.innerWidth - 40, 1400);
+    var maxHeight = window.innerHeight - 40;
+
+    if (newWidth < minWidth) {
+      newWidth = minWidth;
+      if (resizeDir.indexOf('w') !== -1) {
+        newLeft = startLeft + (startWidth - minWidth);
+      }
+    }
+    if (newHeight < minHeight) {
+      newHeight = minHeight;
+      if (resizeDir.indexOf('n') !== -1) {
+        newTop = startTop + (startHeight - minHeight);
+      }
+    }
+
+    if (newWidth > maxWidth) {
+      newWidth = maxWidth;
+    }
+    if (newHeight > maxHeight) {
+      newHeight = maxHeight;
+    }
+
+    var maxRight = window.innerWidth - 10;
+    var maxBottom = window.innerHeight - 10;
+    if (newLeft + newWidth > maxRight) {
+      if (resizeDir.indexOf('e') !== -1) {
+        newWidth = maxRight - newLeft;
+      } else {
+        newLeft = maxRight - newWidth;
+      }
+    }
+    if (newTop + newHeight > maxBottom) {
+      if (resizeDir.indexOf('s') !== -1) {
+        newHeight = maxBottom - newTop;
+      } else {
+        newTop = maxBottom - newHeight;
+      }
+    }
+
+    modalDialog.style.width = newWidth + 'px';
+    modalDialog.style.height = newHeight + 'px';
+    modalDialog.style.left = newLeft + 'px';
+    modalDialog.style.top = newTop + 'px';
+  }
+
+  function onResizeEnd() {
+    if (!isResizing) return;
+    document.removeEventListener('mousemove', onResizeMove);
+    document.removeEventListener('mouseup', onResizeEnd);
+    isResizing = false;
+
+    var active = getActiveItem();
+    if (active && !isMobile) {
+      var rect = modalDialog.getBoundingClientRect();
+      active.position = { left: rect.left, top: rect.top };
+      active.size = { width: rect.width, height: rect.height };
+      active.zoom = currentZoom;
+      saveState();
+      updateLastGeometryFromActive();
+    }
+  }
+
+  // ズーム（ポップアップ内だけ）
+  // Ctrl/Command + スクロールによる拡大・縮小は無効化し、
+  // 通常スクロールのみを許可する
+  modalDialog.addEventListener('wheel', function (e) {
+    if (isMobile) return;
+    var isZoomGesture = e.ctrlKey || e.metaKey || e.deltaZ !== 0;
+    if (!isZoomGesture) return;
+
+    // ブラウザのページズームが発動しないように止める
+    e.preventDefault();
+  }, { passive: false });
+
+  // ---- トースト（格納状態） ----
+  function getMaxIndividualToasts() {
+    try {
+      var raw = window.localStorage.getItem('gdocPreviewMaxToasts');
+      if (raw == null) return 3;
+      var n = parseInt(raw, 10);
+      if (isNaN(n)) n = 3;
+      if (n < 0) n = 0;
+      if (n > 9) n = 9;
+      return n;
+    } catch (e) {
+      return 3;
+    }
+  }
+
+  function rebuildToasts() {
+    if (!toastInner || isMobile) return;
+    toastInner.innerHTML = '';
+
+    var minimized = [];
+    for (var i = 0; i < state.items.length; i++) {
+      if (state.items[i].state === 'minimized') minimized.push(state.items[i]);
+    }
+
+    if (!minimized.length) return;
+
+    // 更新日時の新しいものが上に来るように並べ替え
+    minimized.sort(function (a, b) {
+      return (b.lastUpdated || 0) - (a.lastUpdated || 0);
+    });
+
+    var maxIndividual = getMaxIndividualToasts();
+    var individualCount = Math.min(minimized.length, maxIndividual);
+
+    for (var j = 0; j < individualCount; j++) {
+      var item = minimized[j];
+      var toast = document.createElement('div');
+      toast.className = 'gdoc-toast';
+      toast.setAttribute('data-preview-key', item.key);
+
+      var main = document.createElement('div');
+      main.className = 'gdoc-toast-main';
+
+      var titleNode = document.createElement('div');
+      titleNode.className = 'gdoc-toast-title';
+      var prefix = item.kind === 'bg' ? '[BG] ' : '[Docs] ';
+      titleNode.textContent = prefix + (item.title || item.href || '');
+      main.appendChild(titleNode);
+
+      toast.appendChild(main);
+
+      var actions = document.createElement('div');
+      actions.className = 'gdoc-toast-actions';
+
+      var btnCopy = document.createElement('button');
+      btnCopy.type = 'button';
+      btnCopy.className = 'gdoc-toast-btn';
+      btnCopy.setAttribute('data-action', 'copy');
+      btnCopy.title = 'リンクをコピー';
+      btnCopy.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"></path></svg>';
+      actions.appendChild(btnCopy);
+
+      var btnOpen = document.createElement('button');
+      btnOpen.type = 'button';
+      btnOpen.className = 'gdoc-toast-btn';
+      btnOpen.setAttribute('data-action', 'open');
+      btnOpen.title = '別タブで開く';
+      btnOpen.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z"></path><path d="M5 5h5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5h-2v5H5V5z"></path></svg>';
+      actions.appendChild(btnOpen);
+
+      var btnJump = document.createElement('button');
+      btnJump.type = 'button';
+      btnJump.className = 'gdoc-toast-btn';
+      btnJump.setAttribute('data-action', 'jump');
+      btnJump.title = '本文へ移動';
+      btnJump.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c-.55 0-1 .45-1 1v12.59l-4.3-4.3a1 1 0 10-1.4 1.42l6 6a1 1 0 001.4 0l6-6a1 1 0 10-1.4-1.42L13 15.59V3c0-.55-.45-1-1-1z"></path></svg>';
+      actions.appendChild(btnJump);
+
+      var btnClose = document.createElement('button');
+      btnClose.type = 'button';
+      btnClose.className = 'gdoc-toast-btn';
+      btnClose.setAttribute('data-action', 'close');
+      btnClose.title = '閉じる';
+      btnClose.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.293 6.707l5.293 5.293-5.293 5.293c-.39.39-.39 1.024 0 1.414s1.024.39 1.414 0l5.293-5.293 5.293 5.293c.39.39 1.024.39 1.414 0s.39-1.024 0-1.414L13.414 12l5.293-5.293c.39-.39.39-1.024 0-1.414s-1.024-.39-1.414 0L12 10.586 6.707 5.293c-.39-.39-1.024-.39-1.414 0s-.39 1.024 0 1.414z"></path></svg>';
+      actions.appendChild(btnClose);
+
+      toast.appendChild(actions);
+      toastInner.appendChild(toast);
+    }
+
+    if (minimized.length > maxIndividual) {
+      var othersCount = minimized.length - maxIndividual;
+      var othersToast = document.createElement('div');
+      othersToast.className = 'gdoc-toast';
+      othersToast.setAttribute('data-preview-key', 'others');
+      othersToast.setAttribute('data-other-toast', '1');
+
+      var main2 = document.createElement('div');
+      main2.className = 'gdoc-toast-main';
+      var title2 = document.createElement('div');
+      title2.className = 'gdoc-toast-title';
+      title2.textContent = 'プレビューの他文書 (' + othersCount + ' 件)';
+      main2.appendChild(title2);
+      othersToast.appendChild(main2);
+
+      toastInner.appendChild(othersToast);
+    }
+  }
+
+  toastInner.addEventListener('click', function (e) {
+    var toast = e.target.closest('.gdoc-toast');
+    if (!toast) return;
+    var key = toast.getAttribute('data-preview-key');
+    var isOthers = toast.hasAttribute('data-other-toast');
+
+    if (isOthers) {
+      if (!isMobile) {
+        openListModal();
+      }
+      return;
+    }
+
+    var actionEl = e.target.closest('[data-action]');
+    var action = actionEl ? actionEl.getAttribute('data-action') : null;
+    var item = findItemByKey(key);
+    if (!item) return;
+
+    if (!action) {
+      // トースト本体クリック → 復帰
+      activatePreviewItem(item, true);
+      return;
+    }
+
+    if (action === 'copy') {
+      var url = item.href;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).catch(function () {});
+      } else {
+        var tmp = document.createElement('textarea');
+        tmp.style.position = 'fixed';
+        tmp.style.opacity = '0';
+        tmp.value = url;
+        document.body.appendChild(tmp);
+        tmp.select();
+        try { document.execCommand('copy'); } catch (err) {}
+        document.body.removeChild(tmp);
+      }
+    } else if (action === 'open') {
+      window.open(item.href, '_blank', 'noopener');
+    } else if (action === 'close') {
+      closeItemByKey(item.key);
+    } else if (action === 'jump') {
+      jumpToSourceForItem(item);
+    }
+  });
+
+  // ---- 他文書一覧モーダル ----
+  function renderListModal() {
+    listEl.innerHTML = '';
+    if (!state.items.length) return;
+
+    for (var i = 0; i < state.items.length; i++) {
+      var item = state.items[i];
+      var li = document.createElement('li');
+      li.className = 'gdoc-list-item';
+      li.setAttribute('data-preview-key', item.key);
+
+      var titleDiv = document.createElement('div');
+      titleDiv.className = 'gdoc-list-item-title';
+      titleDiv.textContent = item.title || item.href || '';
+      li.appendChild(titleDiv);
+
+      var actionsDiv = document.createElement('div');
+      actionsDiv.className = 'gdoc-list-item-actions';
+
+      var btnActivate = document.createElement('button');
+      btnActivate.type = 'button';
+      btnActivate.className = 'gdoc-list-item-btn';
+      btnActivate.setAttribute('data-action', 'activate');
+      btnActivate.textContent = '表示';
+      actionsDiv.appendChild(btnActivate);
+
+      var btnJumpBody = document.createElement('button');
+      btnJumpBody.type = 'button';
+      btnJumpBody.className = 'gdoc-list-item-btn';
+      btnJumpBody.setAttribute('data-action', 'jump');
+      btnJumpBody.textContent = '本文';
+      actionsDiv.appendChild(btnJumpBody);
+
+      var btnOpenTab = document.createElement('button');
+      btnOpenTab.type = 'button';
+      btnOpenTab.className = 'gdoc-list-item-btn';
+      btnOpenTab.setAttribute('data-action', 'openTab');
+      btnOpenTab.textContent = '他タブ';
+      actionsDiv.appendChild(btnOpenTab);
+
+      var btnClose = document.createElement('button');
+      btnClose.type = 'button';
+      btnClose.className = 'gdoc-list-item-btn';
+      btnClose.setAttribute('data-action', 'close');
+      btnClose.textContent = '閉じる';
+      actionsDiv.appendChild(btnClose);
+
+      var btnUp = document.createElement('button');
+      btnUp.type = 'button';
+      btnUp.className = 'gdoc-list-item-btn';
+      btnUp.setAttribute('data-action', 'up');
+      btnUp.textContent = '↑';
+      actionsDiv.appendChild(btnUp);
+
+      var btnDown = document.createElement('button');
+      btnDown.type = 'button';
+      btnDown.className = 'gdoc-list-item-btn';
+      btnDown.setAttribute('data-action', 'down');
+      btnDown.textContent = '↓';
+      actionsDiv.appendChild(btnDown);
+
+      li.appendChild(actionsDiv);
+      listEl.appendChild(li);
+    }
+  }
+
+  function openListModal() {
+    if (isMobile) return;
+    renderListModal();
+    listModal.hidden = false;
+  }
+
+  function closeListModal() {
+    listModal.hidden = true;
+  }
+
+  listModalClose.addEventListener('click', function () {
+    closeListModal();
+  });
+
+  listModal.addEventListener('click', function (e) {
+    if (e.target === listModal) {
+      closeListModal();
+    }
+  });
+
+  listEl.addEventListener('click', function (e) {
+    var li = e.target.closest('.gdoc-list-item');
+    if (!li) return;
+    var key = li.getAttribute('data-preview-key');
+    var item = findItemByKey(key);
+    if (!item) return;
+
+    var btn = e.target.closest('[data-action]');
+    if (!btn) return;
+    var action = btn.getAttribute('data-action');
+
+    if (action === 'openTab') {
+      window.open(item.href, '_blank', 'noopener');
+    } else if (action === 'close') {
+      closeItemByKey(item.key);
+      renderListModal();
+    } else if (action === 'activate') {
+      activatePreviewItem(item, true);
+      closeListModal();
+    } else if (action === 'jump') {
+      jumpToSourceForItem(item);
+      closeListModal();
+    } else if (action === 'up' || action === 'down') {
+      var items = state.items;
+      var idx = -1;
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].key === item.key) { idx = i; break; }
+      }
+      if (idx === -1) return;
+      var newIdx = action === 'up' ? idx - 1 : idx + 1;
+      if (newIdx < 0 || newIdx >= items.length) return;
+      var tmp = items[idx];
+      items[idx] = items[newIdx];
+      items[newIdx] = tmp;
+      saveState();
+      renderListModal();
+      rebuildToasts();
+    }
+  });
+
+  // ---- キーボード ----
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (!popover.hidden) {
+        popover.hidden = true;
+        currentLink = null;
+      } else if (!listModal.hidden) {
+        closeListModal();
+      } else if (!modal.hidden) {
+        // ESC ではプレビューを閉じず、トーストへ格納する
+        minimizeActiveToToast();
+      }
+    }
+  });
+
+  // ページ内リンクのクリックに対して、戻るボタンで元の位置に戻れるように履歴を積む
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var href = a.getAttribute('href');
+    if (!href || href === '#') return;
+
+    var url;
+    try {
+      url = new URL(a.href, window.location.href);
+    } catch (err) {
+      return;
+    }
+    if (url.pathname !== window.location.pathname || url.origin !== window.location.origin) {
+      return;
+    }
+
+    var id = decodeURIComponent(url.hash.slice(1));
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (!target) return;
+
+    e.preventDefault();
+
+    var scrollEl = getScrollElement();
+    var currentY = scrollEl.scrollTop;
+    try {
+      history.pushState({ __gdocScrollRestore: currentY }, url.hash, url.href);
+    } catch (err2) {}
+
+    applyJumpHighlight(target);
+  });
+
+  window.addEventListener('popstate', function (e) {
+    if (e.state && typeof e.state.__gdocScrollRestore === 'number') {
+      var scrollEl = getScrollElement();
+      scrollEl.scrollTop = e.state.__gdocScrollRestore;
+    }
+  });
+
+  // BGプレビュー対象リンクの検出とマーク
+  function markBgPreviewLinks() {
+    try {
+      // 全てのリンクを対象に検索
+      var allLinks = document.querySelectorAll('a[href]');
+      var markedCount = 0;
+      
+      for (var i = 0; i < allLinks.length; i++) {
+        var link = allLinks[i];
+        var href = link.getAttribute('href');
+        if (!href) continue;
+        
+        // 既にマークされている場合はスキップ
+        if (link.classList.contains('bg-preview-link')) continue;
+        
+        // 1. 索引リンク（idx- を含む）
+        if (href.indexOf('#idx-') !== -1) {
+          link.classList.add('bg-preview-link');
+          link.setAttribute('data-bg-type', 'index');
+          markedCount++;
+          continue;
+        }
+        
+        // 2. 目次リンク（toc- を含む）
+        if (href.indexOf('#toc-') !== -1 || href.indexOf('toc-') !== -1) {
+          link.classList.add('bg-preview-link');
+          link.setAttribute('data-bg-type', 'toc');
+          markedCount++;
+          continue;
+        }
+        
+        // 3. 章ファイルへのリンク（NN_chNN.html 形式）
+        if (href.match(/\d+_ch\d+\.html/)) {
+          link.classList.add('bg-preview-link');
+          link.setAttribute('data-bg-type', 'chapter');
+          markedCount++;
+          continue;
+        }
+        
+        // 4. 同一ページ内のアンカーリンク（#で始まる）
+        if (href.indexOf('#') === 0 && href.length > 1) {
+          // ヘッダーナビゲーションは除外
+          if (link.closest('header') || link.closest('.header-ui')) continue;
+          
+          link.classList.add('bg-preview-link');
+          link.setAttribute('data-bg-type', 'anchor');
+          markedCount++;
+          continue;
+        }
+      }
+      
+      console.log('BGプレビューリンクをマーク:', markedCount + '個');
+    } catch (e) {
+      console.warn('markBgPreviewLinks failed', e);
+    }
+  }
+
+  // BGプレビューリンクのイベントハンドラ
+  document.addEventListener('mouseover', function (e) {
+    var link = e.target.closest && e.target.closest('a.bg-preview-link');
+    if (!link) return;
+    
+    // プレビュー内のリンクの場合、既存のプレビューを最小化
+    if (link.closest('.bg-preview-body')) {
+      var activeItem = getActiveItem();
+      if (activeItem && activeItem.state === 'active') {
+        activeItem.state = 'minimized';
+        saveState();
+        if (!isMobile) {
+          rebuildToasts();
+        }
+      }
+    }
+    
+    cancelHideBgPopover();
+    cancelShowBgPopover();
+    bgShowTimer = window.setTimeout(function () {
+      showBgPopoverForLink(link);
+    }, POPOVER_SHOW_DELAY);
+  });
+
+  document.addEventListener('mouseout', function (e) {
+    var fromLink = e.target.closest && e.target.closest('a.bg-preview-link');
+    if (!fromLink) return;
+    var to = e.relatedTarget;
+    if (to && (to.closest && (to.closest('a.bg-preview-link') || to.closest('#bg-preview-popover')))) {
+      return;
+    }
+    cancelShowBgPopover();
+    scheduleHideBgPopover();
+  });
+
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('a.bg-preview-link');
+    if (!link) return;
+    
+    // ポップオーバー内のボタンクリックの場合は何もしない
+    if (e.target.closest('#bg-preview-popover')) {
+      return;
+    }
+    
+    // モバイルまたはタッチデバイスの場合
+    if (isMobile || ('ontouchstart' in window)) {
+      e.preventDefault();
+      cancelHideBgPopover();
+      if (bgPopover.hidden) {
+        showBgPopoverForLink(link);
+      } else if (currentBgLink === link) {
+        // 2回目のタップで遷移
+        window.location.href = link.href;
+      } else {
+        showBgPopoverForLink(link);
+      }
+    }
+    // PCの場合は通常のクリックで遷移（ポップオーバーは補助的）
+    // デフォルトの動作を許可（リンク遷移）
+  });
+
+  // 初期化: モード判定と既存状態の復元
+  updateMode();
+  markBgPreviewLinks();
+  
+  (function restoreFromState() {
+    if (!state || !state.items.length) return;
+    if (isMobile) return; // モバイルでは復元しない
+
+    rebuildToasts();
+    var active = getActiveItem();
+    if (active) {
+      activatePreviewItem(active, false);
+    }
+  })();
+
+  // 外部統合用の簡易API
+  window.__gdocPreviewAPI__ = {
+    getState: function () {
+      return { items: state.items.slice(), currentKey: currentKey };
+    },
+    getItems: function () {
+      return state.items.slice();
+    },
+    getItemsByKind: function (kind) {
+      return state.items.filter(function (item) {
+        return item.kind === kind;
+      });
+    },
+    activate: function (key) {
+      var item = findItemByKey(key);
+      if (item) activatePreviewItem(item, true);
+    },
+    close: function (key) {
+      closeItemByKey(key);
+    },
+    jumpToSource: function (key) {
+      var item = findItemByKey(key);
+      if (item) jumpToSourceForItem(item);
+    },
+    minimizeActive: function () {
+      minimizeActiveToToast();
+    },
+    refreshToasts: function () {
+      rebuildToasts();
+    },
+    openBgPreview: function (href, title) {
+      var link = document.createElement('a');
+      link.href = href;
+      link.textContent = title || href;
+      openBgPreviewFromLink(link);
+    }
+  };
+})();
+</script>
+<script src="../src/js/index-scroll.js"></script>
 
 
 

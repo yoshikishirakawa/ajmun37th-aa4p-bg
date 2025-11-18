@@ -1,0 +1,108 @@
+---
+title: "参考文献"
+---
+
+# 参考文献
+
+以下に各章で引用された参考文献を章ごとにまとめて表示します。
+
+```{python}
+# 章ごとの参考文献を生成するスクリプト
+import os
+import re
+from pathlib import Path
+from collections import defaultdict
+
+def generate_chapter_references():
+    """章ごとの参考文献リストを生成"""
+    
+    # 章名マッピング
+    chapter_order = [
+        ('00_front.bib', 'フロント挨拶'),
+        ('01_ch01.bib', '第1章 プロジェクト概要'),
+        ('02_ch02.bib', '第2章 技術的課題'),
+        ('03_ch03.bib', '第3章 実装方針'),
+        ('20_col01.bib', 'コラム1'),
+        ('21_col02.bib', 'コラム2'),
+        ('04_ch04.bib', '第4章 ユーザーインタフェース'),
+        ('05_ch05.bib', '第5章 パフォーマンス最適化'),
+        ('06_ch06.bib', '第6章 品質保証'),
+        ('07_ch07.bib', '第7章 プロジェクト完了'),
+        ('22_col03.bib', 'コラム3'),
+        ('90_afterword.bib', '編集後記')
+    ]
+    
+    bib_dir = Path("../meta/bib")
+    if not bib_dir.exists():
+        bib_dir = Path("meta/bib")
+    
+    references_output = []
+    
+    for bib_file, chapter_name in chapter_order:
+        bib_path = bib_dir / bib_file
+        
+        if bib_path.exists():
+            references_output.append(f"\n## {chapter_name}")
+            
+            # BibTeXファイルを読み込み
+            try:
+                with open(bib_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # BibTeXエントリを抽出
+                entry_pattern = r'@(\w+)\s*{\s*(\w+)\s*,([^@]*?)}'
+                entries = re.findall(entry_pattern, content, re.IGNORECASE | re.DOTALL)
+                
+                if entries:
+                    references_output.append("\n\\begin{enumerate}")
+                    
+                    for i, (entry_type, key, fields) in enumerate(entries, 1):
+                        # タイトルを抽出
+                        title_match = re.search(r'title\s*=\s*{([^}]*)}', fields)
+                        title = title_match.group(1) if title_match else f"[未公開タイトル {key}]"
+                        
+                        # 著者を抽出
+                        author_match = re.search(r'author\s*=\s*{([^}]*)}', fields)
+                        author = author_match.group(1) if author_match else ""
+                        
+                        # 出版年を抽出
+                        year_match = re.search(r'year\s*=\s*{([^}]*)}', fields)
+                        year = year_match.group(1) if year_match else ""
+                        
+                        if year:
+                            citation = f"{author} ({year}): *{title}*"
+                        else:
+                            citation = f"{author}: *{title}*"
+                        
+                        references_output.append(f"\\item {citation}")
+                    
+                    references_output.append("\\end{enumerate}")
+                else:
+                    references_output.append("\\n（この章では参考文献を引用していません）")
+                    
+            except Exception as e:
+                references_output.append(f"\\n（エラー: {bib_file} の読み込みに失敗しました: {e}）")
+        else:
+            references_output.append(f"\n## {chapter_name}")
+            references_output.append("\\n（この章では参考文献を引用していません）")
+    
+    # 共通技術資料
+    references_output.append("""
+## 共通技術資料
+
+\\begin{itemize}
+\\item Quarto.org (2020): *Quarto Technical Documentation*
+\\item Pandoc.org (2023): *Pandoc User's Guide*
+\\item W3C (2018): *HTML Living Standard*
+\\end{itemize}
+""")
+    
+    return "\\n".join(references_output)
+
+# 出力
+markdown_content = generate_chapter_references()
+print(markdown_content)
+```
+
+---
+*参考文献は各章のbibTeXファイルから自動的に生成されています*

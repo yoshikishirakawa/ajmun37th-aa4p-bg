@@ -1,5 +1,5 @@
 window.__NAV_DATA__ = {
-  "generated_at": "2025-11-12T16:34:54.282861+00:00",
+  "generated_at": "2025-11-18T23:27:36.267186+00:00",
   "pages": [
     {
       "source": "index.qmd",
@@ -10,73 +10,49 @@ window.__NAV_DATA__ = {
           "title": "平和への課題：補遺",
           "level": 1,
           "anchor": null,
-          "children": []
-        },
-        {
-          "title": "表紙？",
-          "level": 1,
-          "anchor": null,
           "children": [
             {
-              "title": "はじめに",
+              "title": "How To Use",
               "level": 2,
-              "anchor": "はじめに",
-              "children": []
-            },
-            {
-              "title": "基本レイアウト",
-              "level": 2,
-              "anchor": "基本レイアウト",
-              "children": []
-            },
-            {
-              "title": "ビルドについて",
-              "level": 2,
-              "anchor": "ビルドについて",
-              "children": []
-            },
-            {
-              "title": "技術仕様",
-              "level": 2,
-              "anchor": "技術仕様",
-              "children": []
-            },
-            {
-              "title": "章構成",
-              "level": 2,
-              "anchor": "章構成",
+              "anchor": "how-to-use",
               "children": [
                 {
-                  "title": "はじめに",
+                  "title": "問題が起きた時の対処",
                   "level": 3,
-                  "anchor": "はじめに-1",
+                  "anchor": "問題が起きた時の対処",
                   "children": []
                 },
                 {
-                  "title": "基本レイアウト",
+                  "title": "目次",
                   "level": 3,
-                  "anchor": "基本レイアウト-1",
+                  "anchor": "目次",
                   "children": []
                 },
                 {
-                  "title": "技術仕様",
+                  "title": "索引",
                   "level": 3,
-                  "anchor": "技術仕様-1",
+                  "anchor": "索引",
                   "children": []
                 },
                 {
-                  "title": "脚注",
+                  "title": "プレビュー機能",
                   "level": 3,
-                  "anchor": "脚注",
+                  "anchor": "プレビュー機能",
+                  "children": []
+                },
+                {
+                  "title": "コメント・マーカー機能",
+                  "level": 3,
+                  "anchor": "コメントマーカー機能",
+                  "children": []
+                },
+                {
+                  "title": "設定",
+                  "level": 3,
+                  "anchor": "設定",
                   "children": []
                 }
               ]
-            },
-            {
-              "title": "レイアウト確認",
-              "level": 2,
-              "anchor": "レイアウト確認",
-              "children": []
             }
           ]
         }
@@ -225,10 +201,10 @@ window.__NAV_DATA__ = {
     {
       "source": "content/02_ch02.md",
       "output": "content/02_ch02.html",
-      "title": "第2章　集団安全保障体制の系譜　　　　　　　　　　　　　　　　　　　　　〜「平和への課題：補遺」に至るまで〜",
+      "title": "第2章　集団安全保障体制の系譜",
       "headings": [
         {
-          "title": "第2章 集団安全保障体制の系譜 〜「平和への課題：補遺」に至るまで〜",
+          "title": "第2章 集団安全保障体制の系譜",
           "level": 1,
           "anchor": null,
           "children": [
@@ -281,21 +257,21 @@ window.__NAV_DATA__ = {
                   "children": []
                 },
                 {
-                  "title": "第３項 朝鮮戦争（まだ）",
+                  "title": "第3項 朝鮮戦争（まだ）",
                   "level": 3,
-                  "anchor": "第３項-朝鮮戦争まだ",
+                  "anchor": "第3項-朝鮮戦争まだ",
                   "children": []
                 },
                 {
-                  "title": "第４項 アジア・アフリカ諸国の外交努力",
+                  "title": "第4項 アジア・アフリカ諸国の外交努力",
                   "level": 3,
-                  "anchor": "第４項-アジアアフリカ諸国の外交努力",
+                  "anchor": "第4項-アジアアフリカ諸国の外交努力",
                   "children": []
                 },
                 {
-                  "title": "第５項 平和維持活動の登場",
+                  "title": "第5項 平和維持活動の登場",
                   "level": 3,
-                  "anchor": "第５項-平和維持活動の登場",
+                  "anchor": "第5項-平和維持活動の登場",
                   "children": []
                 },
                 {
@@ -348,9 +324,9 @@ window.__NAV_DATA__ = {
               "anchor": "第4節-ポスト冷戦期の国連の集団安全保障体制",
               "children": [
                 {
-                  "title": "第1項 湾岸戦争（最後に組み直し）",
+                  "title": "第1項 湾岸戦争（一次資料残し）",
                   "level": 3,
-                  "anchor": "第1項-湾岸戦争最後に組み直し",
+                  "anchor": "第1項-湾岸戦争一次資料残し",
                   "children": []
                 },
                 {
@@ -428,194 +404,133 @@ window.__NAV_DATA__ = {
     {
       "source": "content/03_ch03.md",
       "output": "content/03_ch03.html",
-      "title": "第3章 実装方針",
+      "title": "第3章　争点・論点解説",
       "headings": [
         {
-          "title": "第3章 実装方針",
+          "title": "第3章 争点・論点解説",
           "level": 1,
           "anchor": null,
           "children": [
             {
-              "title": "3.1 開発アプローチ",
+              "title": "",
               "level": 2,
-              "anchor": "開発アプローチ",
-              "children": [
-                {
-                  "title": "3.1.1 プロジェクト構造",
-                  "level": 3,
-                  "anchor": "プロジェクト構造",
-                  "children": []
-                },
-                {
-                  "title": "3.1.2 ビルドシステム",
-                  "level": 3,
-                  "anchor": "ビルドシステム",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "title": "3.2 技術選択",
-              "level": 2,
-              "anchor": "技術選択",
+              "anchor": "section",
               "children": []
             },
             {
-              "title": "3.3 品質保証",
+              "title": "大論点1 ： 国連の迅速展開能力の問題と対処",
               "level": 2,
-              "anchor": "品質保証",
+              "anchor": "大論点1-国連の迅速展開能力の問題と対処",
+              "children": [
+                {
+                  "title": "問題意識",
+                  "level": 3,
+                  "anchor": "問題意識",
+                  "children": []
+                },
+                {
+                  "title": "「平和への課題」以降における平和維持軍の迅速的な展開のための議論",
+                  "level": 3,
+                  "anchor": "平和への課題以降における平和維持軍の迅速的な展開のための議論",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "title": "ある種横断的な論点",
+              "level": 2,
+              "anchor": "ある種横断的な論点",
               "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "source": "content/20_col01.md",
-      "output": "content/20_col01.html",
-      "title": "コラム1：Webフォントの歴史",
-      "headings": [
-        {
-          "title": "コラム1：Webフォントの歴史",
-          "level": 1,
-          "anchor": null,
-          "children": [
+            },
             {
-              "title": "デジタルタイポグラフィの発展",
+              "title": "なるはや、効果的、PKO",
               "level": 2,
-              "anchor": "デジタルタイポグラフィの発展",
+              "anchor": "なるはや効果的pko",
               "children": []
             },
             {
-              "title": "画像フォントの時代",
+              "title": "・安保理の戦略的予備としての国連常設即応部隊の設立の是非",
               "level": 2,
-              "anchor": "画像フォントの時代",
-              "children": [
-                {
-                  "title": "課題",
-                  "level": 3,
-                  "anchor": "課題",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "title": "Webフォントの登場",
-              "level": 2,
-              "anchor": "webフォントの登場",
-              "children": [
-                {
-                  "title": "日本語対応の課題",
-                  "level": 3,
-                  "anchor": "日本語対応の課題",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "title": "サブセット化の重要性",
-              "level": 2,
-              "anchor": "サブセット化の重要性",
-              "children": [
-                {
-                  "title": "1. 静的サブセット",
-                  "level": 3,
-                  "anchor": "静的サブセット",
-                  "children": []
-                },
-                {
-                  "title": "2. 動的サブセット",
-                  "level": 3,
-                  "anchor": "動的サブセット",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "title": "現代のベストプラクティス",
-              "level": 2,
-              "anchor": "現代のベストプラクティス",
-              "children": [
-                {
-                  "title": "フォント選定の基準",
-                  "level": 3,
-                  "anchor": "フォント選定の基準",
-                  "children": []
-                },
-                {
-                  "title": "表示戦略",
-                  "level": 3,
-                  "anchor": "表示戦略",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "title": "今後の展望",
-              "level": 2,
-              "anchor": "今後の展望",
+              "anchor": "安保理の戦略的予備としての国連常設即応部隊の設立の是非",
               "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "source": "content/21_col02.md",
-      "output": "content/21_col02.html",
-      "title": "コラム2：アクセシビリティの重要性",
-      "headings": [
-        {
-          "title": "コラム2：アクセシビリティの重要性",
-          "level": 1,
-          "anchor": null,
-          "children": [
-            {
-              "title": "リテラシーの多様性",
-              "level": 2,
-              "anchor": "リテラシーの多様性",
-              "children": [
-                {
-                  "title": "視覚的配慮",
-                  "level": 3,
-                  "anchor": "視覚的配慮",
-                  "children": []
-                },
-                {
-                  "title": "聴覚的配慮",
-                  "level": 3,
-                  "anchor": "聴覚的配慮",
-                  "children": []
-                },
-                {
-                  "title": "身体的配慮",
-                  "level": 3,
-                  "anchor": "身体的配慮",
-                  "children": []
-                }
-              ]
             },
             {
-              "title": "技術的な実装",
+              "title": "・平和強制の権限(憲章7章下での権限)を持つPKOの是非（即応体制の関連で）",
               "level": 2,
-              "anchor": "技術的な実装",
+              "anchor": "平和強制の権限憲章7章下での権限を持つpkoの是非即応体制の関連で",
+              "children": []
+            },
+            {
+              "title": "",
+              "level": 2,
+              "anchor": "section-1",
+              "children": []
+            },
+            {
+              "title": "大論点2 ： 経済制裁レジームについて",
+              "level": 2,
+              "anchor": "大論点2-経済制裁レジームについて",
               "children": [
                 {
-                  "title": "WCAG 2.2 対応",
+                  "title": "当時の問題意識と補遺や他文書における提案内容",
                   "level": 3,
-                  "anchor": "wcag-2.2-対応",
+                  "anchor": "当時の問題意識と補遺や他文書における提案内容",
+                  "children": [
+                    {
+                      "title": "③第三国被害の補償",
+                      "level": 4,
+                      "anchor": "第三国被害の補償",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "title": "大論2 論点解説",
+                  "level": 3,
+                  "anchor": "大論2-論点解説",
                   "children": []
                 },
                 {
-                  "title": "キーボード操作",
+                  "title": "成果文書の形式",
                   "level": 3,
-                  "anchor": "キーボード操作",
+                  "anchor": "成果文書の形式",
                   "children": []
                 },
                 {
-                  "title": "スクリーンリーダー対応",
+                  "title": "OoA(禁止する議論)とその解説",
                   "level": 3,
-                  "anchor": "スクリーンリーダー対応",
+                  "anchor": "ooa禁止する議論とその解説",
+                  "children": [
+                    {
+                      "title": "スマートサンクション",
+                      "level": 4,
+                      "anchor": "スマートサンクション",
+                      "children": []
+                    },
+                    {
+                      "title": "個別国家による制裁",
+                      "level": 4,
+                      "anchor": "個別国家による制裁",
+                      "children": []
+                    },
+                    {
+                      "title": "実効支配地域の変動",
+                      "level": 4,
+                      "anchor": "実効支配地域の変動",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "title": "史実の結果とその後",
+                  "level": 3,
+                  "anchor": "史実の結果とその後",
+                  "children": []
+                },
+                {
+                  "title": "",
+                  "level": 3,
+                  "anchor": "section-2",
                   "children": []
                 }
               ]
@@ -627,29 +542,194 @@ window.__NAV_DATA__ = {
     {
       "source": "content/04_ch04.md",
       "output": "content/04_ch04.html",
-      "title": "第4章 UI/UX設計",
+      "title": "第4章 国連による紛争処理",
       "headings": [
         {
-          "title": "第4章 UI/UX設計",
+          "title": "第4章 国連による紛争処理",
           "level": 1,
           "anchor": null,
           "children": [
             {
-              "title": "4.1 基本原則",
+              "title": "はじめに",
               "level": 2,
-              "anchor": "基本原則",
+              "anchor": "はじめに",
               "children": []
             },
             {
-              "title": "4.2 コンポーネント設計",
+              "title": "国連（パレスチナ）休戦監視機構（1948年～） {#国連（パレスチナ）休戦監視機構（1948年～）}",
               "level": 2,
-              "anchor": "コンポーネント設計",
+              "anchor": "国連パレスチナ休戦監視機構1948年-国連パレスチナ休戦監視機構1948年",
               "children": []
             },
             {
-              "title": "4.3 アクセシビリティ",
+              "title": "国連緊急軍",
               "level": 2,
-              "anchor": "アクセシビリティ",
+              "anchor": "国連緊急軍",
+              "children": [
+                {
+                  "title": "第一次国連緊急軍（UNEFⅠ） {#第一次国連緊急軍（unefⅰ）}",
+                  "level": 3,
+                  "anchor": "第一次国連緊急軍unefⅰ-第一次国連緊急軍unefⅰ",
+                  "children": []
+                },
+                {
+                  "title": "第二次国連緊急軍（UNEFⅡ）",
+                  "level": 3,
+                  "anchor": "第二次国連緊急軍unefⅱ",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "title": "コンゴ動乱（1960年～1964年） {#コンゴ動乱（1960年～1964年）}",
+              "level": 2,
+              "anchor": "コンゴ動乱1960年1964年-コンゴ動乱1960年1964年",
+              "children": []
+            },
+            {
+              "title": "キプロス（1964年～） {#キプロス（1964年～）}",
+              "level": 2,
+              "anchor": "キプロス1964年-キプロス1964年",
+              "children": []
+            },
+            {
+              "title": "アンゴラ（1989年～1999年） {#アンゴラ（1989年～1999年）}",
+              "level": 2,
+              "anchor": "アンゴラ1989年1999年-アンゴラ1989年1999年",
+              "children": []
+            },
+            {
+              "title": "ナミビア（1989年～1990年） {#ナミビア（1989年～1990年）}",
+              "level": 2,
+              "anchor": "ナミビア1989年1990年-ナミビア1989年1990年",
+              "children": []
+            },
+            {
+              "title": "湾岸戦争（1990年～1991年） {#湾岸戦争（1990年～1991年）}",
+              "level": 2,
+              "anchor": "湾岸戦争1990年1991年-湾岸戦争1990年1991年",
+              "children": []
+            },
+            {
+              "title": "イラク（1991年～2003年） {#イラク（1991年～2003年）}",
+              "level": 2,
+              "anchor": "イラク1991年2003年-イラク1991年2003年",
+              "children": []
+            },
+            {
+              "title": "西サハラ（1991年～） {#西サハラ（1991年～）}",
+              "level": 2,
+              "anchor": "西サハラ1991年-西サハラ1991年",
+              "children": []
+            },
+            {
+              "title": "エルサルバドル（1991年～1995年） {#エルサルバドル（1991年～1995年）}",
+              "level": 2,
+              "anchor": "エルサルバドル1991年1995年-エルサルバドル1991年1995年",
+              "children": []
+            },
+            {
+              "title": "旧ユーゴスラビア（UNPROFOR） {#旧ユーゴスラビア（unprofor）}",
+              "level": 2,
+              "anchor": "旧ユーゴスラビアunprofor-旧ユーゴスラビアunprofor",
+              "children": [
+                {
+                  "title": "クロアチア",
+                  "level": 3,
+                  "anchor": "クロアチア",
+                  "children": []
+                },
+                {
+                  "title": "ボスニア",
+                  "level": 3,
+                  "anchor": "ボスニア",
+                  "children": []
+                },
+                {
+                  "title": "マケドニア",
+                  "level": 3,
+                  "anchor": "マケドニア",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "title": "カンボジア（1992年～1993年） {#カンボジア（1992年～1993年）}",
+              "level": 2,
+              "anchor": "カンボジア1992年1993年-カンボジア1992年1993年",
+              "children": []
+            },
+            {
+              "title": "ソマリア内戦（1990年代初期） {#ソマリア内戦（1990年代初期）}",
+              "level": 2,
+              "anchor": "ソマリア内戦1990年代初期-ソマリア内戦1990年代初期",
+              "children": []
+            },
+            {
+              "title": "モザンビーク（1992年～1994年） {#モザンビーク（1992年～1994年）}",
+              "level": 2,
+              "anchor": "モザンビーク1992年1994年-モザンビーク1992年1994年",
+              "children": []
+            },
+            {
+              "title": "リベリア（1993年～1997年） {#リベリア（1993年～1997年）}",
+              "level": 2,
+              "anchor": "リベリア1993年1997年-リベリア1993年1997年",
+              "children": []
+            },
+            {
+              "title": "ハイチ（1993年～） {#ハイチ（1993年～）}",
+              "level": 2,
+              "anchor": "ハイチ1993年-ハイチ1993年",
+              "children": []
+            },
+            {
+              "title": "ルワンダ内戦（1994年） {#ルワンダ内戦（1994年）}",
+              "level": 2,
+              "anchor": "ルワンダ内戦1994年-ルワンダ内戦1994年",
+              "children": []
+            },
+            {
+              "title": "エピローグ",
+              "level": 2,
+              "anchor": "エピローグ",
+              "children": [
+                {
+                  "title": "伝統的PKO",
+                  "level": 3,
+                  "anchor": "伝統的pko",
+                  "children": []
+                },
+                {
+                  "title": "防止（予防）型PKO",
+                  "level": 3,
+                  "anchor": "防止予防型pko",
+                  "children": []
+                },
+                {
+                  "title": "多機能型PKO",
+                  "level": 3,
+                  "anchor": "多機能型pko",
+                  "children": []
+                },
+                {
+                  "title": "複雑・緊急事態型PKO",
+                  "level": 3,
+                  "anchor": "複雑緊急事態型pko",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "title": "参照",
+              "level": 2,
+              "anchor": "参照",
+              "children": []
+            },
+            {
+              "title": "参考文献",
+              "level": 2,
+              "anchor": "参考文献",
               "children": []
             }
           ]
@@ -659,42 +739,10 @@ window.__NAV_DATA__ = {
     {
       "source": "content/05_ch05.md",
       "output": "content/05_ch05.html",
-      "title": "第5章 パフォーマンス最適化",
+      "title": "第5章　国連の制度",
       "headings": [
         {
-          "title": "第5章 パフォーマンス最適化",
-          "level": 1,
-          "anchor": null,
-          "children": [
-            {
-              "title": "5.1 読み込み速度",
-              "level": 2,
-              "anchor": "読み込み速度",
-              "children": []
-            },
-            {
-              "title": "5.2 レンダリングの効率化",
-              "level": 2,
-              "anchor": "レンダリングの効率化",
-              "children": []
-            },
-            {
-              "title": "5.3 キャッシュ戦略",
-              "level": 2,
-              "anchor": "キャッシュ戦略",
-              "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "source": "content/06_ch06.md",
-      "output": "content/06_ch06.html",
-      "title": "第6章　国連の制度",
-      "headings": [
-        {
-          "title": "第6章 国連の制度",
+          "title": "第5章 国連の制度",
           "level": 1,
           "anchor": null,
           "children": [
@@ -713,17 +761,36 @@ window.__NAV_DATA__ = {
                   "title": "第1項 概要・組織構造",
                   "level": 3,
                   "anchor": "第1項-概要組織構造",
-                  "children": []
-                },
-                {
-                  "title": "第2項 安全保障理事会5",
-                  "level": 3,
-                  "anchor": "第2項-安全保障理事会06_ch06-5",
                   "children": [
                     {
-                      "title": "概要",
+                      "title": "国連総会",
                       "level": 4,
-                      "anchor": "概要",
+                      "anchor": "国連総会",
+                      "children": []
+                    },
+                    {
+                      "title": "国連事務局",
+                      "level": 4,
+                      "anchor": "国連事務局",
+                      "children": []
+                    },
+                    {
+                      "title": "その他の関連機関",
+                      "level": 4,
+                      "anchor": "その他の関連機関",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "title": "第2項 安全保障理事会14",
+                  "level": 3,
+                  "anchor": "第2項-安全保障理事会05_ch05-14",
+                  "children": [
+                    {
+                      "title": "安保理の概要",
+                      "level": 4,
+                      "anchor": "安保理の概要",
                       "children": []
                     },
                     {
@@ -783,20 +850,20 @@ window.__NAV_DATA__ = {
                   "anchor": "第4項-安保理決議に基づく義務",
                   "children": [
                     {
-                      "title": "安保理決議に基づく義務の発生",
+                      "title": "義務の発生",
                       "level": 4,
-                      "anchor": "安保理決議に基づく義務の発生",
+                      "anchor": "義務の発生",
+                      "children": []
+                    },
+                    {
+                      "title": "安保理の措置の限界",
+                      "level": 4,
+                      "anchor": "安保理の措置の限界",
                       "children": []
                     }
                   ]
                 }
               ]
-            },
-            {
-              "title": "コラム 安保理決議の拘束力",
-              "level": 2,
-              "anchor": "コラム-安保理決議の拘束力",
-              "children": []
             },
             {
               "title": "第2節 国連財政",
@@ -810,9 +877,9 @@ window.__NAV_DATA__ = {
                   "children": []
                 },
                 {
-                  "title": "分担比率の決定と滞納",
+                  "title": "分担と滞納",
                   "level": 4,
-                  "anchor": "分担比率の決定と滞納",
+                  "anchor": "分担と滞納",
                   "children": []
                 },
                 {
@@ -827,9 +894,15 @@ window.__NAV_DATA__ = {
                       "children": []
                     },
                     {
-                      "title": "PKO予算の分担率決定",
+                      "title": "PKO予算の分担",
                       "level": 4,
-                      "anchor": "pko予算の分担率決定",
+                      "anchor": "pko予算の分担",
+                      "children": []
+                    },
+                    {
+                      "title": "その後のPKOおよび通常予算改革",
+                      "level": 4,
+                      "anchor": "その後のpkoおよび通常予算改革",
                       "children": []
                     }
                   ]
@@ -837,9 +910,28 @@ window.__NAV_DATA__ = {
               ]
             },
             {
-              "title": "第3節 国連による経済制裁",
+              "title": "第3節 PKOができるまで",
               "level": 2,
-              "anchor": "第3節-国連による経済制裁",
+              "anchor": "第3節-pkoができるまで",
+              "children": [
+                {
+                  "title": "第1項 PKOの設立過程",
+                  "level": 3,
+                  "anchor": "第1項-pkoの設立過程",
+                  "children": []
+                },
+                {
+                  "title": "第2項 当時の問題",
+                  "level": 3,
+                  "anchor": "第2項-当時の問題",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "title": "第4節 国連の経済制裁",
+              "level": 2,
+              "anchor": "第4節-国連の経済制裁",
               "children": [
                 {
                   "title": "第1項 国際連合憲章における経済制裁措置",
@@ -850,12 +942,6 @@ window.__NAV_DATA__ = {
                       "title": "国際連盟期",
                       "level": 4,
                       "anchor": "国際連盟期",
-                      "children": []
-                    },
-                    {
-                      "title": "",
-                      "level": 4,
-                      "anchor": "section",
                       "children": []
                     },
                     {
@@ -957,6 +1043,12 @@ window.__NAV_DATA__ = {
                       "children": []
                     },
                     {
+                      "title": "対リビア制裁",
+                      "level": 4,
+                      "anchor": "対リビア制裁",
+                      "children": []
+                    },
+                    {
                       "title": "対ハイチ制裁",
                       "level": 4,
                       "anchor": "対ハイチ制裁",
@@ -965,164 +1057,155 @@ window.__NAV_DATA__ = {
                   ]
                 },
                 {
-                  "title": "第3項 経済制裁に伴う問題とその後",
+                  "title": "第4項 経済制裁に伴う問題とその後",
                   "level": 3,
-                  "anchor": "第3項-経済制裁に伴う問題とその後",
+                  "anchor": "第4項-経済制裁に伴う問題とその後",
+                  "children": [
+                    {
+                      "title": "補遺へと議論経緯",
+                      "level": 4,
+                      "anchor": "補遺へと議論経緯",
+                      "children": []
+                    },
+                    {
+                      "title": "平和への課題：補遺",
+                      "level": 4,
+                      "anchor": "平和への課題補遺",
+                      "children": []
+                    },
+                    {
+                      "title": "史実のその後",
+                      "level": 4,
+                      "anchor": "史実のその後",
+                      "children": []
+                    },
+                    {
+                      "title": "スマートサンクション",
+                      "level": 4,
+                      "anchor": "スマートサンクション",
+                      "children": []
+                    },
+                    {
+                      "title": "制裁の現在",
+                      "level": 4,
+                      "anchor": "制裁の現在",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "source": "content/06_ch06.md",
+      "output": "content/06_ch06.html",
+      "title": "第1節　国際法法原論",
+      "headings": [
+        {
+          "title": "第1節 国際法法原論",
+          "level": 1,
+          "anchor": null,
+          "children": [
+            {
+              "title": "第0項 国際法初めて解説",
+              "level": 3,
+              "anchor": "第0項-国際法初めて解説",
+              "children": []
+            },
+            {
+              "title": "第1項 国際法と国内法における違法行為への対応の概念",
+              "level": 3,
+              "anchor": "第1項-国際法と国内法における違法行為への対応の概念",
+              "children": []
+            },
+            {
+              "title": "第2項 内政不干渉原則",
+              "level": 3,
+              "anchor": "第2項-内政不干渉原則",
+              "children": []
+            },
+            {
+              "title": "第2節 国家責任法",
+              "level": 2,
+              "anchor": "第2節-国家責任法",
+              "children": [
+                {
+                  "title": "・国家責任法の成り立ち",
+                  "level": 3,
+                  "anchor": "国家責任法の成り立ち",
                   "children": []
                 },
                 {
-                  "title": "第4項 国連憲章第50条の注解（第二校）",
+                  "title": "第1項",
                   "level": 3,
-                  "anchor": "第4項-国連憲章第50条の注解第二校",
+                  "anchor": "第1項",
+                  "children": []
+                },
+                {
+                  "title": "・国家責任法のあらまし～国家責任の定義・発生～",
+                  "level": 3,
+                  "anchor": "国家責任法のあらまし国家責任の定義発生",
+                  "children": [
+                    {
+                      "title": "・要件①",
+                      "level": 4,
+                      "anchor": "要件①",
+                      "children": []
+                    },
+                    {
+                      "title": "・要件②",
+                      "level": 4,
+                      "anchor": "要件②",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "title": "第2項",
+                  "level": 3,
+                  "anchor": "第2項",
+                  "children": []
+                },
+                {
+                  "title": "・国家責任法のあらまし～国家責任の結果～",
+                  "level": 3,
+                  "anchor": "国家責任法のあらまし国家責任の結果",
+                  "children": []
+                },
+                {
+                  "title": "・対抗措置",
+                  "level": 3,
+                  "anchor": "対抗措置",
+                  "children": []
+                },
+                {
+                  "title": "・対抗措置としての単独国家による制裁",
+                  "level": 3,
+                  "anchor": "対抗措置としての単独国家による制裁",
                   "children": []
                 }
               ]
             },
             {
-              "title": "第4節 国連平和維持活動(PKO)",
+              "title": "・国連による経済制裁の法的問題",
               "level": 2,
-              "anchor": "第4節-国連平和維持活動pko",
+              "anchor": "国連による経済制裁の法的問題",
+              "children": []
+            },
+            {
+              "title": "第3節 国際経済法",
+              "level": 2,
+              "anchor": "第3節-国際経済法",
               "children": []
             },
             {
               "title": "参考文献",
               "level": 2,
               "anchor": "参考文献",
-              "children": [
-                {
-                  "title": "第1節",
-                  "level": 3,
-                  "anchor": "第1節",
-                  "children": []
-                },
-                {
-                  "title": "第2節",
-                  "level": 3,
-                  "anchor": "第2節",
-                  "children": []
-                },
-                {
-                  "title": "第3節",
-                  "level": 3,
-                  "anchor": "第3節",
-                  "children": [
-                    {
-                      "title": "ユーゴ",
-                      "level": 4,
-                      "anchor": "ユーゴ",
-                      "children": []
-                    }
-                  ]
-                },
-                {
-                  "title": "第4節",
-                  "level": 3,
-                  "anchor": "第4節",
-                  "children": []
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "source": "content/07_ch07.md",
-      "output": "content/07_ch07.html",
-      "title": "第7章 まとめと展望",
-      "headings": [
-        {
-          "title": "第7章 まとめと展望",
-          "level": 1,
-          "anchor": null,
-          "children": [
-            {
-              "title": "7.1 プロジェクトの成果",
-              "level": 2,
-              "anchor": "プロジェクトの成果",
               "children": []
-            },
-            {
-              "title": "7.2 技術的貢献",
-              "level": 2,
-              "anchor": "技術的貢献",
-              "children": []
-            },
-            {
-              "title": "7.3 今後の発展",
-              "level": 2,
-              "anchor": "今後の発展",
-              "children": []
-            },
-            {
-              "title": "まとめ",
-              "level": 2,
-              "anchor": "まとめ",
-              "children": []
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "source": "content/22_col03.md",
-      "output": "content/22_col03.html",
-      "title": "コラム3：今後の技術動向",
-      "headings": [
-        {
-          "title": "コラム3：今後の技術動向",
-          "level": 1,
-          "anchor": null,
-          "children": [
-            {
-              "title": "新しい技術の登場",
-              "level": 2,
-              "anchor": "新しい技術の登場",
-              "children": [
-                {
-                  "title": "Variable Fonts",
-                  "level": 3,
-                  "anchor": "variable-fonts",
-                  "children": []
-                },
-                {
-                  "title": "Container Queries",
-                  "level": 3,
-                  "anchor": "container-queries",
-                  "children": []
-                },
-                {
-                  "title": "Web Components",
-                  "level": 3,
-                  "anchor": "web-components",
-                  "children": []
-                }
-              ]
-            },
-            {
-              "title": "発展の可能性",
-              "level": 2,
-              "anchor": "発展の可能性",
-              "children": [
-                {
-                  "title": "PWA化",
-                  "level": 3,
-                  "anchor": "pwa化",
-                  "children": []
-                },
-                {
-                  "title": "オフライン対応",
-                  "level": 3,
-                  "anchor": "オフライン対応",
-                  "children": []
-                },
-                {
-                  "title": "マルチデバイス同期",
-                  "level": 3,
-                  "anchor": "マルチデバイス同期",
-                  "children": []
-                }
-              ]
             }
           ]
         }
@@ -1219,35 +1302,35 @@ window.__NAV_DATA__ = {
           "title": "付録 C — 索引",
           "level": 1,
           "anchor": null,
+          "children": []
+        },
+        {
+          "title": "索引",
+          "level": 1,
+          "anchor": null,
           "children": [
             {
-              "title": "テスト",
+              "title": "イラク情勢",
               "level": 2,
-              "anchor": "テスト",
+              "anchor": "イラク情勢",
               "children": []
             },
             {
-              "title": "テスト2",
+              "title": "主要な安保理決議",
               "level": 2,
-              "anchor": "テスト2",
+              "anchor": "主要な安保理決議",
               "children": []
             },
             {
-              "title": "国連憲章各条",
+              "title": "国連憲章",
               "level": 2,
-              "anchor": "国連憲章各条",
+              "anchor": "国連憲章",
               "children": []
             },
             {
-              "title": "ア段",
+              "title": "カテゴリなし",
               "level": 2,
-              "anchor": "ア段",
-              "children": []
-            },
-            {
-              "title": "カ段",
-              "level": 2,
-              "anchor": "カ段",
+              "anchor": "カテゴリなし",
               "children": []
             }
           ]
