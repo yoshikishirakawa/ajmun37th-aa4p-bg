@@ -3522,6 +3522,13 @@ let readingStateSaveTimer = null;
     } else {
       renderSidebarFootnotes();
     }
+    try {
+      if (document.body) {
+        document.body.classList.add('js-footnotes-enhanced');
+      }
+    } catch (e) {
+      console.warn('applyFootnoteLayout: failed to mark enhanced footnotes state', e);
+    }
   }
 
   function renderSidebarFootnotes() {

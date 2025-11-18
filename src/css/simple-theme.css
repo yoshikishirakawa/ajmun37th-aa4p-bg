@@ -342,11 +342,6 @@ main.content blockquote {
   font-style: normal;
 }
 
-section.footnotes,
-.footnotes {
-  display: none !important;
-}
-
 .scroll-settings-header.visible {
   transform: translateY(100px);
 }
@@ -1802,8 +1797,9 @@ header.quarto-title-block {
     text-decoration: underline;
   }
 
-  /* 元の脚注を非表示 */
-  .footnotes:not(.right-sidebar .footnotes) {
+  /* 元の脚注を非表示（JSで拡張された場合のみ） */
+  body.js-footnotes-enhanced section.footnotes,
+  body.js-footnotes-enhanced .footnotes:not(.right-sidebar .footnotes) {
     display: none !important;
   }
 

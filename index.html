@@ -4673,10 +4673,6 @@ border-radius: 8px;
 background: var(--indent-guide-surface);
 font-style: normal;
 }
-section.footnotes,
-.footnotes {
-display: none !important;
-}
 .scroll-settings-header.visible {
 transform: translateY(100px);
 }
@@ -5922,7 +5918,8 @@ text-decoration: none;
 text-decoration: underline;
 }
 
-.footnotes:not(.right-sidebar .footnotes) {
+body.js-footnotes-enhanced section.footnotes,
+body.js-footnotes-enhanced .footnotes:not(.right-sidebar .footnotes) {
 display: none !important;
 }
 
@@ -9878,6 +9875,13 @@ let readingStateSaveTimer = null;
       renderInlineFootnotes();
     } else {
       renderSidebarFootnotes();
+    }
+    try {
+      if (document.body) {
+        document.body.classList.add('js-footnotes-enhanced');
+      }
+    } catch (e) {
+      console.warn('applyFootnoteLayout: failed to mark enhanced footnotes state', e);
     }
   }
 
