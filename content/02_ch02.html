@@ -1524,6 +1524,67 @@ const STORAGE_KEYS = {
   readingState: 'quarto-reading-state'
 };
 
+const PANEL_STORAGE_KEYS = {
+  leftWidth: 'aj-panel-left-width',
+  rightWidth: 'aj-panel-right-width',
+  leftState: 'aj-panel-left-state',
+  rightState: 'aj-panel-right-state'
+};
+
+const PANEL_LIMITS = {
+  stictionStart: 150,
+  collapseWidth: 120,
+  keyboardStep: 16,
+  minVisibleWidth: 130
+};
+
+const FONT_SIZE_PANEL_WIDTHS = {
+  '3XS': { left: 240, right: 280 },
+  '2XS': { left: 260, right: 300 },
+  'XS': { left: 280, right: 320 },
+  'S': { left: 300, right: 340 },
+  'M': { left: 320, right: 360 },
+  'DEFAULT': { left: 320, right: 360 },
+  'L': { left: 340, right: 380 },
+  'XL': { left: 360, right: 400 }
+};
+
+const DEFAULT_PANEL_WIDTHS = {
+  left: FONT_SIZE_PANEL_WIDTHS.M.left,
+  right: FONT_SIZE_PANEL_WIDTHS.M.right
+};
+
+const PANEL_SIDE_CONFIG = {
+  left: {
+    cssVar: '--aj-left-panel-width',
+    datasetKey: 'leftPanelState',
+    widthStorage: PANEL_STORAGE_KEYS.leftWidth,
+    stateStorage: PANEL_STORAGE_KEYS.leftState,
+    handleLabel: '目次サイドバーを展開',
+    resizerLabel: '左サイドバーの幅を調整'
+  },
+  right: {
+    cssVar: '--aj-right-panel-width',
+    datasetKey: 'rightPanelState',
+    widthStorage: PANEL_STORAGE_KEYS.rightWidth,
+    stateStorage: PANEL_STORAGE_KEYS.rightState,
+    handleLabel: '脚注・コメントサイドバーを展開',
+    resizerLabel: '右サイドバーの幅を調整'
+  }
+};
+
+let PANEL_STATE = {
+  left: createInitialPanelState('left'),
+  right: createInitialPanelState('right')
+};
+
+let PANEL_RESIZE_CONTEXT = null;
+let PANEL_UI_ELEMENTS = {
+  handles: { left: null, right: null },
+  resizers: { left: null, right: null }
+};
+let CURRENT_LAYOUT_MODE = null;
+
   const NAV_DATA_STATE = {
     promise: null,
     data: null,
@@ -1562,6 +1623,10 @@ const STORAGE_KEYS = {
       localStorage.removeItem('theme');
       localStorage.removeItem('tocLocation');
       localStorage.removeItem('scrollPos');
+      localStorage.removeItem(PANEL_STORAGE_KEYS.leftWidth);
+      localStorage.removeItem(PANEL_STORAGE_KEYS.rightWidth);
+      localStorage.removeItem(PANEL_STORAGE_KEYS.leftState);
+      localStorage.removeItem(PANEL_STORAGE_KEYS.rightState);
     } catch (e) {
       console.warn('resetUiSettings failed', e);
     }
@@ -1668,6 +1733,383 @@ const STORAGE_KEYS = {
         }
       }
     });
+  }
+
+  // =============================
+  // パネル幅・レイアウト制御
+  // =============================
+  function createInitialPanelState(side) {
+    const base = DEFAULT_PANEL_WIDTHS[side] || 280;
+    return {
+      width: base,
+      defaultWidth: base,
+      state: 'expanded',
+      userSized: false
+    };
+  }
+
+  function resolveFontSizePreset(sizeToken) {
+    const raw = (sizeToken || 'M').toString().trim().toUpperCase();
+    const normalized = raw.replace(/[^A-Z0-9]/g, '');
+    if (FONT_SIZE_PANEL_WIDTHS[normalized]) {
+      return FONT_SIZE_PANEL_WIDTHS[normalized];
+    }
+    const aliasMap = {
+      DEFAULT: 'M',
+      MEDIUM: 'M',
+      SMALL: 'S',
+      LARGE: 'L',
+      XLARGE: 'XL',
+      XXLARGE: 'XL',
+      XSMALL: 'XS',
+      XXSMALL: '2XS',
+      XXXSMALL: '3XS'
+    };
+    const mapped = aliasMap[normalized] || 'M';
+    return FONT_SIZE_PANEL_WIDTHS[mapped] || FONT_SIZE_PANEL_WIDTHS.M;
+  }
+
+  function initializePanelSizing() {
+    const preset = resolveFontSizePreset(document.body?.getAttribute('data-font-size'));
+    ['left', 'right'].forEach(side => {
+      const cfg = PANEL_SIDE_CONFIG[side];
+      if (!cfg) return;
+      const storedWidth = readStoredPanelWidth(cfg.widthStorage);
+      const storedState = readStoredPanelState(cfg.stateStorage);
+      const defaults = preset[side] || DEFAULT_PANEL_WIDTHS[side];
+      const state = PANEL_STATE[side] || createInitialPanelState(side);
+      state.defaultWidth = defaults;
+      state.width = Number.isFinite(storedWidth) ? storedWidth : defaults;
+      state.userSized = Number.isFinite(storedWidth);
+      state.state = storedState || 'expanded';
+      PANEL_STATE[side] = state;
+      setPanelCssWidth(side, state.width);
+      setBodyPanelState(side, state.state);
+    });
+    updatePanelHandles();
+  }
+
+  function handlePanelFontSizeChange(sizeToken) {
+    const preset = resolveFontSizePreset(sizeToken);
+    ['left', 'right'].forEach(side => {
+      const defaults = preset[side] || DEFAULT_PANEL_WIDTHS[side];
+      const state = PANEL_STATE[side];
+      if (!state) return;
+      state.defaultWidth = defaults;
+      if (!state.userSized) {
+        state.width = defaults;
+        setPanelCssWidth(side, defaults);
+        clearStoredPanelWidth(side);
+        savePanelState(side);
+      }
+    });
+  }
+
+  function readStoredPanelWidth(key) {
+    if (!key) return null;
+    try {
+      const raw = localStorage.getItem(key);
+      const num = raw == null ? NaN : Number(raw);
+      return Number.isFinite(num) ? num : null;
+    } catch (err) {
+      console.warn('Failed to read panel width', key, err);
+      return null;
+    }
+  }
+
+  function readStoredPanelState(key) {
+    if (!key) return 'expanded';
+    try {
+      const value = localStorage.getItem(key);
+      return value === 'collapsed' ? 'collapsed' : 'expanded';
+    } catch (err) {
+      console.warn('Failed to read panel state', key, err);
+      return 'expanded';
+    }
+  }
+
+  function clearStoredPanelWidth(side) {
+    const cfg = PANEL_SIDE_CONFIG[side];
+    if (!cfg) return;
+    try {
+      localStorage.removeItem(cfg.widthStorage);
+    } catch (err) {
+      console.warn('Failed to clear panel width', side, err);
+    }
+  }
+
+  function savePanelState(side) {
+    const cfg = PANEL_SIDE_CONFIG[side];
+    const state = PANEL_STATE[side];
+    if (!cfg || !state) return;
+    try {
+      localStorage.setItem(cfg.stateStorage, state.state);
+      if (state.userSized) {
+        localStorage.setItem(cfg.widthStorage, String(Math.round(state.width)));
+      } else {
+        localStorage.removeItem(cfg.widthStorage);
+      }
+    } catch (err) {
+      console.warn('Failed to save panel state', side, err);
+    }
+  }
+
+  function setPanelCssWidth(side, width) {
+    const cfg = PANEL_SIDE_CONFIG[side];
+    if (!cfg) return;
+    const px = Math.max(0, Math.round(Number(width) || 0));
+    document.documentElement.style.setProperty(cfg.cssVar, `${px}px`);
+  }
+
+  function setBodyPanelState(side, value) {
+    if (!document.body) return;
+    if (side === 'left') {
+      document.body.dataset.leftPanelState = value;
+    } else if (side === 'right') {
+      document.body.dataset.rightPanelState = value;
+    }
+  }
+
+  function collapsePanel(side, opts = {}) {
+    const state = PANEL_STATE[side];
+    if (!state || state.state === 'collapsed') return;
+    state.state = 'collapsed';
+    setBodyPanelState(side, 'collapsed');
+    updatePanelHandles();
+    if (!opts.skipSave) {
+      savePanelState(side);
+    }
+  }
+
+  function expandPanel(side, opts = {}) {
+    const state = PANEL_STATE[side];
+    if (!state) return;
+    state.state = 'expanded';
+    setBodyPanelState(side, 'expanded');
+    setPanelCssWidth(side, state.width || state.defaultWidth);
+    updatePanelHandles();
+    if (!opts.skipSave) {
+      savePanelState(side);
+    }
+  }
+
+  function evaluatePanelDragWidth(rawWidth) {
+    if (!Number.isFinite(rawWidth)) {
+      return { shouldCollapse: false, width: PANEL_LIMITS.stictionStart };
+    }
+    if (rawWidth <= PANEL_LIMITS.collapseWidth) {
+      return { shouldCollapse: true };
+    }
+    if (rawWidth >= PANEL_LIMITS.stictionStart) {
+      return { shouldCollapse: false, width: rawWidth };
+    }
+    const span = PANEL_LIMITS.stictionStart - PANEL_LIMITS.collapseWidth;
+    const ratio = Math.max(0, Math.min(1, (rawWidth - PANEL_LIMITS.collapseWidth) / span));
+    const eased = PANEL_LIMITS.collapseWidth + Math.pow(ratio, 1.35) * span;
+    return { shouldCollapse: false, width: Math.max(PANEL_LIMITS.minVisibleWidth, eased) };
+  }
+
+  function applyWidthChangeFromUser(side, proposedWidth, opts = {}) {
+    const state = PANEL_STATE[side];
+    if (!state) return;
+    const outcome = evaluatePanelDragWidth(proposedWidth);
+    if (outcome.shouldCollapse) {
+      collapsePanel(side, { skipSave: opts.live });
+      return;
+    }
+    state.width = Math.round(outcome.width);
+    if (opts.markUserSized) state.userSized = true;
+    expandPanel(side, { skipSave: true });
+    setPanelCssWidth(side, state.width);
+    if (!opts.live) {
+      savePanelState(side);
+    }
+  }
+
+  function ensurePanelHandles() {
+    const body = document.body;
+    if (!body) return;
+    ['left', 'right'].forEach(side => {
+      if (PANEL_UI_ELEMENTS.handles[side]) return;
+      const cfg = PANEL_SIDE_CONFIG[side];
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = `panel-handle panel-handle--${side}`;
+      btn.setAttribute('aria-label', cfg.handleLabel);
+      btn.setAttribute('tabindex', '0');
+      btn.dataset.side = side;
+      const icon = document.createElement('span');
+      icon.className = 'panel-handle__icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = side === 'left' ? '›' : '‹';
+      btn.appendChild(icon);
+      btn.addEventListener('click', () => expandPanelFromHandle(side));
+      btn.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          expandPanelFromHandle(side);
+        }
+      });
+      body.appendChild(btn);
+      PANEL_UI_ELEMENTS.handles[side] = btn;
+    });
+    updatePanelHandles();
+  }
+
+  function expandPanelFromHandle(side) {
+    const state = PANEL_STATE[side];
+    if (!state) return;
+    state.state = 'expanded';
+    setBodyPanelState(side, 'expanded');
+    const targetWidth = Math.max(PANEL_LIMITS.minVisibleWidth, state.width || state.defaultWidth);
+    setPanelCssWidth(side, targetWidth);
+    updatePanelHandles();
+    savePanelState(side);
+  }
+
+  function ensurePanelResizers() {
+    const hosts = {
+      left: document.getElementById('quarto-sidebar'),
+      right: document.getElementById('quarto-margin-sidebar')
+    };
+    Object.entries(hosts).forEach(([side, host]) => {
+      if (!host || PANEL_UI_ELEMENTS.resizers[side]) return;
+      const cfg = PANEL_SIDE_CONFIG[side];
+      const resizer = document.createElement('div');
+      resizer.className = `panel-resizer panel-resizer-${side}`;
+      resizer.setAttribute('role', 'separator');
+      resizer.setAttribute('tabindex', '0');
+      resizer.setAttribute('aria-orientation', 'vertical');
+      resizer.setAttribute('aria-label', cfg.resizerLabel);
+      resizer.dataset.side = side;
+      resizer.addEventListener('pointerdown', handlePanelResizePointerDown);
+      resizer.addEventListener('keydown', handlePanelResizerKeydown);
+      host.appendChild(resizer);
+      PANEL_UI_ELEMENTS.resizers[side] = resizer;
+    });
+  }
+
+  function updatePanelHandles() {
+    const desktop = CURRENT_LAYOUT_MODE === 'desktop';
+    ['left', 'right'].forEach(side => {
+      const handle = PANEL_UI_ELEMENTS.handles[side];
+      if (!handle) return;
+      const state = PANEL_STATE[side];
+      const visible = desktop && state && state.state === 'collapsed';
+      handle.classList.toggle('panel-handle--visible', !!visible);
+    });
+  }
+
+  function handlePanelResizePointerDown(event) {
+    const side = event.currentTarget?.dataset?.side;
+    if (!side) return;
+    if (event.button !== 0) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const state = PANEL_STATE[side];
+    if (!state || state.state === 'collapsed') return;
+    PANEL_RESIZE_CONTEXT = {
+      side,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startWidth: state.width || state.defaultWidth
+    };
+    document.body.classList.add('panel-resizing');
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch (err) {
+      // noop
+    }
+    window.addEventListener('pointermove', handlePanelResizePointerMove);
+    window.addEventListener('pointerup', handlePanelResizePointerUp);
+    window.addEventListener('pointercancel', handlePanelResizePointerUp);
+  }
+
+  function handlePanelResizePointerMove(event) {
+    if (!PANEL_RESIZE_CONTEXT || PANEL_RESIZE_CONTEXT.pointerId !== event.pointerId) return;
+    event.preventDefault();
+    const ctx = PANEL_RESIZE_CONTEXT;
+    const delta = event.clientX - ctx.startX;
+    const proposed = ctx.side === 'left'
+      ? ctx.startWidth + delta
+      : ctx.startWidth + (ctx.startX - event.clientX);
+    applyWidthChangeFromUser(ctx.side, proposed, { markUserSized: true, live: true });
+  }
+
+  function handlePanelResizePointerUp(event) {
+    if (!PANEL_RESIZE_CONTEXT || (event.pointerId != null && PANEL_RESIZE_CONTEXT.pointerId !== event.pointerId)) return;
+    event.preventDefault();
+    const side = PANEL_RESIZE_CONTEXT.side;
+    PANEL_RESIZE_CONTEXT = null;
+    document.body.classList.remove('panel-resizing');
+    if (event.pointerId != null) {
+      try {
+        PANEL_UI_ELEMENTS.resizers[side]?.releasePointerCapture(event.pointerId);
+      } catch (err) {
+        // ignore
+      }
+    }
+    window.removeEventListener('pointermove', handlePanelResizePointerMove);
+    window.removeEventListener('pointerup', handlePanelResizePointerUp);
+    window.removeEventListener('pointercancel', handlePanelResizePointerUp);
+    savePanelState(side);
+    updatePanelHandles();
+  }
+
+  function handlePanelResizerKeydown(event) {
+    const side = event.currentTarget?.dataset?.side;
+    if (!side) return;
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    const state = PANEL_STATE[side];
+    if (!state) return;
+    const baseWidth = state.width || state.defaultWidth;
+    let delta = event.key === 'ArrowRight' ? PANEL_LIMITS.keyboardStep : -PANEL_LIMITS.keyboardStep;
+    if (side === 'right') {
+      delta = -delta;
+    }
+    applyWidthChangeFromUser(side, baseWidth + delta, { markUserSized: true });
+  }
+
+  function computeLayoutMode() {
+    const width = window.innerWidth || document.documentElement.clientWidth || 0;
+    const height = window.innerHeight || document.documentElement.clientHeight || 0;
+    if (width < 768) return 'mobile';
+    if (height > width) return 'mobile';
+    return 'desktop';
+  }
+
+  function updateLayoutMode(opts = {}) {
+    const nextMode = computeLayoutMode();
+    const changed = CURRENT_LAYOUT_MODE !== nextMode;
+    if (!changed && !opts.force) return CURRENT_LAYOUT_MODE;
+    CURRENT_LAYOUT_MODE = nextMode;
+    if (document.body) {
+      document.body.dataset.layoutMode = nextMode;
+    }
+    updatePanelHandles();
+    return CURRENT_LAYOUT_MODE;
+  }
+
+  function isMobileLayout() {
+    return CURRENT_LAYOUT_MODE === 'mobile';
+  }
+
+  function setupPanelLayoutControls() {
+    if (document.body?.dataset.panelsInitialized === 'true') return;
+    if (document.body) {
+      document.body.dataset.panelsInitialized = 'true';
+    }
+    initializePanelSizing();
+    ensurePanelHandles();
+    ensurePanelResizers();
+    updateLayoutMode({ force: true });
+    const onViewportChange = debounce(() => {
+      updateLayoutMode();
+      updatePanelHandles();
+    }, 140);
+    window.addEventListener('resize', onViewportChange);
+    window.addEventListener('orientationchange', onViewportChange);
   }
 
   function setInlineFootnoteMode(active) {
@@ -2311,6 +2753,7 @@ let readingStateSaveTimer = null;
       ['site-title-enhancements', () => applySiteTitleEnhancements(navData)],
       ['mobile-nav-drawer', () => setupMobileNavDrawer(navData)],
       ['left-sidebar-stability', () => setupLeftSidebarStability()],
+      ['panel-layout', () => setupPanelLayoutControls()],
       ['right-sidebar', () => setupRightSidebar()],
       ['top-nav', () => setupTopChapterNavigation()],
       ['markers', () => setupMarkerFunctionality()],
@@ -2441,6 +2884,9 @@ let readingStateSaveTimer = null;
         const size = e.target.value;
         document.body.setAttribute('data-font-size', size);
         localStorage.setItem(STORAGE_KEYS.fontSize, size);
+        if (document.body?.dataset.panelsInitialized === 'true') {
+          handlePanelFontSizeChange(size);
+        }
       });
     }
 
@@ -3123,8 +3569,7 @@ let readingStateSaveTimer = null;
   }
 
   function applyFootnoteLayout() {
-    const isPortrait = window.matchMedia('(orientation: portrait)').matches || (window.innerHeight > window.innerWidth);
-    if (isPortrait) {
+    if (isMobileLayout()) {
       renderInlineFootnotes();
     } else {
       renderSidebarFootnotes();

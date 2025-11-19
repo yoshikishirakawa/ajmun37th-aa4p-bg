@@ -34,6 +34,159 @@
   --toc-connector-offset-y: calc(var(--toc-row-padding-y) + 0.75em);
   --toc-line-thickness: max(1px, 0.08em);
   --toc-line-offset: 0.25em;
+  --aj-left-panel-width: var(--left-w);
+  --aj-right-panel-width: var(--right-w);
+  --aj-left-panel-visible-width: var(--aj-left-panel-width);
+  --aj-right-panel-visible-width: var(--aj-right-panel-width);
+  --panel-resizer-width: 10px;
+  --panel-handle-width: 22px;
+  --panel-handle-bg: #0d6efd;
+  --panel-handle-border: #0a58ca;
+  --panel-handle-color: #ffffff;
+  --sidebar-width: var(--aj-left-panel-visible-width);
+  --margin-width: var(--aj-right-panel-visible-width);
+}
+
+body {
+  --aj-left-panel-visible-width: var(--aj-left-panel-width);
+  --aj-right-panel-visible-width: var(--aj-right-panel-width);
+}
+
+body[data-left-panel-state="collapsed"] {
+  --aj-left-panel-visible-width: 0px;
+}
+
+body[data-right-panel-state="collapsed"] {
+  --aj-right-panel-visible-width: 0px;
+}
+
+body[data-layout-mode="mobile"] {
+  --aj-left-panel-visible-width: 0px;
+  --aj-right-panel-visible-width: 0px;
+}
+
+body[data-layout-mode="desktop"] {
+  --sidebar-width: var(--aj-left-panel-visible-width);
+  --margin-width: var(--aj-right-panel-visible-width);
+}
+
+body.panel-resizing {
+  cursor: ew-resize;
+  user-select: none;
+}
+
+body.panel-resizing * {
+  cursor: inherit !important;
+}
+
+/* パネル幅と操作UI */
+#quarto-sidebar,
+#quarto-margin-sidebar {
+  transition: width 0.28s ease, margin 0.28s ease, opacity 0.28s ease;
+  overflow-x: visible;
+}
+
+#quarto-sidebar {
+  width: var(--aj-left-panel-visible-width);
+  min-width: var(--aj-left-panel-visible-width);
+}
+
+#quarto-margin-sidebar {
+  width: var(--aj-right-panel-visible-width);
+  min-width: var(--aj-right-panel-visible-width);
+}
+
+body[data-left-panel-state="collapsed"] #quarto-sidebar,
+body[data-right-panel-state="collapsed"] #quarto-margin-sidebar {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.panel-resizer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--panel-resizer-width);
+  cursor: ew-resize;
+  z-index: calc(var(--z-toc) + 5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+}
+
+.panel-resizer::after {
+  content: '';
+  width: 2px;
+  height: 34px;
+  border-radius: 1px;
+  background: rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease, height 0.2s ease;
+}
+
+.panel-resizer-left {
+  right: calc(var(--panel-resizer-width) * -0.5);
+}
+
+.panel-resizer-right {
+  left: calc(var(--panel-resizer-width) * -0.5);
+}
+
+.panel-resizer:hover::after,
+.panel-resizer:focus-visible::after {
+  height: 48px;
+  background: var(--panel-handle-border);
+}
+
+body[data-layout-mode="mobile"] .panel-resizer,
+body[data-left-panel-state="collapsed"] .panel-resizer-left,
+body[data-right-panel-state="collapsed"] .panel-resizer-right {
+  display: none !important;
+}
+
+.panel-handle {
+  position: fixed;
+  top: 12vh;
+  height: 76vh;
+  width: var(--panel-handle-width);
+  background: var(--panel-handle-bg);
+  border: 2px solid var(--panel-handle-border);
+  color: var(--panel-handle-color);
+  z-index: calc(var(--z-toc) + 10);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.18);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.panel-handle--left {
+  left: 0;
+  clip-path: polygon(0% 0%, 100% 8%, 100% 92%, 0% 100%);
+}
+
+.panel-handle--right {
+  right: 0;
+  clip-path: polygon(100% 0%, 0% 8%, 0% 92%, 100% 100%);
+}
+
+.panel-handle--visible {
+  display: flex;
+}
+
+.panel-handle:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 2px;
+}
+
+.panel-handle__icon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+body[data-layout-mode="mobile"] .panel-handle {
+  display: none !important;
 }
 
 .marker-toolbar {
@@ -3221,4 +3374,17 @@ div.highlight-target {
   100% {
     background-color: transparent;
   }
+}
+
+/* 強制的な表示制御（ブレークポイントに優先） */
+body[data-layout-mode="mobile"] #quarto-sidebar,
+body[data-layout-mode="mobile"] #quarto-margin-sidebar,
+body[data-layout-mode="mobile"] .right-sidebar {
+  display: none !important;
+}
+
+body[data-layout-mode="desktop"] #quarto-sidebar,
+body[data-layout-mode="desktop"] #quarto-margin-sidebar,
+body[data-layout-mode="desktop"] .right-sidebar {
+  display: block !important;
 }
