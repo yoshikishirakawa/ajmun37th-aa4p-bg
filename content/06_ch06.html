@@ -1480,6 +1480,7 @@ let readingStateSaveTimer = null;
   let footnoteRenderRetries = 0;
   const FOOTNOTE_MAX_RETRIES = 4;
   const FOOTNOTE_RETRY_DELAY = 300;
+  const FALLBACK_NOTE_CLASS = 'margin-note-fallback';
 
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
@@ -2661,6 +2662,49 @@ let readingStateSaveTimer = null;
     });
   }
 
+  // フットノートが取得できない場合の保険: 末尾脚注を元に傍注DOMを再構築
+  function renderFallbackSidenotes() {
+    const marginSidebar = document.getElementById('quarto-margin-sidebar');
+    if (!marginSidebar) return false;
+
+    const defs = Array.from(document.querySelectorAll('section.footnotes li[id]'));
+    if (!defs.length) return false;
+
+    // 既存の傍注やフォールバックをクリア
+    marginSidebar.querySelectorAll('.margin-note, .' + FALLBACK_NOTE_CLASS).forEach(n => n.remove());
+
+    const items = [];
+    defs.forEach((li, idx) => {
+      const id = li.id;
+      const ref = document.querySelector(`a[href="#${CSS.escape(id)}"]`);
+      if (!ref) return;
+      const note = document.createElement('div');
+      note.className = `margin-note ${FALLBACK_NOTE_CLASS}`;
+      const body = li.cloneNode(true);
+      body.querySelectorAll('.footnote-back, .footnote-backref, [role="doc-backlink"]').forEach(n => n.remove());
+
+      const num = document.createElement('span');
+      num.className = 'footnote-num';
+      num.textContent = `${idx + 1}. `;
+      note.appendChild(num);
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'body';
+      wrapper.innerHTML = body.innerHTML;
+      note.appendChild(wrapper);
+
+      marginSidebar.appendChild(note);
+      items.push({ kind: 'foot', el: ref, node: note });
+    });
+
+    if (!items.length) return false;
+
+    SIDENOTES_ON = true;
+    SIDENOTES_ITEMS = items;
+    updateSidenotesPositions();
+    return true;
+  }
+
   function applyFootnoteLayout() {
     const inlineQuery = window.matchMedia(`(max-width: ${FOOTNOTE_INLINE_BREAKPOINT}px)`);
     const shouldInline = inlineQuery.matches || window.innerWidth <= FOOTNOTE_INLINE_BREAKPOINT;
@@ -2699,6 +2743,10 @@ let readingStateSaveTimer = null;
         renderSidebarFootnotes();
       }
       updateSidenotesPositions();
+      // 最終リトライでも傍注がない場合、フォールバックを試みる
+      if (footnoteRenderRetries >= FOOTNOTE_MAX_RETRIES) {
+        renderFallbackSidenotes();
+      }
     };
     setTimeout(attempt, FOOTNOTE_RETRY_DELAY * footnoteRenderRetries);
   }
@@ -2752,8 +2800,12 @@ let readingStateSaveTimer = null;
 
     const footnotes = gatherActiveFootnotes();
     if (!footnotes.length) {
-      footHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注がありません。</p>');
-      if (bothHost) bothHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注/コメントがありません。</p>');
+      // バックアップ描画: 末尾脚注から傍注を生成
+      const fallbackOk = renderFallbackSidenotes();
+      if (!fallbackOk) {
+        footHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注がありません。</p>');
+        if (bothHost) bothHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注/コメントがありません。</p>');
+      }
       return;
     }
 
