@@ -1384,6 +1384,7 @@ let readingStateSaveTimer = null;
   const SCROLL_EXTENSION_BUFFER = 80;
   const FOOTNOTE_INLINE_BREAKPOINT = 1024;
   let currentFootnoteLayout = null;
+  let readingStateSaveTimer = null;
 
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
@@ -2304,8 +2305,12 @@ let readingStateSaveTimer = null;
     if (SIDENOTES_ON) {
       renderSidenotes(currentRightTab());
     }
-    enumerateReadingNodes();
-    scheduleReadingStateSave();
+    if (typeof enumerateReadingNodes === 'function') {
+      enumerateReadingNodes();
+    }
+    if (typeof scheduleReadingStateSave === 'function') {
+      scheduleReadingStateSave();
+    }
     scheduleScrollExtensionUpdate();
   }
 
@@ -5271,8 +5276,10 @@ function setupMarkerFunctionality() {
         persistReadingState();
       }
     });
-    window.addEventListener('scroll', scheduleReadingStateSave, { passive: true });
-    window.addEventListener('resize', scheduleReadingStateSave);
+    if (typeof scheduleReadingStateSave === 'function') {
+      window.addEventListener('scroll', scheduleReadingStateSave, { passive: true });
+      window.addEventListener('resize', scheduleReadingStateSave);
+    }
   }
 
   function expandAllInMenu(root) {

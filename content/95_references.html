@@ -392,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="参考文献" class="level1">
 <h1>参考文献</h1>
 <p>以下に各章で引用された参考文献を章ごとにまとめて表示します。</p>
-<div id="4752aaf4" class="cell" data-execution_count="1">
+<div id="d5abfb24" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 章ごとの参考文献を生成するスクリプト</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -1443,6 +1443,7 @@ let readingStateSaveTimer = null;
   const SCROLL_EXTENSION_BUFFER = 80;
   const FOOTNOTE_INLINE_BREAKPOINT = 1024;
   let currentFootnoteLayout = null;
+  let readingStateSaveTimer = null;
 
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
@@ -2363,8 +2364,12 @@ let readingStateSaveTimer = null;
     if (SIDENOTES_ON) {
       renderSidenotes(currentRightTab());
     }
-    enumerateReadingNodes();
-    scheduleReadingStateSave();
+    if (typeof enumerateReadingNodes === 'function') {
+      enumerateReadingNodes();
+    }
+    if (typeof scheduleReadingStateSave === 'function') {
+      scheduleReadingStateSave();
+    }
     scheduleScrollExtensionUpdate();
   }
 
@@ -5330,8 +5335,10 @@ function setupMarkerFunctionality() {
         persistReadingState();
       }
     });
-    window.addEventListener('scroll', scheduleReadingStateSave, { passive: true });
-    window.addEventListener('resize', scheduleReadingStateSave);
+    if (typeof scheduleReadingStateSave === 'function') {
+      window.addEventListener('scroll', scheduleReadingStateSave, { passive: true });
+      window.addEventListener('resize', scheduleReadingStateSave);
+    }
   }
 
   function expandAllInMenu(root) {

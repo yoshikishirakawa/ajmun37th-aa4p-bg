@@ -342,7 +342,7 @@ body {
 /*
 @font-face {
   font-family: 'UDPMincho';
-  src: url('../fonts/UDPMincho.woff2') format('woff2');
+  src: url('../../fonts/BIZUDPMincho-Regular.woff2') format('woff2');
   font-display: swap;
 }
 

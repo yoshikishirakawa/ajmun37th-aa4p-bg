@@ -44,6 +44,7 @@
   let scrollExtensionEl = null;
   let pendingScrollExtensionRaf = 0;
   const SCROLL_EXTENSION_BUFFER = 80;
+  let readingStateSaveTimer = null;
 
   function resolveAssetPath(relPath) {
     try {
