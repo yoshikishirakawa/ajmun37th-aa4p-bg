@@ -372,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="参考文献" class="level1">
 <h1>参考文献</h1>
 <p>以下に各章で引用された参考文献を章ごとにまとめて表示します。</p>
-<div id="9f050e2d" class="cell" data-execution_count="1">
+<div id="e21fab6b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 章ごとの参考文献を生成するスクリプト</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -2627,10 +2627,15 @@ let readingStateSaveTimer = null;
   }
 
   function renderSidebarFootnotes() {
+    console.log('[DEBUG] renderSidebarFootnotes called');
     setInlineFootnoteMode(false);
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
     let marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) return;
+    if (!marginSidebar) {
+      console.warn('[DEBUG] quarto-margin-sidebar not found');
+      return;
+    }
+    console.log('[DEBUG] quarto-margin-sidebar found');
 
     if (marginSidebar.style.display === 'none') {
       const prev = marginSidebar.dataset.prevDisplay || '';
@@ -2674,11 +2679,14 @@ let readingStateSaveTimer = null;
     footHost.appendChild(headerRow);
 
     const footnotes = gatherActiveFootnotes();
+    console.log('[DEBUG] gatherActiveFootnotes returned', footnotes.length, 'footnotes');
     if (!footnotes.length) {
+      console.warn('[DEBUG] No footnotes found');
       footHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注がありません。</p>');
       if (bothHost) bothHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注/コメントがありません。</p>');
       return;
     }
+    console.log('[DEBUG] Rendering', footnotes.length, 'footnotes to sidebar');
 
     const items = footnotes.slice();
     const mode = sort.value;

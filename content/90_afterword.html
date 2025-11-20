@@ -2543,10 +2543,15 @@ let readingStateSaveTimer = null;
   }
 
   function renderSidebarFootnotes() {
+    console.log('[DEBUG] renderSidebarFootnotes called');
     setInlineFootnoteMode(false);
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
     let marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) return;
+    if (!marginSidebar) {
+      console.warn('[DEBUG] quarto-margin-sidebar not found');
+      return;
+    }
+    console.log('[DEBUG] quarto-margin-sidebar found');
 
     if (marginSidebar.style.display === 'none') {
       const prev = marginSidebar.dataset.prevDisplay || '';
@@ -2590,11 +2595,14 @@ let readingStateSaveTimer = null;
     footHost.appendChild(headerRow);
 
     const footnotes = gatherActiveFootnotes();
+    console.log('[DEBUG] gatherActiveFootnotes returned', footnotes.length, 'footnotes');
     if (!footnotes.length) {
+      console.warn('[DEBUG] No footnotes found');
       footHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注がありません。</p>');
       if (bothHost) bothHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注/コメントがありません。</p>');
       return;
     }
+    console.log('[DEBUG] Rendering', footnotes.length, 'footnotes to sidebar');
 
     const items = footnotes.slice();
     const mode = sort.value;
