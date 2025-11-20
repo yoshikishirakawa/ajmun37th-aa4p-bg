@@ -235,25 +235,6 @@ ul.task-list li input[type="checkbox"] {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
-<script>
-  (function () {
-    try {
-      var storedTheme = localStorage.getItem('quarto-theme');
-      if (!storedTheme || storedTheme === 'auto') return;
-      document.documentElement.setAttribute('data-theme', storedTheme);
-      var applyThemeToBody = function () {
-        if (!document.body) {
-          requestAnimationFrame(applyThemeToBody);
-          return;
-        }
-        document.body.setAttribute('data-theme', storedTheme);
-      };
-      applyThemeToBody();
-    } catch (err) {
-      console.warn('Failed to apply stored theme early', err);
-    }
-  })();
-</script>
 <div class="header-ui">
   <div id="js-header" class="js-header">
     <div class="js-header__inner">
@@ -266,8 +247,7 @@ ul.task-list li input[type="checkbox"] {
         <div class="js-header__controls">
           <!-- 設定メニューボタン -->
           <button class="js-settings-toggle-btn" id="settings-toggle-btn" aria-label="設定メニューを開く">
-            <span class="settings-toggle-icon" aria-hidden="true"></span>
-            <span class="settings-toggle-text">表示設定</span>
+            <img src="" data-asset="assets/setting.png" alt="" aria-hidden="true" class="settings-toggle-icon">
           </button>
         </div>
       </div>
@@ -406,12 +386,12 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="技術選定">1.3 技術選定</h2>
 <section id="quarto-pandoc" class="level3">
 <h3 class="anchored" data-anchor-id="quarto-pandoc">1.3.1 Quarto + Pandoc</h3>
-<p>本研究では<strong>Quarto</strong>と<strong>Pandoc</strong>を中核技術として選択しました[^01_ch01-1]。</p>
+<p>本研究では<strong>Quarto</strong>と<strong>Pandoc</strong>を中核技術として選択しました<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</p>
 <p>選定理由： - 学術文書生成の標準ツール - Markdownからの変換が容易 - PDF出力の高品質性 - プラグイン拡張性</p>
 </section>
 <section id="udp明朝フォント" class="level3">
 <h3 class="anchored" data-anchor-id="udp明朝フォント">1.3.2 UDP明朝フォント</h3>
-<p>本文書では<strong>UDP明朝</strong>を主要な日本語フォントとして使用します[^01_ch01-2]。</p>
+<p>本文書では<strong>UDP明朝</strong>を主要な日本語フォントとして使用します<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。</p>
 <p>特長： - 読みやすさ - 印刷適性 - Webフォントとしての利用可能性</p>
 </section>
 </section>
@@ -431,7 +411,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="ファイル配置戦略" class="level3">
 <h3 class="anchored" data-anchor-id="ファイル配置戦略">1.4.2 ファイル配置戦略</h3>
-<p>章ファイルは数値プリフィクスで順序を管理します[fn:3]。</p>
+<p>章ファイルは数値プリフィクスで順序を管理します<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。</p>
 <ul>
 <li><code>00_front.md</code>: フロント挨拶</li>
 <li><code>01_ch01.md</code>〜<code>07_ch07.md</code>: 本文</li>
@@ -449,16 +429,21 @@ ul.task-list li input[type="checkbox"] {
 <section id="アクセシビリティ優先" class="level3">
 <h3 class="anchored" data-anchor-id="アクセシビリティ優先">1.5.2 アクセシビリティ優先</h3>
 <p>WCAG 2.2 AA準拠を目標としています。</p>
-<hr>
 </section>
 </section>
 <section id="まとめ" class="level2">
 <h2 class="anchored" data-anchor-id="まとめ">まとめ</h2>
 <p>本章ではプロジェクト全体の概要を説明しました。次章以降では、具体的な実装方法について詳述します。</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
-<p>[^01_ch01-1] QuartoはRStudioが開発した統合的オーサリング環境です。 [^01_ch01-2] UDP明朝のライセンスと配布条件については別途確認が必要です。 [fn:3]: 数値プリフィクスにより、ファイルシステム上の自然な並び順を確保します。</p>
-
-
+<ol>
+<li id="fn1"><p>QuartoはRStudioが開発した統合的オーサリング環境です。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>UDP明朝のライセンスと配布条件については別途確認が必要です。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>数値プリフィクスにより、ファイルシステム上の自然な並び順を確保します。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1384,7 +1369,6 @@ let readingStateSaveTimer = null;
   const SCROLL_EXTENSION_BUFFER = 80;
   const FOOTNOTE_INLINE_BREAKPOINT = 1024;
   let currentFootnoteLayout = null;
-  let readingStateSaveTimer = null;
 
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
@@ -1799,6 +1783,17 @@ let readingStateSaveTimer = null;
 
     // ハンバーガーメニューは廃止
 
+    // 設定メニュー開閉機能
+    if (settingsToggleBtn) {
+      const iconImg = settingsToggleBtn.querySelector('.settings-toggle-icon[data-asset]');
+      if (iconImg) {
+        const assetPath = iconImg.getAttribute('data-asset');
+        if (assetPath) {
+          iconImg.src = resolveAssetPath(assetPath);
+        }
+      }
+    }
+
     // 一般の画像についても data-asset 属性があれば resolveAssetPath で解決する
     try {
       const assetImgs = document.querySelectorAll('img[data-asset]');
@@ -1841,9 +1836,11 @@ let readingStateSaveTimer = null;
     if (themeSelect) {
       const mq = window.matchMedia('(prefers-color-scheme: dark)');
       function applyTheme(mode) {
-        const target = mode === 'auto' ? (mq.matches ? 'dark' : 'light') : mode;
-        document.body.setAttribute('data-theme', target);
-        document.documentElement.setAttribute('data-theme', target);
+        if (mode === 'auto') {
+          document.body.setAttribute('data-theme', mq.matches ? 'dark' : 'light');
+        } else {
+          document.body.setAttribute('data-theme', mode);
+        }
       }
       const saved = localStorage.getItem(STORAGE_KEYS.theme) || 'auto';
       themeSelect.value = saved;
@@ -2305,12 +2302,8 @@ let readingStateSaveTimer = null;
     if (SIDENOTES_ON) {
       renderSidenotes(currentRightTab());
     }
-    if (typeof enumerateReadingNodes === 'function') {
-      enumerateReadingNodes();
-    }
-    if (typeof scheduleReadingStateSave === 'function') {
-      scheduleReadingStateSave();
-    }
+    enumerateReadingNodes();
+    scheduleReadingStateSave();
     scheduleScrollExtensionUpdate();
   }
 
@@ -2560,11 +2553,19 @@ let readingStateSaveTimer = null;
       currentFootnoteLayout = nextMode;
       document.body && document.body.classList.toggle('footnotes-inline-mode', shouldInline);
       document.body && document.body.classList.toggle('footnotes-sidebar-mode', !shouldInline);
+      if (shouldInline) {
+        renderInlineFootnotes();
+      } else {
+        renderSidebarFootnotes();
+      }
+    } else if (shouldInline) {
+      renderInlineFootnotes();
+    } else {
+      renderSidebarFootnotes();
     }
-    const rendered = shouldInline ? !!renderInlineFootnotes() : !!renderSidebarFootnotes();
     try {
       if (document.body) {
-        document.body.classList.toggle('js-footnotes-enhanced', rendered);
+        document.body.classList.add('js-footnotes-enhanced');
       }
     } catch (e) {
       console.warn('applyFootnoteLayout: failed to mark enhanced footnotes state', e);
@@ -2575,7 +2576,7 @@ let readingStateSaveTimer = null;
     setInlineFootnoteMode(false);
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
     let marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) return false;
+    if (!marginSidebar) return;
 
     if (marginSidebar.style.display === 'none') {
       const prev = marginSidebar.dataset.prevDisplay || '';
@@ -2622,7 +2623,7 @@ let readingStateSaveTimer = null;
     if (!footnotes.length) {
       footHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注がありません。</p>');
       if (bothHost) bothHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注/コメントがありません。</p>');
-      return false;
+      return;
     }
 
     const items = footnotes.slice();
@@ -2679,7 +2680,6 @@ let readingStateSaveTimer = null;
     setupScrollSyncForFootnotes(footHost, items);
     refreshCommentMarkersFromDB({ preserveExisting: true });
     scheduleScrollExtensionUpdate();
-    return true;
   }
 
   function renderBothPanel(host, footItems) {
@@ -3084,9 +3084,8 @@ let readingStateSaveTimer = null;
     const scope = active || document;
     const refSelector = 'a[role="doc-noteref"], a.footnote-ref';
     const refs = Array.from(scope.querySelectorAll(refSelector)).filter(ref => !active || active.contains(ref));
-    if (!refs.length) return false;
+    if (!refs.length) return;
     const hostTailMap = new Map();
-    let inserted = false;
     refs.forEach(ref => {
       const href = ref.getAttribute('href') || ref.getAttribute('data-footnote-href');
       if (!href || !href.startsWith('#')) return;
@@ -3117,11 +3116,9 @@ let readingStateSaveTimer = null;
       }
       hostTailMap.set(host, container);
       reinforceAnchors(container);
-      inserted = true;
     });
     ensureCommentMarkerInteractions();
     scheduleScrollExtensionUpdate();
-    return inserted;
   }
 
   function findHostParagraph(el) {
@@ -3459,7 +3456,7 @@ function setupMarkerFunctionality() {
             <button type="button" class="marker-color-btn" data-color="blue" title="青"></button>
             <button type="button" class="marker-color-btn" data-color="pink" title="ピンク"></button>
           </div>
-          <button type="button" class="marker-comment-btn" title="選択範囲にコメント" aria-label="選択範囲にコメント">コメント</button>
+          <button type="button" class="marker-comment-btn" title="選択範囲にコメント" aria-label="選択範囲にコメント"></button>
         </div>
       `;
       toolbar.querySelectorAll('.marker-color-btn').forEach(btn => {
@@ -3488,19 +3485,19 @@ function setupMarkerFunctionality() {
       if (!baseRange || baseRange.collapsed) return;
 
       const overlay = document.createElement('div');
-      overlay.className = 'comment-dialog-overlay';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:10000;display:flex;align-items:center;justify-content:center;';
       const dialog = document.createElement('div');
-      dialog.className = 'comment-dialog';
+      dialog.style.cssText = 'background:#fff;color:#222;max-width:600px;width:92%;padding:16px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.25);';
       dialog.innerHTML = `
-        <div class="comment-dialog__header">
-          <h3 class="comment-dialog__title">コメントを追加</h3>
-          <button type="button" aria-label="閉じる" class="comment-dialog__close">×</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <h3 style="margin:0;font-size:16px;">コメントを追加</h3>
+          <button type="button" aria-label="閉じる" style="background:none;border:none;font-size:18px;cursor:pointer;">×</button>
         </div>
-        <div class="comment-dialog__snippet" id="comment-snippet"></div>
-        <textarea id="comment-textarea" rows="6" class="comment-dialog__textarea" placeholder="ここにコメントを入力（長文可）"></textarea>
-        <div class="comment-dialog__actions">
-          <button type="button" id="comment-cancel" class="comment-dialog__btn comment-dialog__btn--muted">キャンセル</button>
-          <button type="button" id="comment-save" class="comment-dialog__btn comment-dialog__btn--primary">保存</button>
+        <div style="font-size:13px;color:#555;background:#f8f9fa;border:1px solid #e9ecef;padding:8px;border-radius:4px;margin-bottom:8px;" id="comment-snippet"></div>
+        <textarea id="comment-textarea" rows="6" style="width:100%;font-size:14px;padding:8px;border-radius:6px;border:1px solid #ced4da;resize:vertical;" placeholder="ここにコメントを入力（長文可）"></textarea>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px;">
+          <button type="button" id="comment-cancel" style="padding:6px 12px;border:1px solid #dee2e6;border-radius:4px;background:#f8f9fa;cursor:pointer;">キャンセル</button>
+          <button type="button" id="comment-save" style="padding:6px 12px;border:1px solid #0d6efd;border-radius:4px;background:#0d6efd;color:#fff;cursor:pointer;">保存</button>
         </div>
       `;
       overlay.appendChild(dialog);
@@ -5276,10 +5273,8 @@ function setupMarkerFunctionality() {
         persistReadingState();
       }
     });
-    if (typeof scheduleReadingStateSave === 'function') {
-      window.addEventListener('scroll', scheduleReadingStateSave, { passive: true });
-      window.addEventListener('resize', scheduleReadingStateSave);
-    }
+    window.addEventListener('scroll', scheduleReadingStateSave, { passive: true });
+    window.addEventListener('resize', scheduleReadingStateSave);
   }
 
   function expandAllInMenu(root) {
@@ -6256,45 +6251,7 @@ function setupMarkerFunctionality() {
     background: rgba(255, 235, 59, 0.3);
     padding: 0 2px;
   }
-
-  body[data-theme="dark"] .gdoc-popover {
-    --gdoc-popover-bg: #111827;
-    background: #111827;
-    color: #e2e8f0;
-    border-color: rgba(138, 180, 248, 0.25);
-    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
-  }
-
-  body[data-theme="dark"] .gdoc-popover-actions .gdoc-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  body[data-theme="dark"] .gdoc-modal-dialog {
-    background: #0b101a;
-    color: #e1e5ed;
-    border: 1px solid rgba(138, 180, 248, 0.35);
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
-  }
-
-  body[data-theme="dark"] .gdoc-modal-header {
-    background: rgba(255, 255, 255, 0.05);
-    border-bottom-color: rgba(255, 255, 255, 0.12);
-    color: inherit;
-  }
-
-  body[data-theme="dark"] .gdoc-modal-header-actions .gdoc-modal-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  body[data-theme="dark"] .bg-preview-body {
-    color: #e5e9f0;
-    background: transparent;
-  }
-
-  body[data-theme="dark"] .bg-preview-body a {
-    color: #8ab4f8;
-  }
-
+  
   /* プレビュー内のポップオーバーを最前面に */
   .bg-preview-body .gdoc-popover,
   .bg-preview-body #bg-preview-popover {

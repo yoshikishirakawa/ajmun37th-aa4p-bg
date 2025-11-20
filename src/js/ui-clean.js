@@ -44,7 +44,6 @@
   let scrollExtensionEl = null;
   let pendingScrollExtensionRaf = 0;
   const SCROLL_EXTENSION_BUFFER = 80;
-  let readingStateSaveTimer = null;
 
   function resolveAssetPath(relPath) {
     try {
@@ -411,24 +410,14 @@
     const searchBtn = document.getElementById('search-open-btn');
 
     if (themeSelect) {
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      const applyTheme = (mode) => {
-        const next = mode === 'auto' ? (mq.matches ? 'dark' : 'light') : mode;
-        document.body.setAttribute('data-theme', next);
-        document.documentElement.setAttribute('data-theme', next);
-      };
-      const savedTheme = localStorage.getItem(STORAGE_KEYS.theme) || 'auto';
-      themeSelect.value = savedTheme;
-      applyTheme(savedTheme);
-      mq.addEventListener('change', () => {
-        if ((localStorage.getItem(STORAGE_KEYS.theme) || 'auto') === 'auto') {
-          applyTheme('auto');
-        }
-      });
+      const currentTheme = localStorage.getItem(STORAGE_KEYS.theme) || 'light';
+      themeSelect.value = currentTheme;
+      document.body.setAttribute('data-theme', currentTheme);
+
       themeSelect.addEventListener('change', (e) => {
         const theme = e.target.value;
+        document.body.setAttribute('data-theme', theme);
         localStorage.setItem(STORAGE_KEYS.theme, theme);
-        applyTheme(theme);
         console.log('Theme switched to:', theme);
       });
     }
@@ -574,13 +563,15 @@
     const inlineQuery = window.matchMedia(`(max-width: ${FOOTNOTE_INLINE_BREAKPOINT}px)`);
     const shouldInline = inlineQuery.matches || window.innerWidth <= FOOTNOTE_INLINE_BREAKPOINT;
     const nextMode = shouldInline ? 'inline' : 'sidebar';
-    if (currentFootnoteLayout !== nextMode) {
-      currentFootnoteLayout = nextMode;
-      document.body.classList.toggle('footnotes-inline-mode', shouldInline);
-      document.body.classList.toggle('footnotes-sidebar-mode', !shouldInline);
+    if (currentFootnoteLayout === nextMode) return;
+    currentFootnoteLayout = nextMode;
+    document.body.classList.toggle('footnotes-inline-mode', shouldInline);
+    document.body.classList.toggle('footnotes-sidebar-mode', !shouldInline);
+    if (shouldInline) {
+      renderInlineFootnotes();
+    } else {
+      renderSidebarFootnotes();
     }
-    const rendered = shouldInline ? !!renderInlineFootnotes() : !!renderSidebarFootnotes();
-    document.body.classList.toggle('js-footnotes-enhanced', rendered);
   }
 
   function renderSidebarFootnotes() {
@@ -588,12 +579,12 @@
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
 
     const marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) return false;
+    if (!marginSidebar) return;
 
     const footnotes = document.querySelector('section.footnotes');
     if (!footnotes) {
       marginSidebar.innerHTML = '<p class="footnotes-empty">このページには脚注がありません。</p>';
-      return false;
+      return;
     }
 
     ensureFootnotesPlaceholder(footnotes);
@@ -618,7 +609,6 @@
       }
     });
     scheduleScrollExtensionUpdate();
-    return true;
   }
 
   function renderInlineFootnotes() {
@@ -637,10 +627,9 @@
     // remove previous inline blocks
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
 
-    if (!footnotesSection) return false;
+    if (!footnotesSection) return;
 
     const refSelector = 'a[role="doc-noteref"], a.footnote-ref';
-    let inserted = false;
     document.querySelectorAll(refSelector).forEach(ref => {
       const href = ref.getAttribute('href') || ref.getAttribute('data-footnote-href');
       if (!href || !href.startsWith('#')) return;
@@ -666,10 +655,8 @@
         container.appendChild(clone.firstChild);
       }
       host.insertAdjacentElement('afterend', container);
-      inserted = true;
     });
     scheduleScrollExtensionUpdate();
-    return inserted;
   }
 
   function ensureFootnotesPlaceholder(section) {
@@ -709,10 +696,7 @@
           <span class="scroll-settings-header-title"><span class="scroll-title-main">平和への課題：補遺</span><span class="scroll-title-sub">Background Guide</span></span>
         </div>
         <div class="scroll-settings-header-controls">
-          <button id="scroll-search-btn" class="scroll-search-btn" aria-label="検索">
-            <span class="scroll-search-btn__icon" aria-hidden="true"></span>
-            <span>検索</span>
-          </button>
+          <button id="scroll-search-btn" class="scroll-search-btn" aria-label="検索">🔍 検索</button>
           <div class="font-size-control">
             <label for="scroll-font-size-select">文字サイズ：</label>
             <select id="scroll-font-size-select">

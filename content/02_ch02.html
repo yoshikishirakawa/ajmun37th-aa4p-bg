@@ -250,25 +250,6 @@ ul.task-list li input[type="checkbox"] {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
-<script>
-  (function () {
-    try {
-      var storedTheme = localStorage.getItem('quarto-theme');
-      if (!storedTheme || storedTheme === 'auto') return;
-      document.documentElement.setAttribute('data-theme', storedTheme);
-      var applyThemeToBody = function () {
-        if (!document.body) {
-          requestAnimationFrame(applyThemeToBody);
-          return;
-        }
-        document.body.setAttribute('data-theme', storedTheme);
-      };
-      applyThemeToBody();
-    } catch (err) {
-      console.warn('Failed to apply stored theme early', err);
-    }
-  })();
-</script>
 <div class="header-ui">
   <div id="js-header" class="js-header">
     <div class="js-header__inner">
@@ -281,8 +262,7 @@ ul.task-list li input[type="checkbox"] {
         <div class="js-header__controls">
           <!-- 設定メニューボタン -->
           <button class="js-settings-toggle-btn" id="settings-toggle-btn" aria-label="設定メニューを開く">
-            <span class="settings-toggle-icon" aria-hidden="true"></span>
-            <span class="settings-toggle-text">表示設定</span>
+            <img src="" data-asset="assets/setting.png" alt="" aria-hidden="true" class="settings-toggle-icon">
           </button>
         </div>
       </div>
@@ -761,8 +741,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="第1項-湾岸戦争一次資料残し" class="level3">
 <h3 class="anchored" data-anchor-id="第1項-湾岸戦争一次資料残し">第1項　湾岸戦争（一次資料残し）</h3>
 <p>　東西間の冷戦が終結し、大国間の協調体制により安保理事会の機能が回復すると、国連の集団安全保障への期待がにわかに高まった。そのなかで、湾岸危機に際して国連がとった対応は、安保理事会の下での平和強制機能の復活を印象づけるものであった。1990年8月のイラクによるクウェート進攻とともに、米国を中心とする諸国はいち早くサウジアラビアとその周辺の海域に多国籍軍を派遣したが、安保理事会は、イラクに対する第7章の下での平和破壊の認定 (39条)、経済制裁 (41条)などに関する一連の決議を矢継ぎ早に採択した。<br>
-　安保理は憲章第39条に基づき、「イラクのクウェート侵攻に関し国際の平和及び安全の破壊が存在することを認定」し、第40条によりイラクに対して「全ての軍隊を90年8月1日に位置していた地点まで独自活無条件に撤退することを要求」したのである。[^02_ch02-1]そして追加で加盟国に対して、イラクとの経済関係を中断することを求めたのである[^02_ch02-2]。安保理が一国の侵略行為に対して経済制裁を発動したのは国連史上初の事態であった。この後、安保理はイラクのクウェート侵攻を無効と宣言する決議[^02_ch02-3]、クウェートからの第三国民の出国を要求する決議[^02_ch02-4]を採択した。8月25日には「国籍を問わず全ての船舶の停戦と集積及びその戦期の検査を実施することにより」、決議661による経済制裁のうち「海運に関する条項の厳格な実施を確保する」ため「クウェート政府と協力してこの水域に海軍部隊を展開している加盟国」に対して「個別の状況が必要とするかもしれない措置」をとることを要請する決議を採択した[^02_ch02-5]。そして安保理は経済制裁を決めた決議661が海上輸送に重点を置いていたところ、リビアとイエメンが空路でイラクに対して物資を送っていることが判明したため、9月25日には対イラク空域封鎖決議[^02_ch02-6]などを採択したのち、11月29日にこれらの決議の実効性を確保するため、湾岸地域に展開する多国籍軍に対し、憲章第7章の下での武力行使を含む「あらゆる必要な手段」をとる権限を授権 (authorise) する決議678を採択したのである[^02_ch02-7]。<br>
-　しかし、安保理決議678による武力行使の許可は、イラクに対する経済制裁の効果を十分見極めることなしに採択された。しかも本決議採択後の安保理の主要メンバーは以後新たな措置や行動をとるつもりのないことを声明して自ら交渉による解決の道を閉ざし、強制的に軍事措置に移行したのである。湾岸戦争直前の事務総長やフランスによるイニシアチブは、戦争回避＝平和的解決の可能性を孕むものであったし、ソ連による仲介の努力やイラクからの安保理決議受諾のシグナルがあったにも関わらず、安保理はその可能性を生かすことなく、翌年1月17日に多国籍軍による対イラク地上戦が開始された。4月3日、安保理は正式な停戦のための決議687[^02_ch02-8]を採択、6日にイラクが受諾したことにより湾岸戦争は終結をみたのである。この決議では、イラク・クウェート国境地帯での停戦監視団（UNOKOM）の設置が決定された。<br>
+　安保理は憲章第39条に基づき、「イラクのクウェート侵攻に関し国際の平和及び安全の破壊が存在することを認定」し、第40条によりイラクに対して「全ての軍隊を90年8月1日に位置していた地点まで独自活無条件に撤退することを要求」したのである。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>そして追加で加盟国に対して、イラクとの経済関係を中断することを求めたのである<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。安保理が一国の侵略行為に対して経済制裁を発動したのは国連史上初の事態であった。この後、安保理はイラクのクウェート侵攻を無効と宣言する決議<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>、クウェートからの第三国民の出国を要求する決議<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>を採択した。8月25日には「国籍を問わず全ての船舶の停戦と集積及びその戦期の検査を実施することにより」、決議661による経済制裁のうち「海運に関する条項の厳格な実施を確保する」ため「クウェート政府と協力してこの水域に海軍部隊を展開している加盟国」に対して「個別の状況が必要とするかもしれない措置」をとることを要請する決議を採択した<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>。そして安保理は経済制裁を決めた決議661が海上輸送に重点を置いていたところ、リビアとイエメンが空路でイラクに対して物資を送っていることが判明したため、9月25日には対イラク空域封鎖決議<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>などを採択したのち、11月29日にこれらの決議の実効性を確保するため、湾岸地域に展開する多国籍軍に対し、憲章第7章の下での武力行使を含む「あらゆる必要な手段」をとる権限を授権 (authorise) する決議678を採択したのである<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>。<br>
+　しかし、安保理決議678による武力行使の許可は、イラクに対する経済制裁の効果を十分見極めることなしに採択された。しかも本決議採択後の安保理の主要メンバーは以後新たな措置や行動をとるつもりのないことを声明して自ら交渉による解決の道を閉ざし、強制的に軍事措置に移行したのである。湾岸戦争直前の事務総長やフランスによるイニシアチブは、戦争回避＝平和的解決の可能性を孕むものであったし、ソ連による仲介の努力やイラクからの安保理決議受諾のシグナルがあったにも関わらず、安保理はその可能性を生かすことなく、翌年1月17日に多国籍軍による対イラク地上戦が開始された。4月3日、安保理は正式な停戦のための決議687<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>を採択、6日にイラクが受諾したことにより湾岸戦争は終結をみたのである。この決議では、イラク・クウェート国境地帯での停戦監視団（UNOKOM）の設置が決定された。<br>
 　多国籍軍によるイラク地上戦の憲章上の根拠については、これを51条の集団的自衛権の行使とみるか、42条の国連行動で一部の国に権限を委ねるものとみるかについて、学者の間に議論が分かれたが、43条の特別協定に基づく国連軍を組織できない現状では、安保理事会は一部の加盟国に強制行動を「授権」するという変則的な手段に頼らざるをえなかったのである。<br>
 　こうした学説の混乱の原因は、安保理決議678の文言の曖昧さにある。 この決議は、安保理が自ら主体性を発揮して強制行動を統轄する責任をとらず、米国を中心とする多国籍軍に「あらゆる措置をとる」白紙委任に近い権限を付与する内容のものであったからである。1950年の朝鮮戦争の場合は、安保理は軍事行動の統一指揮権を、韓国援助の主導的立場にあったアメリカ政府に委ねるという便法がとられた。このため、朝鮮での軍事行動は、国連の直接の統制下におかれなかったのである。しかし、それでも「国連軍」司令部を設置し、国連旗の使用を認めるなど、国連との結び付きをもつ工夫をこらしたのである。<br>
 　これに対し、湾岸戦争での多国籍軍の軍事行動は、安保理の「容認」決議によって国連からの「お墨付き」をもらったあと、それ以上に国連と結びつける努力はなされなかったのである。監督・統制の手続きとしては定期的報告しか規定しておらず、多国籍軍の軍事行動を停止または制限するためには新たな決議の採択が必要であった。軍事作戦の主導権を握った米国は、多国籍軍を、自ら「同盟軍 (coalition forces)」 と称して国連旗は使用せず、軍事行動の指揮にあたり軍事参謀委員会を活用すべきであるとのソ連提案も拒否したのである。こうして、多国籍軍による軍事行動が開始された1月17日以降、2月28日の停戦までの間、デ・クエアル事務総長が、多国籍軍側の作戦に関する情報収集について 「蚊帳の外に置かれた」と不満を述べるほど、国連との絶縁状態は続いた。1991年2月後半ごろからは、イラクから安保理決議受諾のシグナルが発せられるようになり、安保理では和平強化を訴える発言が相次いだが、アメリカはソ連による仲介の努力も無視して地上戦に突入、撤退途上のイラク軍に猛烈な攻撃を加えたのである。<br>
@@ -772,24 +752,24 @@ ul.task-list li input[type="checkbox"] {
 <section id="第2項-ポスト冷戦期の始まりと安保理サミット文は完成一次資料をこれから追加予定" class="level3">
 <h3 class="anchored" data-anchor-id="第2項-ポスト冷戦期の始まりと安保理サミット文は完成一次資料をこれから追加予定">第2項　ポスト冷戦期の始まりと安保理サミット（文は完成／一次資料をこれから追加予定）</h3>
 <p>　1989年12月、アメリカ合衆国大統領ジョージ・ブッシュとソビエト連邦共産党書記長ミハイル・ゴルバチョフは地中海に浮かぶ小さな島マルタにいた。この両者による米ソ首脳会談で40年以上にわたり続いた東西冷戦の終結が宣言された。「冷戦の終焉」は、さらに90年10月のドイツ統一、91年4月のワルシャワ条約機構の解体、そして91年12月のソビエト社会主義共和国連邦の崩壊などにより、新たな歴史の潮流となった。「冷戦の終焉」とは単に東西関係における厳しい緊張イメージに終止符が打たれたということを意味するものではない。第二次世界大戦後の国際政治における力の体系、またイデオロギーや思想、外交の行動規範にいたるまで、これらを大きく変える力を発揮した。つまり「冷戦の終焉」は従来の国際体系の機能や役割を大きく変質ないし消失させることとなった。<br>
-　冷戦の終焉とともに、世界平和機構としての本来の国連の機能回復に大きな期待が寄せられた。既述のように、冷戦時代には、国連による国際安全保障機能は米ソ及び東西両陣営の厳しい「不信の構造」と「敵対構造」によって、実質上機能不全に陥っていた。この事実に鑑みれば、「冷戦の終焉」が何よりもまず国連に対して、新たに国際安全保障の機能と役割を復活させ、再生させる好機を与えることになったことに疑問の余地はないだろう。実際のところ、デクエヤル前国連事務総長は、1991年の「国連の活動に関する事務総長報告」の冒頭部分で、「冷戦の終焉」は「国連にとっての長い沈滞の季節」が終わりを告げたことを意味するものであると指摘し、さらに、「国連憲章の諸原則が新たな国際秩序を支配するようになるとの関心」がこれから続くこととなって、国連は「機構上のルネッサンス」期を迎えることになったと手放しで喜びを表現したくらいであった[^02_ch02-9]。<br>
-　同様にガリ事務総長も冷戦時代の敵対的国家関係が終止符を打って国連は検証の偉大な目標を達成できることに希望を抱いていた。1992年6月にガリが残した「平和への課題」においては、「国際平和と安全を維持し、正義と人権を確保し、より大きな自由の下に社会的進歩とより良き生活水準を推進する」ことが実際に可能となるとの確信が国連加盟諸国に生まれ、その結果「国連は、過去の時代と同じように再び不全となることは決してない」と残している[^02_ch02-10]。<br>
-　1992年1月31日、ニューヨークの国連本部で国連安全保障理事会が開催された。安保理の15のメンバーの首脳が一堂に会し「国際平和と安全に関する安全保障理事会の役割」という一般的議題について論じたため「安保理サミット」と呼ばれた。このような安保理の首脳会議が初めて開催されることとなった直接のきっかけは、同月に新しい国連事務総長としてエジプト出身のブトロス・ブトロス＝ガリ氏が就任したことと安保理常任理事国であったソ連に代わりロシアがその地位を継承したことの2点であった。また、より基本的な背景としては、湾岸戦争後1年を迎える時期に当たり冷戦後の新世界秩序の中で国連の果たす役割を改めて問い直し、その将来を模索する必要が感じられたからであった[^02_ch02-11]。安保理サミットでの各国首脳の発言内容は「国際平和と安全」という一般的なテーマの枠内で様々な分野に及んだが、議論の中心をなしたのは国連が紛争処理のために取る諸方策、および軍備管理・軍縮の諸問題であった。ここからは国際紛争の解決のための国連の在り方に焦点をあて、その審議の内容を紹介する。<br>
+　冷戦の終焉とともに、世界平和機構としての本来の国連の機能回復に大きな期待が寄せられた。既述のように、冷戦時代には、国連による国際安全保障機能は米ソ及び東西両陣営の厳しい「不信の構造」と「敵対構造」によって、実質上機能不全に陥っていた。この事実に鑑みれば、「冷戦の終焉」が何よりもまず国連に対して、新たに国際安全保障の機能と役割を復活させ、再生させる好機を与えることになったことに疑問の余地はないだろう。実際のところ、デクエヤル前国連事務総長は、1991年の「国連の活動に関する事務総長報告」の冒頭部分で、「冷戦の終焉」は「国連にとっての長い沈滞の季節」が終わりを告げたことを意味するものであると指摘し、さらに、「国連憲章の諸原則が新たな国際秩序を支配するようになるとの関心」がこれから続くこととなって、国連は「機構上のルネッサンス」期を迎えることになったと手放しで喜びを表現したくらいであった<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a>。<br>
+　同様にガリ事務総長も冷戦時代の敵対的国家関係が終止符を打って国連は検証の偉大な目標を達成できることに希望を抱いていた。1992年6月にガリが残した「平和への課題」においては、「国際平和と安全を維持し、正義と人権を確保し、より大きな自由の下に社会的進歩とより良き生活水準を推進する」ことが実際に可能となるとの確信が国連加盟諸国に生まれ、その結果「国連は、過去の時代と同じように再び不全となることは決してない」と残している<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a>。<br>
+　1992年1月31日、ニューヨークの国連本部で国連安全保障理事会が開催された。安保理の15のメンバーの首脳が一堂に会し「国際平和と安全に関する安全保障理事会の役割」という一般的議題について論じたため「安保理サミット」と呼ばれた。このような安保理の首脳会議が初めて開催されることとなった直接のきっかけは、同月に新しい国連事務総長としてエジプト出身のブトロス・ブトロス＝ガリ氏が就任したことと安保理常任理事国であったソ連に代わりロシアがその地位を継承したことの2点であった。また、より基本的な背景としては、湾岸戦争後1年を迎える時期に当たり冷戦後の新世界秩序の中で国連の果たす役割を改めて問い直し、その将来を模索する必要が感じられたからであった<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a>。安保理サミットでの各国首脳の発言内容は「国際平和と安全」という一般的なテーマの枠内で様々な分野に及んだが、議論の中心をなしたのは国連が紛争処理のために取る諸方策、および軍備管理・軍縮の諸問題であった。ここからは国際紛争の解決のための国連の在り方に焦点をあて、その審議の内容を紹介する。<br>
 　湾岸戦争後1周年に当たる時期に開催された安保理サミットでは、各国首脳から対イラク制裁への言及がなされ、侵略を打ち砕く国連加盟国の結束を擁護する発言がみられた。湾岸戦争時に行われた多国籍軍の軍事行動は、朝鮮戦争以来2回目の国連による軍事的強制行動であり、空文と化していた憲章第7章（「平和の強制」システム）の復活の兆しとして、各国の関心を呼んだのである。もっとも、湾岸戦争での米軍を中心とする多国籍軍の軍事行動がはたして国連による集団安全保障体制の発動といえるかどうか、といった問題があった（詳しいものは既述）。湾岸戦争での米軍を中心とする多国籍軍の行動は、憲章第7章との関連において、かなり変則的であったからである。対イラク軍事活動のイニシアチブをとった米軍は、安保理からその行動を「容認（authorize）」する決議を取り付けたものの、多国籍軍は自らを「同盟軍（coalition forces, allied forces）」と呼んで国連との間に一定の距離を保ち、その軍事作戦について国連の統制を受けることを極力回避したからである。<br>
-　安保理サミットではこの点が問題とされ、将来の集団安全保障が憲章第7章に則った真の意味での「国連行動」たらしめる必要が説かれた。オーストリアやフランスなどは第47条の軍事参謀委員会の活用や、国連軍に関する第43条の規定に言及した[^02_ch02-12]。しかし湾岸戦争のリーダーであった米国からはそれらについて何らの肯定的反応はなかった。このため議長として会議の結果をとりまとめた英国は議長声明の中で「集団安全保障」についてごく簡単な抽象的言及をするにとどめ、第7章の規定の活用について具体的な提案は一切行わなかったのである[^02_ch02-13]。<br>
-　のみならず、国連の集団安全保障体制そのものについても、一部の国から、その将来について消極的・否定的見解が述べられてもいる。アフリカのカーボベルデやジンバブエは「侵略に対抗するための国連の集団的強制行動が効果的であるためには、その適用に一貫性がなければならない。これが選択的、恣意的になされれば、国連行動は道義性と信用を失うことになる。しかし、安保理の拒否権が認められている現状ではその一貫性は期待できない」として、強制行動の将来に不信感を示し、むしろ「強制行動は武力を用いない経済制裁にとどめるべきである」とすら主張したのである[^02_ch02-14]。<br>
+　安保理サミットではこの点が問題とされ、将来の集団安全保障が憲章第7章に則った真の意味での「国連行動」たらしめる必要が説かれた。オーストリアやフランスなどは第47条の軍事参謀委員会の活用や、国連軍に関する第43条の規定に言及した<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a>。しかし湾岸戦争のリーダーであった米国からはそれらについて何らの肯定的反応はなかった。このため議長として会議の結果をとりまとめた英国は議長声明の中で「集団安全保障」についてごく簡単な抽象的言及をするにとどめ、第7章の規定の活用について具体的な提案は一切行わなかったのである<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a>。<br>
+　のみならず、国連の集団安全保障体制そのものについても、一部の国から、その将来について消極的・否定的見解が述べられてもいる。アフリカのカーボベルデやジンバブエは「侵略に対抗するための国連の集団的強制行動が効果的であるためには、その適用に一貫性がなければならない。これが選択的、恣意的になされれば、国連行動は道義性と信用を失うことになる。しかし、安保理の拒否権が認められている現状ではその一貫性は期待できない」として、強制行動の将来に不信感を示し、むしろ「強制行動は武力を用いない経済制裁にとどめるべきである」とすら主張したのである<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a>。<br>
 　このように「平和の強制」システムの将来についての強化策に具体性を欠いたのとは対照的に、紛争の平和的な解決の諸法策については各代表から一様に積極的な評価がなされ、その一層の強化と活用のための具体策が提案されたのである。まず各代表が押しなべて言及したのは、「予防外交」についてであり、紛争の初期の段階での国連の介入の必要性を強調した。すなわち、世界平和に対する潜在的脅威となる地域紛争や事態に対して国連がいち早く解決に乗り出し、これが武力紛争に発展するのを食い止め、紛争を目のうちに摘み取ることの必要性である。紛争の現地に代表を送り、情報収集や解決のための斡旋を行わせるなどの権限を、事務総長が与えられるよう提案したのである。<br>
-　「予防外交」と並んで各国代表が盛んに言及したのが「平和創造」と「平和維持」の二つであり、その具体的な中身としては、国連事務総長をはじめとする国連の諸機関による交渉、斡旋、仲介、事実調査、調停などの諸手続に及ぶものであった。安保理サミットで多くの代表は、この「平和創造」面での国連介入方式に高い評価を与え、とくに事務総長を中心とする「平和創造」の努力について一層の強化・活用を提案した。また、「平和維持」についてもこれの貢献を高く評価する発言が相次ぎ、PKOへの自国の積極的な参加の意向も表明された。理事国の中でこれまでPKOへの参加の実績を持つ国（オーストリアなど）に加えて新たな人的貢献を公約した国として、フランス代表は約1000人の隊員を国連からの要請に応じて即時に派遣できる体制を整えていることを伝え、ロシア代表も将来のPKOについて特に兵站面での貢献を申し出た。またベルギー代表はPKOに備えた待機軍を自国内に用意する意向を明らかにし、日本代表も目下PKO協力法案が国会で審議中であることを伝えるとともに財政面ではPKOの当初の経費を賄うための協力体制について提言を行った[^02_ch02-15]。<br>
-　以上の各国による積極的発言を受け、会議終了時の議長声明では「「予防外交」、「平和創造」および「平和維持」に関する国連の能力をより効果的にし強化する方法について、事務総長がその分析と提案を作成し、92年7月1日までに提出するよう」勧告する文言が挿入されたのである[^02_ch02-16]。<br>
+　「予防外交」と並んで各国代表が盛んに言及したのが「平和創造」と「平和維持」の二つであり、その具体的な中身としては、国連事務総長をはじめとする国連の諸機関による交渉、斡旋、仲介、事実調査、調停などの諸手続に及ぶものであった。安保理サミットで多くの代表は、この「平和創造」面での国連介入方式に高い評価を与え、とくに事務総長を中心とする「平和創造」の努力について一層の強化・活用を提案した。また、「平和維持」についてもこれの貢献を高く評価する発言が相次ぎ、PKOへの自国の積極的な参加の意向も表明された。理事国の中でこれまでPKOへの参加の実績を持つ国（オーストリアなど）に加えて新たな人的貢献を公約した国として、フランス代表は約1000人の隊員を国連からの要請に応じて即時に派遣できる体制を整えていることを伝え、ロシア代表も将来のPKOについて特に兵站面での貢献を申し出た。またベルギー代表はPKOに備えた待機軍を自国内に用意する意向を明らかにし、日本代表も目下PKO協力法案が国会で審議中であることを伝えるとともに財政面ではPKOの当初の経費を賄うための協力体制について提言を行った<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a>。<br>
+　以上の各国による積極的発言を受け、会議終了時の議長声明では「「予防外交」、「平和創造」および「平和維持」に関する国連の能力をより効果的にし強化する方法について、事務総長がその分析と提案を作成し、92年7月1日までに提出するよう」勧告する文言が挿入されたのである<a href="#fn16" class="footnote-ref" id="fnref16" role="doc-noteref"><sup>16</sup></a>。<br>
 　なお安保理サミットの議長声明は、とくにPKOについて言及し「「平和創造」がアジア、アフリカ、ラテンアメリカ、欧州の各地域で貴重な貢献を行っていることを歓迎」したのち、「ここ数年来、PKOの活動がその数を増し、その幅を広げている」事を指摘している。当時のPKOの特色として、その数が激増する傾向に加え、その任務や組織面で“多様化”する現象が注目されていた時代であった。ここでいう多様化とは、「平和創造」がそれ自体単独でなされるのではなく、「平和維持」と結合するかたちで実施される事例が増えていた事を指す。冷戦の終結が東西間の代理戦争を終焉させたものの、代わって登場したのが人種的・宗教的内紛であった。国連は多発した紛争を収束させる切り札としてPKOを大いに活用したことで、量的にも質的にも大きな展開を遂げることとなったのである。質的な変化に着目すると、PKOは軍事・文民部門を含む複雑な任務と組織を持つものが多くなった。武力紛争が国連の平和的解決の努力によって解決に向かう中で、紛争の当事者間に同意をみた包括的な和平計画の一翼を担うものとして、PKOが組み込まれているのである。<br>
 　典型的な事例としては、国連ナミビア独立支援グループ（UNTAG）があげられる。ナミビアの独立移行に関する包括的和平計画には、南アと人民解放戦線（SWAPO）との停戦と兵力引き離し、武力解除・軍の解体に始まり、差別・抑圧的性格の法令の廃止と政治犯の釈放、亡命者・難民の帰国という準備期間を経て、国連管理下での自由選挙を実施し、新憲法を採択してナミビアを独立させるというプロセスが含まれ、これらがUNTAGの支援の下に実施に移されたのである。そこでは、和平達成への包括的な計画の一環として停戦や兵力引き渡しといった軍事的側面の収集過程が、自由選挙などの政治過程と不可分に結びついて施され、「平和創造」と「平和維持」の二つの機能有機的に連動する形で結合したのである。これに参加したUNTAGの要員は、軍事部門と文民部門を含め8000名に上った。同様の方式は、国連西サハラ住民投票監視団（MINURSO）の活動、国連エルサルバドル監視団（ONUSAL）の活動、さらには国連カンボジア暫定統治機構（UNTAC）の諸活動は、いづれもナミビアをモデルにした、包括的和平計画に従って実施される予定である。<br>
 　このような、和平の実現に至る軍事的過程と政治的過程とが連動して一挙に実施されることは、これまでPKOに対してしばしば与えられた「PKO自体は武力紛争の軍事的側面を収集するだけで、紛争そのものの根本的解決をもたらさない」という批判に答えるものであり、当時は将来のPKOの在り方を示すものとして大きな注目を浴びていた。<br>
 　また、当時のPKOにはもう一つの潮流も存在していた。それが「平和の強制」と結びついた平和維持活動の登場である。湾岸戦争の終結の際に設けられた、国連イラク・クウェート監視団（UNIKOM）がそれである。UNIKOMは、国連憲章第7章のもとでイラクに対してとられた軍事的強制措置をいわば引き継ぐ形で非武装地帯の監視のために派遣されたものであり、「平和の強制」の後始末のために「平和維持」が導入された例である。もっとも「平和維持」と「平和の強制」の機能は、もともと水と油のような関係に立つから、両者の結合が無理なく行われるには困難が伴った。UNIKOM設置の時点では、第7章の下での国連の経済制裁は依然継続中であり、現地では多国籍軍の駐留がなお続けられていた。したがって、このような特殊な状況下ではPKOの実施にあたり「同意原則」は適応上、若干の修正を受けることはやむを得ないことであった。<br>
 　第1に、UNIKOMの設置は、イラクに対する軍事行動を終結するための安保理の包括的停戦決議の一環として提案され、イラクはこの提案を受け入れたが、そもそも敗戦国による「受諾」がUNIKOMの受け入れに対する「同意」と同じものなのか、といった問題点がある。第2に、UNIKOMの駐留継続の可否は6か月ごとに安保理のみが決定するという方式がとられたが、これもPKOの任務終了に関する従来の慣行からは若干ずれてしまっている。<br>
-　しかしこれらの点を除き、UNIKOM の現地での活動そのものは、基本的性格に何ら変更を生じなかった。このPKOの設置が第7章の適用という特殊な状況下でなされたにもかかわらず、UNIKOMの非武装地帯での活動に関する限り、その非強制性と中立性は貫かれ、またその他に関しても従来の慣行通りであった。また、33カ国の国籍の将校からなるUNIKOM監視団の中に常任理事国の監視員が含まれていたとしても、これもまた異とするには足らない。個人単位で採用される監視団については「国籍」は重要性が低いのであって、すでにパレスチナ停戦監視団（UNTSO）をはじめ、他の監視団にも常任理事国の参加の先例がみられる。[^02_ch02-17]<br>
+　しかしこれらの点を除き、UNIKOM の現地での活動そのものは、基本的性格に何ら変更を生じなかった。このPKOの設置が第7章の適用という特殊な状況下でなされたにもかかわらず、UNIKOMの非武装地帯での活動に関する限り、その非強制性と中立性は貫かれ、またその他に関しても従来の慣行通りであった。また、33カ国の国籍の将校からなるUNIKOM監視団の中に常任理事国の監視員が含まれていたとしても、これもまた異とするには足らない。個人単位で採用される監視団については「国籍」は重要性が低いのであって、すでにパレスチナ停戦監視団（UNTSO）をはじめ、他の監視団にも常任理事国の参加の先例がみられる。<a href="#fn17" class="footnote-ref" id="fnref17" role="doc-noteref"><sup>17</sup></a><br>
 　なお、安保理サミットが国連事務総長に対して紛争解決の3機能についての検討をゆだねたことは、同年のPKO特別委員会の審議に少なからぬ影響を与えた。4月から5月にかけて開かれたこの総会の補助機関は、PKOの諸問題について包括的審議を行ったのであり、PKOの財政的側面の他、加盟国によるPKOへの人的・物的貢献の促進の問題や、憲章第8章に基づく地域機構とのPKO実施の協力体制など、幅広い検討がなされたが、特にガリ事務総長の蒸気の報告書に委員会の討議を反映させる趣旨から、PKOと「予防外交」および「和平努力」との関連について、突っ込んだ討議が交わされたのである。<br>
 　なかでも論戦の焦点となったのは「平和維持」と「予防外交」との関連であり、PKOをこれまでの武力衝突発生後の事後的使用にとどめず、紛争前の予防的な活用への可能性をめぐる議論であった。一部の加盟国は、予防的外交への手段として事務総長の情報収集、事実調査団の派遣に加えて、PKOの予防的展開が望ましいと述べ、これに侵略の抑止の効果を期待した。さらに、PKOの展開には関係国の同意が不可欠であるが、当事者が協力を拒むときには国連が強制措置に移ることを考えるべきで、この「自動的拡大（automatic escalation）」について慎重に検討すべきであると述べた。<br>
-　しかしこれには他の加盟国から反論も出された。すなわち、ある地域の危険な事態に対してPKOを予防的に展開するにはどの程度で、どのような基準に従ってそれを特定し、その期間の決定に基づいて実施に踏み切るかという困難な問題があり、特に侵略に対する抑止力として使用するには相当の慎重さが要求される。PKOの予防的展開に当たっても、PKOの伝統的ガイドラインにのっとるべきであり、領域国の主権、内政不干渉原則の尊重、関係同時者の事前の同意、武器の不使用および現地活動での中立・公正な態度など、これらの諸原則は堅持されなければならず、憲章第7章の強制行動とは明確に一線を画すべきであるとの主張がなされたのである。このように、6月4日のPKO特別委員会の報告書は、PKOの予防的使用の可否についての見解の対立を浮き彫りにしている[^02_ch02-18]。</p>
+　しかしこれには他の加盟国から反論も出された。すなわち、ある地域の危険な事態に対してPKOを予防的に展開するにはどの程度で、どのような基準に従ってそれを特定し、その期間の決定に基づいて実施に踏み切るかという困難な問題があり、特に侵略に対する抑止力として使用するには相当の慎重さが要求される。PKOの予防的展開に当たっても、PKOの伝統的ガイドラインにのっとるべきであり、領域国の主権、内政不干渉原則の尊重、関係同時者の事前の同意、武器の不使用および現地活動での中立・公正な態度など、これらの諸原則は堅持されなければならず、憲章第7章の強制行動とは明確に一線を画すべきであるとの主張がなされたのである。このように、6月4日のPKO特別委員会の報告書は、PKOの予防的使用の可否についての見解の対立を浮き彫りにしている<a href="#fn18" class="footnote-ref" id="fnref18" role="doc-noteref"><sup>18</sup></a>。</p>
 </section>
 <section id="第3項-平和への課題文はおおよそ完成一次資料を追加予定" class="level3">
 <h3 class="anchored" data-anchor-id="第3項-平和への課題文はおおよそ完成一次資料を追加予定">第3項　「平和への課題」（文はおおよそ完成／一次資料を追加予定）</h3>
@@ -810,7 +790,7 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>　まず「予防外交」は、国連の諸機関(安保理、総会、事務総長および補助機関)が地域機構や専門機関の協力の下に行なう信頼醸成の措置にほかならない。このために、危機管理としての情報収集に努めるほか、事実調査団の現地派遣を通じて紛争の発生や悪化防止をはかり、さらにすすめて、国連要員の予防的現地介入ないし駐留を行なう。国内紛争への介入にあたり則るべき基本原則は、関係当事者の要請や同意を得ること、領域主権の尊重、内政不干渉、当事者に対する公平・中立的態度の厳守などである。国際紛争ないし国際的危機の場合には、安保理が国連の予防的介入を必要と認め、かつ紛争当事国双方が同意するとき、国連は当事国双方の領域への駐留が可能である。さらに、隣国の武力攻撃の脅威を感じ、安保理が国連の介在を必要と認めれば、当該国家のみの要請でその領域への展開が可能となる。<br>
-　報告書は、その際に駐留する国連要員の規模と任務の内容は状況により異なるとしており、そこには軍隊の駐留も含まれるであろう。加えて報告書は予防的介入の措置として「非武装地帯」の設置を挙げる。これは、従来、停戦実施のためPKOの一環として実施されてきたものを、「予防的展開」の一方式として活用する提案である。非武装地帯の設置も、紛争当事者双方の同意があれば、国境をはさんで両側に設けることができるが、一方の側のみの同意がある場合、国境線の同意国側に設けることができるとする[^02_ch02-19]。</p>
+　報告書は、その際に駐留する国連要員の規模と任務の内容は状況により異なるとしており、そこには軍隊の駐留も含まれるであろう。加えて報告書は予防的介入の措置として「非武装地帯」の設置を挙げる。これは、従来、停戦実施のためPKOの一環として実施されてきたものを、「予防的展開」の一方式として活用する提案である。非武装地帯の設置も、紛争当事者双方の同意があれば、国境をはさんで両側に設けることができるが、一方の側のみの同意がある場合、国境線の同意国側に設けることができるとする<a href="#fn19" class="footnote-ref" id="fnref19" role="doc-noteref"><sup>19</sup></a>。</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 100%">
@@ -927,7 +907,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="第11項-ガリが残した平和への課題補遺要素は入れた最後に組み直し" class="level3">
 <h3 class="anchored" data-anchor-id="第11項-ガリが残した平和への課題補遺要素は入れた最後に組み直し">第11項　ガリが残した「平和への課題：補遺」（要素は入れた／最後に組み直し）</h3>
 <p>　ここまでポスト冷戦期の国連の諸活動について振り返ってきた。先にも述べたように、冷戦の終焉は国際政治の力の体系を大きく変容せしめたが、その冷戦の終焉が露見させた集団安全保障機能と役割をめぐる問題の本質はどこにあるのだろうか。この点について、国連事務次長（1945-1986）を長く経験したブライアン・ウルクハルトが興味深い分析を行っている。<br>
-　ウルクハルトによれば、安保理は88年から90年ごろまでは集団安全保障機能を果たしていたという[^02_ch02-20]。88年8月にはイラン・イラク戦争を集結させ（安保理決議598号）、また国連事務総長による交渉のイニシアティブに従って88-89年にはソ連軍をアフガニスタンから撤退させることに成功し、さらにナミビアの独立が安保理決議435号の下に90年3月に実現し、またキューバ軍も89年にアンゴラから段階的撤退を始めた。ところが、国連の集団安全保障機能とその役割の順調な回復は90年を境としてむしろ深刻な壁にぶつかることとなった。ウルクハルトの見立てでは、その第一の主要な国際的事件は90年8月に勃発したイラクによるクウェート侵攻であり、第二に民族間対立の紛争を契機とした既成の国家内あるいは旧主権国家内に起こる深刻な武力闘争の多発であり、まさにソマリア、旧ユーゴスラビアやルワンダといった事例がこれにあたる。<br>
+　ウルクハルトによれば、安保理は88年から90年ごろまでは集団安全保障機能を果たしていたという<a href="#fn20" class="footnote-ref" id="fnref20" role="doc-noteref"><sup>20</sup></a>。88年8月にはイラン・イラク戦争を集結させ（安保理決議598号）、また国連事務総長による交渉のイニシアティブに従って88-89年にはソ連軍をアフガニスタンから撤退させることに成功し、さらにナミビアの独立が安保理決議435号の下に90年3月に実現し、またキューバ軍も89年にアンゴラから段階的撤退を始めた。ところが、国連の集団安全保障機能とその役割の順調な回復は90年を境としてむしろ深刻な壁にぶつかることとなった。ウルクハルトの見立てでは、その第一の主要な国際的事件は90年8月に勃発したイラクによるクウェート侵攻であり、第二に民族間対立の紛争を契機とした既成の国家内あるいは旧主権国家内に起こる深刻な武力闘争の多発であり、まさにソマリア、旧ユーゴスラビアやルワンダといった事例がこれにあたる。<br>
 　95年の国連とくに安保理が問われている、集団安全保障機能に関わる問いは以下の2つに大別される。①国連の集団安全保障機能とその役割が、強制措置を司る憲章第7章の予定・期待する通りに果たして冷戦後作動しているかどうか。②国連は国家間（between states）の侵略行為や紛争を抑止および終結させるばかりではなく、国家国境の内部（within the borders of states）で発生する紛争とそれに伴って発生する人権抑圧などに介入するべきなのか、そしてそうなのであればこれらを解決するために、どのような対応が求められるのか。<br>
 　まずは第1の問題についてから。イラクによるクウェート侵攻に対する国連の対応については既述のとおりなので軽く振り返るに留める。安保理はクウェート侵攻が始まった1990年8月2日から、計12もの安保理決議を採択したものの、11月29日の678号決議（「イラクが91年1月15日までに撤退しない場合、（中略）あらゆる必要な手段を講ずることを国連加盟諸国はクウェート政府と協力して行う」ことを認める）に至ると、憲章第7章の諸条件・諸規定からますます逸脱することとなった。91年1月になって派遣された多国籍軍は、名実ともに憲章第7章が定める国連軍ではなかった。当時の国連事務総長であったデクエヤルは、この多国籍軍が憲章第7章第42条の形式をとって作られた強制力の行使ではなかった事実を強調し、湾岸戦争は「集団的外交の驚くべき失敗」とまで述べた。この経験が、冷戦終焉後の国際政治および国際関係の中で国連の予定し期待する「国連軍」ないし常設される平和維持軍が創設されるべきではないか、との問題意識と再提案につながっているのである。また、（ここからちょこっと経済制裁の話）<br>
 　そもそも集団安全保障とは、「いずれか特定の国家に対するいずれか特定の国家による侵略的かつ非合法的な武力行使は、すべての国々の連合した力によってこれを排除する」ものとの前提及び仮定に立っている。ここにおいて、普遍的な意味における集団安全保障は、歴史上の軍事同盟と異なるばかりでなく、力の均衡システムとも異なっている。力の均衡システムが不当なパワーに向けられた国々の共同行動であるのに対し、集団安全保障は明らかに侵略行為に対抗する共同行動として位置づけられているからである。安保理がその集団安全保障を効果的に機能させ、実効的な強制行動を行うためには、安保理の「民主性」と行動の「一貫性」が求められるのはこれまで繰り返したとおりである。だがその集団安全保障体制は、国連において創設当初から明らかに不十分な構造のまま放置され、理想的な強制行動の運用からほど遠い現実に置かれているのである。また、この本質的な問題点は国内紛争に対して行われた強制行動についても同様でなのであり、旧ユーゴに対して行われた経済措置については、〜〜であり、旧ユーゴに加えソマリアに対する軍事的な強制措置についても、〜〜であったのはすでに述べたとおりである。</p>
@@ -1089,28 +1069,33 @@ ul.task-list li input[type="checkbox"] {
 <p>B. Boutros-Ghali, “The Papers of United Nations Secretary-General Boutros Boutros-Ghali”</p>
 <p>「平和への課題 1995年 - 国際連合広報センター」<br>
 <a href="https://www.unic.or.jp/files/peace.pdf">https://www.unic.or.jp/files/peace.pdf</a>　（2025年10月21日閲覧）</p>
-<p>[^02_ch02-1] 決議660</p>
-<p>[^02_ch02-2] 決議661</p>
-<p>[^02_ch02-3] 決議662</p>
-<p>[^02_ch02-4] 決議664</p>
-<p>[^02_ch02-5] 決議665</p>
-<p>[^02_ch02-6] 決議670</p>
-<p>[^02_ch02-7] 決議678</p>
-<p>[^02_ch02-8] 決議687</p>
-<p>[^02_ch02-9] 要出典</p>
-<p>[^02_ch02-10] 要出典</p>
-<p>[^02_ch02-11] 結果から申し上げれば、新世界秩序の中で求められる国連の役割についてはっきりとした意思統一が国連内でなされることがないまま、95年でも同様の問題意識を抱えた状態で当会議を迎えている</p>
-<p>[^02_ch02-12] 要出典</p>
-<p>[^02_ch02-13] 要出典</p>
-<p>[^02_ch02-14] 要出典</p>
-<p>[^02_ch02-15] 要出典</p>
-<p>[^02_ch02-16] 要出典</p>
-<p>[^02_ch02-17] 「研究摘要」後の基本的に平和維持軍から常任理事国を除く方針は、一部の例外があるものの冷戦期には続けられてきた。しかしUNIKOMをはじめポスト冷戦期においては、各地のPKOに米英仏が積極的に参加するようになった。なお、ロシアは1992年のボスニア・ヘルツェゴビナにて最初のPKO派遣を行い、中国も同年のカンボジアにて最初のＰＫＯ派遣を行った。また、ＵＮＩＫＯＭには最終的に常任理事国のすべての国が参加した。</p>
-<p>[^02_ch02-18] 要出典</p>
-<p>[^02_ch02-19] 92年12月に安保理はマケドニアへの平和維持軍の展開を決定した。これはマケドニアにおいて武力衝突が発生する恐れがあることからマケドニアの大統領の要請に基づいて派遣されることになったPKOであり、予防展開のリーディングケースとなった。決議７９５。</p>
-<p>[^02_ch02-20] ソ連の国連政策転換が大きく影響した。国連創設以来、ソ連は社会主義国が少数派であったことから国連に対しては常に不信感を抱き続け、平和維持活動についてもこれを憲章違反だとして財政的支援を拒否し続けてきた。しかし87年以降、ゴルバチョフの影響でこうした姿勢に変化が生じ、平和維持活動が活性化することとなった。</p>
 
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>決議660<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>決議661<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>決議662<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>決議664<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>決議665<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>決議670<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>決議678<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>決議687<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>要出典<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>要出典<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>結果から申し上げれば、新世界秩序の中で求められる国連の役割についてはっきりとした意思統一が国連内でなされることがないまま、95年でも同様の問題意識を抱えた状態で当会議を迎えている<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>要出典<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>要出典<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>要出典<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>要出典<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn16"><p>要出典<a href="#fnref16" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn17"><p>「研究摘要」後の基本的に平和維持軍から常任理事国を除く方針は、一部の例外があるものの冷戦期には続けられてきた。しかしUNIKOMをはじめポスト冷戦期においては、各地のPKOに米英仏が積極的に参加するようになった。なお、ロシアは1992年のボスニア・ヘルツェゴビナにて最初のPKO派遣を行い、中国も同年のカンボジアにて最初のＰＫＯ派遣を行った。また、ＵＮＩＫＯＭには最終的に常任理事国のすべての国が参加した。<a href="#fnref17" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn18"><p>要出典<a href="#fnref18" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn19"><p>92年12月に安保理はマケドニアへの平和維持軍の展開を決定した。これはマケドニアにおいて武力衝突が発生する恐れがあることからマケドニアの大統領の要請に基づいて派遣されることになったPKOであり、予防展開のリーディングケースとなった。決議７９５。<a href="#fnref19" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn20"><p>ソ連の国連政策転換が大きく影響した。国連創設以来、ソ連は社会主義国が少数派であったことから国連に対しては常に不信感を抱き続け、平和維持活動についてもこれを憲章違反だとして財政的支援を拒否し続けてきた。しかし87年以降、ゴルバチョフの影響でこうした姿勢に変化が生じ、平和維持活動が活性化することとなった。<a href="#fnref20" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -2036,7 +2021,6 @@ let readingStateSaveTimer = null;
   const SCROLL_EXTENSION_BUFFER = 80;
   const FOOTNOTE_INLINE_BREAKPOINT = 1024;
   let currentFootnoteLayout = null;
-  let readingStateSaveTimer = null;
 
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
@@ -2451,6 +2435,17 @@ let readingStateSaveTimer = null;
 
     // ハンバーガーメニューは廃止
 
+    // 設定メニュー開閉機能
+    if (settingsToggleBtn) {
+      const iconImg = settingsToggleBtn.querySelector('.settings-toggle-icon[data-asset]');
+      if (iconImg) {
+        const assetPath = iconImg.getAttribute('data-asset');
+        if (assetPath) {
+          iconImg.src = resolveAssetPath(assetPath);
+        }
+      }
+    }
+
     // 一般の画像についても data-asset 属性があれば resolveAssetPath で解決する
     try {
       const assetImgs = document.querySelectorAll('img[data-asset]');
@@ -2493,9 +2488,11 @@ let readingStateSaveTimer = null;
     if (themeSelect) {
       const mq = window.matchMedia('(prefers-color-scheme: dark)');
       function applyTheme(mode) {
-        const target = mode === 'auto' ? (mq.matches ? 'dark' : 'light') : mode;
-        document.body.setAttribute('data-theme', target);
-        document.documentElement.setAttribute('data-theme', target);
+        if (mode === 'auto') {
+          document.body.setAttribute('data-theme', mq.matches ? 'dark' : 'light');
+        } else {
+          document.body.setAttribute('data-theme', mode);
+        }
       }
       const saved = localStorage.getItem(STORAGE_KEYS.theme) || 'auto';
       themeSelect.value = saved;
@@ -2957,12 +2954,8 @@ let readingStateSaveTimer = null;
     if (SIDENOTES_ON) {
       renderSidenotes(currentRightTab());
     }
-    if (typeof enumerateReadingNodes === 'function') {
-      enumerateReadingNodes();
-    }
-    if (typeof scheduleReadingStateSave === 'function') {
-      scheduleReadingStateSave();
-    }
+    enumerateReadingNodes();
+    scheduleReadingStateSave();
     scheduleScrollExtensionUpdate();
   }
 
@@ -3212,11 +3205,19 @@ let readingStateSaveTimer = null;
       currentFootnoteLayout = nextMode;
       document.body && document.body.classList.toggle('footnotes-inline-mode', shouldInline);
       document.body && document.body.classList.toggle('footnotes-sidebar-mode', !shouldInline);
+      if (shouldInline) {
+        renderInlineFootnotes();
+      } else {
+        renderSidebarFootnotes();
+      }
+    } else if (shouldInline) {
+      renderInlineFootnotes();
+    } else {
+      renderSidebarFootnotes();
     }
-    const rendered = shouldInline ? !!renderInlineFootnotes() : !!renderSidebarFootnotes();
     try {
       if (document.body) {
-        document.body.classList.toggle('js-footnotes-enhanced', rendered);
+        document.body.classList.add('js-footnotes-enhanced');
       }
     } catch (e) {
       console.warn('applyFootnoteLayout: failed to mark enhanced footnotes state', e);
@@ -3227,7 +3228,7 @@ let readingStateSaveTimer = null;
     setInlineFootnoteMode(false);
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
     let marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) return false;
+    if (!marginSidebar) return;
 
     if (marginSidebar.style.display === 'none') {
       const prev = marginSidebar.dataset.prevDisplay || '';
@@ -3274,7 +3275,7 @@ let readingStateSaveTimer = null;
     if (!footnotes.length) {
       footHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注がありません。</p>');
       if (bothHost) bothHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注/コメントがありません。</p>');
-      return false;
+      return;
     }
 
     const items = footnotes.slice();
@@ -3331,7 +3332,6 @@ let readingStateSaveTimer = null;
     setupScrollSyncForFootnotes(footHost, items);
     refreshCommentMarkersFromDB({ preserveExisting: true });
     scheduleScrollExtensionUpdate();
-    return true;
   }
 
   function renderBothPanel(host, footItems) {
@@ -3736,9 +3736,8 @@ let readingStateSaveTimer = null;
     const scope = active || document;
     const refSelector = 'a[role="doc-noteref"], a.footnote-ref';
     const refs = Array.from(scope.querySelectorAll(refSelector)).filter(ref => !active || active.contains(ref));
-    if (!refs.length) return false;
+    if (!refs.length) return;
     const hostTailMap = new Map();
-    let inserted = false;
     refs.forEach(ref => {
       const href = ref.getAttribute('href') || ref.getAttribute('data-footnote-href');
       if (!href || !href.startsWith('#')) return;
@@ -3769,11 +3768,9 @@ let readingStateSaveTimer = null;
       }
       hostTailMap.set(host, container);
       reinforceAnchors(container);
-      inserted = true;
     });
     ensureCommentMarkerInteractions();
     scheduleScrollExtensionUpdate();
-    return inserted;
   }
 
   function findHostParagraph(el) {
@@ -4111,7 +4108,7 @@ function setupMarkerFunctionality() {
             <button type="button" class="marker-color-btn" data-color="blue" title="青"></button>
             <button type="button" class="marker-color-btn" data-color="pink" title="ピンク"></button>
           </div>
-          <button type="button" class="marker-comment-btn" title="選択範囲にコメント" aria-label="選択範囲にコメント">コメント</button>
+          <button type="button" class="marker-comment-btn" title="選択範囲にコメント" aria-label="選択範囲にコメント"></button>
         </div>
       `;
       toolbar.querySelectorAll('.marker-color-btn').forEach(btn => {
@@ -4140,19 +4137,19 @@ function setupMarkerFunctionality() {
       if (!baseRange || baseRange.collapsed) return;
 
       const overlay = document.createElement('div');
-      overlay.className = 'comment-dialog-overlay';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:10000;display:flex;align-items:center;justify-content:center;';
       const dialog = document.createElement('div');
-      dialog.className = 'comment-dialog';
+      dialog.style.cssText = 'background:#fff;color:#222;max-width:600px;width:92%;padding:16px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.25);';
       dialog.innerHTML = `
-        <div class="comment-dialog__header">
-          <h3 class="comment-dialog__title">コメントを追加</h3>
-          <button type="button" aria-label="閉じる" class="comment-dialog__close">×</button>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <h3 style="margin:0;font-size:16px;">コメントを追加</h3>
+          <button type="button" aria-label="閉じる" style="background:none;border:none;font-size:18px;cursor:pointer;">×</button>
         </div>
-        <div class="comment-dialog__snippet" id="comment-snippet"></div>
-        <textarea id="comment-textarea" rows="6" class="comment-dialog__textarea" placeholder="ここにコメントを入力（長文可）"></textarea>
-        <div class="comment-dialog__actions">
-          <button type="button" id="comment-cancel" class="comment-dialog__btn comment-dialog__btn--muted">キャンセル</button>
-          <button type="button" id="comment-save" class="comment-dialog__btn comment-dialog__btn--primary">保存</button>
+        <div style="font-size:13px;color:#555;background:#f8f9fa;border:1px solid #e9ecef;padding:8px;border-radius:4px;margin-bottom:8px;" id="comment-snippet"></div>
+        <textarea id="comment-textarea" rows="6" style="width:100%;font-size:14px;padding:8px;border-radius:6px;border:1px solid #ced4da;resize:vertical;" placeholder="ここにコメントを入力（長文可）"></textarea>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px;">
+          <button type="button" id="comment-cancel" style="padding:6px 12px;border:1px solid #dee2e6;border-radius:4px;background:#f8f9fa;cursor:pointer;">キャンセル</button>
+          <button type="button" id="comment-save" style="padding:6px 12px;border:1px solid #0d6efd;border-radius:4px;background:#0d6efd;color:#fff;cursor:pointer;">保存</button>
         </div>
       `;
       overlay.appendChild(dialog);
@@ -5928,10 +5925,8 @@ function setupMarkerFunctionality() {
         persistReadingState();
       }
     });
-    if (typeof scheduleReadingStateSave === 'function') {
-      window.addEventListener('scroll', scheduleReadingStateSave, { passive: true });
-      window.addEventListener('resize', scheduleReadingStateSave);
-    }
+    window.addEventListener('scroll', scheduleReadingStateSave, { passive: true });
+    window.addEventListener('resize', scheduleReadingStateSave);
   }
 
   function expandAllInMenu(root) {
@@ -6908,45 +6903,7 @@ function setupMarkerFunctionality() {
     background: rgba(255, 235, 59, 0.3);
     padding: 0 2px;
   }
-
-  body[data-theme="dark"] .gdoc-popover {
-    --gdoc-popover-bg: #111827;
-    background: #111827;
-    color: #e2e8f0;
-    border-color: rgba(138, 180, 248, 0.25);
-    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
-  }
-
-  body[data-theme="dark"] .gdoc-popover-actions .gdoc-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  body[data-theme="dark"] .gdoc-modal-dialog {
-    background: #0b101a;
-    color: #e1e5ed;
-    border: 1px solid rgba(138, 180, 248, 0.35);
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
-  }
-
-  body[data-theme="dark"] .gdoc-modal-header {
-    background: rgba(255, 255, 255, 0.05);
-    border-bottom-color: rgba(255, 255, 255, 0.12);
-    color: inherit;
-  }
-
-  body[data-theme="dark"] .gdoc-modal-header-actions .gdoc-modal-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  body[data-theme="dark"] .bg-preview-body {
-    color: #e5e9f0;
-    background: transparent;
-  }
-
-  body[data-theme="dark"] .bg-preview-body a {
-    color: #8ab4f8;
-  }
-
+  
   /* プレビュー内のポップオーバーを最前面に */
   .bg-preview-body .gdoc-popover,
   .bg-preview-body #bg-preview-popover {
