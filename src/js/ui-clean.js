@@ -40,6 +40,10 @@
   const FOOTNOTE_INLINE_BREAKPOINT = 1024;
   let currentFootnoteLayout = null;
   let footnotesPlaceholderEl = null;
+  let scrollExtensionEventsBound = false;
+  let scrollExtensionEl = null;
+  let pendingScrollExtensionRaf = 0;
+  const SCROLL_EXTENSION_BUFFER = 80;
 
   function resolveAssetPath(relPath) {
     try {
@@ -98,6 +102,65 @@
       clone.querySelectorAll(selector).forEach((node) => node.remove());
     });
     return (clone.textContent || '').replace(/\s+/g, '');
+  }
+
+  function ensureScrollExtensionElement() {
+    if (scrollExtensionEl && document.body.contains(scrollExtensionEl)) {
+      return scrollExtensionEl;
+    }
+    if (!document.body) return null;
+    scrollExtensionEl = document.createElement('div');
+    scrollExtensionEl.id = 'scroll-extension-anchor';
+    scrollExtensionEl.setAttribute('aria-hidden', 'true');
+    scrollExtensionEl.style.cssText = 'width:1px;height:0;margin:0;padding:0;';
+    document.body.appendChild(scrollExtensionEl);
+    return scrollExtensionEl;
+  }
+
+  function updateScrollExtensionNow() {
+    const placeholder = ensureScrollExtensionElement();
+    if (!placeholder) return;
+    placeholder.style.height = '0px';
+    const docElement = document.documentElement || document.body;
+    const baseHeight = Math.max(
+      document.body ? document.body.scrollHeight : 0,
+      docElement ? docElement.scrollHeight : 0
+    );
+    let maxBottom = baseHeight;
+    let hasTarget = false;
+    const targets = [
+      document.getElementById('quarto-document-content'),
+      document.getElementById('quarto-sidebar'),
+      document.getElementById('quarto-margin-sidebar')
+    ];
+    targets.forEach(el => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (!rect || !Number.isFinite(rect.bottom)) return;
+      const bottom = rect.bottom + window.scrollY;
+      if (!Number.isFinite(bottom)) return;
+      maxBottom = Math.max(maxBottom, bottom);
+      hasTarget = true;
+    });
+    if (!hasTarget) {
+      placeholder.style.height = '0px';
+      return;
+    }
+    const needed = Math.max(0, Math.ceil(maxBottom - baseHeight + SCROLL_EXTENSION_BUFFER));
+    placeholder.style.height = needed > 0 ? `${needed}px` : '0px';
+  }
+
+  function scheduleScrollExtensionUpdate() {
+    if (typeof requestAnimationFrame !== 'function') {
+      return updateScrollExtensionNow();
+    }
+    if (pendingScrollExtensionRaf) {
+      cancelAnimationFrame(pendingScrollExtensionRaf);
+    }
+    pendingScrollExtensionRaf = requestAnimationFrame(() => {
+      pendingScrollExtensionRaf = 0;
+      updateScrollExtensionNow();
+    });
   }
 
   function initializeReadingMeter(displayEl) {
@@ -320,6 +383,14 @@
     setupScrollPosition();
     setupScrollableSettingsHeader(); // スクロール設定ヘッダーを追加
 
+    if (!scrollExtensionEventsBound) {
+      window.addEventListener('resize', () => scheduleScrollExtensionUpdate(), { passive: true });
+      window.addEventListener('orientationchange', () => scheduleScrollExtensionUpdate());
+      window.addEventListener('load', () => scheduleScrollExtensionUpdate(), { once: true });
+      scrollExtensionEventsBound = true;
+    }
+    scheduleScrollExtensionUpdate();
+
     setupTocFootnoteCleanup();
   }
 
@@ -470,6 +541,7 @@
     });
 
     console.log('サイドバータブを初期化しました');
+    scheduleScrollExtensionUpdate();
   }
 
   // Footnotes layout controller (sidebar vs inline on portrait)
@@ -536,6 +608,7 @@
         li.insertBefore(num, li.firstChild);
       }
     });
+    scheduleScrollExtensionUpdate();
   }
 
   function renderInlineFootnotes() {
@@ -583,6 +656,7 @@
       }
       host.insertAdjacentElement('afterend', container);
     });
+    scheduleScrollExtensionUpdate();
   }
 
   function ensureFootnotesPlaceholder(section) {
