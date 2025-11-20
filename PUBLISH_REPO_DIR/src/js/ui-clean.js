@@ -37,6 +37,13 @@
   };
 
   let readingMeterState = null;
+  const FOOTNOTE_INLINE_BREAKPOINT = 1024;
+  let currentFootnoteLayout = null;
+  let footnotesPlaceholderEl = null;
+  let scrollExtensionEventsBound = false;
+  let scrollExtensionEl = null;
+  let pendingScrollExtensionRaf = 0;
+  const SCROLL_EXTENSION_BUFFER = 80;
 
   function resolveAssetPath(relPath) {
     try {
@@ -95,6 +102,65 @@
       clone.querySelectorAll(selector).forEach((node) => node.remove());
     });
     return (clone.textContent || '').replace(/\s+/g, '');
+  }
+
+  function ensureScrollExtensionElement() {
+    if (scrollExtensionEl && document.body.contains(scrollExtensionEl)) {
+      return scrollExtensionEl;
+    }
+    if (!document.body) return null;
+    scrollExtensionEl = document.createElement('div');
+    scrollExtensionEl.id = 'scroll-extension-anchor';
+    scrollExtensionEl.setAttribute('aria-hidden', 'true');
+    scrollExtensionEl.style.cssText = 'width:1px;height:0;margin:0;padding:0;';
+    document.body.appendChild(scrollExtensionEl);
+    return scrollExtensionEl;
+  }
+
+  function updateScrollExtensionNow() {
+    const placeholder = ensureScrollExtensionElement();
+    if (!placeholder) return;
+    placeholder.style.height = '0px';
+    const docElement = document.documentElement || document.body;
+    const baseHeight = Math.max(
+      document.body ? document.body.scrollHeight : 0,
+      docElement ? docElement.scrollHeight : 0
+    );
+    let maxBottom = baseHeight;
+    let hasTarget = false;
+    const targets = [
+      document.getElementById('quarto-document-content'),
+      document.getElementById('quarto-sidebar'),
+      document.getElementById('quarto-margin-sidebar')
+    ];
+    targets.forEach(el => {
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (!rect || !Number.isFinite(rect.bottom)) return;
+      const bottom = rect.bottom + window.scrollY;
+      if (!Number.isFinite(bottom)) return;
+      maxBottom = Math.max(maxBottom, bottom);
+      hasTarget = true;
+    });
+    if (!hasTarget) {
+      placeholder.style.height = '0px';
+      return;
+    }
+    const needed = Math.max(0, Math.ceil(maxBottom - baseHeight + SCROLL_EXTENSION_BUFFER));
+    placeholder.style.height = needed > 0 ? `${needed}px` : '0px';
+  }
+
+  function scheduleScrollExtensionUpdate() {
+    if (typeof requestAnimationFrame !== 'function') {
+      return updateScrollExtensionNow();
+    }
+    if (pendingScrollExtensionRaf) {
+      cancelAnimationFrame(pendingScrollExtensionRaf);
+    }
+    pendingScrollExtensionRaf = requestAnimationFrame(() => {
+      pendingScrollExtensionRaf = 0;
+      updateScrollExtensionNow();
+    });
   }
 
   function initializeReadingMeter(displayEl) {
@@ -317,6 +383,14 @@
     setupScrollPosition();
     setupScrollableSettingsHeader(); // スクロール設定ヘッダーを追加
 
+    if (!scrollExtensionEventsBound) {
+      window.addEventListener('resize', () => scheduleScrollExtensionUpdate(), { passive: true });
+      window.addEventListener('orientationchange', () => scheduleScrollExtensionUpdate());
+      window.addEventListener('load', () => scheduleScrollExtensionUpdate(), { once: true });
+      scrollExtensionEventsBound = true;
+    }
+    scheduleScrollExtensionUpdate();
+
     setupTocFootnoteCleanup();
   }
 
@@ -467,19 +541,33 @@
     });
 
     console.log('サイドバータブを初期化しました');
+    scheduleScrollExtensionUpdate();
   }
 
   // Footnotes layout controller (sidebar vs inline on portrait)
   function setupRightSidebar() {
+    const debouncedApply = debounce(applyFootnoteLayout, 150);
     applyFootnoteLayout();
-    // respond to orientation/resize
-    window.addEventListener('resize', debounce(applyFootnoteLayout, 200));
-    window.addEventListener('orientationchange', debounce(applyFootnoteLayout, 200));
+    // respond to orientation/resize/media query changes
+    window.addEventListener('resize', debouncedApply);
+    window.addEventListener('orientationchange', debouncedApply);
+    const breakpointQuery = window.matchMedia(`(max-width: ${FOOTNOTE_INLINE_BREAKPOINT}px)`);
+    if (typeof breakpointQuery.addEventListener === 'function') {
+      breakpointQuery.addEventListener('change', debouncedApply);
+    } else if (typeof breakpointQuery.addListener === 'function') {
+      breakpointQuery.addListener(debouncedApply);
+    }
   }
 
   function applyFootnoteLayout() {
-    const isPortrait = window.matchMedia('(orientation: portrait)').matches || (window.innerHeight > window.innerWidth);
-    if (isPortrait) {
+    const inlineQuery = window.matchMedia(`(max-width: ${FOOTNOTE_INLINE_BREAKPOINT}px)`);
+    const shouldInline = inlineQuery.matches || window.innerWidth <= FOOTNOTE_INLINE_BREAKPOINT;
+    const nextMode = shouldInline ? 'inline' : 'sidebar';
+    if (currentFootnoteLayout === nextMode) return;
+    currentFootnoteLayout = nextMode;
+    document.body.classList.toggle('footnotes-inline-mode', shouldInline);
+    document.body.classList.toggle('footnotes-sidebar-mode', !shouldInline);
+    if (shouldInline) {
       renderInlineFootnotes();
     } else {
       renderSidebarFootnotes();
@@ -499,6 +587,7 @@
       return;
     }
 
+    ensureFootnotesPlaceholder(footnotes);
     marginSidebar.innerHTML = '';
     const header = document.createElement('h2');
     header.className = 'footnotes-title';
@@ -506,6 +595,7 @@
     marginSidebar.appendChild(header);
     marginSidebar.appendChild(footnotes);
     footnotes.classList.add('margin-footnotes');
+    footnotes.style.display = '';
 
     // inject numbers label at start of each li
     const items = footnotes.querySelectorAll('ol > li');
@@ -518,17 +608,25 @@
         li.insertBefore(num, li.firstChild);
       }
     });
+    scheduleScrollExtensionUpdate();
   }
 
   function renderInlineFootnotes() {
-    // ensure right panel cleaned
     const marginSidebar = document.getElementById('quarto-margin-sidebar');
+    const footnotesSection = document.querySelector('section.footnotes');
+    if (footnotesSection) {
+      ensureFootnotesPlaceholder(footnotesSection);
+      if (marginSidebar && marginSidebar.contains(footnotesSection)) {
+        marginSidebar.removeChild(footnotesSection);
+      }
+      restoreFootnotesToDocument(footnotesSection);
+      footnotesSection.classList.remove('margin-footnotes');
+      footnotesSection.style.display = '';
+    }
     if (marginSidebar) marginSidebar.innerHTML = '';
-
     // remove previous inline blocks
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
 
-    const footnotesSection = document.querySelector('section.footnotes');
     if (!footnotesSection) return;
 
     const refSelector = 'a[role="doc-noteref"], a.footnote-ref';
@@ -558,6 +656,21 @@
       }
       host.insertAdjacentElement('afterend', container);
     });
+    scheduleScrollExtensionUpdate();
+  }
+
+  function ensureFootnotesPlaceholder(section) {
+    if (footnotesPlaceholderEl || !section || !section.parentNode) return;
+    footnotesPlaceholderEl = document.createElement('div');
+    footnotesPlaceholderEl.className = 'footnotes-placeholder';
+    footnotesPlaceholderEl.style.display = 'none';
+    section.parentNode.insertBefore(footnotesPlaceholderEl, section);
+  }
+
+  function restoreFootnotesToDocument(section) {
+    if (!section || !footnotesPlaceholderEl || !footnotesPlaceholderEl.parentNode) return;
+    if (footnotesPlaceholderEl.nextSibling === section) return;
+    footnotesPlaceholderEl.parentNode.insertBefore(section, footnotesPlaceholderEl.nextSibling);
   }
 
   function findHostParagraph(el) {

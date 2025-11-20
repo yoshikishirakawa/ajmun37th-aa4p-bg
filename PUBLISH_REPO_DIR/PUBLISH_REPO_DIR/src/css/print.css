@@ -1,0 +1,231 @@
+/* 印刷用スタイル */
+
+@media print {
+  /* 基本設定 */
+  body {
+    font-size: 11pt;
+    line-height: 1.4;
+    color: black;
+    background: white;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* 不要な要素を非表示 */
+  .header,
+  .left-panel,
+  .right-panel,
+  .page-nav,
+  .back-to-top,
+  .toc-overlay,
+  .toc-sheet,
+  .main-menu-button,
+  .theme-button {
+    display: none !important;
+  }
+  
+  /* レイアウトをシンプルに */
+  .layout {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  .main {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* 見出しの改ページ制御 */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  
+  h1 {
+    font-size: 18pt;
+    margin: 24pt 0 12pt 0;
+  }
+  
+  h2 {
+    font-size: 14pt;
+    margin: 18pt 0 9pt 0;
+  }
+  
+  h3 {
+    font-size: 12pt;
+    margin: 12pt 0 6pt 0;
+  }
+  
+  /* 段落 */
+  p {
+    margin: 6pt 0;
+    text-align: justify;
+    orphans: 3;
+    widows: 3;
+  }
+  
+  /* リスト */
+  ul, ol {
+    margin: 6pt 0;
+    padding-left: 18pt;
+  }
+  
+  li {
+    margin: 3pt 0;
+    orphans: 2;
+    widows: 2;
+  }
+  
+  /* 引用 */
+  blockquote {
+    margin: 9pt 0;
+    padding: 6pt 9pt;
+    border-left: 2pt solid #666;
+    background: #f5f5f5;
+    page-break-inside: avoid;
+  }
+  
+  /* テーブル */
+  table {
+    margin: 9pt 0;
+    border-collapse: collapse;
+    font-size: 10pt;
+  }
+  
+  th, td {
+    padding: 3pt 6pt;
+    border: 0.5pt solid #666;
+  }
+  
+  th {
+    background: #e0e0e0;
+  }
+  
+  /* コード */
+  code {
+    font-family: 'Courier', monospace;
+    background: #f0f0f0;
+    padding: 1pt 2pt;
+    border: 0.5pt solid #ccc;
+  }
+  
+  pre {
+    margin: 9pt 0;
+    padding: 6pt;
+    border: 0.5pt solid #ccc;
+    background: #f5f5f5;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+  
+  /* 脚注 */
+  .footnote-ref {
+    font-size: 8pt;
+    vertical-align: super;
+  }
+  
+  .footnotes {
+    font-size: 9pt;
+    margin-top: 24pt;
+    border-top: 1pt solid #666;
+    padding-top: 12pt;
+  }
+  
+  .footnotes ol {
+    padding-left: 18pt;
+    margin: 0;
+  }
+  
+  .footnotes li {
+    margin: 3pt 0;
+  }
+  
+  /* リンク */
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt;
+    color: #666;
+  }
+  
+  /* 章区切り */
+  .chapter {
+    page-break-before: always;
+  }
+  
+  .chapter:first-child {
+    page-break-before: auto;
+  }
+  
+  /* 図表の改ページ制御 */
+  figure,
+  img,
+  table {
+    page-break-inside: avoid;
+  }
+  
+  /* 図キャプション */
+  figcaption,
+  caption {
+    font-size: 9pt;
+    font-style: italic;
+    text-align: center;
+    margin: 6pt 0;
+  }
+  
+  /* 参考文献 */
+  .references {
+    font-size: 10pt;
+  }
+  
+  /* 索引 */
+  .index {
+    font-size: 10pt;
+  }
+  
+  .index-columns {
+    column-count: 2;
+    column-gap: 24pt;
+  }
+  
+  /* 装飾的な背景やボーダーを削除 */
+  * {
+    box-shadow: none !important;
+    background: transparent !important;
+    border: 1pt solid #666 !important;
+  }
+  
+  /* カラーを白黒に */
+  body {
+    color: black !important;
+    background: white !important;
+  }
+  
+  .toc-tab,
+  .toc-item,
+  .main-menu-button {
+    color: black !important;
+    background: white !important;
+    border: 1pt solid black !important;
+  }
+  
+  /* マージン設定 */
+  @page {
+    margin: 2cm;
+    size: A4;
+  }
+  
+  @page :left {
+    margin: 2cm 3cm 2cm 2cm;
+  }
+  
+  @page :right {
+    margin: 2cm 2cm 2cm 3cm;
+  }
+}

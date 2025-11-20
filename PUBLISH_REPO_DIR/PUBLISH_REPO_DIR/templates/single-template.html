@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>$title$</title>
+  $if(css)$
+  <style>$css$</style>
+  $endif$
+  $for(css)$
+  <link rel="stylesheet" href="$css$" />
+  $endfor$
+</head>
+<body class="quarto-basic">
+  <header id="quarto-header">
+    $for(header-includes)$
+    $header-includes$
+    $endfor$
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <h1>$title$</h1>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="quarto-sidebar">
+    <div id="TOC" role="doc-toc">
+      $if(toc)$
+      $toc$
+      $endif$
+    </div>
+  </nav>
+
+  <main>
+    $body$
+  </main>
+
+  <aside class="right-sidebar">
+    <div class="footnotes-container">
+      <h3>脚注</h3>
+      <div class="footnotes-content">
+        <!-- 脚注はJavaScriptで動的に挿入 -->
+      </div>
+    </div>
+  </aside>
+
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col text-center">
+          <small>$date$</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // 単一HTML用の脚注処理
+  document.addEventListener('DOMContentLoaded', function() {
+    function moveFootnotesToRightSidebar() {
+      const footnotesContainer = document.querySelector('.footnotes-content');
+      const footnotes = document.querySelectorAll('.footnotes ol li');
+      
+      if (footnotesContainer && footnotes.length > 0) {
+        footnotesContainer.innerHTML = '';
+        
+        footnotes.forEach(function(footnote) {
+          const clone = footnote.cloneNode(true);
+          footnotesContainer.appendChild(clone);
+        });
+      }
+    }
+    
+    setTimeout(moveFootnotesToRightSidebar, 100);
+  });
+  </script>
+
+  $for(js)$
+  <script src="$js$"></script>
+  $endfor$
+</body>
+</html>

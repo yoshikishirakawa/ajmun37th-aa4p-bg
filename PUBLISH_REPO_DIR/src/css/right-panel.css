@@ -1,19 +1,36 @@
+:root {
+  --toc-surface: var(--ui-surface, #fff);
+  --toc-muted-surface: var(--ui-surface-muted, #f8f9fb);
+  --toc-border-color: var(--ui-border, #e1e5eb);
+  --toc-text-color: var(--ui-text, #202124);
+  --toc-muted-text: var(--ui-text-muted, #6c757d);
+  --toc-accent-color: var(--ui-link, #1a73e8);
+  --toc-accent-strong: var(--ui-link-strong, #0c5bc0);
+  --toc-highlight-color: rgba(26, 115, 232, 0.14);
+  --footnote-highlight: #fff6d6;
+}
+
+body[data-theme="dark"] {
+  --toc-highlight-color: rgba(138, 180, 248, 0.2);
+  --footnote-highlight: rgba(255, 214, 153, 0.25);
+}
+
 /* Sidebar TOC toggle */
 
 #quarto-sidebar .toc-switcher {
   margin-top: 16px;
-  border: 1px solid #e1e5eb;
+  border: 1px solid var(--toc-border-color);
   border-radius: 8px;
-  background: #fff;
+  background: var(--toc-surface);
   overflow: hidden;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--ui-shadow-soft, 0 1px 2px rgba(0, 0, 0, 0.06));
 }
 
 #quarto-sidebar .toc-tabs {
   display: flex;
   gap: 0;
-  border-bottom: 1px solid #e1e5eb;
-  background: #f8f9fb;
+  border-bottom: 1px solid var(--toc-border-color);
+  background: var(--toc-muted-surface);
 }
 
 #quarto-sidebar .toc-tab {
@@ -23,24 +40,24 @@
   border: none;
   font-size: 0.9rem;
   font-weight: 500;
-  color: #6c757d;
+  color: var(--toc-muted-text);
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 #quarto-sidebar .toc-tab:first-child {
-  border-right: 1px solid #e1e5eb;
+  border-right: 1px solid var(--toc-border-color);
 }
 
 #quarto-sidebar .toc-tab:hover {
-  background: #eef2f6;
-  color: #495057;
+  background: var(--toc-surface);
+  color: var(--toc-text-color);
 }
 
 #quarto-sidebar .toc-tab.active {
-  background: #fff;
-  color: #1a73e8;
-  box-shadow: inset 0 -3px 0 #1a73e8;
+  background: var(--toc-surface);
+  color: var(--toc-accent-color);
+  box-shadow: inset 0 -3px 0 var(--toc-accent-color);
 }
 
 #quarto-sidebar .toc-panel {
@@ -48,6 +65,8 @@
   max-height: calc(100vh - 160px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  background: var(--toc-surface);
+  color: var(--toc-text-color);
 }
 
 /* 日本語 UI 用の折り返し設定（サイドバー TOC） */
@@ -92,7 +111,7 @@
   display: block;
   padding: 6px 10px;
   border-radius: 6px;
-  color: #1a73e8;
+  color: var(--toc-accent-color);
   text-decoration: none;
   font-size: 0.9rem;
   transition: background 0.2s ease, color 0.2s ease;
@@ -100,8 +119,8 @@
 
 #quarto-sidebar .toc-page-content .page-toc-link:hover,
 #quarto-sidebar .toc-page-content .page-toc-link.active {
-  background: #e8f2ff;
-  color: #0c5bc0;
+  background: var(--toc-highlight-color);
+  color: var(--toc-accent-strong);
 }
 
 #quarto-sidebar .toc-page-content .page-toc-level-2 {
@@ -135,25 +154,26 @@
 #quarto-sidebar .toc-all-content .all-toc-item {
   margin: 0;
   line-height: 1.05;
+  color: var(--toc-text-color);
 }
 
 #quarto-sidebar .toc-all-content .all-toc-item.active > .all-toc-link {
   font-weight: 600;
-  color: #1a73e8;
+  color: var(--toc-accent-color);
 }
 
 #quarto-sidebar .toc-all-content .all-toc-link {
   display: block;
   padding: 4px 10px;
   border-radius: 6px;
-  color: #202124;
+  color: var(--toc-text-color);
   text-decoration: none;
   font-size: 0.9rem;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 #quarto-sidebar .toc-all-content .all-toc-link:hover {
-  background: #f1f3f4;
+  background: var(--toc-muted-surface);
 }
 
 #quarto-sidebar .toc-all-content .all-toc-sublist {
@@ -167,7 +187,7 @@
 
 #quarto-sidebar .toc-all-content .all-toc-sublink {
   font-size: 0.8rem;
-  color: #5f6368;
+  color: var(--toc-muted-text);
   text-decoration: none;
   padding: 3px 8px;
   border-radius: 4px;
@@ -175,8 +195,8 @@
 }
 
 #quarto-sidebar .toc-all-content .all-toc-sublink:hover {
-  background: #f3f4f6;
-  color: #3c4043;
+  background: var(--toc-muted-surface);
+  color: var(--toc-text-color);
 }
 
 #quarto-sidebar .toc-all-content .all-toc-item--chapter {
@@ -191,7 +211,7 @@
 #quarto-sidebar .toc-empty {
   margin: 0;
   padding: 8px;
-  color: #868e96;
+  color: var(--toc-muted-text);
   font-size: 0.85rem;
   font-style: italic;
 }
@@ -200,13 +220,14 @@
 
 #quarto-margin-sidebar {
   padding: 16px 20px;
-  border-left: 1px solid #e1e5eb;
-  background: #f8f9fb;
+  border-left: 1px solid var(--toc-border-color);
+  background: var(--toc-muted-surface);
   position: sticky;
   top: 80px;
   max-height: calc(100vh - 80px);
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  color: var(--toc-text-color);
 }
 
 #quarto-margin-sidebar .right-switcher {
@@ -219,37 +240,37 @@
 #quarto-margin-sidebar .toc-tabs {
   display: flex;
   gap: 0;
-  border: 1px solid #e1e5eb;
+  border: 1px solid var(--toc-border-color);
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 10px;
-  background: #fff;
+  background: var(--toc-surface);
 }
 
 #quarto-margin-sidebar .toc-tab {
   flex: 1;
   padding: 8px 10px;
-  background: #f8f9fb;
+  background: var(--toc-muted-surface);
   border: none;
   font-size: 0.9rem;
-  color: #6c757d;
+  color: var(--toc-muted-text);
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 #quarto-margin-sidebar .toc-tab+.toc-tab {
-  border-left: 1px solid #e1e5eb;
+  border-left: 1px solid var(--toc-border-color);
 }
 
 #quarto-margin-sidebar .toc-tab:hover {
-  background: #eef2f6;
-  color: #495057;
+  background: var(--toc-surface);
+  color: var(--toc-text-color);
 }
 
 #quarto-margin-sidebar .toc-tab.active {
-  background: #fff;
-  color: #1a73e8;
-  box-shadow: inset 0 -3px 0 #1a73e8;
+  background: var(--toc-surface);
+  color: var(--toc-accent-color);
+  box-shadow: inset 0 -3px 0 var(--toc-accent-color);
 }
 
 #quarto-margin-sidebar .toc-panel {
@@ -268,13 +289,13 @@
   max-width: 100%;
   background: transparent;
   border: none;
-  border-left: 2px solid #1a73e8;
+  border-left: 2px solid var(--toc-accent-color);
   border-radius: 0;
   box-shadow: none;
   padding: 4px 6px;
   font-size: 0.8em;
   /* 本文の約80% */
-  color: #495057;
+  color: var(--toc-text-color);
   z-index: 1;
 }
 
@@ -285,7 +306,7 @@
 #quarto-margin-sidebar .margin-note .meta {
   font-size: 0.8em;
   /* 傍注本文より少し小さめ */
-  color: #6c757d;
+  color: var(--toc-muted-text);
   margin-bottom: 2px;
   display: flex;
   gap: 8px;
@@ -293,11 +314,11 @@
 }
 
 #quarto-margin-sidebar .margin-note .target {
-  background: #f8f9fa;
+  background: var(--toc-muted-surface);
   border-radius: 4px;
   padding: 3px 4px;
   margin-bottom: 2px;
-  color: #495057;
+  color: var(--toc-text-color);
 }
 
 /* 傍注としての脚注本文を [番号] 本文 の1行スタイルに */
@@ -319,7 +340,7 @@
 #quarto-margin-sidebar .margin-note .footnote-num {
   flex: 0 0 auto;
   font-weight: 600;
-  color: #6c757d;
+  color: var(--toc-muted-text);
   margin-right: 2px;
 }
 
@@ -335,7 +356,7 @@
   align-items: center;
   gap: 6px;
   font-size: 0.85em;
-  color: #6c757d;
+  color: var(--toc-muted-text);
 }
 
 /* 右パネル（通常タブ）の文字サイズを本文の80%に統一 */
@@ -349,7 +370,7 @@
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 12px;
-  color: #495057;
+  color: var(--toc-text-color);
 }
 
 #quarto-margin-sidebar .margin-footnotes {
@@ -384,7 +405,7 @@
   display: flex;
   align-items: flex-start;
   gap: 4px;
-  border-bottom: 1px solid #e1e5eb;
+  border-bottom: 1px solid var(--toc-border-color);
   /* 薄い区切り線 */
   line-height: 1.5;
   background: transparent;
@@ -413,15 +434,15 @@
   background: transparent !important;
   border-radius: 0 !important;
   border-left: none !important;
-  border-bottom: 1px solid #e1e5eb !important;
+  border-bottom: 1px solid var(--toc-border-color) !important;
   box-shadow: none !important;
   position: relative;
 }
 
 #quarto-margin-sidebar .comment-item .comment-snippet {
   font-size: 13px;
-  color: #495057;
-  background: #f8f9fa;
+  color: var(--toc-text-color);
+  background: var(--toc-muted-surface);
   padding: 4px 6px !important;
   border-radius: 4px;
   margin-bottom: 3px !important;
@@ -441,7 +462,7 @@
   box-shadow: none !important;
   background: transparent !important;
   border-left-width: 2px !important;
-  border-bottom: 1px solid #e1e5eb !important;
+  border-bottom: 1px solid var(--toc-border-color) !important;
 }
 
 /* 両方タブ内の脚注も [番号] 本文 を同一行で表示 */
@@ -459,7 +480,7 @@
   display: inline-block;
   flex: 0 0 auto;
   font-weight: 600;
-  color: #6c757d;
+  color: var(--toc-muted-text);
   margin-right: 2px;
 }
 
@@ -468,7 +489,7 @@
 }
 
 #quarto-margin-sidebar .margin-footnotes a {
-  color: #1a73e8;
+  color: var(--toc-accent-color);
   text-decoration: none;
   pointer-events: auto;
 }
@@ -479,7 +500,7 @@
 
 #quarto-margin-sidebar .footnotes-empty {
   font-size: 0.85rem;
-  color: #868e96;
+  color: var(--toc-muted-text);
   font-style: italic;
 }
 
@@ -488,7 +509,7 @@
   display: inline-block;
   flex: 0 0 auto;
   font-weight: 600;
-  color: #6c757d;
+  color: var(--toc-muted-text);
   margin-right: 2px;
 }
 
@@ -498,7 +519,7 @@
 
 @keyframes footnote-highlight {
   0% {
-    background: #fff6d6;
+    background: var(--footnote-highlight);
   }
 
   100% {
