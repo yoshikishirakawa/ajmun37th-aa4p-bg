@@ -372,7 +372,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="参考文献" class="level1">
 <h1>参考文献</h1>
 <p>以下に各章で引用された参考文献を章ごとにまとめて表示します。</p>
-<div id="38f0960e" class="cell" data-execution_count="1">
+<div id="83fd7e99" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 章ごとの参考文献を生成するスクリプト</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
@@ -1427,6 +1427,8 @@ let readingStateSaveTimer = null;
   const FOOTNOTE_MAX_RETRIES = 4;
   const FOOTNOTE_RETRY_DELAY = 300;
   const FALLBACK_NOTE_CLASS = 'margin-note-fallback';
+  const FOOTNOTE_READY_RETRIES = 12;
+  const FOOTNOTE_READY_DELAY = 250;
 
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
@@ -2356,6 +2358,17 @@ let readingStateSaveTimer = null;
       footnoteRenderRetries = 0;
       scheduleFootnoteReflow();
     }, { once: true });
+    if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+      document.fonts.ready.then(() => {
+        footnoteRenderRetries = 0;
+        scheduleFootnoteReflow();
+      }).catch(() => {});
+    }
+    waitForFootnotesReady(() => {
+      footnoteRenderRetries = 0;
+      refreshRightPanels();
+    });
+    watchFootnotesMutations();
   }
 
   function refreshRightPanels() {
@@ -2649,6 +2662,31 @@ let readingStateSaveTimer = null;
     SIDENOTES_ITEMS = items;
     updateSidenotesPositions();
     return true;
+  }
+
+  function waitForFootnotesReady(cb) {
+    let tries = 0;
+    const tick = () => {
+      const hasFootnotes = document.querySelector('section.footnotes li[id]');
+      if (hasFootnotes) {
+        cb && cb();
+        return;
+      }
+      tries += 1;
+      if (tries >= FOOTNOTE_READY_RETRIES) return;
+      setTimeout(tick, FOOTNOTE_READY_DELAY);
+    };
+    tick();
+  }
+
+  function watchFootnotesMutations() {
+    const container = document.querySelector('section.footnotes');
+    if (!container) return;
+    const observer = new MutationObserver(() => {
+      footnoteRenderRetries = 0;
+      scheduleFootnoteReflow();
+    });
+    observer.observe(container, { childList: true, subtree: true });
   }
 
   function applyFootnoteLayout() {

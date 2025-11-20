@@ -511,6 +511,8 @@ let readingStateSaveTimer = null;
   const FOOTNOTE_MAX_RETRIES = 4;
   const FOOTNOTE_RETRY_DELAY = 300;
   const FALLBACK_NOTE_CLASS = 'margin-note-fallback';
+  const FOOTNOTE_READY_RETRIES = 12;
+  const FOOTNOTE_READY_DELAY = 250;
 
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
@@ -1440,6 +1442,17 @@ let readingStateSaveTimer = null;
       footnoteRenderRetries = 0;
       scheduleFootnoteReflow();
     }, { once: true });
+    if (document.fonts && document.fonts.ready && typeof document.fonts.ready.then === 'function') {
+      document.fonts.ready.then(() => {
+        footnoteRenderRetries = 0;
+        scheduleFootnoteReflow();
+      }).catch(() => {});
+    }
+    waitForFootnotesReady(() => {
+      footnoteRenderRetries = 0;
+      refreshRightPanels();
+    });
+    watchFootnotesMutations();
   }
 
   function refreshRightPanels() {
@@ -1733,6 +1746,31 @@ let readingStateSaveTimer = null;
     SIDENOTES_ITEMS = items;
     updateSidenotesPositions();
     return true;
+  }
+
+  function waitForFootnotesReady(cb) {
+    let tries = 0;
+    const tick = () => {
+      const hasFootnotes = document.querySelector('section.footnotes li[id]');
+      if (hasFootnotes) {
+        cb && cb();
+        return;
+      }
+      tries += 1;
+      if (tries >= FOOTNOTE_READY_RETRIES) return;
+      setTimeout(tick, FOOTNOTE_READY_DELAY);
+    };
+    tick();
+  }
+
+  function watchFootnotesMutations() {
+    const container = document.querySelector('section.footnotes');
+    if (!container) return;
+    const observer = new MutationObserver(() => {
+      footnoteRenderRetries = 0;
+      scheduleFootnoteReflow();
+    });
+    observer.observe(container, { childList: true, subtree: true });
   }
 
   function applyFootnoteLayout() {
