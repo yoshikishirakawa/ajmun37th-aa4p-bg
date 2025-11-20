@@ -1300,6 +1300,9 @@ let readingStateSaveTimer = null;
   const SCROLL_EXTENSION_BUFFER = 80;
   const FOOTNOTE_INLINE_BREAKPOINT = 1024;
   let currentFootnoteLayout = null;
+  let footnoteRenderRetries = 0;
+  const FOOTNOTE_MAX_RETRIES = 4;
+  const FOOTNOTE_RETRY_DELAY = 300;
 
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
@@ -2225,6 +2228,10 @@ let readingStateSaveTimer = null;
     window.addEventListener('resize', onResize);
     window.addEventListener('orientationchange', onResize);
     window.addEventListener('hashchange', () => { setTimeout(refreshRightPanels, 60); });
+    window.addEventListener('load', () => {
+      footnoteRenderRetries = 0;
+      scheduleFootnoteReflow();
+    }, { once: true });
   }
 
   function refreshRightPanels() {
@@ -2236,6 +2243,7 @@ let readingStateSaveTimer = null;
     enumerateReadingNodes();
     scheduleReadingStateSave();
     scheduleScrollExtensionUpdate();
+    scheduleFootnoteReflow();
   }
 
   function ensureRightTabs() {
@@ -2501,6 +2509,21 @@ let readingStateSaveTimer = null;
     } catch (e) {
       console.warn('applyFootnoteLayout: failed to mark enhanced footnotes state', e);
     }
+    scheduleFootnoteReflow();
+  }
+
+  function scheduleFootnoteReflow() {
+    if (footnoteRenderRetries >= FOOTNOTE_MAX_RETRIES) return;
+    const attempt = () => {
+      footnoteRenderRetries += 1;
+      if (document.body && document.body.classList.contains('footnotes-inline-mode')) {
+        renderInlineFootnotes();
+      } else {
+        renderSidebarFootnotes();
+      }
+      updateSidenotesPositions();
+    };
+    setTimeout(attempt, FOOTNOTE_RETRY_DELAY * footnoteRenderRetries);
   }
 
   function renderSidebarFootnotes() {
@@ -6014,81 +6037,6 @@ function setupMarkerFunctionality() {
     reader.readAsText(file, 'utf-8');
   }
 
-})();
-</script>
-<script>
-(function () {
-  'use strict';
-
-  const FALLBACK_DELAY_MS = 800;
-  let styleInjected = false;
-
-  function injectFallbackStyles() {
-    if (styleInjected) return;
-    styleInjected = true;
-    const style = document.createElement('style');
-    style.textContent = `
-      #quarto-margin-sidebar .margin-note-fallback {
-        position: static;
-        border-left: 2px solid var(--toc-accent-color, #f35);
-        padding: 4px 0 4px 8px;
-        margin-bottom: 10px;
-        background: transparent;
-      }
-      #quarto-margin-sidebar .margin-note-fallback .footnote-num {
-        font-weight: 600;
-        color: var(--toc-accent-color, #f35);
-        margin-right: 4px;
-      }
-      #quarto-margin-sidebar .margin-note-fallback .body {
-        padding: 0;
-        margin: 0;
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  function renderFallbackSidenotes() {
-    const marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) return;
-
-    // 既に傍注が描画されている場合は何もしない
-    if (marginSidebar.querySelector('.margin-note')) return;
-
-    const defs = Array.from(document.querySelectorAll('section.footnotes li'));
-    if (!defs.length) return;
-
-    injectFallbackStyles();
-
-    const fragment = document.createDocumentFragment();
-    defs.forEach((li, idx) => {
-      const note = document.createElement('div');
-      note.className = 'margin-note margin-note-fallback';
-
-      const num = document.createElement('span');
-      num.className = 'footnote-num';
-      num.textContent = `${idx + 1}. `;
-      note.appendChild(num);
-
-      const body = document.createElement('div');
-      body.className = 'body';
-      const clone = li.cloneNode(true);
-      clone
-        .querySelectorAll('.footnote-back, .footnote-backref, [role="doc-backlink"]')
-        .forEach((n) => n.remove());
-      body.innerHTML = clone.innerHTML;
-      note.appendChild(body);
-
-      fragment.appendChild(note);
-    });
-
-    marginSidebar.appendChild(fragment);
-    marginSidebar.classList.add('sidenotes-on');
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    setTimeout(renderFallbackSidenotes, FALLBACK_DELAY_MS);
-  });
 })();
 </script>
 <style>

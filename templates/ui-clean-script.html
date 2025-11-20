@@ -507,6 +507,9 @@ let readingStateSaveTimer = null;
   const SCROLL_EXTENSION_BUFFER = 80;
   const FOOTNOTE_INLINE_BREAKPOINT = 1024;
   let currentFootnoteLayout = null;
+  let footnoteRenderRetries = 0;
+  const FOOTNOTE_MAX_RETRIES = 4;
+  const FOOTNOTE_RETRY_DELAY = 300;
 
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
@@ -1432,6 +1435,10 @@ let readingStateSaveTimer = null;
     window.addEventListener('resize', onResize);
     window.addEventListener('orientationchange', onResize);
     window.addEventListener('hashchange', () => { setTimeout(refreshRightPanels, 60); });
+    window.addEventListener('load', () => {
+      footnoteRenderRetries = 0;
+      scheduleFootnoteReflow();
+    }, { once: true });
   }
 
   function refreshRightPanels() {
@@ -1443,6 +1450,7 @@ let readingStateSaveTimer = null;
     enumerateReadingNodes();
     scheduleReadingStateSave();
     scheduleScrollExtensionUpdate();
+    scheduleFootnoteReflow();
   }
 
   function ensureRightTabs() {
@@ -1708,6 +1716,21 @@ let readingStateSaveTimer = null;
     } catch (e) {
       console.warn('applyFootnoteLayout: failed to mark enhanced footnotes state', e);
     }
+    scheduleFootnoteReflow();
+  }
+
+  function scheduleFootnoteReflow() {
+    if (footnoteRenderRetries >= FOOTNOTE_MAX_RETRIES) return;
+    const attempt = () => {
+      footnoteRenderRetries += 1;
+      if (document.body && document.body.classList.contains('footnotes-inline-mode')) {
+        renderInlineFootnotes();
+      } else {
+        renderSidebarFootnotes();
+      }
+      updateSidenotesPositions();
+    };
+    setTimeout(attempt, FOOTNOTE_RETRY_DELAY * footnoteRenderRetries);
   }
 
   function renderSidebarFootnotes() {
