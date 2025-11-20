@@ -822,10 +822,7 @@ let readingStateSaveTimer = null;
     const items = [];
     refMap.forEach(entry => {
       let def = document.getElementById(entry.id);
-      if (!def) {
-        console.warn('[DEBUG] Footnote definition not found for id:', entry.id);
-        return;
-      }
+      if (!def) return;
       if (!(def instanceof HTMLElement)) def = def.parentElement;
       if (!def) return;
       let li = def;
@@ -834,17 +831,13 @@ let readingStateSaveTimer = null;
         if (nearestLi) li = nearestLi;
       }
       if (!(li instanceof HTMLElement)) return;
-      // 脚注セクション（#footnotes）は通常 chapter-page の外にあるため、
-      // active が存在する場合でも、脚注定義が #footnotes セクション内にあれば許可する
-      const footnotesSection = li.closest('section#footnotes, section.footnotes');
-      if (active && !footnotesSection) {
+      if (active) {
         const parentSection = li.closest('section.chapter-page');
         if (parentSection && parentSection !== active) return;
       }
       const fallbackLabel = entry.number || entry.id.replace(/[^0-9]+/g, '').trim();
       items.push({ id: entry.id, li, ref: entry.ref, pos: entry.pos, number: fallbackLabel });
     });
-    console.log('[DEBUG] gatherActiveFootnotes: found', refMap.size, 'refs,', items.length, 'definitions');
     return items;
   }
 
@@ -1718,15 +1711,10 @@ let readingStateSaveTimer = null;
   }
 
   function renderSidebarFootnotes() {
-    console.log('[DEBUG] renderSidebarFootnotes called');
     setInlineFootnoteMode(false);
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
     let marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) {
-      console.warn('[DEBUG] quarto-margin-sidebar not found');
-      return;
-    }
-    console.log('[DEBUG] quarto-margin-sidebar found');
+    if (!marginSidebar) return;
 
     if (marginSidebar.style.display === 'none') {
       const prev = marginSidebar.dataset.prevDisplay || '';
@@ -1770,14 +1758,11 @@ let readingStateSaveTimer = null;
     footHost.appendChild(headerRow);
 
     const footnotes = gatherActiveFootnotes();
-    console.log('[DEBUG] gatherActiveFootnotes returned', footnotes.length, 'footnotes');
     if (!footnotes.length) {
-      console.warn('[DEBUG] No footnotes found');
       footHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注がありません。</p>');
       if (bothHost) bothHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注/コメントがありません。</p>');
       return;
     }
-    console.log('[DEBUG] Rendering', footnotes.length, 'footnotes to sidebar');
 
     const items = footnotes.slice();
     const mode = sort.value;

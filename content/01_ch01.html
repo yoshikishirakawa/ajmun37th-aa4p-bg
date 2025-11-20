@@ -386,12 +386,12 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="技術選定">1.3 技術選定</h2>
 <section id="quarto-pandoc" class="level3">
 <h3 class="anchored" data-anchor-id="quarto-pandoc">1.3.1 Quarto + Pandoc</h3>
-<p>本研究では<strong>Quarto</strong>と<strong>Pandoc</strong>を中核技術として選択しました<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</p>
+<p>本研究では<strong>Quarto</strong>と<strong>Pandoc</strong>を中核技術として選択しました[^01_ch01-1]。</p>
 <p>選定理由： - 学術文書生成の標準ツール - Markdownからの変換が容易 - PDF出力の高品質性 - プラグイン拡張性</p>
 </section>
 <section id="udp明朝フォント" class="level3">
 <h3 class="anchored" data-anchor-id="udp明朝フォント">1.3.2 UDP明朝フォント</h3>
-<p>本文書では<strong>UDP明朝</strong>を主要な日本語フォントとして使用します<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。</p>
+<p>本文書では<strong>UDP明朝</strong>を主要な日本語フォントとして使用します[^01_ch01-2]。</p>
 <p>特長： - 読みやすさ - 印刷適性 - Webフォントとしての利用可能性</p>
 </section>
 </section>
@@ -411,7 +411,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="ファイル配置戦略" class="level3">
 <h3 class="anchored" data-anchor-id="ファイル配置戦略">1.4.2 ファイル配置戦略</h3>
-<p>章ファイルは数値プリフィクスで順序を管理します<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。</p>
+<p>章ファイルは数値プリフィクスで順序を管理します[fn:3]。</p>
 <ul>
 <li><code>00_front.md</code>: フロント挨拶</li>
 <li><code>01_ch01.md</code>〜<code>07_ch07.md</code>: 本文</li>
@@ -436,16 +436,9 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="まとめ">まとめ</h2>
 <p>本章ではプロジェクト全体の概要を説明しました。次章以降では、具体的な実装方法について詳述します。</p>
 <hr>
+<p>[^01_ch01-1] QuartoはRStudioが開発した統合的オーサリング環境です。 [^01_ch01-2] UDP明朝のライセンスと配布条件については別途確認が必要です。 [fn:3]: 数値プリフィクスにより、ファイルシステム上の自然な並び順を確保します。</p>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>QuartoはRStudioが開発した統合的オーサリング環境です。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>UDP明朝のライセンスと配布条件については別途確認が必要です。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>数値プリフィクスにより、ファイルシステム上の自然な並び順を確保します。<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1686,10 +1679,7 @@ let readingStateSaveTimer = null;
     const items = [];
     refMap.forEach(entry => {
       let def = document.getElementById(entry.id);
-      if (!def) {
-        console.warn('[DEBUG] Footnote definition not found for id:', entry.id);
-        return;
-      }
+      if (!def) return;
       if (!(def instanceof HTMLElement)) def = def.parentElement;
       if (!def) return;
       let li = def;
@@ -1698,17 +1688,13 @@ let readingStateSaveTimer = null;
         if (nearestLi) li = nearestLi;
       }
       if (!(li instanceof HTMLElement)) return;
-      // 脚注セクション（#footnotes）は通常 chapter-page の外にあるため、
-      // active が存在する場合でも、脚注定義が #footnotes セクション内にあれば許可する
-      const footnotesSection = li.closest('section#footnotes, section.footnotes');
-      if (active && !footnotesSection) {
+      if (active) {
         const parentSection = li.closest('section.chapter-page');
         if (parentSection && parentSection !== active) return;
       }
       const fallbackLabel = entry.number || entry.id.replace(/[^0-9]+/g, '').trim();
       items.push({ id: entry.id, li, ref: entry.ref, pos: entry.pos, number: fallbackLabel });
     });
-    console.log('[DEBUG] gatherActiveFootnotes: found', refMap.size, 'refs,', items.length, 'definitions');
     return items;
   }
 
@@ -2582,15 +2568,10 @@ let readingStateSaveTimer = null;
   }
 
   function renderSidebarFootnotes() {
-    console.log('[DEBUG] renderSidebarFootnotes called');
     setInlineFootnoteMode(false);
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
     let marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) {
-      console.warn('[DEBUG] quarto-margin-sidebar not found');
-      return;
-    }
-    console.log('[DEBUG] quarto-margin-sidebar found');
+    if (!marginSidebar) return;
 
     if (marginSidebar.style.display === 'none') {
       const prev = marginSidebar.dataset.prevDisplay || '';
@@ -2634,14 +2615,11 @@ let readingStateSaveTimer = null;
     footHost.appendChild(headerRow);
 
     const footnotes = gatherActiveFootnotes();
-    console.log('[DEBUG] gatherActiveFootnotes returned', footnotes.length, 'footnotes');
     if (!footnotes.length) {
-      console.warn('[DEBUG] No footnotes found');
       footHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注がありません。</p>');
       if (bothHost) bothHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注/コメントがありません。</p>');
       return;
     }
-    console.log('[DEBUG] Rendering', footnotes.length, 'footnotes to sidebar');
 
     const items = footnotes.slice();
     const mode = sort.value;
@@ -6100,6 +6078,81 @@ function setupMarkerFunctionality() {
     reader.readAsText(file, 'utf-8');
   }
 
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+
+  const FALLBACK_DELAY_MS = 800;
+  let styleInjected = false;
+
+  function injectFallbackStyles() {
+    if (styleInjected) return;
+    styleInjected = true;
+    const style = document.createElement('style');
+    style.textContent = `
+      #quarto-margin-sidebar .margin-note-fallback {
+        position: static;
+        border-left: 2px solid var(--toc-accent-color, #f35);
+        padding: 4px 0 4px 8px;
+        margin-bottom: 10px;
+        background: transparent;
+      }
+      #quarto-margin-sidebar .margin-note-fallback .footnote-num {
+        font-weight: 600;
+        color: var(--toc-accent-color, #f35);
+        margin-right: 4px;
+      }
+      #quarto-margin-sidebar .margin-note-fallback .body {
+        padding: 0;
+        margin: 0;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function renderFallbackSidenotes() {
+    const marginSidebar = document.getElementById('quarto-margin-sidebar');
+    if (!marginSidebar) return;
+
+    // 既に傍注が描画されている場合は何もしない
+    if (marginSidebar.querySelector('.margin-note')) return;
+
+    const defs = Array.from(document.querySelectorAll('section.footnotes li'));
+    if (!defs.length) return;
+
+    injectFallbackStyles();
+
+    const fragment = document.createDocumentFragment();
+    defs.forEach((li, idx) => {
+      const note = document.createElement('div');
+      note.className = 'margin-note margin-note-fallback';
+
+      const num = document.createElement('span');
+      num.className = 'footnote-num';
+      num.textContent = `${idx + 1}. `;
+      note.appendChild(num);
+
+      const body = document.createElement('div');
+      body.className = 'body';
+      const clone = li.cloneNode(true);
+      clone
+        .querySelectorAll('.footnote-back, .footnote-backref, [role="doc-backlink"]')
+        .forEach((n) => n.remove());
+      body.innerHTML = clone.innerHTML;
+      note.appendChild(body);
+
+      fragment.appendChild(note);
+    });
+
+    marginSidebar.appendChild(fragment);
+    marginSidebar.classList.add('sidenotes-on');
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(renderFallbackSidenotes, FALLBACK_DELAY_MS);
+  });
 })();
 </script>
 <style>
