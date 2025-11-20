@@ -1792,7 +1792,10 @@ let readingStateSaveTimer = null;
     const items = [];
     refMap.forEach(entry => {
       let def = document.getElementById(entry.id);
-      if (!def) return;
+      if (!def) {
+        console.warn('[DEBUG] Footnote definition not found for id:', entry.id);
+        return;
+      }
       if (!(def instanceof HTMLElement)) def = def.parentElement;
       if (!def) return;
       let li = def;
@@ -1801,13 +1804,17 @@ let readingStateSaveTimer = null;
         if (nearestLi) li = nearestLi;
       }
       if (!(li instanceof HTMLElement)) return;
-      if (active) {
+      // 脚注セクション（#footnotes）は通常 chapter-page の外にあるため、
+      // active が存在する場合でも、脚注定義が #footnotes セクション内にあれば許可する
+      const footnotesSection = li.closest('section#footnotes, section.footnotes');
+      if (active && !footnotesSection) {
         const parentSection = li.closest('section.chapter-page');
         if (parentSection && parentSection !== active) return;
       }
       const fallbackLabel = entry.number || entry.id.replace(/[^0-9]+/g, '').trim();
       items.push({ id: entry.id, li, ref: entry.ref, pos: entry.pos, number: fallbackLabel });
     });
+    console.log('[DEBUG] gatherActiveFootnotes: found', refMap.size, 'refs,', items.length, 'definitions');
     return items;
   }
 
