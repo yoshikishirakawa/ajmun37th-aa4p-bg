@@ -5,6 +5,7 @@ format:
     number-sections: false
     file-scope: true
     page-layout: article
+    reference-location: margin
     css:
       - ../src/css/font-udpmincho.css
       - ../src/css/base.css

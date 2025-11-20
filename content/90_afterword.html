@@ -96,7 +96,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../src/css/right-panel.css">
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -222,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 <div class="header-ui">
   <div id="js-header" class="js-header">
     <div class="js-header__inner">
@@ -358,13 +358,13 @@ ul.task-list li input[type="checkbox"] {
 <p>これらの課題に対する総合的な解決策として、本書で示したアプローチを策定しました。</p>
 <hr>
 </section>
-<section id="技術的な挑戦" class="level2">
+<section id="技術的な挑戦" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="技術的な挑戦">技術的な挑戦</h2>
 <p>実装過程では多くの技術的課題に直面しました：</p>
-<section id="フォント埋込" class="level3">
+<section id="フォント埋込" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="フォント埋込">フォント埋込</h3>
 <p>UDP明朝のデータURI化には慎重な検討が必要でした。ファイルサイズと品質のバランス取りは特に難しい判断でした<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</p>
-</section>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;最終的にはサブセット化と圧縮により、許容範囲内に収めることができました。</p></div></div></section>
 <section id="レスポンシブ設計" class="level3">
 <h3 class="anchored" data-anchor-id="レスポンシブ設計">レスポンシブ設計</h3>
 <p>横長画面の3カラムレイアウトとモバイルの1カラム表示の両立は、CSS設計の根幹に関わる課題でした。</p>
@@ -409,12 +409,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 </section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1"><p>最終的にはサブセット化と圧縮により、許容範囲内に収めることができました。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
