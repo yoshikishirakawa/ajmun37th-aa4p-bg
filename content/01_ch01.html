@@ -961,21 +961,110 @@ ul.task-list li input[type="checkbox"] {
       return false;
     }
 
-    function restoreReadingState() {
-      let raw = null;
-      try {
-        raw = sessionStorage.getItem(STORAGE_KEYS.readingState);
-      } catch (e) {
-        raw = null;
+    let readingStateSaveTimer = null;
+
+    function findReadableElement(node) {
+      const scope = document.getElementById('quarto-document-content');
+      if (!scope) return null;
+      let current = node;
+      while (current && current !== document.body) {
+        if (current.tagName) {
+          const tag = current.tagName.toLowerCase();
+          if (['p', 'li', 'blockquote', 'pre', 'table', 'figure', 'dd', 'dt'].includes(tag)) {
+            return current;
+          }
+        }
+        current = current.parentElement;
       }
-      if (!raw) return;
+      return null;
+    }
+
+    function captureReadingState(options) {
+      const opts = options || {};
+      const headings = getHeadingElements();
+      const docEl = document.documentElement;
+      const body = document.body;
+      const scrollTop = (docEl && docEl.scrollTop) || (body && body.scrollTop) || 0;
+      const viewportHeight = window.innerHeight || docEl.clientHeight || 0;
+      const viewportWidth = window.innerWidth || docEl.clientWidth || body.clientWidth || 0;
+      const focusLine = scrollTop + viewportHeight * 0.35;
+      let current = null;
+      for (let i = 0; i < headings.length; i += 1) {
+        const el = headings[i];
+        const top = el.offsetTop;
+        if (top <= focusLine) {
+          current = el;
+        } else {
+          break;
+        }
+      }
+      if (!current && headings.length) {
+        current = headings[0];
+      }
+      const pageHeight = Math.max(1, (docEl && docEl.scrollHeight) || (body && body.scrollHeight) || 1) - viewportHeight;
+      const pageRatio = pageHeight > 0 ? scrollTop / pageHeight : 0;
+      const state = { pageRatio };
+      const centerX = viewportWidth / 2;
+      let focusNode = null;
+      try {
+        focusNode = document.elementFromPoint(centerX, viewportHeight * 0.4);
+      } catch (e) {
+        focusNode = null;
+      }
+      if (current) {
+        const currentId = current.getAttribute('id') || current.getAttribute('data-anchor-id') || '';
+        const next = current.nextElementSibling ? current.nextElementSibling.closest('h1, h2, h3, h4, h5, h6') : null;
+        let nextTop = null;
+        if (next) {
+          nextTop = next.offsetTop;
+        } else {
+          nextTop = (docEl && docEl.scrollHeight) || (body && body.scrollHeight) || (current.offsetTop + viewportHeight);
+        }
+        const currentTop = current.offsetTop;
+        const sectionHeight = Math.max(1, nextTop - currentTop);
+        const rel = (focusLine - currentTop) / sectionHeight;
+        if (currentId) {
+          state.sectionId = currentId;
+          state.sectionOffset = Math.min(0.995, Math.max(0, rel));
+        }
+      }
+      const focusElement = findReadableElement(focusNode);
+      if (focusElement) {
+        const rect = focusElement.getBoundingClientRect();
+        const elementHeight = Math.max(1, rect.height || focusElement.offsetHeight || 1);
+        const elementTop = focusElement.offsetTop;
+        const relInElement = Math.min(0.995, Math.max(0, (focusLine - elementTop) / elementHeight));
+        state.focusElementOffset = relInElement;
+        const id = focusElement.getAttribute('id') || focusElement.getAttribute('data-anchor-id') || '';
+        if (id) state.focusElementId = id;
+        if (opts.captureNodeRef) {
+          state.__focusNode = focusElement;
+        }
+      }
+      return state;
+    }
+
+    function persistReadingState() {
       let state = null;
       try {
-        state = JSON.parse(raw);
+        state = captureReadingState();
       } catch (e) {
         state = null;
       }
-      scrollToReadingState(state);
+      if (!state) return;
+      try {
+        sessionStorage.setItem(STORAGE_KEYS.readingState, JSON.stringify(state));
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    function scheduleReadingStateSave() {
+      if (readingStateSaveTimer) return;
+      readingStateSaveTimer = window.setTimeout(() => {
+        readingStateSaveTimer = null;
+        persistReadingState();
+      }, 500);
     }
 
     // =============================
@@ -3232,115 +3321,7 @@ ul.task-list li input[type="checkbox"] {
 
         function enumerateReadingNodes() { }
 
-        function findReadableElement(node) {
-          const scope = document.getElementById('quarto-document-content');
-          if (!scope) return null;
-          let current = node;
-          while (current && current !== document.body) {
-            if (current.tagName) {
-              const tag = current.tagName.toLowerCase();
-              if (['p', 'li', 'blockquote', 'pre', 'table', 'figure', 'dd', 'dt'].includes(tag)) {
-                return current;
-              }
-            }
-            current = current.parentElement;
-          }
-          return null;
-        }
 
-        function captureReadingState(options) {
-          const opts = options || {};
-          const headings = getHeadingElements();
-          const docEl = document.documentElement;
-          const body = document.body;
-          const scrollTop = (docEl && docEl.scrollTop) || (body && body.scrollTop) || 0;
-          const viewportHeight = window.innerHeight || docEl.clientHeight || 0;
-          const viewportWidth = window.innerWidth || docEl.clientWidth || body.clientWidth || 0;
-          const focusLine = scrollTop + viewportHeight * 0.35;
-          let current = null;
-          for (let i = 0; i < headings.length; i += 1) {
-            const el = headings[i];
-            const top = el.offsetTop;
-            if (top <= focusLine) {
-              current = el;
-            } else {
-              break;
-            }
-          }
-          if (!current && headings.length) {
-            current = headings[0];
-          }
-          const pageHeight = Math.max(1, (docEl && docEl.scrollHeight) || (body && body.scrollHeight) || 1) - viewportHeight;
-          const pageRatio = pageHeight > 0 ? scrollTop / pageHeight : 0;
-          const state = { pageRatio };
-          const centerX = viewportWidth / 2;
-          let focusNode = null;
-          try {
-            focusNode = document.elementFromPoint(centerX, viewportHeight * 0.4);
-          } catch (e) {
-            focusNode = null;
-          }
-          if (current) {
-            const currentId = current.getAttribute('id') || current.getAttribute('data-anchor-id') || '';
-            const next = current.nextElementSibling ? current.nextElementSibling.closest('h1, h2, h3, h4, h5, h6') : null;
-            let nextTop = null;
-            if (next) {
-              nextTop = next.offsetTop;
-            } else {
-              nextTop = (docEl && docEl.scrollHeight) || (body && body.scrollHeight) || (current.offsetTop + viewportHeight);
-            }
-            const currentTop = current.offsetTop;
-            const sectionHeight = Math.max(1, nextTop - currentTop);
-            const rel = (focusLine - currentTop) / sectionHeight;
-            if (currentId) {
-              state.sectionId = currentId;
-              state.sectionOffset = Math.min(0.995, Math.max(0, rel));
-            }
-          }
-          const focusElement = findReadableElement(focusNode);
-          if (focusElement) {
-            const rect = focusElement.getBoundingClientRect();
-            const elementHeight = Math.max(1, rect.height || focusElement.offsetHeight || 1);
-            const elementTop = focusElement.offsetTop;
-            const relInElement = Math.min(0.995, Math.max(0, (focusLine - elementTop) / elementHeight));
-            state.focusElementOffset = relInElement;
-            const id = focusElement.getAttribute('id') || focusElement.getAttribute('data-anchor-id') || '';
-            if (id) state.focusElementId = id;
-            if (opts.captureNodeRef) {
-              state.__focusNode = focusElement;
-            }
-          }
-          return state;
-        }
-
-
-
-
-
-
-
-        function persistReadingState() {
-          let state = null;
-          try {
-            state = captureReadingState();
-          } catch (e) {
-            state = null;
-          }
-          if (!state) return;
-          try {
-            sessionStorage.setItem(STORAGE_KEYS.readingState, JSON.stringify(state));
-          } catch (e) {
-            // ignore
-          }
-        }
-
-        function scheduleReadingStateSave() {
-          if (readingStateSaveTimer) return;
-          readingStateSaveTimer = window.setTimeout(() => {
-            readingStateSaveTimer = null;
-            persistReadingState();
-          }, 500);
-        }
         const text = sel.toString().trim();
         if (text) {
           const rect = getSelectionRect(sel);
