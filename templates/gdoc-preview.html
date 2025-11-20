@@ -2633,10 +2633,13 @@
       var allLinks = document.querySelectorAll('a[href]');
       var markedCount = 0;
       
-      for (var i = 0; i < allLinks.length; i++) {
-        var link = allLinks[i];
-        var href = link.getAttribute('href');
-        if (!href) continue;
+    for (var i = 0; i < allLinks.length; i++) {
+      var link = allLinks[i];
+      var href = link.getAttribute('href');
+      if (!href) continue;
+      if (link.classList && (link.classList.contains('footnote-ref') || link.getAttribute('role') === 'doc-noteref')) {
+        continue;
+      }
         
         // 既にマークされている場合はスキップ
         if (link.classList.contains('bg-preview-link')) continue;

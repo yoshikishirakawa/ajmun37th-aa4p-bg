@@ -8,13 +8,52 @@
   --font-large: 19px;
   --font-serif: 'BIZ UDPMincho', 'Hiragino Mincho ProN', 'Yu Mincho', 'MS PMincho', serif;
   --font-sans: 'BIZ UDPGothic', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
-  
-  /* カラー */
-  --fg: #333;
-  --bg: #fff;
-  --muted: #666;
-  --link: #0066cc;
-  --accent: #ff6b35;
+
+  /* カラー（ライト/ダーク共通のトークン） */
+  --color-text-light: #1f2329;
+  --color-text-dark: #e8eaed;
+  --color-muted-light: #5c6675;
+  --color-muted-dark: #aeb4c0;
+  --color-heading-light: #0f1115;
+  --color-heading-dark: #f5f7fa;
+  --color-bg-light: #fdfdfd;
+  --color-bg-dark: #05070b;
+  --surface-muted-light: #f5f6fb;
+  --surface-muted-dark: #151b2b;
+  --surface-raised-light: #ffffff;
+  --surface-raised-dark: #111726;
+  --border-color-light: #dfe3eb;
+  --border-color-dark: rgba(255, 255, 255, 0.18);
+  --accent-light: #ff6b35;
+  --accent-dark: #ffb347;
+  --link-color-light: #1a73e8;
+  --link-color-dark: #8ab4f8;
+  --link-hover-light: #0c56c3;
+  --link-hover-dark: #c8dafc;
+  --code-bg-light: #f5f5f5;
+  --code-bg-dark: #1f2430;
+  --code-fg-light: #1f1f1f;
+  --code-fg-dark: #f1f1f1;
+
+  /* デフォルト値（ライトテーマ相当） */
+  --color-text: var(--color-text-light);
+  --color-muted: var(--color-muted-light);
+  --color-heading: var(--color-heading-light);
+  --color-bg: var(--color-bg-light);
+  --surface-muted: var(--surface-muted-light);
+  --surface-raised: var(--surface-raised-light);
+  --border-color: var(--border-color-light);
+  --accent: var(--accent-light);
+  --link-color: var(--link-color-light);
+  --link-hover: var(--link-hover-light);
+  --code-bg: var(--code-bg-light);
+  --code-fg: var(--code-fg-light);
+
+  /* 互換性のための旧トークン */
+  --fg: var(--color-text);
+  --bg: var(--color-bg);
+  --muted: var(--color-muted);
+  --link: var(--link-color);
   
   /* レイアウト */
   --header-h: 56px;
@@ -42,11 +81,74 @@ html {
 body {
   font-family: var(--font-serif);
   line-height: var(--lh-base);
-  color: var(--fg);
-  background: var(--bg);
+  color: var(--color-text);
+  background: var(--color-bg);
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+
+body[data-theme="light"] {
+  --color-text: var(--color-text-light);
+  --color-muted: var(--color-muted-light);
+  --color-heading: var(--color-heading-light);
+  --color-bg: var(--color-bg-light);
+  --surface-muted: var(--surface-muted-light);
+  --surface-raised: var(--surface-raised-light);
+  --border-color: var(--border-color-light);
+  --accent: var(--accent-light);
+  --link-color: var(--link-color-light);
+  --link-hover: var(--link-hover-light);
+  --code-bg: var(--code-bg-light);
+  --code-fg: var(--code-fg-light);
+  --fg: var(--color-text);
+  --bg: var(--color-bg);
+  --muted: var(--color-muted);
+  --link: var(--link-color);
+}
+
+body[data-theme="dark"] {
+  --color-text: var(--color-text-dark);
+  --color-muted: var(--color-muted-dark);
+  --color-heading: var(--color-heading-dark);
+  --color-bg: var(--color-bg-dark);
+  --surface-muted: var(--surface-muted-dark);
+  --surface-raised: var(--surface-raised-dark);
+  --border-color: var(--border-color-dark);
+  --accent: var(--accent-dark);
+  --link-color: var(--link-color-dark);
+  --link-hover: var(--link-hover-dark);
+  --code-bg: var(--code-bg-dark);
+  --code-fg: var(--code-fg-dark);
+  --fg: var(--color-text);
+  --bg: var(--color-bg);
+  --muted: var(--color-muted);
+  --link: var(--link-color);
+}
+
+body[data-theme="auto"] {
+  --fg: var(--color-text);
+  --bg: var(--color-bg);
+  --muted: var(--color-muted);
+  --link: var(--link-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  body[data-theme="auto"],
+  body:not([data-theme]) {
+    --color-text: var(--color-text-dark);
+    --color-muted: var(--color-muted-dark);
+    --color-heading: var(--color-heading-dark);
+    --color-bg: var(--color-bg-dark);
+    --surface-muted: var(--surface-muted-dark);
+    --surface-raised: var(--surface-raised-dark);
+    --border-color: var(--border-color-dark);
+    --accent: var(--accent-dark);
+    --link-color: var(--link-color-dark);
+    --link-hover: var(--link-hover-dark);
+    --code-bg: var(--code-bg-dark);
+    --code-fg: var(--code-fg-dark);
+  }
 }
 
 /* 文字サイズ調整 */
@@ -55,24 +157,14 @@ body.font-m { --font-base: 17px; }
 body.font-l { --font-base: 19px; }
 body.font-xl { --font-base: 21px; }
 
-/* ダークテーマ */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --fg: #e0e0e0;
-    --bg: #1a1a1a;
-    --muted: #999;
-    --link: #4da6ff;
-    --accent: #ff8c42;
-  }
-}
-
 /* リンク */
 a {
-  color: var(--link);
+  color: var(--link-color);
   text-decoration: none;
 }
 
 a:hover {
+  color: var(--link-hover);
   text-decoration: underline;
 }
 
@@ -81,6 +173,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   font-weight: 600;
   line-height: 1.3;
+  color: var(--color-heading);
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-wrap: pretty;
 }
 
 h1 { font-size: 2em; margin: 1.5em 0 1em; }
@@ -108,10 +204,10 @@ li {
 blockquote {
   margin: 1.5em 0;
   padding: 1em 2em;
-  border-left: 3px solid #333;
-  background: transparent;
+  border-left: 3px solid var(--border-color);
+  background: var(--surface-muted);
   font-style: italic;
-  color: #222;
+  color: var(--color-text);
   line-height: 1.8;
 }
 
@@ -132,26 +228,22 @@ blockquote blockquote {
   margin: 0.5em 0;
   padding-left: 1.5em;
   border-left-width: 2px;
-  border-left-color: #666;
-}
-
-/* ダークモード */
-body[data-theme="dark"] blockquote {
-  border-left-color: #666;
-  color: #ddd;
+  border-left-color: var(--border-color);
 }
 
 /* コード */
 code {
   font-family: 'Monaco', 'Menlo', monospace;
-  background: #f5f5f5;
+  background: var(--code-bg);
+  color: var(--code-fg);
   padding: 0.2em 0.4em;
   border-radius: 3px;
   font-size: 0.9em;
 }
 
 pre {
-  background: #f5f5f5;
+  background: var(--code-bg);
+  color: var(--code-fg);
   padding: 1em;
   border-radius: var(--radius);
   overflow-x: auto;
@@ -169,18 +261,19 @@ table {
   border-collapse: collapse;
   margin: 1.5em 0;
   font-size: 0.95em;
-  background: #fff;
+  background: var(--surface-raised);
 }
 
 th, td {
   padding: 0.8em 1em;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   text-align: left;
   vertical-align: top;
+  color: var(--color-text);
 }
 
 th {
-  background: #f5f5f5;
+  background: var(--surface-muted);
   font-weight: 600;
 }
 
@@ -205,29 +298,8 @@ th strong {
 
 td a,
 th a {
-  color: var(--link);
+  color: var(--link-color);
   text-decoration: underline;
-}
-
-body[data-theme="dark"] table {
-  background: #161616;
-  border-color: #333;
-  color: #f1f1f1;
-}
-
-body[data-theme="dark"] th,
-body[data-theme="dark"] td {
-  border-color: #3b3b3b;
-}
-
-body[data-theme="dark"] th {
-  background: #1f1f1f;
-  color: #f9f9f9;
-}
-
-body[data-theme="dark"] td a,
-body[data-theme="dark"] th a {
-  color: #8ab4f8;
 }
 
 /* 列幅を指定する colmin テーブル（最小幅 + 自動折り返し） */
@@ -277,8 +349,8 @@ h3,
 h4,
 .aj-index__block h2,
 table th {
-  word-break: keep-all;
-  line-break: strict;
+  word-break: break-word;
+  line-break: auto;
 }
 
 /* 脚注 */
@@ -297,7 +369,7 @@ table th {
 
 /* フォーカス */
 :focus-visible {
-  outline: 2px solid var(--link);
+  outline: 2px solid var(--link-color);
   outline-offset: 2px;
 }
 
@@ -479,7 +551,7 @@ textarea,
 
 /* ページ背景色を CSS 変数として公開（グラデーション用） */
 :root {
-  --page-bg: var(--bg);
+  --page-bg: var(--color-bg);
 }
 
 /* ブロック画像（中央配置） */
@@ -560,7 +632,7 @@ textarea,
     /* 左 → 右（左右端をフェード） */
     linear-gradient(
       to right,
-      var(--page-bg) 0,
+      var(--page-bg, var(--color-bg)) 0,
       transparent var(--img-gradient-edge, 10%),
       transparent calc(100% - var(--img-gradient-edge, 10%)),
       var(--page-bg) 100%
@@ -568,9 +640,32 @@ textarea,
     /* 上 → 下（上下端をフェード） */
     linear-gradient(
       to bottom,
-      var(--page-bg) 0,
+      var(--page-bg, var(--color-bg)) 0,
       transparent var(--img-gradient-edge, 10%),
       transparent calc(100% - var(--img-gradient-edge, 10%)),
       var(--page-bg) 100%
     );
+}
+
+/* 脚注内のリンク折り返し（特にモバイル用） */
+.footnote-inline,
+section.footnotes,
+section.footnotes ol,
+section.footnotes li {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+.footnote-inline a,
+section.footnotes a {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  text-decoration-thickness: 0.08em;
+}
+
+@media (max-width: 640px) {
+  .footnote-inline,
+  section.footnotes {
+    font-size: 0.9em;
+  }
 }

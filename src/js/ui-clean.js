@@ -37,6 +37,9 @@
   };
 
   let readingMeterState = null;
+  const FOOTNOTE_INLINE_BREAKPOINT = 1024;
+  let currentFootnoteLayout = null;
+  let footnotesPlaceholderEl = null;
 
   function resolveAssetPath(relPath) {
     try {
@@ -471,15 +474,28 @@
 
   // Footnotes layout controller (sidebar vs inline on portrait)
   function setupRightSidebar() {
+    const debouncedApply = debounce(applyFootnoteLayout, 150);
     applyFootnoteLayout();
-    // respond to orientation/resize
-    window.addEventListener('resize', debounce(applyFootnoteLayout, 200));
-    window.addEventListener('orientationchange', debounce(applyFootnoteLayout, 200));
+    // respond to orientation/resize/media query changes
+    window.addEventListener('resize', debouncedApply);
+    window.addEventListener('orientationchange', debouncedApply);
+    const breakpointQuery = window.matchMedia(`(max-width: ${FOOTNOTE_INLINE_BREAKPOINT}px)`);
+    if (typeof breakpointQuery.addEventListener === 'function') {
+      breakpointQuery.addEventListener('change', debouncedApply);
+    } else if (typeof breakpointQuery.addListener === 'function') {
+      breakpointQuery.addListener(debouncedApply);
+    }
   }
 
   function applyFootnoteLayout() {
-    const isPortrait = window.matchMedia('(orientation: portrait)').matches || (window.innerHeight > window.innerWidth);
-    if (isPortrait) {
+    const inlineQuery = window.matchMedia(`(max-width: ${FOOTNOTE_INLINE_BREAKPOINT}px)`);
+    const shouldInline = inlineQuery.matches || window.innerWidth <= FOOTNOTE_INLINE_BREAKPOINT;
+    const nextMode = shouldInline ? 'inline' : 'sidebar';
+    if (currentFootnoteLayout === nextMode) return;
+    currentFootnoteLayout = nextMode;
+    document.body.classList.toggle('footnotes-inline-mode', shouldInline);
+    document.body.classList.toggle('footnotes-sidebar-mode', !shouldInline);
+    if (shouldInline) {
       renderInlineFootnotes();
     } else {
       renderSidebarFootnotes();
@@ -499,6 +515,7 @@
       return;
     }
 
+    ensureFootnotesPlaceholder(footnotes);
     marginSidebar.innerHTML = '';
     const header = document.createElement('h2');
     header.className = 'footnotes-title';
@@ -506,6 +523,7 @@
     marginSidebar.appendChild(header);
     marginSidebar.appendChild(footnotes);
     footnotes.classList.add('margin-footnotes');
+    footnotes.style.display = '';
 
     // inject numbers label at start of each li
     const items = footnotes.querySelectorAll('ol > li');
@@ -521,14 +539,21 @@
   }
 
   function renderInlineFootnotes() {
-    // ensure right panel cleaned
     const marginSidebar = document.getElementById('quarto-margin-sidebar');
+    const footnotesSection = document.querySelector('section.footnotes');
+    if (footnotesSection) {
+      ensureFootnotesPlaceholder(footnotesSection);
+      if (marginSidebar && marginSidebar.contains(footnotesSection)) {
+        marginSidebar.removeChild(footnotesSection);
+      }
+      restoreFootnotesToDocument(footnotesSection);
+      footnotesSection.classList.remove('margin-footnotes');
+      footnotesSection.style.display = '';
+    }
     if (marginSidebar) marginSidebar.innerHTML = '';
-
     // remove previous inline blocks
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
 
-    const footnotesSection = document.querySelector('section.footnotes');
     if (!footnotesSection) return;
 
     const refSelector = 'a[role="doc-noteref"], a.footnote-ref';
@@ -558,6 +583,20 @@
       }
       host.insertAdjacentElement('afterend', container);
     });
+  }
+
+  function ensureFootnotesPlaceholder(section) {
+    if (footnotesPlaceholderEl || !section || !section.parentNode) return;
+    footnotesPlaceholderEl = document.createElement('div');
+    footnotesPlaceholderEl.className = 'footnotes-placeholder';
+    footnotesPlaceholderEl.style.display = 'none';
+    section.parentNode.insertBefore(footnotesPlaceholderEl, section);
+  }
+
+  function restoreFootnotesToDocument(section) {
+    if (!section || !footnotesPlaceholderEl || !footnotesPlaceholderEl.parentNode) return;
+    if (footnotesPlaceholderEl.nextSibling === section) return;
+    footnotesPlaceholderEl.parentNode.insertBefore(section, footnotesPlaceholderEl.nextSibling);
   }
 
   function findHostParagraph(el) {
