@@ -1371,6 +1371,14 @@ let readingStateSaveTimer = null;
   const FOOTNOTE_READY_RETRIES = 12;
   const FOOTNOTE_READY_DELAY = 250;
 
+  // 安全策: ビルド工程で削られた場合に備え、必要な関数のダミーを用意
+  if (typeof enumerateReadingNodes !== 'function') {
+    window.enumerateReadingNodes = function () { return []; };
+  }
+  if (typeof scheduleReadingStateSave !== 'function') {
+    window.scheduleReadingStateSave = function () {};
+  }
+
   function formatReadingNumber(value) {
     if (!Number.isFinite(value)) return '0';
     try {
