@@ -460,28 +460,6 @@
         openSearchOverlay();
       });
     }
-
-    if (tocLocationBtn) {
-      tocLocationBtn.addEventListener('click', () => {
-        const current = document.documentElement.classList.contains('toc-right-on') ? 'body' : 'right';
-        setTocLocation(current);
-      });
-    }
-
-    // Restore TOC location
-    const savedTocLocation = localStorage.getItem(STORAGE_KEYS.tocLocation) || 'right';
-    setTocLocation(savedTocLocation);
-  }
-
-  function setTocLocation(location) {
-    const root = document.documentElement;
-    root.classList.toggle('toc-right-on', location === 'right');
-    root.classList.toggle('toc-body-on', location === 'body');
-    try {
-      localStorage.setItem(STORAGE_KEYS.tocLocation, location);
-    } catch (e) {
-      console.warn('Failed to save TOC location', e);
-    }
   }
 
   // Left sidebar toggle between project navigation and page TOC
