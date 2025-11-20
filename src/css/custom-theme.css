@@ -33,12 +33,13 @@ body {
 
 /* メインコンテンツ */
 #quarto-content,
-main,
-.page-columns {
+main {
   max-width: var(--content-width);
   margin: 0 auto;
   padding: 0 20px;
 }
+
+/* Quartoの傍注機能を有効にするため、.page-columnsのスタイルは削除 */
 
 /* 3カラムレイアウト（デスクトップ） */
 @media (min-width: 1200px) {
@@ -88,12 +89,16 @@ main,
   /* メインコンテンツ */
   #quarto-content,
   main,
-  .quarto-layout-panel-inner,
-  .page-columns {
+  .quarto-layout-panel-inner {
     grid-area: main;
     padding: 40px 30px;
     max-width: none;
     overflow-y: auto;
+  }
+  
+  /* Quartoの傍注レイアウトを維持 */
+  .page-columns {
+    grid-area: main;
   }
 
   /* 右サイドバー（脚注用） */
