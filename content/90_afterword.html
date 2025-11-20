@@ -863,6 +863,91 @@ ul.task-list li input[type="checkbox"] {
       return decoded.replace(/^\/+/, '');
     }
 
+    function getHeadingElements() {
+      const scope = document.getElementById('quarto-document-content');
+      if (!scope) return [];
+      return scope.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    }
+
+    function escapeCssId(id) {
+      if (window.CSS && typeof window.CSS.escape === 'function') {
+        return window.CSS.escape(id);
+      }
+      return id.replace(/[^a-zA-Z0-9_\-]/g, '\\$&');
+    }
+
+    function scrollToReadingState(state) {
+      if (!state) return false;
+      const docEl = document.documentElement;
+      const body = document.body;
+      const viewportHeight = window.innerHeight || docEl.clientHeight || 0;
+      const focusRatio = typeof state.focusElementOffset === 'number' ? state.focusElementOffset : null;
+      const resolveFocusTarget = () => {
+        if (state.__focusNode && state.__focusNode instanceof HTMLElement && document.body.contains(state.__focusNode)) {
+          return state.__focusNode;
+        }
+        if (state.focusElementId) {
+          return document.getElementById(state.focusElementId) || document.querySelector(`[data-anchor-id="${state.focusElementId}"]`);
+        }
+        return null;
+      };
+      const focusTarget = resolveFocusTarget();
+      if (focusTarget) {
+        const ratio = focusRatio != null ? focusRatio : 0.35;
+        const targetTop = focusTarget.offsetTop + ratio * Math.max(1, focusTarget.offsetHeight || 1);
+        const desired = targetTop - viewportHeight * 0.35;
+        window.scrollTo({ top: Math.max(0, desired), behavior: 'auto' });
+        return true;
+      }
+      if (state.sectionId) {
+        const selector = `#${escapeCssId(state.sectionId)}`;
+        let target = document.querySelector(selector);
+        if (!target) {
+          target = document.querySelector(`[data-anchor-id="${state.sectionId}"]`);
+        }
+        if (target) {
+          const headings = Array.from(getHeadingElements());
+          const idx = headings.indexOf(target);
+          let nextTop = null;
+          if (idx >= 0 && idx + 1 < headings.length) {
+            nextTop = headings[idx + 1].offsetTop;
+          } else {
+            nextTop = (docEl && docEl.scrollHeight) || (body && body.scrollHeight) || (target.offsetTop + viewportHeight);
+          }
+          const currentTop = target.offsetTop;
+          const sectionHeight = Math.max(1, nextTop - currentTop);
+          const rel = typeof state.sectionOffset === 'number' ? state.sectionOffset : 0;
+          const dest = currentTop + rel * sectionHeight;
+          window.scrollTo({ top: Math.max(0, dest), behavior: 'auto' });
+          return true;
+        }
+      }
+      if (typeof state.pageRatio === 'number') {
+        const docHeight = Math.max(1, ((docEl && docEl.scrollHeight) || (body && body.scrollHeight) || 1) - viewportHeight);
+        const targetY = state.pageRatio * docHeight;
+        window.scrollTo({ top: Math.max(0, targetY), behavior: 'auto' });
+        return true;
+      }
+      return false;
+    }
+
+    function restoreReadingState() {
+      let raw = null;
+      try {
+        raw = sessionStorage.getItem(STORAGE_KEYS.readingState);
+      } catch (e) {
+        raw = null;
+      }
+      if (!raw) return;
+      let state = null;
+      try {
+        state = JSON.parse(raw);
+      } catch (e) {
+        state = null;
+      }
+      scrollToReadingState(state);
+    }
+
     // =============================
     // 設定リセット系ユーティリティ
     // =============================
@@ -3113,11 +3198,7 @@ ul.task-list li input[type="checkbox"] {
           return;
         }
 
-        function getHeadingElements() {
-          const scope = document.getElementById('quarto-document-content');
-          if (!scope) return [];
-          return scope.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        }
+
 
         function enumerateReadingNodes() { }
 
@@ -3202,84 +3283,11 @@ ul.task-list li input[type="checkbox"] {
           return state;
         }
 
-        function scrollToReadingState(state) {
-          if (!state) return false;
-          const docEl = document.documentElement;
-          const body = document.body;
-          const viewportHeight = window.innerHeight || docEl.clientHeight || 0;
-          const focusRatio = typeof state.focusElementOffset === 'number' ? state.focusElementOffset : null;
-          const resolveFocusTarget = () => {
-            if (state.__focusNode && state.__focusNode instanceof HTMLElement && document.body.contains(state.__focusNode)) {
-              return state.__focusNode;
-            }
-            if (state.focusElementId) {
-              return document.getElementById(state.focusElementId) || document.querySelector(`[data-anchor-id="${state.focusElementId}"]`);
-            }
-            return null;
-          };
-          const focusTarget = resolveFocusTarget();
-          if (focusTarget) {
-            const ratio = focusRatio != null ? focusRatio : 0.35;
-            const targetTop = focusTarget.offsetTop + ratio * Math.max(1, focusTarget.offsetHeight || 1);
-            const desired = targetTop - viewportHeight * 0.35;
-            window.scrollTo({ top: Math.max(0, desired), behavior: 'auto' });
-            return true;
-          }
-          if (state.sectionId) {
-            const selector = `#${escapeCssId(state.sectionId)}`;
-            let target = document.querySelector(selector);
-            if (!target) {
-              target = document.querySelector(`[data-anchor-id="${state.sectionId}"]`);
-            }
-            if (target) {
-              const headings = Array.from(getHeadingElements());
-              const idx = headings.indexOf(target);
-              let nextTop = null;
-              if (idx >= 0 && idx + 1 < headings.length) {
-                nextTop = headings[idx + 1].offsetTop;
-              } else {
-                nextTop = (docEl && docEl.scrollHeight) || (body && body.scrollHeight) || (target.offsetTop + viewportHeight);
-              }
-              const currentTop = target.offsetTop;
-              const sectionHeight = Math.max(1, nextTop - currentTop);
-              const rel = typeof state.sectionOffset === 'number' ? state.sectionOffset : 0;
-              const dest = currentTop + rel * sectionHeight;
-              window.scrollTo({ top: Math.max(0, dest), behavior: 'auto' });
-              return true;
-            }
-          }
-          if (typeof state.pageRatio === 'number') {
-            const docHeight = Math.max(1, ((docEl && docEl.scrollHeight) || (body && body.scrollHeight) || 1) - viewportHeight);
-            const targetY = state.pageRatio * docHeight;
-            window.scrollTo({ top: Math.max(0, targetY), behavior: 'auto' });
-            return true;
-          }
-          return false;
-        }
 
-        function escapeCssId(id) {
-          if (window.CSS && typeof window.CSS.escape === 'function') {
-            return window.CSS.escape(id);
-          }
-          return id.replace(/[^a-zA-Z0-9_\-]/g, '\\$&');
-        }
 
-        function restoreReadingState() {
-          let raw = null;
-          try {
-            raw = sessionStorage.getItem(STORAGE_KEYS.readingState);
-          } catch (e) {
-            raw = null;
-          }
-          if (!raw) return;
-          let state = null;
-          try {
-            state = JSON.parse(raw);
-          } catch (e) {
-            state = null;
-          }
-          scrollToReadingState(state);
-        }
+
+
+
 
         function persistReadingState() {
           let state = null;

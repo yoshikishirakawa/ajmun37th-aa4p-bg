@@ -1,5 +1,5 @@
 window.__NAV_DATA__ = {
-  "generated_at": "2025-11-20T10:21:11.502482+00:00",
+  "generated_at": "2025-11-20T10:48:34.993831+00:00",
   "pages": [
     {
       "source": "index.qmd",
