@@ -573,15 +573,13 @@
     const inlineQuery = window.matchMedia(`(max-width: ${FOOTNOTE_INLINE_BREAKPOINT}px)`);
     const shouldInline = inlineQuery.matches || window.innerWidth <= FOOTNOTE_INLINE_BREAKPOINT;
     const nextMode = shouldInline ? 'inline' : 'sidebar';
-    if (currentFootnoteLayout === nextMode) return;
-    currentFootnoteLayout = nextMode;
-    document.body.classList.toggle('footnotes-inline-mode', shouldInline);
-    document.body.classList.toggle('footnotes-sidebar-mode', !shouldInline);
-    if (shouldInline) {
-      renderInlineFootnotes();
-    } else {
-      renderSidebarFootnotes();
+    if (currentFootnoteLayout !== nextMode) {
+      currentFootnoteLayout = nextMode;
+      document.body.classList.toggle('footnotes-inline-mode', shouldInline);
+      document.body.classList.toggle('footnotes-sidebar-mode', !shouldInline);
     }
+    const rendered = shouldInline ? !!renderInlineFootnotes() : !!renderSidebarFootnotes();
+    document.body.classList.toggle('js-footnotes-enhanced', rendered);
   }
 
   function renderSidebarFootnotes() {
@@ -589,12 +587,12 @@
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
 
     const marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) return;
+    if (!marginSidebar) return false;
 
     const footnotes = document.querySelector('section.footnotes');
     if (!footnotes) {
       marginSidebar.innerHTML = '<p class="footnotes-empty">このページには脚注がありません。</p>';
-      return;
+      return false;
     }
 
     ensureFootnotesPlaceholder(footnotes);
@@ -619,6 +617,7 @@
       }
     });
     scheduleScrollExtensionUpdate();
+    return true;
   }
 
   function renderInlineFootnotes() {
@@ -637,9 +636,10 @@
     // remove previous inline blocks
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
 
-    if (!footnotesSection) return;
+    if (!footnotesSection) return false;
 
     const refSelector = 'a[role="doc-noteref"], a.footnote-ref';
+    let inserted = false;
     document.querySelectorAll(refSelector).forEach(ref => {
       const href = ref.getAttribute('href') || ref.getAttribute('data-footnote-href');
       if (!href || !href.startsWith('#')) return;
@@ -665,8 +665,10 @@
         container.appendChild(clone.firstChild);
       }
       host.insertAdjacentElement('afterend', container);
+      inserted = true;
     });
     scheduleScrollExtensionUpdate();
+    return inserted;
   }
 
   function ensureFootnotesPlaceholder(section) {

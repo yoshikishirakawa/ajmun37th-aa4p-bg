@@ -2555,19 +2555,11 @@ let readingStateSaveTimer = null;
       currentFootnoteLayout = nextMode;
       document.body && document.body.classList.toggle('footnotes-inline-mode', shouldInline);
       document.body && document.body.classList.toggle('footnotes-sidebar-mode', !shouldInline);
-      if (shouldInline) {
-        renderInlineFootnotes();
-      } else {
-        renderSidebarFootnotes();
-      }
-    } else if (shouldInline) {
-      renderInlineFootnotes();
-    } else {
-      renderSidebarFootnotes();
     }
+    const rendered = shouldInline ? !!renderInlineFootnotes() : !!renderSidebarFootnotes();
     try {
       if (document.body) {
-        document.body.classList.add('js-footnotes-enhanced');
+        document.body.classList.toggle('js-footnotes-enhanced', rendered);
       }
     } catch (e) {
       console.warn('applyFootnoteLayout: failed to mark enhanced footnotes state', e);
@@ -2578,7 +2570,7 @@ let readingStateSaveTimer = null;
     setInlineFootnoteMode(false);
     document.querySelectorAll('.footnote-inline').forEach(n => n.remove());
     let marginSidebar = document.getElementById('quarto-margin-sidebar');
-    if (!marginSidebar) return;
+    if (!marginSidebar) return false;
 
     if (marginSidebar.style.display === 'none') {
       const prev = marginSidebar.dataset.prevDisplay || '';
@@ -2625,7 +2617,7 @@ let readingStateSaveTimer = null;
     if (!footnotes.length) {
       footHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注がありません。</p>');
       if (bothHost) bothHost.insertAdjacentHTML('beforeend','<p class="footnotes-empty">このページには脚注/コメントがありません。</p>');
-      return;
+      return false;
     }
 
     const items = footnotes.slice();
@@ -2682,6 +2674,7 @@ let readingStateSaveTimer = null;
     setupScrollSyncForFootnotes(footHost, items);
     refreshCommentMarkersFromDB({ preserveExisting: true });
     scheduleScrollExtensionUpdate();
+    return true;
   }
 
   function renderBothPanel(host, footItems) {
@@ -3086,8 +3079,9 @@ let readingStateSaveTimer = null;
     const scope = active || document;
     const refSelector = 'a[role="doc-noteref"], a.footnote-ref';
     const refs = Array.from(scope.querySelectorAll(refSelector)).filter(ref => !active || active.contains(ref));
-    if (!refs.length) return;
+    if (!refs.length) return false;
     const hostTailMap = new Map();
+    let inserted = false;
     refs.forEach(ref => {
       const href = ref.getAttribute('href') || ref.getAttribute('data-footnote-href');
       if (!href || !href.startsWith('#')) return;
@@ -3118,9 +3112,11 @@ let readingStateSaveTimer = null;
       }
       hostTailMap.set(host, container);
       reinforceAnchors(container);
+      inserted = true;
     });
     ensureCommentMarkerInteractions();
     scheduleScrollExtensionUpdate();
+    return inserted;
   }
 
   function findHostParagraph(el) {
