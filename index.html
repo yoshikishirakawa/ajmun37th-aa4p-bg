@@ -3944,6 +3944,8 @@ font-display: swap;
 html {
 font-size: var(--font-base);
 scroll-behavior: smooth;
+background: var(--color-bg);
+color: var(--color-text);
 }
 body {
 font-family: var(--font-serif);
@@ -4558,7 +4560,7 @@ min-width: 150px;
 .marker-toolbar.visible {
 display: flex;
 flex-direction: column;
-gap: 4px;
+gap: 0;
 }
 body[data-theme="dark"] .marker-toolbar {
 --marker-toolbar-bg: #1f1f1f;
@@ -4613,27 +4615,149 @@ border-color: #1a73e8;
 box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.25);
 }
 .marker-comment-btn {
-width: 28px;
-height: 24px;
-border: 1px solid rgba(0, 0, 0, 0.15);
-border-radius: 6px;
-background: #f5f7fb url(data:image/png;base64,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) center/16px 16px no-repeat;
+min-width: 64px;
+height: 30px;
+border: 1px solid var(--ui-border);
+border-radius: 20px;
+background: var(--ui-surface);
 cursor: pointer;
-transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+color: var(--ui-text);
+font-size: 0.8rem;
+font-weight: 600;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+gap: 4px;
+padding: 0 10px;
 }
 .marker-comment-btn:hover {
 transform: translateY(-1px);
 box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-border-color: rgba(0, 0, 0, 0.3);
-background-color: #eef1f8;
+border-color: var(--ui-border-strong, rgba(0, 0, 0, 0.3));
+background-color: var(--ui-surface-muted);
 }
 body[data-theme="dark"] .marker-comment-btn {
-background-color: #edf1ff;
-border-color: rgba(255, 255, 255, 0.2);
+border-color: var(--ui-border);
 }
 body[data-theme="dark"] .marker-comment-btn:hover {
-background-color: #dce4ff;
-border-color: rgba(255, 255, 255, 0.32);
+border-color: rgba(255, 255, 255, 0.4);
+}
+.comment-dialog-overlay {
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.45);
+z-index: 10000;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 16px;
+}
+body[data-theme="dark"] .comment-dialog-overlay {
+background: rgba(3, 5, 9, 0.82);
+}
+.comment-dialog {
+width: min(600px, 96vw);
+background: var(--ui-surface);
+color: var(--ui-text);
+border-radius: 14px;
+padding: 18px 20px;
+box-shadow: var(--ui-shadow-strong);
+border: 1px solid var(--ui-border);
+display: flex;
+flex-direction: column;
+gap: 14px;
+}
+.comment-dialog__header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+}
+.comment-dialog__title {
+margin: 0;
+font-size: 1rem;
+font-weight: 600;
+color: inherit;
+}
+.comment-dialog__close {
+background: none;
+border: none;
+font-size: 1.25rem;
+color: inherit;
+cursor: pointer;
+border-radius: 6px;
+width: 32px;
+height: 32px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+transition: background 0.2s ease;
+}
+.comment-dialog__close:hover {
+background: rgba(0, 0, 0, 0.06);
+}
+body[data-theme="dark"] .comment-dialog__close:hover {
+background: rgba(255, 255, 255, 0.08);
+}
+.comment-dialog__snippet {
+font-size: 0.85rem;
+color: var(--ui-text-muted);
+background: var(--ui-surface-muted);
+border: 1px solid var(--ui-border);
+padding: 8px 10px;
+border-radius: 6px;
+}
+.comment-dialog__textarea {
+width: 100%;
+font-size: 0.95rem;
+padding: 10px 12px;
+border-radius: 8px;
+border: 1px solid var(--ui-border);
+background: var(--ui-surface);
+color: var(--ui-text);
+min-height: 120px;
+resize: vertical;
+}
+.comment-dialog__actions {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+}
+.comment-dialog__btn {
+padding: 8px 16px;
+border-radius: 999px;
+border: 1px solid transparent;
+font-weight: 600;
+cursor: pointer;
+font-size: 0.9rem;
+transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.comment-dialog__btn--muted {
+background: var(--ui-surface-muted);
+border-color: var(--ui-border);
+color: var(--ui-text);
+}
+.comment-dialog__btn--muted:hover {
+transform: translateY(-1px);
+box-shadow: 0 8px 16px rgba(15, 23, 42, 0.1);
+}
+.comment-dialog__btn--primary {
+background: #1a73e8;
+border-color: #1a73e8;
+color: #fff;
+}
+.comment-dialog__btn--primary:hover {
+transform: translateY(-1px);
+box-shadow: 0 10px 24px rgba(26, 115, 232, 0.35);
+}
+body[data-theme="dark"] .comment-dialog__btn--primary {
+background: #8ab4f8;
+border-color: #8ab4f8;
+color: #0e1628;
+}
+body[data-theme="dark"] .comment-dialog__btn--primary:hover {
+box-shadow: 0 10px 24px rgba(138, 180, 248, 0.35);
 }
 
 #quarto-content,
@@ -4926,6 +5050,27 @@ display: flex;
 align-items: center;
 gap: 6px;
 }
+.scroll-search-btn__icon {
+width: 16px;
+height: 16px;
+border: 2px solid currentColor;
+border-radius: 50%;
+position: relative;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+}
+.scroll-search-btn__icon::after {
+content: "";
+position: absolute;
+width: 6px;
+height: 2px;
+background: currentColor;
+border-radius: 1px;
+transform: rotate(45deg);
+bottom: -4px;
+right: -3px;
+}
 .scroll-search-btn:hover {
 background: #f8f9fa;
 color: #212529;
@@ -5099,7 +5244,7 @@ align-items: center;
 display: flex;
 flex-direction: column;
 font-weight: 600;
-color: #212529;
+color: var(--ui-text-strong);
 line-height: 1.1;
 max-width: clamp(180px, 32vw, 320px);
 width: 100%;
@@ -5113,6 +5258,8 @@ text-overflow: clip;
 }
 .js-header__logo .js-header__title .title-main {
 font-size: clamp(1rem, 2.4vw, 1.45rem);
+color: var(--ui-text-strong);
+text-shadow: 0 1px 4px rgba(15, 23, 42, 0.25);
 }
 .js-header__logo .js-header__title .title-sub {
 font-size: clamp(0.85rem, 1.8vw, 1.05rem);
@@ -5138,6 +5285,24 @@ white-space: nowrap;
 font-size: clamp(0.7rem, 1.2vw, 0.9rem);
 color: var(--ui-text-muted);
 white-space: nowrap;
+}
+#quarto-sidebar .sidebar-menu-container {
+display: flex;
+flex-direction: column;
+gap: 2px;
+}
+#quarto-sidebar .sidebar-menu-container a {
+color: var(--ui-text);
+text-decoration: none;
+padding: 4px 8px;
+border-radius: 6px;
+transition: background 0.2s ease, color 0.2s ease;
+display: block;
+}
+#quarto-sidebar .sidebar-menu-container a:hover,
+#quarto-sidebar .sidebar-menu-container a:focus-visible {
+background: rgba(26, 115, 232, 0.14);
+color: var(--ui-link-strong);
 }
 header.quarto-title-block {
 display: none !important;
@@ -6503,23 +6668,50 @@ border-bottom-color: #333;
 background: none;
 border: none;
 cursor: pointer;
-padding: 6px;
-display: flex;
+padding: 6px 10px;
+display: inline-flex;
 align-items: center;
 justify-content: center;
+gap: 6px;
 min-width: 36px;
 height: 36px;
-border-radius: 4px;
-transition: background 0.2s ease;
+border-radius: 6px;
+transition: background 0.2s ease, color 0.2s ease;
+color: var(--ui-text);
+font-weight: 600;
+letter-spacing: 0.04em;
 }
 .js-settings-toggle-btn:hover {
-background: rgba(0, 0, 0, 0.1);
+background: rgba(0, 0, 0, 0.08);
 }
 .js-settings-toggle-btn .settings-toggle-icon {
-width: 20px;
-height: 20px;
-object-fit: contain;
-display: block;
+width: 18px;
+height: 18px;
+border: 2px solid currentColor;
+border-radius: 50%;
+position: relative;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+}
+.js-settings-toggle-btn .settings-toggle-icon::before,
+.js-settings-toggle-btn .settings-toggle-icon::after {
+content: "";
+position: absolute;
+background: currentColor;
+border-radius: 1px;
+}
+.js-settings-toggle-btn .settings-toggle-icon::before {
+width: 8px;
+height: 2px;
+}
+.js-settings-toggle-btn .settings-toggle-icon::after {
+width: 2px;
+height: 8px;
+}
+.js-settings-toggle-btn .settings-toggle-text {
+font-size: 0.85rem;
+text-transform: none;
 }
 .settings-menu {
 position: fixed;
@@ -7815,6 +8007,25 @@ background: transparent;
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
+<script>
+  (function () {
+    try {
+      var storedTheme = localStorage.getItem('quarto-theme');
+      if (!storedTheme || storedTheme === 'auto') return;
+      document.documentElement.setAttribute('data-theme', storedTheme);
+      var applyThemeToBody = function () {
+        if (!document.body) {
+          requestAnimationFrame(applyThemeToBody);
+          return;
+        }
+        document.body.setAttribute('data-theme', storedTheme);
+      };
+      applyThemeToBody();
+    } catch (err) {
+      console.warn('Failed to apply stored theme early', err);
+    }
+  })();
+</script>
 <div class="header-ui">
   <div id="js-header" class="js-header">
     <div class="js-header__inner">
@@ -7827,7 +8038,8 @@ background: transparent;
         <div class="js-header__controls">
           <!-- 設定メニューボタン -->
           <button class="js-settings-toggle-btn" id="settings-toggle-btn" aria-label="設定メニューを開く">
-            <img role="img" aria-label="" src="" data-asset="assets/setting.png" alt="" aria-hidden="true" class="settings-toggle-icon">
+            <span class="settings-toggle-icon" aria-hidden="true"></span>
+            <span class="settings-toggle-text">表示設定</span>
           </button>
         </div>
       </div>
@@ -9311,17 +9523,6 @@ let readingStateSaveTimer = null;
 
     // ハンバーガーメニューは廃止
 
-    // 設定メニュー開閉機能
-    if (settingsToggleBtn) {
-      const iconImg = settingsToggleBtn.querySelector('.settings-toggle-icon[data-asset]');
-      if (iconImg) {
-        const assetPath = iconImg.getAttribute('data-asset');
-        if (assetPath) {
-          iconImg.src = resolveAssetPath(assetPath);
-        }
-      }
-    }
-
     // 一般の画像についても data-asset 属性があれば resolveAssetPath で解決する
     try {
       const assetImgs = document.querySelectorAll('img[data-asset]');
@@ -9364,11 +9565,9 @@ let readingStateSaveTimer = null;
     if (themeSelect) {
       const mq = window.matchMedia('(prefers-color-scheme: dark)');
       function applyTheme(mode) {
-        if (mode === 'auto') {
-          document.body.setAttribute('data-theme', mq.matches ? 'dark' : 'light');
-        } else {
-          document.body.setAttribute('data-theme', mode);
-        }
+        const target = mode === 'auto' ? (mq.matches ? 'dark' : 'light') : mode;
+        document.body.setAttribute('data-theme', target);
+        document.documentElement.setAttribute('data-theme', target);
       }
       const saved = localStorage.getItem(STORAGE_KEYS.theme) || 'auto';
       themeSelect.value = saved;
@@ -10984,7 +11183,7 @@ function setupMarkerFunctionality() {
             <button type="button" class="marker-color-btn" data-color="blue" title="青"></button>
             <button type="button" class="marker-color-btn" data-color="pink" title="ピンク"></button>
           </div>
-          <button type="button" class="marker-comment-btn" title="選択範囲にコメント" aria-label="選択範囲にコメント"></button>
+          <button type="button" class="marker-comment-btn" title="選択範囲にコメント" aria-label="選択範囲にコメント">コメント</button>
         </div>
       `;
       toolbar.querySelectorAll('.marker-color-btn').forEach(btn => {
@@ -11013,19 +11212,19 @@ function setupMarkerFunctionality() {
       if (!baseRange || baseRange.collapsed) return;
 
       const overlay = document.createElement('div');
-      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:10000;display:flex;align-items:center;justify-content:center;';
+      overlay.className = 'comment-dialog-overlay';
       const dialog = document.createElement('div');
-      dialog.style.cssText = 'background:#fff;color:#222;max-width:600px;width:92%;padding:16px;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.25);';
+      dialog.className = 'comment-dialog';
       dialog.innerHTML = `
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <h3 style="margin:0;font-size:16px;">コメントを追加</h3>
-          <button type="button" aria-label="閉じる" style="background:none;border:none;font-size:18px;cursor:pointer;">×</button>
+        <div class="comment-dialog__header">
+          <h3 class="comment-dialog__title">コメントを追加</h3>
+          <button type="button" aria-label="閉じる" class="comment-dialog__close">×</button>
         </div>
-        <div style="font-size:13px;color:#555;background:#f8f9fa;border:1px solid #e9ecef;padding:8px;border-radius:4px;margin-bottom:8px;" id="comment-snippet"></div>
-        <textarea id="comment-textarea" rows="6" style="width:100%;font-size:14px;padding:8px;border-radius:6px;border:1px solid #ced4da;resize:vertical;" placeholder="ここにコメントを入力（長文可）"></textarea>
-        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px;">
-          <button type="button" id="comment-cancel" style="padding:6px 12px;border:1px solid #dee2e6;border-radius:4px;background:#f8f9fa;cursor:pointer;">キャンセル</button>
-          <button type="button" id="comment-save" style="padding:6px 12px;border:1px solid #0d6efd;border-radius:4px;background:#0d6efd;color:#fff;cursor:pointer;">保存</button>
+        <div class="comment-dialog__snippet" id="comment-snippet"></div>
+        <textarea id="comment-textarea" rows="6" class="comment-dialog__textarea" placeholder="ここにコメントを入力（長文可）"></textarea>
+        <div class="comment-dialog__actions">
+          <button type="button" id="comment-cancel" class="comment-dialog__btn comment-dialog__btn--muted">キャンセル</button>
+          <button type="button" id="comment-save" class="comment-dialog__btn comment-dialog__btn--primary">保存</button>
         </div>
       `;
       overlay.appendChild(dialog);
@@ -13776,6 +13975,37 @@ margin-left: 2px;
 .bg-preview-body .text-marker {
 background: rgba(255, 235, 59, 0.3);
 padding: 0 2px;
+}
+body[data-theme="dark"] .gdoc-popover {
+--gdoc-popover-bg: #111827;
+background: #111827;
+color: #e2e8f0;
+border-color: rgba(138, 180, 248, 0.25);
+box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
+}
+body[data-theme="dark"] .gdoc-popover-actions .gdoc-btn:hover {
+background: rgba(255, 255, 255, 0.08);
+}
+body[data-theme="dark"] .gdoc-modal-dialog {
+background: #0b101a;
+color: #e1e5ed;
+border: 1px solid rgba(138, 180, 248, 0.35);
+box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
+}
+body[data-theme="dark"] .gdoc-modal-header {
+background: rgba(255, 255, 255, 0.05);
+border-bottom-color: rgba(255, 255, 255, 0.12);
+color: inherit;
+}
+body[data-theme="dark"] .gdoc-modal-header-actions .gdoc-modal-btn:hover {
+background: rgba(255, 255, 255, 0.08);
+}
+body[data-theme="dark"] .bg-preview-body {
+color: #e5e9f0;
+background: transparent;
+}
+body[data-theme="dark"] .bg-preview-body a {
+color: #8ab4f8;
 }
 
 .bg-preview-body .gdoc-popover,

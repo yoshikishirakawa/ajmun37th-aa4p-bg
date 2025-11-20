@@ -1,3 +1,22 @@
+<script>
+  (function () {
+    try {
+      var storedTheme = localStorage.getItem('quarto-theme');
+      if (!storedTheme || storedTheme === 'auto') return;
+      document.documentElement.setAttribute('data-theme', storedTheme);
+      var applyThemeToBody = function () {
+        if (!document.body) {
+          requestAnimationFrame(applyThemeToBody);
+          return;
+        }
+        document.body.setAttribute('data-theme', storedTheme);
+      };
+      applyThemeToBody();
+    } catch (err) {
+      console.warn('Failed to apply stored theme early', err);
+    }
+  })();
+</script>
 <div class="header-ui">
   <div id="js-header" class="js-header">
     <div class="js-header__inner">
@@ -10,7 +29,8 @@
         <div class="js-header__controls">
           <!-- 設定メニューボタン -->
           <button class="js-settings-toggle-btn" id="settings-toggle-btn" aria-label="設定メニューを開く">
-            <img src="" data-asset="assets/setting.png" alt="" aria-hidden="true" class="settings-toggle-icon">
+            <span class="settings-toggle-icon" aria-hidden="true"></span>
+            <span class="settings-toggle-text">表示設定</span>
           </button>
         </div>
       </div>
